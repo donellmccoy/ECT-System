@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>ALOD :: DBSignInstall</title>
+    <link href="../App_Themes/DefaultBlue/styles.css" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript">
+        function setLink() {
+            var link = document.getElementById('installLink');
+            link.href = window.location;
+            link.innerHTML = window.location;
+        }
+    </script>
+</head>
+<body class="popup" onload="setLink();">
+    <div>
+        <div id="popupHeader">
+            <img src="../App_Themes/DefaultBlue/images/headerPopup.jpg" alt="logo" class="imgLogo"
+                 align="left" />
+            <div class="popupTitle">
+                DBSign Installation Page
+            </div>
+        </div>
+        <div class="popupBody">
+            <b>Why Am I Here?</b>
+            <br>
+            You have reached this page because you want to use digital signing with a CAC or
+            personal certificate. However, DBsign must be installed first.
+            <br>
+            <br>
+            <b class="red">Please note:</b> Installing DBsign requires administrator privileges.
+            If you do not have administrator privileges on your computer or are unsure, please
+            contact your site administrator and have him return to this page: <a id="installLink">
+                link
+            </a> to perform the installation.
+            <br>
+            <br>
+            <b>What is DBsign?</b> DBsign is security software that is used in LOD to authenticate
+            users and to enable them to digitally sign the LOD. DBsign includes a Web browser
+            control that supports the access of a user's credentials stored on, for example,
+            a floppy or a Common Access Card.
+            <br>
+            <br>
+            <b>How do I install DBsign?</b> Please read the following instructions before starting
+            installation.
+            <ol>
+                <li>
+                    Select this link (<a href="DBsignWebSigner.msi">DBsignWebSigner.msi</a>) to save
+                    or run the DBsign installation program. If you save the installation program to
+                    your hard disk, you'll need to remember its location and run it after saving.
+                </li>
+                <br>
+                <br>
+                <li>
+                    Run the installation program (as Administrator). Accepting the default settings will be sufficient
+                    for most users.
+                </li>
+                <br>
+                <br>
+                <li>Restart your browser after installing DBsign. (Make sure to close all browser windows)</li>
+                <br>
+                <br>
+                <li>DBsign is now configured properly and should be ready for use.</li>
+                <br>
+                <br>
+                <li>
+                    You may verify the integrity of the downloaded DBsignWebSigner.exe by verifying
+                    the MD5 hash value. The Microsoft File Checksum Integrity Verifier
+                    (FCIV) utility can be used for this purpose. This tool may be obtained from <a href="http://support.microsoft.com/kb/841290">http://support.microsoft.com/kb/841290</a>
+                    <br /><br />
+                    The MD5 result is: <strong>6f8878681dd45412b2662846b13e642d</strong><br />
+                </li>
+            </ol>
+        </div>
+    </div>
+</body>
+</html>

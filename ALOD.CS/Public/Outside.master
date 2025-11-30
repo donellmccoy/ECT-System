@@ -1,0 +1,40 @@
+<%@ Master Language="C#" Inherits="ALOD.Web.Public_OutSideMaster" CodeBehind="Outside.master.cs" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title>ECT</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div id="outer">
+            <div id="front-header">
+                <div id="header-logo">
+                    <asp:Image runat="server" ID="imgLogo" SkinID="imgLogoFront" ImageAlign="left" AlternateText="ECT Banner" />
+                </div>
+                <div id="header-right">
+                    <asp:Label ID="VersionLabel" runat="server"></asp:Label></div>
+            </div>
+            <div>
+                <asp:ContentPlaceHolder ID="ContentMain" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+            <div class="clearer">
+            </div>
+        </div>
+        <div id="footer">
+            <div id="footer-left">
+                <p>
+                    <asp:Label ID="SystemDisclaimer" runat="server" Text="<%$ Resources:Global, SystemDisclaimer %>"></asp:Label></p>
+            </div>
+            <div id="footer-right">
+                <p>
+                    <a href="javascript:self.close()" class="LinkBoldWhite">Close</a></p>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

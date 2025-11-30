@@ -1,4 +1,4 @@
-<%@ Page Title="" Language="VB" MasterPageFile="~/Public/Public.master" AutoEventWireup="false" Inherits="ALOD.Web.ClientTest" Codebehind="ClientTest.aspx.vb" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Public/Public.master" AutoEventWireup="false" Inherits="ALOD.Web.ClientTest" CodeBehind="ClientTest.aspx.cs" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentHeader" runat="Server">
 </asp:Content>

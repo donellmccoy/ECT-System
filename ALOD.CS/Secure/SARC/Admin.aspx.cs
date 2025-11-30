@@ -1,0 +1,13 @@
+using System;
+using System.Web.UI;
+
+namespace Web.SARC
+{
+    public partial class Admin : Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // TODO: Convert VB.NET logic from Admin.aspx.vb
+        }
+    }
+}
