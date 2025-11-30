@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Users">
+
+	<class name="UserGroup" table="core_userGroups">
+		<id name="Id" column="groupId">
+			<generator class="identity" />
+		</id>
+
+		<property name="Description" column="name" />
+		<property name="Abbreviation" column="abbr" />
+		<property name="Component" column="compo" />
+		<property name="ShowInfo" column="showInfo" />
+		<property name="SortOrder" column="sortOrder" />
+		<property name="HipaaRequired" />
+		<property name="CanBeRequested" column="canRegister" />
+		<property name="Scope" column="accessScope" />
+		<property name="ReportView" column="reportView" />
+	  <many-to-one name="GroupLevel" class="ALOD.Core.Domain.Users.UserGroupLevel" column="groupLevel" />
+
+    <bag name="ManagedGroups" table="core_UserGroupsManagedBy" lazy="false">
+        <key column="managedBy"></key>
+        <many-to-many class="UserGroup" column="groupId"></many-to-many>
+    </bag>
+
+    <!--Start--><!--
+    <bag name="ViewByGroups" table="core_UserGroupsViewBy" lazy="false">
+      <key column="viewerId"></key>
+      <many-to-many class="UserGroup" column="memberId"></many-to-many>
+    </bag>
+    --><!--End--><!--
+	</class>
+  <class name="UserGroup" table="core_UserGroupsViewBy">
+    <id name="Id" column="groupId">
+      <generator class="identity" />
+    </id>
+    <property name="Description" column="name" />
+    <property name="Abbreviation" column="abbr" />-->
+  </class>
+</hibernate-mapping>

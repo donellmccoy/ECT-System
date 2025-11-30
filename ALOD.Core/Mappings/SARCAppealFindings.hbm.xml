@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Modules.SARC">
+
+  <class name="SARCAppealFindings" table="Form348_AP_SARC_Findings">
+    <id name="Id" column="id">
+      <generator class="identity" />
+    </id>
+    <property name="AppealID" column="appeal_id" />
+    <property name="PType" column="ptype" />
+    <property name="SSN" column="ssn" />
+    <property name="Name" column="name" />
+    <property name="Grade" column="grade" />
+    <property name="Rank" column="rank" />
+    <property name="Compo" column="compo" />
+    <property name="Pascode" column="pascode" />
+    <property name="Finding" column="finding" />
+    <property name="Concur" column="concur" />
+    <property name="Remarks" column="remarks" />
+    <property name="FindingsText" column="findings_text" />
+    <property name="IsLegacyFinding" column="is_legacy_finding" />
+    <property name="CreatedBy" column="created_by" />
+    <property name="CreatedDate" column="created_date" />
+    <property name="ModifiedBy" column="modified_by" />
+    <property name="ModifiedDate" column="modified_date" />
+  </class>
+</hibernate-mapping>

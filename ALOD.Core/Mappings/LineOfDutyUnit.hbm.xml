@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Modules.Lod">
+
+	<class name="LineOfDutyUnit" table="Form348_Unit" discriminator-value="1">
+		<id name="Id" column="LODID">
+			<generator class="assigned" />
+		</id>
+    <discriminator column="workflow" type="integer" />
+    <property name="Workflow" column="workflow" update="false" insert="false" />
+		<property name="AccidentDetails" column="cmdr_circ_details" />
+		<property name="DutyDetermination" column="cmdr_duty_determination" />
+		<property name="DutyFrom" column="cmdr_duty_from" />
+		<property name="DutyTo" column="cmdr_duty_to" />
+		<property name="OtherDutyStatus" column="cmdr_duty_others" />
+		<property name="Activated" column="cmdr_activated_yn" />
+		<property name="ModifiedBy" column="MODIFIED_BY" />
+		<property name="ModifiedDate" column="MODIFIED_DATE" />
+
+    <subclass name="LineOfDutyUnit_v2" discriminator-value="27">
+      <property name="SourceInformation" column="source_information" />
+      <property name="Witnesses" column="witnesses" type="ALOD.Data.Types.WitnessDataListType, ALOD.Data" />
+      <property name="SourceInformationSpecify" column="source_information_specify" />
+      <property name="MemberOccurrence" column="member_occurrence" />
+      <property name="AbsentFrom" column="absent_from" />
+      <property name="AbsentTo" column="absent_to" />
+      <property name="ProximateCause" column="proximate_cause" />
+      <property name="ProximateCauseSpecify" column="proximate_cause_specify" />
+      <property name="MemberOnOrders" column="member_on_orders" />
+      <property name="MemberCredible" column="member_credible" />
+      <property name="TravelOccurrence" column="travel_occurrence" />
+      <property name="MemberStatus" column="verified_status" />
+      <property name="MemberProof" column="proof_of_status" />
+      <property name="LODInitiation" column="lODInitiation" />
+      <property name="WrittenDiagnosis" column="writtenDiagnosis" />
+      <property name="MemberRequest" column="memberRequest" />
+      <property name="PriorToDutytatus" column="priorToDutytatus" />
+      <property name="StatusWorsened" column="statusWorsened" />
+      <property name="IncurredOrAggravated" column="incurredOrAggravated" />
+      <property name="StatusWhenInjuryed" column="statusWhenInjuryed" />
+      <property name="StatusWhenInjuryedExplanation" column="statusWhenInjuryedExplanation" />
+      <property name="OrdersAttached" column="ordersAttached" />
+      <property name="IDTStatus" column="IDTStatus" />
+      <property name="UTAPSAttached" column="UTAPSAttached" />
+      <property name="PCARSAttached" column="PCARSAttached" />
+      <property name="PCARSHistory" column="PCARSHistory" />
+      <property name="EightYearRule" column="EightYearRule" />
+    </subclass>
+  </class>
+</hibernate-mapping>

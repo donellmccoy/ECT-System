@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<TabNavigator>
+	<Configuration>
+		<StartPage>~/Secure/Welcome.aspx</StartPage>
+		<PrintButtonVisible>True</PrintButtonVisible>
+		<PrintButtonText>Print Form 348</PrintButtonText>
+		<PrintScript>PrintForm348();</PrintScript>
+	</Configuration>
+	<Steps>
+		<Step>
+			<Title>Member</Title>
+			<Page>SMData.aspx</Page>
+			<Enabled>True</Enabled>
+			<Visible>True</Visible>
+		</Step>
+		<Step>
+			<Title>Medical</Title>
+			<Page>Medical.aspx</Page>
+			<Enabled>True</Enabled>
+			<Visible>True</Visible>			 
+		</Step>
+		<Step>
+			<Title>Unit CC</Title>
+			<Page>Unit.aspx</Page>
+			<Enabled>True</Enabled>
+			<Visible>True</Visible>
+		</Step>
+		<Step>
+			<Title>Wing JA</Title>
+			<Page>WingJA.aspx</Page>
+			<Enabled>True</Enabled>
+			<Visible>True</Visible>
+		</Step>
+		<Step>
+			<Title>Wing CC</Title>
+			<Page>WingCC.aspx</Page>
+			<Enabled>True</Enabled>
+			<Visible>True</Visible>
+		</Step>
+		<Step>
+			<Title>Documents</Title>
+			<Page>documents.aspx</Page>
+			<Enabled>True</Enabled>
+			<Visible>True</Visible>
+		</Step>
+		<Step>
+			<Title>Investigation</Title>
+			<Page>investigation.aspx</Page>
+			<Enabled>True</Enabled>
+			<Visible>True</Visible>
+		</Step>
+	  <Step>
+	    <Title>Senior Med</Title>
+	    <Page>SeniorMedReviewer.aspx</Page>
+	    <Enabled>True</Enabled>
+	    <Visible>True</Visible>
+	  </Step>
+		<Step>
+			<Title>LOD Board</Title>
+			<Page>lodBoard.aspx</Page>
+			<Enabled>True</Enabled>
+			<Visible>True</Visible>
+		</Step>
+        <Step>
+            <Title>Lessons Learned</Title>
+            <Page>BoardComments.aspx</Page>
+            <Enabled>True</Enabled>
+            <Visible>True</Visible>
+        </Step>
+        <Step>
+            <Title>Comments</Title>
+            <Page>UnitComments.aspx</Page>
+            <Enabled>True</Enabled>
+            <Visible>True</Visible>
+        </Step>
+		<Step>
+			<Title>Next Action</Title>
+			<Page>NextAction.aspx</Page>
+			<Enabled>True</Enabled>
+			<Visible>True</Visible>
+		</Step>
+		<Step>
+			<Title>Tracking</Title>
+			<Page>Tracking.aspx</Page>
+			<Enabled>True</Enabled>
+			<Visible>True</Visible>
+		</Step>
+     
+	</Steps>
+</TabNavigator>

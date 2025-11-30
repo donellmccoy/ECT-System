@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Workflow">
+
+  <class name="ALODPermission" table="core_Permissions">
+    <id name="Id" column="permId">
+      <generator class="identity" />
+    </id>
+
+    <property name="Name" column="permName" />
+    <property name="Description" column="permDesc" />
+    <property name="Exclude" column="exclude" />
+  </class>
+</hibernate-mapping>

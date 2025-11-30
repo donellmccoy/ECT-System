@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Users">
+
+  <class name="UnitChainEntry" table="command_struct_chain">
+    <id name="Id" column="csc_id">
+      <generator class="identity" />
+    </id>
+
+    <property name="CreatedBy" column="CREATED_BY" update="false" />
+		<property name="CreatedDate" column="CREATED_DATE" update="false" />
+		<property name="ModifiedBy" column="MODIFIED_BY" />
+		<property name="ModifiedDate" column="MODIFIED_DATE" />
+    <property name="ParentCSCID" column="CSC_ID_PARENT" />
+    <property name="unitId" column="CS_ID" />
+    <property name="ChainType" column="CHAIN_TYPE" />
+    <property name="ReportView" column="Reportingview" />
+    <property name="UserModified" column="UserModified" />
+  </class>
+</hibernate-mapping>

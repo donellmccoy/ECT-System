@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Workflow">
+
+	<class name="WorkflowOptionRule" table="core_WorkStatus_Rules">
+		<id name="Id" column="wsr_id">
+			<generator class="identity" />
+		</id>
+
+		<property name="RuleValue" column="ruleData" />
+		<property name="CheckAll" column="checkAll" />
+    <!--<property name="RuleId" column="ruleId" />-->
+    <!--<property name="OptionId" column="wso_id" />-->
+		<many-to-one name="OptionType" class="WorkflowStatusOption" column="wso_id" cascade="none" insert="false" />
+		<many-to-one name="RuleTypes" class="RuleType" column="ruleId" cascade="none" insert="false" />
+	</class>
+</hibernate-mapping>

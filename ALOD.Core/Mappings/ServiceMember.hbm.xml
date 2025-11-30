@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core">
+
+	<class name="ALOD.Core.Domain.ServiceMembers.ServiceMember" table="MemberData" lazy="false">
+		<id column="SSAN" name="Id">
+			<generator class="assigned" />
+		</id>
+
+		<property name="FirstName" column="FIRST_NAME" />
+		<property name="LastName" column="LAST_NAME" />
+		<property name="MiddleName" column="MIDDLE_NAMES" />
+		<property name="DutyPhone" column="COMM_DUTY_PHONE" />
+		<property name="Component" column="SVC_COMP" />
+		<property name="DateOfBirth" column="dob" />
+
+		<component name="MailingAddress" class="ALOD.Core.Domain.Lookup.Address">
+			<property name="Street" column="LOCAL_ADDR_STREET" />
+			<property name="City" column="LOCAL_ADDR_CITY" />
+			<property name="State" column="LOCAL_ADDR_STATE" />
+			<property name="Zip" column="ZIP" />
+		</component>
+
+		<many-to-one name="Unit" class="ALOD.Core.Domain.Users.Unit" column="pas_number" lazy="false" property-ref="PasCode" />
+		<many-to-one name="Rank" class="ALOD.Core.Domain.Lookup.UserRank" column="gr_curr" lazy="false" />
+
+    <many-to-one name="AttachUnit" class="ALOD.Core.Domain.Users.Unit" column="attach_pas" lazy="false" property-ref="PasCode" />
+  </class>
+</hibernate-mapping>

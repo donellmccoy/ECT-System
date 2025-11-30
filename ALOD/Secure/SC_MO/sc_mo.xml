@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabNavigator>
+  <Configuration>
+    <StartPage>~/Secure/Welcome.aspx</StartPage>
+    <PrintButtonVisible>False</PrintButtonVisible>
+    <PrintButtonText>Print Form 348</PrintButtonText>
+    <PrintScript>PrintMO();</PrintScript>
+  </Configuration>
+  <Steps>
+    <Step>
+      <Title>MO Member</Title>
+      <Page>SMData.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+    <Step>
+      <Title>MO Med Tech</Title>
+      <Page>MedTech.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+    <Step>
+      <Title>MO Board Med</Title>
+      <Page>MedOff.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+    <Step>
+      <Title>MO Senior Med</Title>
+      <Page>SeniorMedReviewer.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+    <Step>
+      <Title>MO HQ AFRC Tech</Title>
+      <Page>HQTech.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+    <Step>
+      <Title>MO Documents</Title>
+      <Page>documents.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+    <Step>
+      <Title>MO Next Action</Title>
+      <Page>NextAction.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+    <Step>
+      <Title>Case Dialogue</Title>
+      <Page>CaseDialogue.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+    <Step>
+      <Title>MO Case Comments</Title>
+      <Page>UnitComments.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+    <Step>
+      <Title>MO Tracking</Title>
+      <Page>Tracking.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+  </Steps>
+</TabNavigator>

@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Documents">
+
+	<class name="MemoLetterhead" table="core_MemoLetterheads">
+		<id name="Id" column="id">
+			<generator class="identity" />
+		</id>
+
+		<property name="Title" column="title" />
+		<property name="Version" column="version" />
+		<property name="Component" column="compo" />
+		<property name="CreatedDate" column="date_created" />
+    <property name="EffectiveDate" column="effective_date" />
+		<property name="LogoImageLeft" column="logo_image_left" />
+    <property name="LogoImageRight" column="logo_image_right" />
+		<property name="HeaderTitle" column="header_title" />
+		<property name="HeaderTitleSize" column="header_title_size" />
+		<property name="HeaderSubtitle" column="header_subtitle" />
+		<property name="HeaderSubtitleSize" column="header_subtitle_size" />
+    <property name="HeaderFontColorName" column="header_font_color" />
+    <property name="FooterImageCenter" column="footer_image_center" />
+		<property name="Font" column="font" />
+		<property name="FontSize" column="font_size" />
+	</class>
+</hibernate-mapping>

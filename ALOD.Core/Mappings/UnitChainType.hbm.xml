@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Users">
+
+  <class name="UnitChainType" table="core_lkupChainType">
+    <id name="Id" column="id">
+      <generator class="identity" />
+    </id>
+    <property name="Name" column="name" />
+    <property name="Active" column="active" />
+    <property name="CreatedBy" column="created_by" update="false" />
+    <property name="CreatedDate" column="created_date" update="false" />
+    <property name="ModifiedBy" column="modified_by" />
+    <property name="ModifiedDate" column="modified_date" />
+    <property name="Description" column="description" />
+  </class>
+</hibernate-mapping>

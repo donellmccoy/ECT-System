@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core">
+	<class name="ALOD.Core.Domain.Users.AppUser" table="core_Users" lazy="false">
+		<id name="Id" column="userId">
+			<generator class="identity" />
+		</id>
+		<property name="Status" column="accessStatus" />
+		<property name="Component" column="workCompo" />
+		<property name="AccountExpiration" column="expirationDate" />
+		<property name="ReceiveEmail" />
+        <property name="ReceiveReminderEmail" column="receiveReminderEmail" />
+		<property name="CreatedDate" column="created_date" />
+		<property name="AccountComment" column="comment" />
+		<property name="LastLoginDate" column="lastAccessDate" insert="false" />
+		<property name="SSN" />
+		<property name="EDIPIN" />
+		<property name="Username" />
+		<property name="Title" />
+		<property name="FirstName" />
+		<property name="LastName" />
+		<property name="MiddleName" />
+		<property name="DateOfBirth" />
+		<property name="Phone" />
+		<property name="DSN" />
+		<property name="Email" />
+		<property name="Email2" />
+		<property name="Email3" />
+		<property name="ModifiedDate" column="modified_date" />
+		<property name="ReportView" column="reportView" />
+		<property name ="DisabledBy" column="disabled_by" />
+		<property name="UnitView" column="unitView" />
+		<component name="Address" class="ALOD.Core.Domain.Lookup.Address">
+			<property name="Street" column="work_street" />
+			<property name="City" column="work_city" />
+			<property name="State" column="work_state" />
+			<property name="Zip" column="work_zip" />
+			<property name="Country" column="work_country" />
+		</component>
+		<many-to-one name="ModifiedBy" class="ALOD.Core.Domain.Users.AppUser" column="modified_by" />
+		<many-to-one name="CurrentRole" class="ALOD.Core.Domain.Users.UserRole" column="currentRole" />
+		<many-to-one name="Rank" class="ALOD.Core.Domain.Lookup.UserRank" column="rank_code" />
+	 	<many-to-one name="Unit" column="cs_id" class="ALOD.Core.Domain.Users.Unit" />
+		<many-to-one name="ActiveDutyUnit" column="ada_cs_id" class="ALOD.Core.Domain.Users.Unit" cascade="none" />
+		<bag name="AllRoles" table="core_UserRoles" cascade="all">
+			<key column="userId"></key>
+			<one-to-many class="ALOD.Core.Domain.Users.UserRole" />
+		</bag>
+	</class>
+	<sql-query  name="GetIOList">exec dbo.Form348_sp_GetIolist :userId ,:rptView , :caseMemberGradeCode</sql-query>
+</hibernate-mapping>

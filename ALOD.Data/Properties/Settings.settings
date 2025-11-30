@@ -1,0 +1,26 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<!--
+  NOTE: This file defines the default value for ALOD_Data_SRXExchange_DocumentService.
+  This value is used as a fallback when the setting is not found in app.config/web.config.
+  
+  IMPORTANT: The actual runtime value comes from web.config's ALOD_Data_SRXExchange_DocumentService
+  setting, which is transformed per environment via web.*.config files. This default value
+  is only used during development or if the configuration is missing.
+  
+  Environment-specific values are set in web.config transformations:
+  - web.Debug.config: http://alod-loc:8090/services/documentservice.asmx
+  - web.Testing.config: https://alodtest.afrc.af.mil/srxlite/services/documentservice.asmx
+  - web.Staging.config: https://alodstaging.afrc.af.mil/srxlite/services/documentservice.asmx
+  - web.Release.config: https://alod.afrc.af.mil/srxlite/services/documentservice.asmx
+  - web.Production.config: https://alod.afrc.af.mil/srxlite/services/documentservice.asmx
+  
+  Current value set to Testing environment as example. Update to match your development environment.
+-->
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ALOD.Data.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ALOD_Data_SRXExchange_DocumentService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://alodtest.afrc.af.mil/srxlite/services/documentservice.asmx</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

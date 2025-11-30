@@ -1,0 +1,299 @@
+﻿.visuallyHidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    width: 1px;
+    margin: 1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+}
+
+.acc {
+    background-color: #eeeeee;
+}
+
+.accHeader, .accHeaderSelected {
+    font-size: 11pt;
+    letter-spacing: 1pt;
+    color: #FFFFFF;
+    padding: 3px 0px 3px 6px;
+}
+
+.accHeader {
+    background-image: url('../App_Themes/DefaultBlue/images/add.gif');
+    background-repeat: no-repeat;
+    background-position: 98% 50%;
+    background-color: #27487d;
+    margin-bottom: 1px;
+    cursor: pointer;
+}
+
+.accHeaderSelected {
+    background-image: url('../App_Themes/DefaultBlue/images/subtract.gif');
+    background-repeat: no-repeat;
+    background-position: 98% 50%;
+    background-color: #5078B3;
+    /*background-color:#27487d;*/
+    border-left: #8AA4F2;
+    border-top: #8AA4F2;
+    border-right: #000000;
+    border-bottom: #000000;
+    border-width: 1px;
+    border-style: solid;
+}
+
+.accContent {
+    border: solid 1px #000000;
+    padding: 10px;
+    margin-bottom: 1px;
+}
+
+/* Make the main section header links NOT look like links */
+.accHeader a, accHeader a:link, accHeader:visited, accHeader:hover, accHeader:active {
+    text-decoration: none;
+    font-family: Verdana;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+/* Make the main section header links NOT look like links */
+.accHeaderSelected a, accHeaderSelected a:link, accHeaderSelected:visited, accHeaderSelected:hover, accHeaderSelected:active {
+    text-decoration: none;
+    font-family: Verdana;
+    color: #FFFFFF;
+    cursor: default;
+}
+
+.sectionPanelNoTitle {
+    width: auto;
+    border: groove 2px #ffffff;
+    margin: 5px;
+    margin-bottom: 10px;
+    padding: 5px 5px 5px 5px;
+    overflow: hidden;
+}
+
+.sectionPanel {
+    width: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 5px 5px 5px 5px;
+    overflow: hidden;
+    /* Note: border set with .sectionPanel > fieldset */
+}
+
+    .sectionPanel > fieldset {
+        border: groove 2px #ffffff;
+    }
+
+        .sectionPanel > fieldset > legend {
+            font-weight: bold;
+        }
+
+.fieldGroupPanel {
+    width: 50%;
+    display: inline-block;
+}
+
+.fieldGroupPanel-1 {
+    width: 100%;
+    display: inline-block;
+    border-top: solid 1px #FFFFFF;
+    border-right: solid 1px #FFFFFF;
+    border-left: solid 1px #FFFFFF;
+}
+
+.fieldGroupPanelLeft-2 {
+    width: 50%;
+    display: inline-block;
+    float: left;
+    border-top: solid 1px #FFFFFF;
+    border-right: solid 1px #FFFFFF;
+    border-left: solid 1px #FFFFFF;
+    /*margin-right: 10px;*/
+    /*margin-bottom:10px;*/
+}
+
+.fieldGroupPanelRight-2 {
+    width: 48%;
+    display: inline-block;
+    float: right;
+    border-top: solid 1px #FFFFFF;
+    border-right: solid 1px #FFFFFF;
+    border-left: solid 1px #FFFFFF;
+    margin-right: 3px;
+    /*margin-bottom:10px;*/
+}
+
+.fieldGroupPanelLeft-3 {
+    width: 32%;
+    display: inline-block;
+    float: left;
+    border-top: solid 1px #FFFFFF;
+    border-right: solid 1px #FFFFFF;
+    border-left: solid 1px #FFFFFF;
+    margin-right: 9px;
+    /*margin-bottom:10px;*/
+}
+
+.fieldGroupPanelCenter-3 {
+    width: 33%;
+    display: inline-block;
+    float: left;
+    border-top: solid 1px #FFFFFF;
+    border-right: solid 1px #FFFFFF;
+    border-left: solid 1px #FFFFFF;
+    margin-right: 9px;
+    /*margin-bottom:10px;*/
+}
+
+.fieldGroupPanelRight-3 {
+    width: 32%;
+    display: inline-block;
+    float: right;
+    border-top: solid 1px #FFFFFF;
+    border-right: solid 1px #FFFFFF;
+    border-left: solid 1px #FFFFFF;
+    /*margin-bottom:10px;*/
+}
+
+.fieldPanel {
+    display: flex;
+    align-items: center;
+    background-color: #DDDDDD;
+    border-bottom: solid 1px white;
+    padding: 3px 3px 3px 3px;
+    min-height: 21px;
+}
+
+    .fieldPanel > input {
+        margin: 2px 4px 2px 4px
+    }
+
+    .fieldPanel > span {
+        margin: 2px 4px 2px 4px
+    }
+
+.fieldLabelPanel-1 {
+    width: 15%;
+    display: inline-block;
+    float: left;
+    margin-right: 3px;
+}
+
+.fieldComponentsPanel-1 {
+    width: 85%;
+    display: inline-block;
+    min-height: 21px;
+}
+
+.fieldLabelPanel-2 {
+    width: 28%;
+    display: inline-block;
+    float: left;
+    margin-right: 3px;
+}
+
+.fieldComponentsPanel-2 {
+    width: 70%;
+    display: inline-block;
+    min-height: 21px;
+}
+
+.fieldLabelPanel-3 {
+    width: 38%;
+    display: inline-block;
+    float: left;
+    margin-right: 3px;
+}
+
+.fieldComponentsPanel-3 {
+    width: 60%;
+    display: inline-block;
+    min-height: 21px;
+}
+
+.fieldComponentsPanel-NoLabel {
+    width: 100%;
+    display: inline-block;
+    min-height: 21px;
+}
+
+.fieldTypeMS {
+    background-color: #FFFFFF;
+}
+
+.fieldTypeFR {
+    background-color: #bdd6fc;
+}
+
+.fieldTypeFO {
+    background-color: #bebdfc;
+}
+
+.fieldLabel {
+    display: inline-block;
+    width: 100%;
+    min-width: 100%;
+    word-wrap: break-word;
+}
+
+.fieldNumbersTextbox {
+    width: 50px;
+    min-width: 50px;
+    border: 1px solid black;
+    margin: 1px 1px 1px 1px;
+}
+
+.fieldSmallTextbox {
+    width: auto;
+    border: 1px solid black;
+    margin: 1px 1px 1px 1px;
+}
+
+.fieldLargeTextbox {
+    width: 99%;
+    border: 1px solid black;
+    margin: 1px 1px 1px 1px;
+}
+
+.fieldGiantTextbox {
+    width: 99%;
+    border: 1px solid black;
+    margin: 1px 1px 1px 1px;
+}
+
+.fieldOptionsBox {
+    width: auto;
+    border: 1px solid black;
+    margin: 1px 1px 1px 1px;
+}
+
+.fieldMultipleOptionsBox {
+    width: auto;
+    border: 1px solid black;
+    margin: 1px 1px 1px 1px;
+}
+
+.fieldCSVTextbox {
+    width: 99%;
+    border: 1px solid black;
+    margin: 1px 1px 1px 1px;
+}
+
+.fieldCSVLabel {
+    width: 99%;
+    margin: 1px 1px 1px 1px;
+}
+
+.fieldValidationError {
+    border: 2px #FF0000 solid;
+}
+
+.fieldWordWrapLabel {
+    display: inline-block;
+    width: 100%;
+    min-width: 100%;
+    word-wrap: break-word;
+}

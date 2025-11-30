@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabNavigator>
+  <Configuration>
+    <StartPage>~/Secure/Welcome.aspx</StartPage>
+    <PrintButtonVisible>True</PrintButtonVisible>
+    <PrintButtonText>Print Form 348-R</PrintButtonText>
+    <PrintScript>PrintForm348R();</PrintScript>
+  </Configuration>
+  <Steps>
+    <Step>
+      <Title>SARC Member</Title>
+      <Page>SMData.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+
+    <Step>
+      <Title>Wing SARC</Title>
+      <Page>Wing.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+
+    <Step>
+      <Title>SARC Admin</Title>
+      <Page>Admin.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+
+    <Step>
+      <Title>SARC Senior Med</Title>
+      <Page>SeniorMedReviewer.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+
+    <Step>
+      <Title>SARC Board</Title>
+      <Page>Board.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+
+    <Step>
+      <Title>SARC Documents</Title>
+      <Page>Documents.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+
+    <Step>
+      <Title>SARC Next Action</Title>
+      <Page>NextAction.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+    <Step>
+      <Title>Case Dialogue</Title>
+      <Page>CaseDialogue.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+    <Step>
+      <Title>SARC Case Comments</Title>
+      <Page>UnitComments.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+    <Step>
+      <Title>SARC Tracking</Title>
+      <Page>Tracking.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+  </Steps>
+</TabNavigator>

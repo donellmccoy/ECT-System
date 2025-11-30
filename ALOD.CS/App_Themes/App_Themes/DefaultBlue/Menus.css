@@ -1,0 +1,76 @@
+﻿#main-menu ul li {
+    z-index: 500;
+    list-style: none;
+}
+
+/* Define the menu overall background */
+.MainMenuStaticStyle {
+    background-color: #3E74CA;
+}
+
+/* Define the rest state of the top menu items */
+.MainMenuStaticItemStyle,
+A.MainMenuStaticItemStyle:link,
+A.MainMenuStaticItemStyle:visited,
+A.MainMenuStaticItemStyle:active {
+    padding-right: 10px;
+    padding-left: 10px;
+    font-size: 12px;
+    font-weight: bold;
+    padding-bottom: 2px;
+    cursor: hand;
+    color: #FFF;
+    padding-top: 2px;
+    font-family: Verdana;
+    text-align: left;
+    white-space: nowrap;
+    cursor: pointer !important;
+    text-decoration: none;
+}
+
+/* Define the hover state of the top menu items */
+.MainMenuStaticItemHoverStyle,
+A.MainMenuStaticItemHoverStyle:link,
+A.MainMenuStaticItemHoverStyle:visited,
+A.MainMenuStaticItemHoverStyle:active {
+    text-decoration: none;
+    background-color: #3E74CA;
+    cursor: default;
+}
+
+.MainMenuDynamicItemStyle,
+A.MainMenuDynamicItemStyle:link,
+A.MainMenuDynamicItemStyle:visited,
+A.MainMenuDynamicItemStyle:active {
+    background-color: #3E74CA;
+    padding-right: 10px;
+    padding-left: 3px;
+    font-weight: bold;
+    font-size: 11px;
+    padding-bottom: 3px;
+    cursor: hand;
+    color: #FFF;
+    padding-top: 3px;
+    font-family: Verdana;
+    text-align: left;
+    white-space: nowrap;
+    border-top: #3E74CA 0px solid;
+    border-bottom: #FFF 1px solid;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+}
+
+.MainMenuDynamicItemHoverStyle,
+A.MainMenuDynamicItemHoverStyle:link,
+A.MainMenuDynamicItemHoverStyle:visited,
+A.MainMenuDynamicItemHoverStyle:active,
+A.MainMenuDynamicItemHoverStyle:hover {
+    color: #27487D;
+    text-decoration: none;
+    background-color: #C9AB3E;
+    border-top: #3E74CA 0px solid;
+    border-bottom: #FFF 1px solid;
+    display: block;
+    width: 100%;
+}

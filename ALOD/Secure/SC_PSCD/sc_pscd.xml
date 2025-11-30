@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<TabNavigator>
+  <Configuration>
+    <StartPage>~/Secure/Welcome.aspx</StartPage>
+    <PrintButtonVisible>True</PrintButtonVisible>
+    <PrintButtonText>Print Form 348</PrintButtonText>
+    <PrintScript>PrintPSCD();</PrintScript>
+  </Configuration>
+  <Steps>
+    <Step>
+      <Title>PSC Member</Title>
+      <Page>SMData.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+
+    <Step>
+      <Title>PSC Med Tech</Title>
+      <Page>PSCDTech.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+
+    <Step>
+        <Title>PSC Board</Title>
+        <Page>PSCDBoard.aspx</Page>
+        <Enabled>True</Enabled>
+        <Visible>True</Visible>
+    </Step>
+
+	<Step>
+		<Title>PSC Documents</Title>
+		<Page>Documents.aspx</Page>
+		<Enabled>True</Enabled>
+		<Visible>True</Visible>
+	</Step>
+
+    <Step>
+      <Title>PSC WD Documents</Title>
+      <Page>WD_Documents.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+
+    <Step>
+      <Title>PSC IR Documents</Title>
+      <Page>IR_Documents.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+
+    <Step>
+      <Title>PSC RW Documents</Title>
+      <Page>RW_Documents.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+
+    <Step>
+      <Title>PSC Case Comments</Title>
+      <Page>UnitComments.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+
+    <Step>
+		<Title>PSC Case Dialogue</Title>
+		<Page>CaseDialogue.aspx</Page>
+		<Enabled>True</Enabled>
+		<Visible>True</Visible>
+	</Step>
+
+	<Step>
+		<Title>PSC Next Action</Title>
+		<Page>NextAction.aspx</Page>
+		<Enabled>True</Enabled>
+		<Visible>True</Visible>
+	</Step>
+
+    <Step>
+      <Title>PSC Tracking</Title>
+      <Page>Tracking.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+  </Steps>
+</TabNavigator>

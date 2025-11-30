@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Workflow">
+
+	<class name="StatusCode" table="core_StatusCodes">
+		<id name="Id" column="statusId">
+			<generator class="identity" />
+		</id>
+
+		<property name="Description" column="description" />
+		<property name="ModuleId" column="moduleId" />
+		<property name="Compo" column="compo" />
+		<property name="GroupId" column="groupId" />
+		<property name="IsFinal" column="isFinal" />
+		<property name="IsApproved" column="isApproved" />
+		<property name="CanAppeal" column="canAppeal" />
+		<property name="Filter" column="filter" />
+		<property name="DisplayOrder" column="displayOrder" />
+    <property name="IsCancel" column="isCancel" />
+    <property name="IsDisposition" column="isDisposition" />
+    <property name="IsFormal" column="isFormal" />
+
+		<bag name="WorkStatusList" table="core_WorkStatus" cascade="all">
+			<key column="statusId"></key>
+			<one-to-many class="WorkStatus" />
+		</bag>
+	</class>
+</hibernate-mapping>

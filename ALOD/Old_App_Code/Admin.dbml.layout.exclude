@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 18.375" name="Admin">
+  <DataContextMoniker Name="/AdminDataContext" />
+  <nestedChildShapes>
+    <classShape Id="18a3ecfb-f57b-420d-83db-fdbff2592a05" absoluteBounds="0.875, 6.75, 2, 2.5752791341145831">
+      <DataClassMoniker Name="/AdminDataContext/core_UserGroup" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b43a6dfc-60ab-4590-b64d-0de25ee24832" absoluteBounds="0.89, 7.21, 1.9700000000000002, 2.015279134114583" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b17f72a7-05ad-498f-9a5c-7e3c294d6ed1" absoluteBounds="0.5, 9.75, 2, 1.4248478190104166">
+      <DataClassMoniker Name="/AdminDataContext/core_lkupChainType" />
+      <nestedChildShapes>
+        <elementListCompartment Id="44ad1afa-aaf8-4b2a-b35d-1e568b222417" absoluteBounds="0.515, 10.21, 1.9700000000000002, 0.86484781901041663" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="f1c6b9a3-a1ee-4101-a632-d6b4c4703e95" absoluteBounds="0.5, 13.125, 2, 1.0961531575520833">
+      <DataClassMoniker Name="/AdminDataContext/core_lkupOperationType" />
+      <nestedChildShapes>
+        <elementListCompartment Id="10a2121f-38e3-489f-9b71-e7c697034b3e" absoluteBounds="0.515, 13.585, 1.9700000000000002, 0.53615315755208326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="5f4ad144-9cfc-4b28-9ac4-e6f462e5e21a" absoluteBounds="0.75, 12.25, 2, 1.0961531575520833">
+      <DataClassMoniker Name="/AdminDataContext/core_lkupUnitLevelType" />
+      <nestedChildShapes>
+        <elementListCompartment Id="003a16bf-3749-48c9-8b6d-d01b459c4607" absoluteBounds="0.765, 12.71, 1.9700000000000002, 0.53615315755208326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="11d0772c-1d60-42a0-8bea-8e30e446f86f" absoluteBounds="0.5, 1.125, 2, 1.26050048828125">
+      <DataClassMoniker Name="/AdminDataContext/vw_lkupCompo" />
+      <nestedChildShapes>
+        <elementListCompartment Id="797da978-3384-4af5-b1a2-c4224c5465b8" absoluteBounds="0.515, 1.585, 1.9700000000000002, 0.70050048828125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="fd10fab8-d33f-4c1d-ae69-6f6217299156" absoluteBounds="0.75, 2.75, 2, 1.26050048828125">
+      <DataClassMoniker Name="/AdminDataContext/vw_lkupState" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0f9940d8-9b20-41c5-b3c7-2e80c497d49a" absoluteBounds="0.765, 3.21, 1.9700000000000002, 0.70050048828125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="90a53752-61c5-4f6c-b273-eeef6597001d" absoluteBounds="1.25, 11.5, 2, 6.68396240234375">
+      <DataClassMoniker Name="/AdminDataContext/COMMAND_STRUCT" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3e3517da-7dc1-4fec-9139-2c773009ae51" absoluteBounds="1.2650000000000001, 11.96, 1.9700000000000002, 6.12396240234375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(0.5 : 13.673076578776); (0.25 : 13.673076578776); (0.25 : 14.8419812011719); (1.25 : 14.8419812011719)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AdminDataContext/core_lkupOperationType/core_lkupOperationType_COMMAND_STRUCT" />
+      <nodes>
+        <classShapeMoniker Id="f1c6b9a3-a1ee-4101-a632-d6b4c4703e95" />
+        <classShapeMoniker Id="90a53752-61c5-4f6c-b273-eeef6597001d" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.75 : 12.25); (1.75 : 11.25); (2.25 : 11.25); (2.25 : 11.5)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AdminDataContext/core_lkupUnitLevelType/core_lkupUnitLevelType_COMMAND_STRUCT" />
+      <nodes>
+        <classShapeMoniker Id="5f4ad144-9cfc-4b28-9ac4-e6f462e5e21a" />
+        <classShapeMoniker Id="90a53752-61c5-4f6c-b273-eeef6597001d" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="9c3c07af-ca78-4e22-b8b8-39206239f537" absoluteBounds="0.75, 11.625, 2, 1.0961531575520833">
+      <DataClassMoniker Name="/AdminDataContext/core_lkupTimeZone" />
+      <nestedChildShapes>
+        <elementListCompartment Id="06782ba3-efca-4005-b7a7-823ce6d8c384" absoluteBounds="0.765, 12.085, 1.9700000000000002, 0.53615315755208326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

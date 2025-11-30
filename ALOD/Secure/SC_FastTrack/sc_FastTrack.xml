@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<TabNavigator>
+  <Configuration>
+    <StartPage>~/Secure/Welcome.aspx</StartPage>
+    <PrintButtonVisible>True</PrintButtonVisible>
+    <PrintButtonText>Print Form 348</PrintButtonText>
+    <PrintScript>PrintFT()</PrintScript>
+  </Configuration>
+  <Steps>
+    <Step>
+      <Title>IR Member</Title>
+      <Page>SMData.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+    <Step>
+      <Title>IR Med Tech</Title>
+      <Page>MedTech.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+    <Step>
+      <Title>IR Med Off</Title>
+      <Page>MedOff.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+    <Step>
+      <Title>IR Documents</Title>
+      <Page>documents.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+    <Step>
+      <Title>LOD Documents</Title>
+      <Page>LODDocuments.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+    <Step>
+      <Title>IR Next Action</Title>
+      <Page>NextAction.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+    <Step>
+      <Title>Case Dialogue</Title>
+      <Page>CaseDialogue.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+    <Step>
+        <Title>IR Case Comments</Title>
+        <Page>UnitComments.aspx</Page>
+        <Enabled>True</Enabled>
+        <Visible>True</Visible>
+    </Step>
+    <Step>
+      <Title>IR Tracking</Title>
+      <Page>Tracking.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+  </Steps>
+</TabNavigator>

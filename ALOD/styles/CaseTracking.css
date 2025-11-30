@@ -1,0 +1,23 @@
+﻿.startDate, .endDate {
+    width: 146px;
+}
+
+.completedBy {
+    width: 186px;
+}
+
+.procName {
+    width: 244px;
+}
+
+.dayCount {
+    width: 170px;
+}
+
+.expand {
+    width: 20px;
+}
+
+.collapsePanel {
+    overflow: hidden;
+}

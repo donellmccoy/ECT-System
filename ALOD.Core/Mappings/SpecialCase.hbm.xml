@@ -1,0 +1,500 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Modules.SpecialCases">
+
+  <class name="SpecialCase" lazy="false" table="form348_SC" discriminator-value='1'>
+    <id name="Id" column="SC_id">
+      <generator class="identity" />
+    </id>
+    <discriminator column="Module_Id" type="integer" />
+    <property name="CaseId" column="Case_Id" update="false" insert="false" />
+    <property name="CreatedBy" column="Created_By" />
+    <property name="CreatedDate" column="Created_Date" />
+    <property name="moduleId" column="Module_Id" update="false" insert="false" />
+    <property name="ModifiedBy" column="Modified_By" />
+    <property name="ModifiedDate" column="Modified_Date" />
+    <property name="Workflow" column="Workflow" />
+    <property name="Status" column="Status" />
+    <property name="RWOA_Reason" column="RWOA_Reason" />
+    <property name="RWOA_Date" column="RWOA_Date" />
+    <property name="RWOA_Explanation" column="RWOA_Explantion" />
+    <property name="CaseCancelDate" column="Case_Cancel_Date" />
+    <property name="CaseCancelReason" column="Case_Cancel_Reason" />
+    <property name="CaseCancelExplanation" column="Case_Cancel_Explanation" />
+    <property name="ReturnToGroup" column="return_to_group" />
+    <property name="ReturnByGroup" column="return_by_group" />
+    <property name="CaseComments" column="Case_Comments" />
+    <property name="SubWorkflowType" column="sub_workflow_type" />
+    <property name="med_tech_approved" column="med_tech_approved" />
+    <property name="hqt_approval1" column="hqt_approval1" />
+    <property name="med_off_approved" column="med_off_approved" />
+    <property name="hqt_approval2" column="hqt_approval2" />
+    <property name="SeniorMedicalReviewerConcur" column="senior_medical_reviewer_concur" />
+    <property name="SeniorMedicalReviewerApproved" column="senior_medical_reviewer_approved" />
+    <property name="SeniorMedicalReviewerComment" column="senior_medical_reviewer_comment" />
+    <property name="med_tech_approval_comment" column="med_tech_approval_comment" />
+    <property name="hqt_approval1_comment" column="hqt_approval1_comment" />
+    <property name="med_off_approval_comment" column="med_off_approval_comment" />
+    <property name="hqt_approval2_comment" column="hqt_approval2_comment" />
+
+    <many-to-one name="WorkflowStatus" class="ALOD.Core.Domain.Workflow.WorkStatus" column="Status" cascade="none" update="false" insert="false" />
+
+    <property name="Return_Comment" column="Return_Comment" />
+    <property name="MemberSSN" column="Member_SSN" />
+    <property name="MemberName" column="Member_Name" />
+    <property name="MemberUnit" column="Member_Unit" />
+    <property name="MemberCompo" column="Member_Compo" />
+    <property name="MemberUnitId" column="Member_Unit_Id" />
+    <many-to-one name="MemberRank" class="ALOD.Core.Domain.Lookup.UserRank" column="member_grade" update="true" insert="true" />
+    <property name="MemberDOB" column="MEMBER_DOB" />
+    <property name="DocumentGroupId" column="Doc_Group_Id" />
+    <property name="ExpirationDate" column="Expiration_Date" />
+    <property name="AssociatedWWD" column="Initial_SC" />
+    <property name="HasAdminLOD" column="Has_Admin_LOD" />
+    <property name="HasAdminSC" column="Has_Admin_SC" />
+
+    <subclass name="SC_Incap" discriminator-value="6">
+      <property name="TMTNumber" column="TMT_Number" />
+      <property name="TMTReceiveDate" column="TMT_Receive_Date" />
+      <property name="SuspenseDate" column="Suspense_Date" />
+
+          <bag name="INCAPFindings" table="Form348_INCAP_Findings" cascade="all" inverse="true">
+        <key column="sc_Id"></key>
+        <one-to-many class="SC_Incap_Findings" />
+      </bag>
+    <bag name="INCAPExtFindings" table="Form348_INCAP_Ext" cascade="all" inverse="true">
+        <key column="sc_Id"></key>
+        <one-to-many class="SC_IncapExt_Findings" />
+      </bag>
+      <bag name="INCAPAppealFindings" table="Form348_INCAP_Appeal" cascade="all" inverse="true">
+        <key column="sc_Id"></key>
+        <one-to-many class="SC_IncapAppeal_Findings" />
+      </bag>
+    </subclass>
+
+    <subclass name="SC_Congress" discriminator-value="7">
+      <property name="TMTNumber" column="TMT_Number" />
+      <property name="TMTReceiveDate" column="TMT_Receive_Date" />
+      <property name="SuspenseDate" column="Suspense_Date" />
+    </subclass>
+
+    <subclass name="SC_BMT" discriminator-value="8">
+    </subclass>
+
+    <subclass name="SC_WWD" discriminator-value="9">
+      <property name="RMUName" column="RMU_Name" />
+      <property name="MedGroupName" column="Med_Group_Name" />
+      <property name="PocUnit" column="POC_Unit" />
+      <property name="PocPhoneDSN" column="POC_Phone_DSN" />
+      <property name="PocEmail" column="POC_Email" />
+      <property name="ALCLetterType" column="ALC_Letter_Type" />
+      <property name="MemoTemplateID" column="memo_template_id" />
+      <property name="WWDDocsAttached" column="WWD_Docs_Attached" />
+      <property name="CoverLetterUploaded" column="Cover_Letter_Uploaded" />
+      <property name="AFForm469Uploaded" column="AF_Form469_Uploaded" />
+      <property name="NarrativeSummaryUploaded" column="Narrative_Summary_Uploaded" />
+      <property name="IPEBElection" column="IPEB_Election" />
+      <property name="IPEBRefusal" column="IPEB_Refusal" />
+      <property name="IPEBSignatureDate" column="IPEB_Signature_Date" />
+      <property name="MUQRequestDate" column="MUQ_Request_Date" />
+      <property name="MUQUploadDate" column="MUQ_Upload_Date" />
+      <property name="CoverLtrIncMemberStatement" column="Cover_Ltr_Inc_Member_Statement" />
+      <property name="UnitCmdrMemoUploaded" column="Unit_Cmdr_Memo_Uploaded" />
+      <property name="MedEvalFactSheetSignDate" column="Med_Eval_Fact_Sheet_Sign_Date" />
+      <property name="MedEvalFSWaiverSignDate" column="Med_Eval_FS_Waiver_Sign_Date" />
+      <property name="PrivatePhysicianDocsUploaded" column="Private_Physician_Docs_Uploaded" />
+      <property name="PS3811RequestDate" column="PS3811_Request_Date" />
+      <property name="PS3811SignDate" column="PS3811_Sign_Date" />
+      <property name="PS3811Uploaded" column="PS3811_Uploaded" />
+      <property name="FirstClassMailDate" column="First_Class_Mail_Date" />
+      <property name="CoverLtrIncContactAttemptDetails" column="Cover_Ltr_Inc_Contact_Attempt_Details" />
+      <property name="MemberLetterUploaded" column="Member_Letter_Uploaded" />
+      <property name="HQTechDisposition" column="HQTech_Disposition" />
+      <property name="MUQ_Valid" column="MUQ_Valid" />
+      <property name="ICD9Code" column="icd9_id" />
+      <property name="ICD9Description" column="icd9_description" />
+      <property name="ICD9Diagnosis" column="FT_Diagnosis" />
+      <property name="ReturnToDutyDate" column="Return_To_Duty_Date" />
+      <property name="DQParagraph" column="DQ_Paragraph" />
+      <property name="DQCompletionDate" column="DQ_Completion_Date" />
+      <property name="SAFLetterUploadDate" column="SAF_Letter_Upload_Date" />
+      <property name="Code37InitDate" column="Code37_Init_Date" />
+      <property name="ICD7thCharacter"    column="icd_7th_Char" />
+      <property name="AlternateDQParagraph"         column="Alternate_DQ_Paragraph" />
+      <property name="AlternateDQCompletionDate"    column="Alternate_DQ_Completion_Date" />
+      <property name="AlternateExpirationDate"      column="Alternate_Expiration_Date" />
+      <property name="AlternateReturnToDutyDate"    column="Alternate_Return_To_Duty_Date" />
+      <property name="AlternateALCLetterType"       column="Alternate_ALC_Letter_Type" />
+      <property name="AlternateMemoTemplateID"      column="Alternate_memo_template_id" />
+
+      <component name="PointOfContact" class="ALOD.Core.Domain.Modules.Lod.SignatureEntry">
+        <property name="DateSigned" column="sig_date_poc" />
+        <property name="NameAndRank" column="sig_name_poc" />
+        <property name="Title" column="sig_title_poc" />
+      </component>
+    </subclass>
+
+    <subclass name="SC_PWaivers" discriminator-value="10">
+      <property name="ApprovalDate" column="Approval_Date" />
+      <property name="PWaiverCategory" column="PWaiver_Category" />
+      <property name="PWaiverCategoryDescription" column="PWaiver_Category_Text" />
+      <property name="PWaiverLength" column="PWaiver_Length" />
+      <property name="ICD9Code" column="icd9_id" />
+      <property name="ICD9Description" column="icd9_description" />
+      <property name="ICD9Diagnosis" column="FT_Diagnosis" />
+      <property name="ICD7thCharacter" column="icd_7th_Char" />
+      <property name="AlternateApprovalDate" column="Alternate_Approval_Date" />
+      <property name="AlternateExpirationDate" column="Alternate_Expiration_Date" />
+      <property name="AlternatePWaiverLength" column="Alternate_PWaiver_Length" />
+      <property name="PocRankAndName"      column="POC_RankAndName" />
+      <property name="PocEmail"      column="POC_Email" />
+      <property name="PocPhoneDSN"      column="POC_Phone_DSN" />
+    </subclass>
+
+    <subclass name="SC_MEB" discriminator-value="11">
+      <property name="ALCLetterType" column="ALC_Letter_Type" />
+      <property name="MemoTemplateID" column="memo_template_id" />
+
+      <property name="MemberNotifiedDate" column="Notification_Date" />
+      <property name="MedGroupName" column="Med_Group_Name" />
+      <property name="RMUName" column="RMU_Name" />
+      <property name="MemberStatus" column="Member_Status_ID" />
+      <property name="ICD9Code" column="ICD9_ID" />
+      <property name="ICD9Description" column="ICD9_Description" />
+      <property name="ICD9Diagnosis" column="FT_Diagnosis" />
+      <property name="DAWGRecommendation" column="DAWG_Recommendation" />
+      <property name="ApprovingAuthorityType" column="ApprovingAuthorityType" />
+      <property name="ReturnToDutyDate" column="Return_To_Duty_Date" />
+      <property name="EffectiveDate" column="Approval_Date" />
+      <property name="ForwardDate" column="ForwardDate" />
+      <property name="MedOffConcur" column="med_off_concur" />
+      <property name="Code37InitDate" column="Code37_Init_Date" />
+      <property name="ICD7thCharacter"    column="icd_7th_Char" />
+      <property name="AlternateMedOffConcur"    column="Alternate_med_off_concur" />
+      <property name="AlternateALCLetterType"    column="Alternate_ALC_Letter_Type" />
+        <property name="AlternateMemoTemplateId"    column="Alternate_memo_template_id" />
+    </subclass>
+
+    <subclass name="SC_BCMR" discriminator-value="12">
+      <property name="TMTNumber" column="TMT_Number" />
+      <property name="TMTReceiveDate" column="TMT_Receive_Date" />
+      <property name="SuspenseDate" column="Suspense_Date" />
+    </subclass>
+
+    <subclass name="SC_FastTrack" discriminator-value="13">
+      <property name="ALCLetterType" column="ALC_Letter_Type" />
+      <property name="MemoTemplateID" column="memo_template_id" />
+      <property name="RMUName" column="RMU_Name" />
+      <property name="MedGroupName" column="Med_Group_Name" />
+      <property name="FastTrackType" column="Fast_Track_Type" />
+      <property name="TMTReceiveDate" column="TMT_Receive_Date" />
+      <property name="DAFSC" column="DAFSC" />
+      <property name="SuitableDAFSC" column="DAFSC_Is_Suitable" />
+      <property name="YearsSatisfactoryService" column="Years_Satisfactory_Service" />
+      <property name="BodyMassIndex" column="Body_Mass_Index" />
+      <property name="RequiresSpecialistForMgmt" column="Requires_Specialist_For_Mgmt" />
+      <property name="MissedWorkDays" column="Missed_Work_Days" />
+      <property name="HasHadERorUrgentCareVisits" column="Had_ER_Urgent_Care_Visits" />
+      <property name="ERorUrgentCareVisitList" column="ER_Urgent_Care_Visit_Details" />
+      <property name="HasBeenHospitalized" column="Had_Hospitalizations" />
+      <property name="HospitalizationList" column="Hospitalization_List" />
+      <property name="RiskForSuddenIncapacitation" column="Risk_For_Sudden_Incapacitation" />
+      <property name="ICD9Code" column="ICD9_ID" />
+      <property name="ICD9Description" column="ICD9_Description" />
+      <property name="DxInterferenceWithDuties" column="DX_Interferes_With_Duties" />
+      <property name="FTDiagnosis" column="FT_Diagnosis" />
+      <property name="FTPrognosis" column="FT_Prognosis" />
+      <property name="FTTreatment" column="FT_Treatment" />
+      <property name="FTMedicationsAndDosages" column="FT_Medications_And_Dosages" />
+      <property name="RecommendedFollowUpInterval" column="Recommended_Follow_Up_Interval" />
+      <property name="DaytimeSomnolence" column="Daytime_Somnolence" />
+      <property name="DaySleepDescription" column="Day_Sleep_Description" />
+      <property name="HasApneaEpisodes" column="Has_Apnea_Episodes" />
+      <property name="ApneaEpisodeDescription" column="Apnea_Episode_Description" />
+      <property name="SleepStudyResults" column="Sleep_Study_Results" />
+      <property name="OralDevicesUsed" column="Oral_Devices_Used" />
+      <property name="CPAPRequired" column="CPAP_Required" />
+      <property name="BIPAPRequired" column="BIPAP_Required" />
+      <property name="ResponseToDevices" column="Response_To_Devices" />
+      <property name="FastingBloodSugar" column="Fasting_Blood_Sugar" />
+      <property name="HgbA1C" column="HgbA1C" />
+      <property name="CurrentOptometryExam" column="Current_Optometry_Exam" />
+      <property name="HasOtherSignificantConditions" column="Has_Significant_Conditions" />
+      <property name="OtherSignificantConditionsList" column="Other_Significant_Conditions_List" />
+      <property name="ControlledWithOralAgents" column="Controlled_With_Oral_Agents" />
+      <property name="OralAgentsList" column="Oral_Agents_List" />
+      <property name="RequiresInsulin" column="Requires_Insulin" />
+      <property name="InsulinDosageRegime" column="Insulin_Dosage_Regime" />
+      <property name="RequiresNonInsulinMed" column="Requires_Non_Insulin_Med" />
+      <property name="PulmonaryFunctionTest" column="Pulmonary_Function_Test" />
+      <property name="MethacholineChallenge" column="Methacholine_Challenge" />
+      <property name="RequiresDailySteroids" column="Requires_Daily_Steroids" />
+      <property name="DailySteroidDosage" column="Daily_Steroids_Dosage" />
+      <property name="RescueInhalerUsageFrequency" column="Rescue_Inhaler_Usage_Frequency" />
+      <property name="SymptomsExacerbatedByColdExercise" column="Symptoms_Exacerbated_By_Cold_Or_Exercise" />
+      <property name="ExerciseColdSymptomDescription" column="Exercise_Or_Cold_Exacerbated_Symptom_Description" />
+      <property name="ExacerbatedSymptomsRequireOralSteroids" column="Exacerbated_Symptoms_Req_Oral_Steroids" />
+      <property name="ExacerbatedSymptomsOralSteroidsDosage" column="Exacerbated_Symptoms_Oral_Steroids_Dosage" />
+      <property name="NormalPFTwithTreatment" column="Normal_PFT_With_Treatment" />
+      <property name="HOIntubation" column="HO_Intubation" />
+      <property name="ReturnToDutyDate" column="Return_To_Duty_Date" />
+      <property name="ICD7thCharacter"    column="icd_7th_Char" />
+      <property name="DQParagraph" column="DQ_Paragraph" />
+      <property name="DQCompletionDate" column="DQ_Completion_Date" />
+      <property name="DAWGRecommendation" column="DAWG_Recommendation" />
+      <property name="Process" column="process" />
+      <property name="AlternateDQParagraph"         column="Alternate_DQ_Paragraph" />
+      <property name="AlternateDQCompletionDate"    column="Alternate_DQ_Completion_Date" />
+      <property name="AlternateExpirationDate"      column="Alternate_Expiration_Date" />
+      <property name="AlternateReturnToDutyDate"    column="Alternate_Return_To_Duty_Date" />
+      <property name="AlternateProcessAs"           column="Alternate_process" />
+      <property name="AlternateALCLetterType"       column="Alternate_ALC_Letter_Type" />
+      <property name="AlternateMemoTemplateID"      column="Alternate_memo_template_id" />
+      <property name="PocRankAndName"      column="POC_RankAndName" />
+      <property name="PocEmail"      column="POC_Email" />
+      <property name="PocPhoneDSN"      column="POC_Phone_DSN" />
+
+      <component name="DAWGSignature" class="ALOD.Core.Domain.Modules.Lod.SignatureEntry">
+        <property name="DateSigned" column="sig_date_DAWG" />
+        <property name="NameAndRank" column="sig_name_DAWG" />
+        <property name="Title" column="sig_title_DAWG" />
+      </component>
+    </subclass>
+
+    <subclass name="SC_CMAS" discriminator-value="14">
+      <property name="SystemReceiveDate" column="Date_In" />
+      <property name="SystemOutDate" column="Date_Out" />
+    </subclass>
+
+    <subclass name="SC_MMSO" discriminator-value="16">
+      <property name="Member_Address_Street"                  column="Member_Address_Street" />
+      <property name="Member_Address_City"                    column="Member_Address_City" />
+      <property name="Member_Address_State"                   column="Member_Address_State" />
+      <property name="Member_Address_Zip"                     column="Member_Address_Zip" />
+      <property name="Member_Home_Phone"                      column="Member_Home_Phone" />
+      <property name="Member_Tricare_Region"                  column="Member_Tricare_Region" />
+      <property name="Follow_Up_Care"                         column="Follow_Up_Care" />
+      <property name="Medical_Provider"                       column="Medical_Provider" />
+      <property name="Provider_POC"                           column="POC_Email" />
+      <property name="Provider_POC_Phone"                     column="POC_Phone_DSN" />
+      <property name="Military_Treatment_Facility_Suggested"  column="MTF_Suggested" />
+      <property name="Military_Treatment_Facility_Initial"    column="Military_Treatment_Facility_Initial" />
+      <property name="MTF_Initial_Treatment_Date"             column="MTF_Initial_Treatment_Date" />
+      <property name="MTF_Suggested_Distance"                 column="MTF_Suggested_Distance" />
+      <property name="MTF_Suggested_Choice"                   column="MTF_Suggested_Choice" />
+      <property name="Unit_POC_name"                          column="Unit_POC_name" />
+      <property name="Unit_POC_rank"                          column="Unit_POC_rank" />
+      <property name="Unit_POC_title"                         column="Unit_POC_title" />
+      <property name="Unit_POC_Phone"                         column="Unit_POC_Phone" />
+      <property name="Medical_Profile_Info"                   column="Medical_Profile_Info" />
+      <property name="DateIn"                                 column="Date_In" />
+      <property name="DateOut"                                column="Date_Out" />
+      <property name="Medical_Diagnosis"                      column="FT_Diagnosis" />
+      <property name="InjuryIllnessDate"                      column="Injury_Illness_Date" />
+    </subclass>
+
+     <subclass name="SC_MH" discriminator-value="17">
+       <property name="HighTenureDate"          column="high_tenure_date" />
+       <property name="ICD9Code"                column="ICD9_ID" />
+       <property name="ICD9Description"         column="ICD9_Description" />
+       <property name="ICD9Diagnosis"           column="FT_Diagnosis" />
+       <property name="ForwardDate"             column="ForwardDate" />
+       <property name="MemberNotifiedDate"      column="Notification_Date" />
+       <property name="ICD7thCharacter"         column="icd_7th_Char" />
+       <property name="AlternateExpirationDate" column="Alternate_Expiration_Date" />
+    </subclass>
+
+    <subclass name="SC_NE" discriminator-value="18">
+      <property name="ICD9Code"                column="ICD9_ID" />
+      <property name="ICD9Description"         column="ICD9_Description" />
+      <property name="NESurgeryType"           column="FT_Diagnosis" />
+      <property name="SurgeryDate"             column="surgery_date" />
+      <property name="ICD7thCharacter"    column="icd_7th_Char" />
+      <property name="PocRankAndName"      column="POC_RankAndName" />
+      <property name="PocEmail"      column="POC_Email" />
+      <property name="PocPhoneDSN"      column="POC_Phone_DSN" />
+    </subclass>
+
+    <subclass name="SC_DW" discriminator-value="19">
+
+      <property name="MAJCOM"         column="majcom" />
+      <property name="Sim_Deployment" column="sim_deployment" />
+
+      <property name="deploy_start_date" column="deploy_start_date" />
+      <property name="deploy_end_date" column="deploy_end_date" />
+      <property name="deploy_location" column="deploy_location" />
+      <property name="line_number" column="line_number" />
+      <property name="line_remarks" column="line_remarks" />
+
+      <property name="PocRankAndName"      column="POC_RankAndName" />
+      <property name="PocEmail"      column="POC_Email" />
+      <property name="PocPhoneDSN"      column="POC_Phone_DSN" />
+    </subclass>
+
+    <subclass name="SC_MO" discriminator-value="20">
+      <property name="ICD9Code"                column="ICD9_ID" />
+      <property name="ICD9Description"         column="ICD9_Description" />
+      <property name="ICD9Diagnosis"           column="FT_Diagnosis" />
+      <property name="AssociatedSC"       column="associated_SC" />
+      <property name="CaseType"           column="case_type" />
+      <property name="Justification"			column="justification" />
+      <property name="HighTenureDate"			column="high_tenure_date" />
+      <property name="ICD7thCharacter"    column="icd_7th_Char" />
+      <property name="PocRankAndName"      column="POC_RankAndName" />
+      <property name="PocEmail"      column="POC_Email" />
+      <property name="PocPhoneDSN"      column="POC_Phone_DSN" />
+    </subclass>
+
+    <subclass name="SC_PEPP" discriminator-value="21">
+      <property name="ICD9Code"				      column="ICD9_ID" />
+      <property name="ICD9Description"		  column="ICD9_Description" />
+      <property name="ICD9Diagnosis"			  column="FT_Diagnosis" />
+      <property name="CaseType"				      column="case_type" />
+      <property name="Type"					        column="pepp_type" />
+      <property name="Rating"					      column="rating" />
+      <property name="Disposition"			    column="HQTech_Disposition" />
+      <property name="Renewal"				      column="renewal" />
+      <property name="BaseAssign"				    column="base_assign" />
+      <property name="CompletedByUnit"			column="completed_by_unit" />
+      <property name="ALCLetterType" 			  column="ALC_Letter_Type" />
+      <property name="TypeName"             column="type_name" />
+      <property name="RatingName"       		column="rating_name" />
+      <property name="DateReceived"			    column="date_received" />
+      <property name="DateOut"				      column="Date_Out" />
+      <property name="ICD7thCharacter"      column="icd_7th_Char" />
+      <property name="IsWaiverRequired"     column="waiver_required" />
+      <property name="DQParagraph"          column="DQ_Paragraph" />
+      <property name="CertificationDate"    column="certification_date" />
+      <property name="WaiverExpirationDate" column="waiver_expiration_date" />
+      <property name="AlternateDQParagraph"          column="Alternate_DQ_Paragraph" />
+      <property name="AlternateExpirationDate"       column="Alternate_Expiration_Date" />
+      <property name="AlternateCertificationDate"    column="Alternate_certification_date" />
+    </subclass>
+
+    <subclass name="SC_RS" discriminator-value="22">
+      <property name="ICD9Code"				      column="ICD9_ID" />
+      <property name="ICD9Description"		  column="ICD9_Description" />
+      <property name="ICD9Diagnosis"			  column="FT_Diagnosis" />
+      <property name="CaseType"				      column="case_type" />
+      <property name="SubCaseType"				  column="sub_case_type" />
+      <property name="CaseTypeName"         column="case_type_name" />
+      <property name="SubCaseTypeName"      column="sub_case_type_name" />
+      <property name="Rating"					      column="rating" />
+      <property name="Disposition"			    column="HQTech_Disposition" />
+      <property name="CompletedByUnit"			column="completed_by_unit" />
+      <property name="ALCLetterType" 			  column="ALC_Letter_Type" />
+      <property name="TypeName"             column="type_name" />
+      <property name="RatingName"       		column="rating_name" />
+      <property name="DateReceived"			    column="date_received" />
+      <property name="CompletedByUnitName"  column="completed_by_unit_name" />
+      <property name="ICD7thCharacter"      column="icd_7th_Char" />
+      <property name="CertificationStamp"   column="certification_stamp" />
+      <property name="SecondaryCertificationStamp"   column="secondary_certification_stamp" />
+      <property name="FreeText"             column="free_text" />
+      <property name="SecondaryFreeText"    column="secondary_free_text" />
+      <property name="MemoTemplateID"       column="memo_template_id" />
+      <property name="StampedDocId"         column="stamped_doc_id" />
+      <property name="PreviousDisposition"  column="med_off_prev_disposition" />
+      <property name="AlternateALCLetterType"  column="alt_ALC_letter_type" />
+      <property name="AlternateAlternateALCLetterType"  column="Alternate_alt_ALC_letter_type" />
+      <property name="AlternateExpirationDate" column="Alternate_Expiration_Date" />
+      <property name="PocRankAndName"      column="POC_RankAndName" />
+      <property name="PocEmail"      column="POC_Email" />
+      <property name="PocPhoneDSN"      column="POC_Phone_DSN" />
+    </subclass>
+
+    <subclass name="SC_PH" discriminator-value="23">
+      <property name="CaseUnitId"           column="ph_wing_rmu_id" />
+      <property name="IsDelinquent"         column="is_delinquent" />
+      <property name="ReportingPeriod"      column="ph_reporting_period" />
+      <property name="FormLastModified"     column="ph_last_modified" />
+
+      <many-to-one name="DPHUser" class="ALOD.Core.Domain.Users.AppUser" column="ph_user_id" />
+    </subclass>
+
+    <subclass name="SC_RW" discriminator-value="27">
+      <property name="AssociatedSC"                 column="associated_SC" />
+      <property name="RenewalDate"                  column="renewal_date" />
+      <property name="DAFSC"                        column="DAFSC" />
+      <property name="RMUName"                      column="RMU_Name" />
+      <property name="MedGroupName"                 column="Med_Group_Name" />
+      <property name="YearsSatisfactoryService"     column="Years_Satisfactory_Service" />
+      <property name="BodyMassIndex"                column="Body_Mass_Index" />
+      <property name="RequiresSpecialistForMgmt"    column="Requires_Specialist_For_Mgmt" />
+      <property name="MissedWorkDays"               column="Missed_Work_Days" />
+      <property name="HasHadERorUrgentCareVisits"   column="Had_ER_Urgent_Care_Visits" />
+      <property name="ERorUrgentCareVisitList"      column="ER_Urgent_Care_Visit_Details" />
+      <property name="HasBeenHospitalized"          column="Had_Hospitalizations" />
+      <property name="HospitalizationList"          column="Hospitalization_List" />
+      <property name="RiskForSuddenIncapacitation"  column="Risk_For_Sudden_Incapacitation" />
+      <property name="ICD9Code"                     column="ICD9_ID" />
+      <property name="ICD9Description"              column="ICD9_Description" />
+      <property name="ICD9Diagnosis"                column="FT_Diagnosis" />
+      <property name="ICD7thCharacter"				      column="icd_7th_Char" />
+      <property name="Prognosis"                    column="FT_Prognosis" />
+      <property name="Treatment"                    column="FT_Treatment" />
+      <property name="MedicationsAndDosages"        column="FT_Medications_And_Dosages" />
+      <property name="DxInterferenceWithDuties"     column="DX_Interferes_With_Duties" />
+      <property name="DAWGRecommendation"           column="DAWG_Recommendation" />
+      <property name="RecommendedFollowUpInterval"  column="Recommended_Follow_Up_Interval" />
+      <property name="ReturnToDutyDate"				      column="Return_To_Duty_Date" />
+      <property name="ProcessAs"                    column="process" />
+      <property name="DQParagraph"                  column="DQ_Paragraph" />
+      <property name="DQCompletionDate"             column="DQ_Completion_Date" />
+      <property name="ALCLetterType"                column="ALC_Letter_Type" />
+      <property name="MemoTemplateID"               column="memo_template_id" />
+      <property name="AlternateDQParagraph"         column="Alternate_DQ_Paragraph" />
+      <property name="AlternateDQCompletionDate"    column="Alternate_DQ_Completion_Date" />
+      <property name="AlternateExpirationDate"      column="Alternate_Expiration_Date" />
+      <property name="AlternateReturnToDutyDate"    column="Alternate_Return_To_Duty_Date" />
+      <property name="AlternateProcessAs"           column="Alternate_process" />
+      <property name="AlternateALCLetterType"       column="Alternate_ALC_Letter_Type" />
+      <property name="AlternateMemoTemplateID"      column="Alternate_memo_template_id" />
+    </subclass>
+
+    <subclass name="SC_AGRCert" discriminator-value="28">
+      <property name="AFSC" column="DAFSC" />
+      <property name="RMUName" column="RMU_Name" />
+      <property name="PHADate" column="PHA_Date" />
+      <property name="MAJCOM" column="majcom" />
+      <property name="ALC" column="ALC_Letter_Type" />
+      <property name="ApprovalDate" column="Approval_Date" />
+      <property name="AlternateApprovalDate" column="Alternate_Approval_Date" />
+      <property name="MemoTemplateID"       column="memo_template_id" />
+      <property name="PocUnit" column="POC_Unit" />
+      <property name="PocPhoneDSN" column="POC_Phone_DSN" />
+      <property name="PocEmail" column="POC_Email" />
+      <property name="InitialTour" column="Initial_Tour" />
+      <property name="FollowOnTour" column="Follow_OnTour" />
+      <property name="MTFInitialFacility" column="Military_Treatment_Facility_Initial" />
+      <property name="POCRankAndName" column="POC_RankAndName" />
+      <property name="AlternateExpirationDate" column="Alternate_Expiration_Date" />
+      <property name="MTFInitialFacilityCityStateZip" column="Military_Treatment_Facility_City_State_Zip" />
+    </subclass>
+
+    <subclass name="SC_PSCD" discriminator-value="30">
+      <property name="MemberStatus"                 column="member_status" />
+      <property name="MemberCategory"                 column="member_category" />
+      <property name="ICD9Code"                     column="ICD9_ID" />
+      <property name="ICD9Description"              column="ICD9_Description" />
+      <property name="ICD9Diagnosis"                column="FT_Diagnosis" />
+      <property name="ICD7thCharacter"				column="icd_7th_Char" />
+      <property name="IAWAFI"				column="IAW_AFI" />
+      <property name="RMU"				column="RMU_Name" />
+      <property name="DurationOfServiceTo"				column="Date_In" />
+      <property name="DurationOfServiceFrom"				column="Date_Out" />
+      <property name="FacilityLocation"				column="Military_Treatment_Facility_Initial" />
+      <property name="InitialTreatmentDate"				column="MTF_Initial_Treatment_Date" />
+      <property name="AccidentOrHistoryDetails"				column="accident_or_history_details" />
+      <property name="PocRankAndName"      column="POC_RankAndName" />
+      <property name="PocEmail"      column="POC_Email" />
+      <property name="PocPhoneDSN"      column="POC_Phone_DSN" />
+
+      <bag name="PSCDFindings" table="Form348_PSCD_Findings" cascade="all" inverse="true">
+        <key column="PSCD_ID"></key>
+        <one-to-many class="SC_PSCD_Findings" />
+      </bag>
+    </subclass>
+  </class>
+</hibernate-mapping>

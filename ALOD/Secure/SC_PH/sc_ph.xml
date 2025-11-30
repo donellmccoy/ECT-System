@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabNavigator>
+  <Configuration>
+    <StartPage>~/Secure/Welcome.aspx</StartPage>
+    <PrintButtonVisible>True</PrintButtonVisible>
+    <PrintButtonText>Print PH Form</PrintButtonText>
+    <PrintScript>PrintPHForm();</PrintScript>
+  </Configuration>
+  <Steps>
+    <Step>
+      <Title>PH History</Title>
+      <Page>History.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+    <Step>
+      <Title>PH Form</Title>
+      <Page>Form.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+    <Step>
+      <Title>PH Documents</Title>
+      <Page>Documents.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+    <Step>
+      <Title>PH Next Action</Title>
+      <Page>NextAction.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+    <Step>
+      <Title>Case Dialogue</Title>
+      <Page>CaseDialogue.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+    <Step>
+      <Title>PH Case Comments</Title>
+      <Page>UnitComments.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+    <Step>
+      <Title>PH Tracking</Title>
+      <Page>Tracking.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+  </Steps>
+</TabNavigator>

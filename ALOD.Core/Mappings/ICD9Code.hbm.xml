@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+									 assembly="ALOD.Core"
+									 namespace="ALOD.Core.Domain.Common">
+
+	<class name="ICD9Code" table="core_lkupICD9">
+		<id column="ICD9_ID" name="Id">
+			<generator class="identity" />
+		</id>
+
+		<property name="Description" column="text" />
+		<property name="Code" column="value" />
+		<property name="SortOrder" column="sortOrder" />
+		<property name="IsDisease" column="isDisease" />
+		<property name="ParentId" column="parentId" />
+		<property name="Active" column="Active" />
+		<property name="Has7thCharacter" column="SeventhChr" />
+		<property name="DiagnosisLevel" column="DiagOrder" />
+		<property name="ICDVersion" column="ICDVersion" />
+	</class>
+</hibernate-mapping>

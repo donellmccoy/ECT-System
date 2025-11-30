@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Query">
+
+  <class name="PHUserQuery" table="rpt_ph_user_query">
+    <id name="Id" column="Id">
+      <generator class="identity" />
+    </id>
+
+    <property name="ReportType" column="ReportType" />
+    <property name="SortField" column="SortField" />
+
+    <many-to-one name="UserQuery" class="ALOD.Core.Domain.Query.UserQuery" column="UserQueryId" />
+
+    <bag name="Clauses" table="rpt_ph_user_query_clause" inverse="true" cascade="all">
+      <key column="PHQueryId" on-delete="cascade"></key>
+      <one-to-many class="PHQueryClause" />
+    </bag>
+
+    <bag name="OutputFields" table="rpt_ph_user_query_output_fields" inverse="true" cascade="all">
+      <key column="PHQueryId" on-delete="cascade"></key>
+      <one-to-many class="PHQueryOutputField" />
+    </bag>
+  </class>
+</hibernate-mapping>

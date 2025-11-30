@@ -1,0 +1,158 @@
+.formTitle {
+    background-color: #08003c;
+    font-weight: bold;
+    color: White;
+    padding: 2px;
+    font-size: 14px;
+    color: #dcdcdc;
+    font-family: Verdana, Arial, 'Microsoft Sans Serif';
+}
+
+.formTable tr {
+    height: 30px;
+    padding: 2px;
+}
+
+.formTable td {
+    margin: 2px;
+}
+
+.center {
+    text-align: center;
+}
+
+/* Navigation Wizard  */
+
+#wizardbar {
+    color: #000000;
+    width: 930px;
+    border-bottom: 1px solid black;
+    margin: 12px 0px 0px 0px;
+    padding: 0px;
+    position: relative;
+    padding-left: 10px;
+    margin-left: 10px;
+    z-index: 10;
+}
+
+    #wizardbar li {
+        display: inline;
+        text-decoration: none;
+        /* background: #3e74ca url(images/tab.jpg) 0 50% repeat-x; */
+        background-color: #3e74ca;
+        padding: 2px 6px;
+        font: bold 1em Arial, sans-serif;
+        margin-left: 2px;
+        border: 1px solid #000;
+        position: relative;
+        top: -2px;
+        z-index: 10;
+        white-space: nowrap;
+    }
+
+    /*
+284780
+*/
+
+    #wizardbar a {
+        color: #284780;
+        color: White;
+        text-decoration: none;
+    }
+
+    #wizardbar li.active {
+        background: #eee url(images/tab-active.jpg) 0 50% repeat-x;
+        border-bottom: 1px solid #EEE;
+    }
+
+        #wizardbar li.active a {
+            color: White;
+            color: Black;
+            cursor: default;
+        }
+
+    #wizardbar li.hover {
+        background: #648dcd url(images/tab-hover.jpg) 0 50% repeat-x;
+        border-bottom-width: 0px;
+    }
+
+        #wizardbar li.hover a {
+            color: black;
+        }
+
+#wizard {
+    background-color: #EEEEEE;
+    border: 1px solid black;
+    border-top-width: 0px;
+    width: 914px;
+    margin-left: 10px;
+    margin-bottom: 20px;
+    padding: 12px;
+    font-family: Verdana;
+    font-weight: normal;
+    font-size: 12px;
+    text-align: left;
+}
+
+.wizcontrols {
+    text-align: center;
+    border-top: 1px solid gray;
+    padding-top: 10px;
+    margin-top: 10px;
+}
+
+.wizheader {
+    text-align: left;
+    border-bottom: 1px solid gray;
+    font-weight: bold;
+    padding-bottom: 4px;
+    margin-bottom: 8px;
+    font-family: Verdana, Arial, Sans-Serif;
+    font-size: 12px;
+}
+
+.txtMed {
+    font-size: 12px;
+}
+
+SELECT.list {
+    font-size: 11px;
+    width: 460px;
+    font-family: Arial;
+}
+
+#wizard .subsection-left {
+    width: 435px;
+    border-right-width: 0px;
+}
+
+#wizard .subsection-right {
+    padding-right: 0px;
+    padding-bottom: 0px;
+    border-left: gray 1px solid;
+    width: 435px;
+}
+
+#wizard .contents {
+    border: #ffffdd 1px solid;
+    padding: 0px;
+    margin-top: 0px;
+}
+
+#wizard .section {
+    width: 898px;
+}
+
+    #wizard .section TD {
+    }
+
+#wizard .wizControls {
+    margin-top: 10px;
+}
+
+/* Control bar */
+
+.tabControls {
+    width: 930px;
+    margin-left: 12px;
+}

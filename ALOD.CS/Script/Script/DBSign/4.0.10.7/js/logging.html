@@ -1,0 +1,30 @@
+<!--  
+  -- DBsign Javascript Web Signer 4.0.10.7
+  -- Copyright 2000-2019 Gradkell Systems, Inc.
+  -- ALL RIGHTS RESERVED.  
+  -- Usage of this software is subject to the DBsign license agreement. 
+  -->
+
+<html>
+<head>
+<link rel="stylesheet" href="../css/DBsignJSWS.css" type="text/css" />
+<script type="text/javascript" src="DBsignJSWS.js"></script>
+
+<script type="text/javascript">
+  function doConfigLogging()
+  {
+    alert( 'Logging configuration saved.' );
+    CDBsignJSWSLogger.configLoggerGui( doConfigLogging );
+  }
+
+  function _onPageLoad()
+  {
+    CDBsignJSWSLogger.configLoggerGui( doConfigLogging );
+  };
+</script>
+</head>
+
+<body onload="_onPageLoad();">
+</body>
+
+</html>

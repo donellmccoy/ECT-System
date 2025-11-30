@@ -1,0 +1,74 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" Inherits="ALOD.Web.Public_Public" CodeBehind="Public.master.cs" EnableTheming="true" %>
+<%@ Import Namespace="System.Web.Optimization" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head id="Head1" runat="server">
+    <title>ECT</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    
+    <%-- CSS now loaded via StyleSheetTheme (see web.config) --%>
+    <%--= Styles.Render("~/Content/css") --%>
+    <%--= Styles.Render("~/Content/jqueryui") --%>
+    
+    <%-- Bundled and minified JavaScript (using PlaceHolder to avoid theming conflict) --%>
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/jquery") %>
+        <%: Scripts.Render("~/bundles/jqueryui") %>
+        <%: Scripts.Render("~/bundles/common") %>
+    </asp:PlaceHolder>
+    
+    <asp:ContentPlaceHolder ID="ContentHeader" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+     <asp:ScriptManager ID="ScriptManager1" runat="server" />
+        <div id="outer">
+            <div id="front-header">
+                <div id="header-logo">
+                    <asp:HyperLink runat="server" ID="lnkHome" NavigateUrl="~/Default.aspx">
+                        <asp:Image runat="server" ID="imgLogo" SkinID="imgLogoFront" ImageAlign="left" AlternateText="ECT Banner" />
+                    </asp:HyperLink>
+                </div>
+<%--                <div id="header-right">
+                    <asp:Label ID="VersionLabel" runat="server"></asp:Label></div>--%>
+            </div>
+            <div>
+                <asp:ContentPlaceHolder ID="ContentMain" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+            <div class="clearer">
+            </div>
+        </div>
+        <div id="footer">
+            <div id="footer-left">
+                <p>
+                    <span runat="server" id="spnHIPPAPolicy" visible="false">
+                        <asp:HyperLink ID="HIPAAPolicy" runat="server" CssClass="LinkBoldWhite" NavigateUrl="~/Public/HIPPA.aspx" Target="_blank" Text="<%$ Resources:Global, HIPAALink %>" />
+                        &nbsp; &nbsp;
+                    </span>
+                    <asp:HyperLink ID="Section508" runat="server" CssClass="LinkBoldWhite" NavigateUrl="~/Public/Section508.aspx"
+                        Target="_blank" Text="<%$ Resources:Global, Section508 %>"></asp:HyperLink>
+                    &nbsp; &nbsp;
+                    <asp:HyperLink ID="PrivacyAndSecurity" runat="server" CssClass="LinkBoldWhite" NavigateUrl="~/Public/Privacy.aspx"
+                        Target="_blank" Text="<%$ Resources:Global, PrivacyLink %>"></asp:HyperLink>
+                    
+                </p>
+            </div>
+            <div id="footer-right">
+                <p>
+                    <asp:Label ID="SystemDisclaimer" runat="server" Text="<%$ Resources:Global, SystemDisclaimer %>"></asp:Label>
+                    &nbsp; &nbsp;
+                    <asp:Label ID="VersionLabel" runat="server" CssClass="LinkBoldWhite"></asp:Label>
+                </p>
+            </div>
+        </div>
+        <asp:ContentPlaceHolder ID="ContentFooter" runat="server">
+        </asp:ContentPlaceHolder>
+    </form>
+</body>
+</html>

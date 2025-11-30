@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+  <DataCollectionRunSettings>
+    <DataCollectors>
+      <DataCollector friendlyName="Code Coverage" uri="datacollector://Microsoft/CodeCoverage/2.0" assemblyQualifiedName="Microsoft.VisualStudio.Coverage.DynamicCoverageDataCollector, Microsoft.VisualStudio.TraceCollector, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+        <Configuration>
+          <CodeCoverage>
+            <!-- Include only ALOD assemblies -->
+            <ModulePaths>
+              <Include>
+                <ModulePath>.*\\ALOD\.dll$</ModulePath>
+                <ModulePath>.*\\ALOD\.Core\.dll$</ModulePath>
+                <ModulePath>.*\\ALOD\.Data\.dll$</ModulePath>
+                <ModulePath>.*\\ALOD\.Logging\.dll$</ModulePath>
+                <ModulePath>.*\\ALODWebUtility\.dll$</ModulePath>
+                <ModulePath>.*\\SRXLite\.dll$</ModulePath>
+                <ModulePath>.*\\SRXLiteWebUtility\.dll$</ModulePath>
+              </Include>
+              <Exclude>
+                <!-- Exclude all framework and third-party assemblies -->
+                <ModulePath>.*\\xunit\..*\.dll$</ModulePath>
+                <ModulePath>.*\\Moq\.dll$</ModulePath>
+                <ModulePath>.*\\Castle\..*\.dll$</ModulePath>
+                <ModulePath>.*\\NHibernate\.dll$</ModulePath>
+                <ModulePath>.*\\Iesi\..*\.dll$</ModulePath>
+                <ModulePath>.*\\Remotion\..*\.dll$</ModulePath>
+                <ModulePath>.*\\System\..*\.dll$</ModulePath>
+                <ModulePath>.*\\Microsoft\..*\.dll$</ModulePath>
+                <ModulePath>.*\\ALOD\.Tests\.dll$</ModulePath>
+              </Exclude>
+            </ModulePaths>
+
+            <!-- Match attributes on excluded code -->
+            <Attributes>
+              <Exclude>
+                <Attribute>^System\.Diagnostics\.DebuggerHiddenAttribute$</Attribute>
+                <Attribute>^System\.Diagnostics\.DebuggerNonUserCodeAttribute$</Attribute>
+                <Attribute>^System\.CodeDom\.Compiler\.GeneratedCodeAttribute$</Attribute>
+                <Attribute>^System\.Diagnostics\.CodeAnalysis\.ExcludeFromCodeCoverageAttribute$</Attribute>
+              </Exclude>
+            </Attributes>
+
+            <!-- Exclude generated code patterns -->
+            <Sources>
+              <Exclude>
+                <Source>.*\\\.g\.cs$</Source>
+                <Source>.*\\\.designer\.cs$</Source>
+                <Source>.*\\\.Designer\.cs$</Source>
+                <Source>.*\\\.generated\.cs$</Source>
+                <Source>.*\\\.g\.i\.cs$</Source>
+              </Exclude>
+            </Sources>
+
+            <!-- Exclude specific functions -->
+            <Functions>
+              <Exclude>
+                <Function>^.*\.Properties\..*$</Function>
+              </Exclude>
+            </Functions>
+          </CodeCoverage>
+        </Configuration>
+      </DataCollector>
+    </DataCollectors>
+  </DataCollectionRunSettings>
+</RunSettings>

@@ -1,0 +1,792 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:tns="http://tempuri.org/srxlite/documentservice" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://tempuri.org/srxlite/documentservice" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/srxlite/documentservice">
+      <s:element name="CreateGroup">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="groupName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateGroupResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CreateGroupResult" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ServiceLogin" type="tns:ServiceLogin" />
+      <s:complexType name="ServiceLogin">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SubuserName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+        </s:sequence>
+        <s:anyAttribute />
+      </s:complexType>
+      <s:element name="DeleteDocument">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="docID" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteDocumentResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetEntityDocumentList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="entityID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEntityDocumentListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEntityDocumentListResult" type="tns:ArrayOfDocumentData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfDocumentData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="DocumentData" nillable="true" type="tns:DocumentData" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DocumentData">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="DocDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="DocDescription" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DocID" type="s:long" />
+          <s:element minOccurs="1" maxOccurs="1" name="DocStatus" type="tns:DocumentStatus" />
+          <s:element minOccurs="1" maxOccurs="1" name="DocTypeID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="DocTypeName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EntityName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FileExt" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IconUrl" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsAppendable" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="OriginalFileName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PageCount" type="s:short" />
+          <s:element minOccurs="1" maxOccurs="1" name="UploadDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="UploadedBySubuserName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="DocumentStatus">
+        <s:restriction base="s:string">
+          <s:enumeration value="Pending" />
+          <s:enumeration value="Approved" />
+          <s:enumeration value="Deleted" />
+          <s:enumeration value="Test" />
+          <s:enumeration value="Batch" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetGroupDocumentList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="groupID" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetGroupDocumentListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetGroupDocumentListResult" type="tns:ArrayOfDocumentData" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDocumentUploadUrl">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="entityName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="docTypeID" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="groupID" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="stylesheetUrl" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="entityDisplayText" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDocumentUploadUrlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDocumentUploadUrlResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDocumentViewerUrl">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="docID" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="isReadOnly" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDocumentViewerUrlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDocumentViewerUrlResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MoveGroupDocument">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="docID" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="sourceGroupID" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="targetGroupID" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MoveGroupDocumentResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="UpdateDocumentStatus">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="docID" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="docStatus" type="tns:DocumentStatus" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateDocumentStatusResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="UpdateDocumentKeys">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="docID" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="docKeys" type="tns:DocumentKeys" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="DocumentKeys">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="DocDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="DocDescription" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DocStatus" type="tns:DocumentStatus" />
+          <s:element minOccurs="1" maxOccurs="1" name="DocTypeID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="EntityName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UpdateDocumentKeysResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="UploadDocument">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="fileBytes" type="s:base64Binary" />
+            <s:element minOccurs="0" maxOccurs="1" name="uploadKeys" type="tns:UploadKeys" />
+            <s:element minOccurs="1" maxOccurs="1" name="groupID" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="UploadKeys">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="DocDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="DocDescription" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="DocStatus" type="tns:DocumentStatus" />
+          <s:element minOccurs="1" maxOccurs="1" name="DocTypeID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="EntityName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FileName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="InputType" type="tns:InputType" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="InputType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Upload" />
+          <s:enumeration value="Scan" />
+          <s:enumeration value="WebServiceUpload" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="UploadDocumentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UploadDocumentResult" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CopyGroupDocuments">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="oldGroupId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="newGroupId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="oldDocTypeId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="newDocTypeId" type="s:long" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CopyGroupDocumentsResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="long" type="s:long" />
+      <s:element name="ArrayOfDocumentData" nillable="true" type="tns:ArrayOfDocumentData" />
+      <s:element name="string" nillable="true" type="s:string" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="CreateGroupSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateGroup" />
+  </wsdl:message>
+  <wsdl:message name="CreateGroupSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateGroupServiceLogin">
+    <wsdl:part name="ServiceLogin" element="tns:ServiceLogin" />
+  </wsdl:message>
+  <wsdl:message name="DeleteDocumentSoapIn">
+    <wsdl:part name="parameters" element="tns:DeleteDocument" />
+  </wsdl:message>
+  <wsdl:message name="DeleteDocumentSoapOut">
+    <wsdl:part name="parameters" element="tns:DeleteDocumentResponse" />
+  </wsdl:message>
+  <wsdl:message name="DeleteDocumentServiceLogin">
+    <wsdl:part name="ServiceLogin" element="tns:ServiceLogin" />
+  </wsdl:message>
+  <wsdl:message name="GetEntityDocumentListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEntityDocumentList" />
+  </wsdl:message>
+  <wsdl:message name="GetEntityDocumentListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEntityDocumentListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetEntityDocumentListServiceLogin">
+    <wsdl:part name="ServiceLogin" element="tns:ServiceLogin" />
+  </wsdl:message>
+  <wsdl:message name="GetGroupDocumentListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetGroupDocumentList" />
+  </wsdl:message>
+  <wsdl:message name="GetGroupDocumentListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetGroupDocumentListResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetGroupDocumentListServiceLogin">
+    <wsdl:part name="ServiceLogin" element="tns:ServiceLogin" />
+  </wsdl:message>
+  <wsdl:message name="GetDocumentUploadUrlSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDocumentUploadUrl" />
+  </wsdl:message>
+  <wsdl:message name="GetDocumentUploadUrlSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDocumentUploadUrlResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDocumentUploadUrlServiceLogin">
+    <wsdl:part name="ServiceLogin" element="tns:ServiceLogin" />
+  </wsdl:message>
+  <wsdl:message name="GetDocumentViewerUrlSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDocumentViewerUrl" />
+  </wsdl:message>
+  <wsdl:message name="GetDocumentViewerUrlSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDocumentViewerUrlResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDocumentViewerUrlServiceLogin">
+    <wsdl:part name="ServiceLogin" element="tns:ServiceLogin" />
+  </wsdl:message>
+  <wsdl:message name="MoveGroupDocumentSoapIn">
+    <wsdl:part name="parameters" element="tns:MoveGroupDocument" />
+  </wsdl:message>
+  <wsdl:message name="MoveGroupDocumentSoapOut">
+    <wsdl:part name="parameters" element="tns:MoveGroupDocumentResponse" />
+  </wsdl:message>
+  <wsdl:message name="MoveGroupDocumentServiceLogin">
+    <wsdl:part name="ServiceLogin" element="tns:ServiceLogin" />
+  </wsdl:message>
+  <wsdl:message name="UpdateDocumentStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateDocumentStatus" />
+  </wsdl:message>
+  <wsdl:message name="UpdateDocumentStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateDocumentStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateDocumentStatusServiceLogin">
+    <wsdl:part name="ServiceLogin" element="tns:ServiceLogin" />
+  </wsdl:message>
+  <wsdl:message name="UpdateDocumentKeysSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateDocumentKeys" />
+  </wsdl:message>
+  <wsdl:message name="UpdateDocumentKeysSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateDocumentKeysResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateDocumentKeysServiceLogin">
+    <wsdl:part name="ServiceLogin" element="tns:ServiceLogin" />
+  </wsdl:message>
+  <wsdl:message name="UploadDocumentSoapIn">
+    <wsdl:part name="parameters" element="tns:UploadDocument" />
+  </wsdl:message>
+  <wsdl:message name="UploadDocumentSoapOut">
+    <wsdl:part name="parameters" element="tns:UploadDocumentResponse" />
+  </wsdl:message>
+  <wsdl:message name="UploadDocumentServiceLogin">
+    <wsdl:part name="ServiceLogin" element="tns:ServiceLogin" />
+  </wsdl:message>
+  <wsdl:message name="CopyGroupDocumentsSoapIn">
+    <wsdl:part name="parameters" element="tns:CopyGroupDocuments" />
+  </wsdl:message>
+  <wsdl:message name="CopyGroupDocumentsSoapOut">
+    <wsdl:part name="parameters" element="tns:CopyGroupDocumentsResponse" />
+  </wsdl:message>
+  <wsdl:message name="CopyGroupDocumentsServiceLogin">
+    <wsdl:part name="ServiceLogin" element="tns:ServiceLogin" />
+  </wsdl:message>
+  <wsdl:message name="CreateGroupHttpGetIn">
+    <wsdl:part name="groupName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CreateGroupHttpGetOut">
+    <wsdl:part name="Body" element="tns:long" />
+  </wsdl:message>
+  <wsdl:message name="DeleteDocumentHttpGetIn">
+    <wsdl:part name="docID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DeleteDocumentHttpGetOut" />
+  <wsdl:message name="GetEntityDocumentListHttpGetIn">
+    <wsdl:part name="entityID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetEntityDocumentListHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfDocumentData" />
+  </wsdl:message>
+  <wsdl:message name="GetGroupDocumentListHttpGetIn">
+    <wsdl:part name="groupID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetGroupDocumentListHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfDocumentData" />
+  </wsdl:message>
+  <wsdl:message name="GetDocumentUploadUrlHttpGetIn">
+    <wsdl:part name="entityName" type="s:string" />
+    <wsdl:part name="docTypeID" type="s:string" />
+    <wsdl:part name="groupID" type="s:string" />
+    <wsdl:part name="stylesheetUrl" type="s:string" />
+    <wsdl:part name="entityDisplayText" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDocumentUploadUrlHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDocumentViewerUrlHttpGetIn">
+    <wsdl:part name="docID" type="s:string" />
+    <wsdl:part name="isReadOnly" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDocumentViewerUrlHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="MoveGroupDocumentHttpGetIn">
+    <wsdl:part name="docID" type="s:string" />
+    <wsdl:part name="sourceGroupID" type="s:string" />
+    <wsdl:part name="targetGroupID" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="MoveGroupDocumentHttpGetOut" />
+  <wsdl:message name="UpdateDocumentStatusHttpGetIn">
+    <wsdl:part name="docID" type="s:string" />
+    <wsdl:part name="docStatus" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateDocumentStatusHttpGetOut" />
+  <wsdl:message name="CopyGroupDocumentsHttpGetIn">
+    <wsdl:part name="oldGroupId" type="s:string" />
+    <wsdl:part name="newGroupId" type="s:string" />
+    <wsdl:part name="oldDocTypeId" type="s:string" />
+    <wsdl:part name="newDocTypeId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CopyGroupDocumentsHttpGetOut" />
+  <wsdl:portType name="DocumentServiceSoap">
+    <wsdl:operation name="CreateGroup">
+      <wsdl:input message="tns:CreateGroupSoapIn" />
+      <wsdl:output message="tns:CreateGroupSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteDocument">
+      <wsdl:input message="tns:DeleteDocumentSoapIn" />
+      <wsdl:output message="tns:DeleteDocumentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEntityDocumentList">
+      <wsdl:input message="tns:GetEntityDocumentListSoapIn" />
+      <wsdl:output message="tns:GetEntityDocumentListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGroupDocumentList">
+      <wsdl:input message="tns:GetGroupDocumentListSoapIn" />
+      <wsdl:output message="tns:GetGroupDocumentListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentUploadUrl">
+      <wsdl:input message="tns:GetDocumentUploadUrlSoapIn" />
+      <wsdl:output message="tns:GetDocumentUploadUrlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentViewerUrl">
+      <wsdl:input message="tns:GetDocumentViewerUrlSoapIn" />
+      <wsdl:output message="tns:GetDocumentViewerUrlSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MoveGroupDocument">
+      <wsdl:input message="tns:MoveGroupDocumentSoapIn" />
+      <wsdl:output message="tns:MoveGroupDocumentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDocumentStatus">
+      <wsdl:input message="tns:UpdateDocumentStatusSoapIn" />
+      <wsdl:output message="tns:UpdateDocumentStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDocumentKeys">
+      <wsdl:input message="tns:UpdateDocumentKeysSoapIn" />
+      <wsdl:output message="tns:UpdateDocumentKeysSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UploadDocument">
+      <wsdl:input message="tns:UploadDocumentSoapIn" />
+      <wsdl:output message="tns:UploadDocumentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CopyGroupDocuments">
+      <wsdl:input message="tns:CopyGroupDocumentsSoapIn" />
+      <wsdl:output message="tns:CopyGroupDocumentsSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="DocumentServiceHttpGet">
+    <wsdl:operation name="CreateGroup">
+      <wsdl:input message="tns:CreateGroupHttpGetIn" />
+      <wsdl:output message="tns:CreateGroupHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteDocument">
+      <wsdl:input message="tns:DeleteDocumentHttpGetIn" />
+      <wsdl:output message="tns:DeleteDocumentHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEntityDocumentList">
+      <wsdl:input message="tns:GetEntityDocumentListHttpGetIn" />
+      <wsdl:output message="tns:GetEntityDocumentListHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGroupDocumentList">
+      <wsdl:input message="tns:GetGroupDocumentListHttpGetIn" />
+      <wsdl:output message="tns:GetGroupDocumentListHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentUploadUrl">
+      <wsdl:input message="tns:GetDocumentUploadUrlHttpGetIn" />
+      <wsdl:output message="tns:GetDocumentUploadUrlHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentViewerUrl">
+      <wsdl:input message="tns:GetDocumentViewerUrlHttpGetIn" />
+      <wsdl:output message="tns:GetDocumentViewerUrlHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MoveGroupDocument">
+      <wsdl:input message="tns:MoveGroupDocumentHttpGetIn" />
+      <wsdl:output message="tns:MoveGroupDocumentHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDocumentStatus">
+      <wsdl:input message="tns:UpdateDocumentStatusHttpGetIn" />
+      <wsdl:output message="tns:UpdateDocumentStatusHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CopyGroupDocuments">
+      <wsdl:input message="tns:CopyGroupDocumentsHttpGetIn" />
+      <wsdl:output message="tns:CopyGroupDocumentsHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="DocumentServiceSoap" type="tns:DocumentServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreateGroup">
+      <soap:operation soapAction="http://tempuri.org/srxlite/documentservice/CreateGroup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:CreateGroupServiceLogin" part="ServiceLogin" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteDocument">
+      <soap:operation soapAction="http://tempuri.org/srxlite/documentservice/DeleteDocument" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:DeleteDocumentServiceLogin" part="ServiceLogin" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEntityDocumentList">
+      <soap:operation soapAction="http://tempuri.org/srxlite/documentservice/GetEntityDocumentList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetEntityDocumentListServiceLogin" part="ServiceLogin" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGroupDocumentList">
+      <soap:operation soapAction="http://tempuri.org/srxlite/documentservice/GetGroupDocumentList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetGroupDocumentListServiceLogin" part="ServiceLogin" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentUploadUrl">
+      <soap:operation soapAction="http://tempuri.org/srxlite/documentservice/GetDocumentUploadUrl" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetDocumentUploadUrlServiceLogin" part="ServiceLogin" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentViewerUrl">
+      <soap:operation soapAction="http://tempuri.org/srxlite/documentservice/GetDocumentViewerUrl" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetDocumentViewerUrlServiceLogin" part="ServiceLogin" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MoveGroupDocument">
+      <soap:operation soapAction="http://tempuri.org/srxlite/documentservice/MoveGroupDocument" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:MoveGroupDocumentServiceLogin" part="ServiceLogin" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDocumentStatus">
+      <soap:operation soapAction="http://tempuri.org/srxlite/documentservice/UpdateDocumentStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:UpdateDocumentStatusServiceLogin" part="ServiceLogin" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDocumentKeys">
+      <soap:operation soapAction="http://tempuri.org/srxlite/documentservice/UpdateDocumentKeys" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:UpdateDocumentKeysServiceLogin" part="ServiceLogin" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadDocument">
+      <soap:operation soapAction="http://tempuri.org/srxlite/documentservice/UploadDocument" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:UploadDocumentServiceLogin" part="ServiceLogin" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CopyGroupDocuments">
+      <soap:operation soapAction="http://tempuri.org/srxlite/documentservice/CopyGroupDocuments" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:CopyGroupDocumentsServiceLogin" part="ServiceLogin" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="DocumentServiceSoap12" type="tns:DocumentServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreateGroup">
+      <soap12:operation soapAction="http://tempuri.org/srxlite/documentservice/CreateGroup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:CreateGroupServiceLogin" part="ServiceLogin" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteDocument">
+      <soap12:operation soapAction="http://tempuri.org/srxlite/documentservice/DeleteDocument" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:DeleteDocumentServiceLogin" part="ServiceLogin" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEntityDocumentList">
+      <soap12:operation soapAction="http://tempuri.org/srxlite/documentservice/GetEntityDocumentList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetEntityDocumentListServiceLogin" part="ServiceLogin" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGroupDocumentList">
+      <soap12:operation soapAction="http://tempuri.org/srxlite/documentservice/GetGroupDocumentList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetGroupDocumentListServiceLogin" part="ServiceLogin" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentUploadUrl">
+      <soap12:operation soapAction="http://tempuri.org/srxlite/documentservice/GetDocumentUploadUrl" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetDocumentUploadUrlServiceLogin" part="ServiceLogin" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentViewerUrl">
+      <soap12:operation soapAction="http://tempuri.org/srxlite/documentservice/GetDocumentViewerUrl" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetDocumentViewerUrlServiceLogin" part="ServiceLogin" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MoveGroupDocument">
+      <soap12:operation soapAction="http://tempuri.org/srxlite/documentservice/MoveGroupDocument" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:MoveGroupDocumentServiceLogin" part="ServiceLogin" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDocumentStatus">
+      <soap12:operation soapAction="http://tempuri.org/srxlite/documentservice/UpdateDocumentStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:UpdateDocumentStatusServiceLogin" part="ServiceLogin" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDocumentKeys">
+      <soap12:operation soapAction="http://tempuri.org/srxlite/documentservice/UpdateDocumentKeys" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:UpdateDocumentKeysServiceLogin" part="ServiceLogin" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UploadDocument">
+      <soap12:operation soapAction="http://tempuri.org/srxlite/documentservice/UploadDocument" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:UploadDocumentServiceLogin" part="ServiceLogin" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CopyGroupDocuments">
+      <soap12:operation soapAction="http://tempuri.org/srxlite/documentservice/CopyGroupDocuments" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:CopyGroupDocumentsServiceLogin" part="ServiceLogin" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="DocumentServiceHttpGet" type="tns:DocumentServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="CreateGroup">
+      <http:operation location="/CreateGroup" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteDocument">
+      <http:operation location="/DeleteDocument" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="GetEntityDocumentList">
+      <http:operation location="/GetEntityDocumentList" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGroupDocumentList">
+      <http:operation location="/GetGroupDocumentList" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentUploadUrl">
+      <http:operation location="/GetDocumentUploadUrl" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentViewerUrl">
+      <http:operation location="/GetDocumentViewerUrl" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MoveGroupDocument">
+      <http:operation location="/MoveGroupDocument" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDocumentStatus">
+      <http:operation location="/UpdateDocumentStatus" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+    <wsdl:operation name="CopyGroupDocuments">
+      <http:operation location="/CopyGroupDocuments" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output />
+    </wsdl:operation>
+  </wsdl:binding>
+  <!--
+    NOTE: This WSDL file is auto-generated by Visual Studio when updating web references.
+    The service location URLs below should match your target environment. Update manually after regenerating the web reference.
+    
+    Environment URLs:
+    - Development: http://alod-loc:8090/services/documentservice.asmx
+    - Testing: https://alodtest.afrc.af.mil/srxlite/services/documentservice.asmx
+    - Staging: https://alodstaging.afrc.af.mil/srxlite/services/documentservice.asmx
+    - Production: https://alod.afrc.af.mil/srxlite/services/documentservice.asmx
+    
+    IMPORTANT: Runtime URL is controlled by web.config's ALOD_Data_SRXExchange_DocumentService setting.
+    These service location URLs are only used by Visual Studio for web reference discovery.
+  -->
+  <wsdl:service name="DocumentService">
+    <wsdl:port name="DocumentServiceSoap" binding="tns:DocumentServiceSoap">
+      <soap:address location="https://alodtest.afrc.af.mil/srxlite/services/documentservice.asmx" />
+    </wsdl:port>
+    <wsdl:port name="DocumentServiceSoap12" binding="tns:DocumentServiceSoap12">
+      <soap12:address location="https://alodtest.afrc.af.mil/srxlite/services/documentservice.asmx" />
+    </wsdl:port>
+    <wsdl:port name="DocumentServiceHttpGet" binding="tns:DocumentServiceHttpGet">
+      <http:address location="https://alodtest.afrc.af.mil/srxlite/services/documentservice.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

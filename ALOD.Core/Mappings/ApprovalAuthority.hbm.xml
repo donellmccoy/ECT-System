@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Users">
+
+	<class name="ApprovalAuthority" table="form348_approval_authorities">
+		<id name="Id" column="id">
+			<generator class="identity" />
+		</id>
+
+		<property name="Name" column="name" />
+		<property name="SignatureBlock" column="sig_block" />
+		<property name="Title" column="title" />
+		<property name="EffectiveDate" column="effective_date" />
+
+		<property name="CreatedDate" column="created_date" />
+		<property name="ModifiedDate" column="modified_date" />
+		<many-to-one name="CreatedBy" cascade="none" column="created_by" />
+		<many-to-one name="ModifiedBy" cascade="none" column="modified_by" />
+	</class>
+</hibernate-mapping>

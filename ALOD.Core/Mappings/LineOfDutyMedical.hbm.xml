@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Modules.Lod">
+
+	<class name="LineOfDutyMedical" table="Form348_Medical" discriminator-value="1">
+		<id name="Id" column="LODID">
+			<generator class="assigned" />
+		</id>
+    <discriminator column="workflow" type="integer" />
+    <property name="Workflow" column="workflow" update="false" insert="false" />
+		<property name="MemberStatus" column="member_status" />
+		<property name="NatureOfEvent" column="event_nature_type" />
+		<property name="EventDetails" column="event_nature_details" />
+		<property name="MedicalFacility" column="medical_facility" />
+		<property name="MedicalFacilityType" column="medical_facility_type" />
+		<property name="TreatmentDate" column="treatment_date" />
+		<property name="DeathInvolved" column="death_involved_yn" />
+		<property name="MvaInvolved" column="mva_involved_yn" />
+		<property name="Epts" column="epts_yn" />
+		<property name="ApprovalComments" column="physician_approval_comments" />
+		<property name="ModifiedBy" column="modified_by" />
+		<property name="ModifiedDate" column="modified_date" />
+		<property name="ICD9Id" column="icd9id" />
+		<property name="DiagnosisText" column="diagnosis_text" />
+    <property name="PhysicianCancelReason" column="physician_cancel_reason" />
+    <property name="PhysicianCancelExplanation" column="physician_cancel_explanation" />
+    <property name="ICD7thCharacter" column="icd_7th_Char" />
+    <property name="LODInitiation" column="lODInitiation" />
+    <property name="WrittenDiagnosis" column="writtenDiagnosis" />
+    <property name="MemberRequest" column="memberRequest" />
+    <property name="PriorToDutytatus" column="priorToDutytatus" />
+    <property name="StatusWorsened" column="statusWorsened" />
+
+    <subclass name="LineOfDutyMedical_v2" discriminator-value="27">
+      <property name="MemberCondition" column="member_condition" />
+      <property name="Influence" column="influence" />
+      <property name="AlcoholTestDone" column="alcohol_test_done" />
+      <property name="DrugTestDone" column="drug_test_done" />
+      <property name="MemberResponsible" column="member_responsible" />
+      <property name="PsychiatricEval" column="psych_eval" />
+      <property name="PsychiatricDate" column="psych_date" />
+      <property name="RelevantCondition" column="relevant_condition" />
+      <property name="OtherTest" column="other_test" />
+      <property name="OtherTestDate" column="other_test_date" />
+      <property name="DeployedLocation" column="deployed_location" />
+      <property name="ConditionEPTS" column="condition_epts" />
+      <property name="ServiceAggravated" column="service_aggravated" />
+      <property name="MobilityStandards" column="mobility_standards" />
+      <property name="BoardFinalization" column="board_finalization" />
+      <property name="MemberComponent" column="member_component" />
+      <property name="MemberCategory" column="member_category" />
+      <property name="MemberFrom" column="member_from" />
+    </subclass>
+  </class>
+</hibernate-mapping>

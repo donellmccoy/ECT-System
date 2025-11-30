@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Documents">
+
+	<class name="DocumentCategory2" table="DocumentCategory2">
+		<id name="Id" column="DocCatId">
+			<generator class="identity" />
+		</id>
+
+		<property name="CategoryDescription" />
+	</class>
+
+  <sql-query name="GetCategoriesByViewID">
+    exec dbo.docs_GetCatsByView :viewId
+  </sql-query>
+
+  <sql-query name="GetRedactedCategoriesByViewID">
+    exec dbo.docs_GetRedactedCatsByView :viewId
+  </sql-query>
+</hibernate-mapping>

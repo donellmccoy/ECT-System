@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Modules.Reinvestigations">
+
+  <class name="LODReinvestigation" table="form348_RR">
+    <id name="Id" column="request_id">
+      <generator class="identity" />
+    </id>
+    <property name="ReinvestigationLodId" column="ReinvestigationLodid" />
+    <property name="InitialLodId" column="InitialLodId" />
+    <property name="CaseId" column="Case_Id" />
+    <property name="CreatedBy" column="CreatedBy" />
+    <property name="CreatedDate" column="CreatedDate" />
+    <property name="ModifiedBy" column="Modified_By" />
+    <property name="ModifiedDate" column="Modified_Date" />
+    <property name="Workflow" column="Workflow" />
+    <property name="Status" column="Status" />
+    <property name="Cancel_Reason" column="Cancel_Reason" />
+    <property name="Cancel_Explanation" column="Cancel_Explanation" />
+    <property name="Cancel_Date" column="Cancel_Date" />
+    <property name="RWOA_Reason" column="RWOA_Reason" />
+    <property name="RWOA_Date" column="RWOA_Date" />
+    <property name="RWOA_Explanation" column="RWOA_Explanation" />
+    <property name="ReturnToGroup" column="return_to_group" />
+    <property name="ReturnByGroup" column="return_by_group" />
+
+    <!--<component name="MPFSignature" class="ALOD.Core.Domain.Modules.Lod.SignatureEntry">
+      <property name="DateSigned" column="sig_date_mpf" />
+      <property name="NameAndRank" column="sig_name_mpf" />
+      <property name="Title" column="sig_title_mpf" />
+    </component>
+    <component name="WingJASignature" class="ALOD.Core.Domain.Modules.Lod.SignatureEntry">
+      <property name="DateSigned" column="sig_date_wing_ja" />
+      <property name="NameAndRank" column="sig_name_wing_ja" />
+      <property name="Title" column="sig_title_wing_ja" />
+    </component>
+    <component name="WingCCSignature" class="ALOD.Core.Domain.Modules.Lod.SignatureEntry">
+      <property name="DateSigned" column="sig_date_wing_cc" />
+      <property name="NameAndRank" column="sig_name_wing_cc" />
+      <property name="Title" column="sig_title_wing_cc" />
+    </component>
+    <component name="BoardAdminSignature" class="ALOD.Core.Domain.Modules.Lod.SignatureEntry">
+      <property name="DateSigned" column="sig_date_board_admin" />
+      <property name="NameAndRank" column="sig_name_board_admin" />
+      <property name="Title" column="sig_title_board_admin" />
+    </component>
+    <component name="BoardMedicalSignature" class="ALOD.Core.Domain.Modules.Lod.SignatureEntry">
+      <property name="DateSigned" column="sig_date_board_medical" />
+      <property name="NameAndRank" column="sig_name_board_medical" />
+      <property name="Title" column="sig_title_board_medical" />
+    </component>
+    <component name="BoardLegalSignature" class="ALOD.Core.Domain.Modules.Lod.SignatureEntry">
+      <property name="DateSigned" column="sig_date_board_legal" />
+      <property name="NameAndRank" column="sig_name_board_legal" />
+      <property name="Title" column="sig_title_board_legal" />
+    </component>
+    <component name="ApprovingAuthoritySignature" class="ALOD.Core.Domain.Modules.Lod.SignatureEntry">
+      <property name="DateSigned" column="sig_date_approval" />
+      <property name="NameAndRank" column="sig_name_approval" />
+      <property name="Title" column="sig_title_approval" />
+    </component>
+    <component name="BoardTechFinalSignature" class="ALOD.Core.Domain.Modules.Lod.SignatureEntry">
+      <property name="DateSigned" column="sig_date_board_tech_final" />
+      <property name="NameAndRank" column="sig_name_board_tech_final" />
+      <property name="Title" column="sig_title_board_tech_final" />
+    </component>
+    <component name="LODProgramManagerSignature" class="ALOD.Core.Domain.Modules.Lod.SignatureEntry">
+      <property name="DateSigned" column="sig_date_lodPM" />
+      <property name="NameAndRank" column="sig_name_lodPM" />
+      <property name="Title" column="sig_title_lodPM" />
+    </component>
+    <component name="BoardA1Signature" class="ALOD.Core.Domain.Modules.Lod.SignatureEntry">
+      <property name="DateSigned" column="sig_date_board_a1" />
+      <property name="NameAndRank" column="sig_name_board_a1" />
+      <property name="Title" column="sig_title_board_a1" />
+    </component>-->
+
+    <property name="wing_cc_approved" column="wing_cc_approved" />
+    <property name="aa_final_approved" column="aa_final_approved" />
+
+    <bag name="Findings" table="Form348_RR_Findings" cascade="all" inverse="true">
+      <key column="request_id"></key>
+      <one-to-many class="LODReinvestigationFindings" />
+    </bag>
+
+    <many-to-one name="WorkflowStatus" class="ALOD.Core.Domain.Workflow.WorkStatus" column="Status" cascade="none" update="false" insert="false" />
+
+    <property name="Return_Comment" column="Return_Comment" />
+    <property name="MemberSSN" column="Member_SSN" />
+    <property name="MemberName" column="Member_Name" />
+    <property name="MemberUnit" column="member_unit" />
+    <property name="MemberUnitId" column="member_unit_id" />
+    <property name="MemberCompo" column="member_compo" />
+    <property name="DocumentGroupId" column="Doc_Group_Id" />
+    <property name="IsNonDBSignCase" column="is_non_dbsign_case" />
+
+    <many-to-one name="MemberRank" class="ALOD.Core.Domain.Lookup.UserRank" column="member_grade" update="true" insert="true" />
+  </class>
+</hibernate-mapping>

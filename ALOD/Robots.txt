@@ -1,0 +1,4 @@
+﻿sitemap : /SiteMap.aspx
+User-agent: *
+Disallow: /
+

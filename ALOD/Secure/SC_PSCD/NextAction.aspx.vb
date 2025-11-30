@@ -1,0 +1,1031 @@
+﻿Imports ALOD.Core.Domain.Common
+Imports ALOD.Core.Domain.Common.CustomServerControls
+Imports ALOD.Core.Domain.Documents
+Imports ALOD.Core.Domain.Lookup
+Imports ALOD.Core.Domain.Modules.Lod
+Imports ALOD.Core.Domain.Modules.SpecialCases
+Imports ALOD.Core.Domain.Users
+Imports ALOD.Core.Domain.Workflow
+Imports ALOD.Core.Interfaces.DAOInterfaces
+Imports ALOD.Core.Utils
+Imports ALOD.Core.Utils.NextActionHelpers
+Imports ALOD.Data
+Imports ALOD.Data.Services
+Imports ALOD.Logging
+Imports ALOD.Web.UserControls
+Imports ALODWebUtility.Common
+Imports ALODWebUtility.Worklfow
+
+Namespace Web.Special_Case.PSCD
+
+    Partial Class Secure_PSCD_NextAction
+        Inherits System.Web.UI.Page
+
+        Private Const VIEWSTATE_VALIDATIONS As String = "VALIDATION_ITEMS"
+        Private _docDao As IDocumentDao
+        Private _factory As IDaoFactory
+        Private _lookupDao As ILookupDao
+        Private _memoSource As MemoDao2
+        Private _scAccess As Dictionary(Of String, ALOD.Core.Domain.Workflow.PageAccessType)
+        Private _scDao As ISpecialCaseDAO
+        Private _usergroupDao As IUserGroupDao
+        Private _workstatusDao As IWorkStatusDao
+
+        Private boardStages As Short() = New Short() {
+            CShort(SpecCasePSCDStatusCode.BoardMedicalOfficerHQ),
+            CShort(SpecCasePSCDStatusCode.BoardMedicalOfficerHQSMR),
+            CShort(SpecCasePSCDStatusCode.HQMedTech)}
+
+        Private errors As New List(Of ValidationItem)
+        Private sc As SC_PSCD
+        Private separatorTemplate As System.Web.UI.CompiledTemplateBuilder
+
+        Private unitStages As Short() = New Short() {
+            CShort(SpecCasePSCDStatusCode.ApprovingAuthority)}
+
+#Region "SC_PSCDProperty"
+
+        ReadOnly Property DaoFactory() As IDaoFactory
+            Get
+                If (_factory Is Nothing) Then
+                    _factory = New NHibernateDaoFactory()
+                End If
+
+                Return _factory
+            End Get
+        End Property
+
+        ReadOnly Property DocumentDao() As IDocumentDao
+            Get
+                If (_docDao Is Nothing) Then
+                    _docDao = New SRXDocumentStore(SESSION_USERNAME)
+                End If
+
+                Return _docDao
+            End Get
+        End Property
+
+        ReadOnly Property LookupDao() As ILookupDao
+            Get
+                If (_lookupDao Is Nothing) Then
+                    _lookupDao = DaoFactory.GetLookupDao()
+                End If
+
+                Return _lookupDao
+            End Get
+        End Property
+
+        ReadOnly Property RefId() As Integer
+            Get
+                Return Integer.Parse(Request.QueryString("refId"))
+            End Get
+        End Property
+
+        ReadOnly Property SCDao() As ISpecialCaseDAO
+            Get
+                If (_scDao Is Nothing) Then
+                    _scDao = DaoFactory.GetSpecialCaseDAO()
+                End If
+
+                Return _scDao
+            End Get
+        End Property
+
+        ReadOnly Property UserGroupDao() As IUserGroupDao
+            Get
+                If (_usergroupDao Is Nothing) Then
+                    _usergroupDao = DaoFactory.GetUserGroupDao()
+                End If
+
+                Return _usergroupDao
+            End Get
+        End Property
+
+        ReadOnly Property WorkstatusDao() As IWorkStatusDao
+            Get
+                If (_workstatusDao Is Nothing) Then
+                    _workstatusDao = DaoFactory.GetWorkStatusDao()
+                End If
+
+                Return _workstatusDao
+            End Get
+        End Property
+
+        Public ReadOnly Property Navigator() As TabNavigator
+            Get
+                Return MasterPage.Navigator
+            End Get
+        End Property
+
+        Protected ReadOnly Property MasterPage() As SC_PSCDMaster
+            Get
+                Dim master As SC_PSCDMaster = CType(Page.Master, SC_PSCDMaster)
+                Return master
+            End Get
+        End Property
+
+        Protected ReadOnly Property ModuleType() As ModuleType
+            Get
+                Return ModuleType.SpecCasePSCD
+            End Get
+        End Property
+
+        Protected ReadOnly Property SectionList() As Dictionary(Of String, ALOD.Core.Domain.Workflow.PageAccessType)
+            Get
+                If (_scAccess Is Nothing) Then
+                    _scAccess = SpecCase.ReadSectionList(SESSION_GROUP_ID)
+                End If
+                Return _scAccess
+            End Get
+        End Property
+
+        Protected ReadOnly Property SpecCase() As SC_PSCD
+            Get
+                If (sc Is Nothing) Then
+                    sc = SCDao.GetById(RefId)
+                End If
+
+                Return sc
+            End Get
+        End Property
+
+        Public Sub CommitChanges()
+            SCDao.CommitChanges()
+            SCDao.Evict(SpecCase)
+            _scDao = Nothing
+        End Sub
+
+#End Region
+
+#Region "PageProperty"
+
+        Public Property RLBEnabled() As Boolean
+            Get
+                Return ucRLB.Enabled
+            End Get
+            Set(ByVal value As Boolean)
+                ucRLB.Enabled = value
+            End Set
+        End Property
+
+        Public Property RLBVisible() As Boolean
+            Get
+                Return divRLB.Visible
+            End Get
+            Set(ByVal value As Boolean)
+                divRLB.Visible = value
+            End Set
+        End Property
+
+        Public Property UserCanEdit() As Boolean
+            Get
+                If (ViewState("UserCanEdit") Is Nothing) Then
+                    ViewState("UserCanEdit") = False
+                End If
+                Return CBool(ViewState("UserCanEdit"))
+            End Get
+            Set(value As Boolean)
+                ViewState("UserCanEdit") = value
+            End Set
+        End Property
+
+        Protected ReadOnly Property memoTemplateId() As Integer
+            Get
+                Return MemoStore.GetMemoTemplateId("PSC Determination")
+            End Get
+        End Property
+
+        Protected ReadOnly Property worksheetTemplateId() As Integer
+            Get
+                Return MemoStore.GetMemoTemplateId("PSC Commentary Worksheet")
+            End Get
+        End Property
+
+        Private ReadOnly Property MemoStore() As MemoDao2
+            Get
+                If (_memoSource Is Nothing) Then
+                    _memoSource = DaoFactory.GetMemoDao2()
+                End If
+
+                Return _memoSource
+            End Get
+        End Property
+
+        Protected Sub Page_Init(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Init
+            AddHandler Me.Master.TabClick, AddressOf TabButtonClicked
+        End Sub
+
+        Protected Sub Page_PreRender(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.PreRender
+            For Each item As ValidationItem In ViewState(VIEWSTATE_VALIDATIONS)
+                errors.Add(item)
+            Next
+            'If (Not Page.IsPostBack) Then
+            'GetValidations()
+            'End If
+            results.DataSource = errors
+
+        End Sub
+
+        Private Sub TabButtonClicked(ByRef sender As Object, ByRef e As TabNavigationEventArgs)
+            If (e.ButtonType = NavigatorButtonType.Save OrElse e.ButtonType = NavigatorButtonType.NavigatedAway) Then
+                SpecCase.ModifiedBy = SESSION_USER_ID
+                SpecCase.ModifiedDate = DateTime.Now
+            End If
+            If (e.ButtonType = NavigatorButtonType.Save) Then
+                Response.Redirect(Request.RawUrl)
+            End If
+        End Sub
+
+#End Region
+
+        Public Sub SaveCancelData()
+
+            If (Not UserCanEdit) Then
+                Exit Sub
+            End If
+
+            'Cancellation Reasons
+            SpecCase.CaseCancelExplanation = Server.HtmlEncode(CommentsTextBox.Text.Trim)
+            If rblReason.SelectedValue <> "" Then
+                SpecCase.CaseCancelReason = CShort(rblReason.SelectedValue)
+            End If
+            SpecCase.CaseCancelDate = DateTime.Now
+
+        End Sub
+
+        Protected Sub CheckRoutingSelection()
+            Dim workOption = GetWorkOption()
+
+            commentsTitle.CssClass = String.Empty
+
+            If (workOption.DisplayText Like "*Cancel*") Then
+                PopulateCancelrbl()
+
+                reasonTitle.Text = "* Reason for Cancellation:"
+                commentsTitle.Text = "* Cancel Comments:"
+                commentsTitle.CssClass = "labelRequired"
+
+                CommentsTextBox.Text = ""
+                CommentsTextBox.MaxLength = 400
+                SetMaxLength(CommentsTextBox)
+
+                reasonRow.Visible = True
+                reasonLetter.Text = "B"
+                commentsRow.Visible = True
+                commentLetter.Text = "C"
+
+                'Curt Lucas
+                '7-02-2019 - CR-016 - Added OrElse for RFA
+            ElseIf (workOption.DisplayText Like "RWOA*") OrElse (workOption.DisplayText Like "RFA*") Then
+                PopulateRWOArbl()
+
+                reasonTitle.Text = "* Reason for RFA:"
+                commentsTitle.Text = "* RFA Comments:"
+                CommentsTextBox.MaxLength = 400
+                SetMaxLength(CommentsTextBox)
+
+                CommentsTextBox.Text = ""
+
+                reasonRow.Visible = True
+                reasonLetter.Text = "B"
+                commentsRow.Visible = True
+                commentLetter.Text = "C"
+
+            ElseIf (workOption.DisplayText Like "Return*") Then
+                PopulateReturnrbl()
+
+                reasonTitle.Text = "* Reason for Return:"
+                commentsTitle.Text = "* Return Comments:"
+                CommentsTextBox.MaxLength = 400
+                SetMaxLength(CommentsTextBox)
+
+                CommentsTextBox.Text = ""
+
+                reasonRow.Visible = True
+                reasonLetter.Text = "B"
+                commentsRow.Visible = True
+                commentLetter.Text = "C"
+                SignButton.Enabled = True
+            Else
+                reasonRow.Visible = False
+                commentsRow.Visible = False
+            End If
+        End Sub
+
+        Protected Function GetStatusInfo(ByVal statusCodeOut As Integer) As Tuple(Of Integer, String)
+
+            Dim sentTo As String = ""
+            Dim sentToId As Integer = 0
+
+            Select Case statusCodeOut
+                Case SpecCaseRSStatusCode.InitiateCase, SpecCaseRSStatusCode.FinalReview, SpecCaseRSStatusCode.RecruiterComments
+                    sentTo = "HQ Tech"
+                    sentToId = UserGroups.AFRCHQTechnician
+                Case SpecCaseRSStatusCode.MedicalReview
+                    sentTo = "Board Medical"
+                    sentToId = UserGroups.BoardMedical
+                Case SpecCaseRSStatusCode.SeniorMedicalReview
+                    sentTo = "Senior Medical Reviewer"
+                    sentToId = UserGroups.SeniorMedicalReviewer
+                Case Else
+                    sentTo = ""
+            End Select
+
+            Dim sent As Tuple(Of Integer, String) = New Tuple(Of Integer, String)(sentToId, sentTo)
+            Return sent
+
+        End Function
+
+        Protected Function GetWorkOption() As WorkflowStatusOption
+            Dim radio As ValueRadioButton
+            Dim workOption As WorkflowStatusOption = Nothing
+
+            'get the selected option
+            For Each item As RepeaterItem In rbtOption.Items
+                radio = CType(item.FindControl("rblOptions"), ValueRadioButton)
+                If (errors.Count() > 1) Then
+
+                End If
+
+                If (radio.Checked) Then
+                    workOption = StringToOption(radio.Value)
+                    workOption.DisplayText = radio.Text
+                    Exit For
+                End If
+
+            Next
+
+            Return workOption
+        End Function
+
+        Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
+            Dim eventTarget As String
+            GetValidations()
+            If (Not Page.IsPostBack) Then
+
+                UserCanEdit = GetAccess(Navigator.PageAccess, True)
+                InitControls()
+                InitData()
+                ShowRLB()
+                InitNextActionOptions()
+
+                LogManager.LogAction(ModuleType, UserAction.ViewPage, RefId, "Viewed Page: Next Action")
+            End If
+
+            If ((Me.Request("__EVENTTARGET") Is Nothing)) Then
+                eventTarget = String.Empty
+            Else
+                eventTarget = Me.Request("__EVENTTARGET")
+            End If
+
+            If (eventTarget = "CheckRoutingSelection") Then
+                CheckRoutingSelection()
+            End If
+
+            If Not (UserCanEdit) Then
+                SignButton.Enabled = False
+            End If
+        End Sub
+
+        Protected Sub PopulateCancelrbl()
+            rblReason.DataSource = LookupService.GetWorkflowCancelReasons(SpecCase.Workflow, 0)
+            rblReason.DataTextField = "Description"
+            rblReason.DataValueField = "Id"
+            rblReason.DataBind()
+        End Sub
+
+        Protected Sub PopulateReturnrbl()
+            NextActionHelpers.PopulateRadioButtonListWithReturnOptions(rblReason, SpecCase.Workflow, LookupDao)
+        End Sub
+
+        Protected Sub PopulateRWOArbl()
+            NextActionHelpers.PopulateRadioButtonListWithRwoaOptions(rblReason, SpecCase.Workflow, LookupDao)
+        End Sub
+
+        Protected Sub rbtOption_ItemDataBound(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.RepeaterItemEventArgs) Handles rbtOption.ItemDataBound
+
+            If (e.Item.ItemType = ListItemType.Item) OrElse (e.Item.ItemType = ListItemType.AlternatingItem) Then
+
+                Dim rb As ValueRadioButton = CType(e.Item.FindControl("rblOptions"), ValueRadioButton)
+                Dim options As ALOD.Core.Domain.Workflow.WorkflowStatusOption
+
+                options = e.Item.DataItem
+                rb.Text = Server.HtmlEncode(options.DisplayText)
+                rb.CssClass = "option-routing"
+                rb.Value = OptionToString(options)
+                rb.Visible = options.OptionVisible
+                rb.Enabled = options.OptionValid
+                Dim script As String = "SetUniqueRadioButton('rbtOption.*option', this)"
+                rb.Attributes.Add("onclick", script)
+
+                If (separatorTemplate Is Nothing) Then
+                    separatorTemplate = rbtOption.SeparatorTemplate
+                End If
+
+                If (Not options.OptionVisible) Then
+                    rbtOption.SeparatorTemplate = Nothing
+                Else
+                    rbtOption.SeparatorTemplate = separatorTemplate
+                End If
+
+            End If
+        End Sub
+
+        Protected Sub SignatureCompleted(ByVal sender As Object, ByVal e As SignCompletedEventArgs) Handles SigBlock.SignCompleted
+
+            If (e.SignaturePassed) Then
+
+                'we have a good signature.  take any further actions that are required
+                ChangeStatus(e.OptionId, e.StatusOut, e.Text, e.Comments)
+                SetFeedbackMessage("Case " + SpecCase.CaseId + " successfully signed.  Action applied: " + e.Text)
+                Response.Redirect(Resources._Global.StartPage, True)
+            End If
+
+        End Sub
+
+        Protected Sub SignButton_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles SignButton.Click
+
+            Dim workOption = GetWorkOption()
+
+            'make sure we have an option selected
+            If (workOption Is Nothing) Then
+                OptionPanel.CssClass = "fieldRequired"
+                errors.Add(New ValidationItem("Routing", "Routing", "A Routing option must be selected"))
+                Exit Sub
+            Else
+                OptionPanel.CssClass = ""
+            End If
+
+            'we have an option selected
+
+            If (workOption.DisplayText Like "Cancel*") Then
+                'the user is cancelling, do we have a cancel reason?
+                If (Not ValidateReasonControls("Cancellation")) Then
+                    Exit Sub
+                End If
+
+                'we have a cancel reason, so add save it
+                SaveCancelData()
+
+            End If
+
+            'Curt Lucas
+            '7-02-2019 - CR-016 - Added OrElse for RFA
+            If (workOption.DisplayText Like "RWOA*") OrElse (workOption.DisplayText Like "RFA*") Then
+
+                If (Not ValidateReasonControls("RWOA")) Then
+                    Exit Sub
+                End If
+            End If
+
+            If (workOption.DisplayText Like "Return*") Then
+                If (Not ValidateReasonControls("Return")) Then
+                    Exit Sub
+                End If
+            End If
+
+            ReasonPanel.CssClass = ""
+
+            If Not IsNothing(SpecCase.ReturnToGroup) Then  'Clear the Return Group info when the recipient Replies/Forwards
+                If SESSION_GROUP_ID = SpecCase.ReturnToGroup Then
+                    SpecCase.ReturnToGroup = Nothing
+                    SpecCase.ReturnByGroup = Nothing
+                End If
+            End If
+
+            Dim template As Integer = workOption.Template
+
+            Dim secId As Integer = CInt(GetPersonnelTypeFromGroup(SESSION_GROUP_ID, False))
+
+            Dim selectedText As String
+            If (rblReason.SelectedValue.Length > 0) Then
+                selectedText = rblReason.SelectedItem.Text
+            Else
+                selectedText = String.Empty
+            End If
+
+            'Adding RWOA/Cancel Reason to the Log
+            Dim LogActionDisplayText = LogText(workOption.DisplayText, selectedText, Server.HtmlEncode(CommentsTextBox.Text.Trim()))
+
+            SCDao.SaveOrUpdate(SpecCase)
+            CommitChanges()
+            SigBlock.StartSignature(RefId, SpecCase.Workflow, secId, LogActionDisplayText, SpecCase.Status, workOption.wsStatusOut, workOption.Id, template, String.Empty)
+
+        End Sub
+
+        Protected Function ValidateReasonControls(ByVal typeOfReturn As String) As Boolean
+            Dim areValid As Boolean = True
+
+            If (rblReason.SelectedValue.Length = 0) Then
+                ReasonPanel.CssClass = "fieldRequired"
+                errors.Add(New ValidationItem("Routing", "Reason For Return", "A Reason for " & typeOfReturn & " must be selected"))
+                areValid = False
+            Else
+                ReasonPanel.CssClass = String.Empty
+            End If
+
+            If (String.IsNullOrEmpty(CommentsTextBox.Text)) Then
+                CommentsTextBox.CssClass = "fieldRequired"
+                errors.Add(New ValidationItem("Routing", "Reason For Return", "An explanation for " & typeOfReturn & " must be entered"))
+                areValid = False
+            Else
+                CommentsTextBox.CssClass = String.Empty
+            End If
+
+            Return areValid
+        End Function
+
+        Private Sub InitCancelComments(ByVal reason As Integer, ByVal explanation As String)
+            Dim title As String = "Case Cancelled: "
+
+            PopulateCancelrbl()
+            rblReason.SelectedValue = reason
+            CommentLabel.Text = title & rblReason.SelectedItem.Text & "<br /><br />"
+
+            CommentLabel.Text = CommentLabel.Text & NullStringToEmptyString(explanation).Replace(Environment.NewLine, "<br />")
+        End Sub
+
+        Private Sub InitControls()
+
+            SetInputFormatRestriction(Page, CommentsTextBox, FormatRestriction.AlphaNumeric, PERMITTED_SPECIAL_CHAR_INPUT)
+
+        End Sub
+
+        Private Sub InitData()
+
+            If (RefId = 0) Then
+                Exit Sub
+            End If
+
+            'show the comments on the cancel/return (if there are any)
+            CommentPanel.Visible = False
+            CommentLabel.Text = ""
+
+            If (Not IsNothing(SpecCase.CaseCancelReason)) Then  'Check if Cancelled - show Cancel Reason
+                If SpecCase.CaseCancelReason > 0 Then
+                    InitCancelComments(SpecCase.CaseCancelReason, SpecCase.CaseCancelExplanation)
+
+                    CommentPanel.Visible = True
+                End If
+            End If
+
+        End Sub
+
+        Private Sub InitNextActionOptions()
+
+            'as part of this method call the validation errors are generated
+            'so we will store them from here for later display
+
+            If (errors.Count() = 0 OrElse (errors.Count() = 1 AndAlso errors.ElementAt(0).Field = "Routing")) Then
+                Dim options = (From o In SpecCase.GetCurrentOptions(WorkFlowService.GetLastStatus(SpecCase.Id, ModuleType), DaoFactory)
+                               Where (o.Compo = Session(SESSIONKEY_COMPO) Or o.Compo = "0" Or String.IsNullOrEmpty(o.Compo))
+                               Select o
+                               Order By o.SortOrder).Distinct()
+                rbtOption.DataSource = options
+            Else
+                Dim options = (From o In SpecCase.GetCurrentOptions(WorkFlowService.GetLastStatus(SpecCase.Id, ModuleType), DaoFactory)
+                               Where (o.Compo = Session(SESSIONKEY_COMPO) Or o.Compo = "0" Or String.IsNullOrEmpty(o.Compo)) And Not o.DisplayText Like "Forward*"
+                               Select o
+                               Order By o.SortOrder).Distinct()
+                rbtOption.DataSource = options
+            End If
+
+            rbtOption.DataBind()
+            ViewState(VIEWSTATE_VALIDATIONS) = SpecCase.Validations
+
+        End Sub
+
+        Private Sub ShowRLB()
+            Dim access As ALOD.Core.Domain.Workflow.PageAccessType = SectionList(PSCDSectionNames.PSCD_RLB.ToString())
+            Dim ws As IList(Of WorkStatusTracking) = WorkFlowService.GetWorkStatusTracking(SpecCase.Id, ModuleType)
+
+            If access <> ALOD.Core.Domain.Workflow.PageAccessType.None Then
+
+                If (ws IsNot Nothing AndAlso ws.Count > 1) Then
+                    If ((IsReturnedToBoard(SpecCase.CurrentStatusCode) OrElse IsReturnedToUnit(ws(0).WorkflowStatus.StatusCodeType.Id, SpecCase.CurrentStatusCode))) Then
+                        'get the last status from workflowtransaction class
+                        RLBVisible = True
+                        RLBTitle.Text = "Returned Without Action"
+
+                        Dim rwoaDao As IRwoaDao = New NHibernateDaoFactory().GetRwoaDao
+                        ucRLB.Initialize(rwoaDao.GetRecentRWOA(SpecCase.Workflow, SpecCase.Id))
+                        If access <> ALOD.Core.Domain.Workflow.PageAccessType.ReadWrite Then
+                            RLBEnabled = False
+                        End If
+                        Exit Sub
+                    End If
+                End If
+            End If
+
+            If (ws IsNot Nothing AndAlso ws.Count > 1) Then
+
+                If (CheckReturn(ws(0).WorkflowStatus.StatusCodeType.Id, SpecCase.CurrentStatusCode)) Then
+                    Dim returnDao As IReturnDao = New NHibernateDaoFactory().GetReturnDao
+
+                    Dim rwRec = returnDao.GetRecentReturn(SpecCase.Workflow, SpecCase.Id)
+
+                    If (rwRec IsNot Nothing) AndAlso (rwRec.WorkStatusFrom = SpecCase.WorkflowStatus.Id Or rwRec.WorkStatusTo = SpecCase.WorkflowStatus.Id) Then
+                        RLBVisible = True
+                        RLBTitle.Text = "Returned"
+
+                        ucRLB.Initialize(returnDao.GetRecentReturn(SpecCase.Workflow, SpecCase.Id))
+
+                        If rwRec.WorkStatusTo <> SpecCase.WorkflowStatus.Id Then
+                            RLBEnabled = False
+                        End If
+                    End If
+                End If
+            End If
+
+        End Sub
+
+#Region "PSCD Validations"
+
+        Protected Sub GetValidations()
+            Dim psDao As ISpecialCaseDAO = DaoFactory.GetSpecialCaseDAO()
+            Dim psData As SC_PSCD = psDao.GetById(RefId, False)
+            Dim psFindings As SC_PSCD_Findings = Nothing
+            Dim wsid As Int32 = SESSION_WS_ID(RefId)
+            Dim memoTemplet As Int32 = memoTemplateId
+            Dim worksheetTemplet As Int32 = worksheetTemplateId
+            Dim memoId As Int32 = LookupDao.GetPSCDMemoId(RefId, memoTemplet)
+            Dim worksheetId As Int32 = LookupDao.GetPSCDMemoId(RefId, worksheetTemplet)
+            Dim section As String = ""
+
+            Select Case wsid
+                Case SpecCasePSCDWorkStatus.HQMedTech
+                    psFindings = SpecCase.FindByType(PersonnelTypes.MED_TECH)
+                    section = "Board Tech"
+                Case SpecCasePSCDWorkStatus.BoardMedOffHQ
+                    psFindings = SpecCase.FindByType(PersonnelTypes.BOARD_SG)
+                    section = "Board Medical"
+                Case SpecCasePSCDWorkStatus.BoardMedOffHQSMR
+                    psFindings = SpecCase.FindByType(PersonnelTypes.SENIOR_MEDICAL_REVIEWER)
+                    section = "Senior Medical"
+                Case SpecCasePSCDWorkStatus.AFRCJA 'Board Legal
+                    psFindings = SpecCase.FindByType(PersonnelTypes.BOARD_JA)
+                    section = "Board Legal"
+                Case SpecCasePSCDWorkStatus.ApprovAuth
+                    psFindings = SpecCase.FindByType(PersonnelTypes.BOARD)
+                    section = "Approving Authority"
+                Case SpecCasePSCDWorkStatus.BoardAdmin
+                    psFindings = SpecCase.FindByType(PersonnelTypes.BOARD_SR)
+                    section = "Board Personnel"
+                Case SpecCasePSCDWorkStatus.HQMedTech_FinalReview
+                    If (memoId = 0) Then
+                        errors.Add(New ValidationItem("PSC Documents", "PSC Documents", "PSC Findings Memo Required"))
+                    End If
+                    If (worksheetId = 0) Then
+                        errors.Add(New ValidationItem("PSC Documents", "PSC Documents", "PSC Commentary Worksheet Required"))
+                    End If
+            End Select
+            If (Not wsid = SpecCasePSCDWorkStatus.HQMedTech_FinalReview And Not wsid = SpecCasePSCDWorkStatus.HQMedTech) Then
+                If (Not psFindings Is Nothing) Then
+                    If (Not psFindings.Finding.HasValue) Then
+                        errors.Add(New ValidationItem(section, "Findings", section + " Findings Required"))
+                    End If
+                Else
+                    errors.Add(New ValidationItem(section, "Findings", section + " Findings Required"))
+                End If
+            End If
+
+            'PSC Med Tech
+            'taking out due to task 303
+            'If (psData.MemberStatus = "") Then
+            '    errors.Add(New ValidationItem("PSC Med Tech", "Member Status", "Member Status Required"))
+            'End If
+            'If (psData.MemberCategory = "") Then
+            '    errors.Add(New ValidationItem("PSC Med Tech", "Member Category", "Member Category Required"))
+            'End If
+            If (psData.ICD9Description = "") Then
+                errors.Add(New ValidationItem("PSC Med Tech", "ICD9 Description", "Diagnosis Required"))
+            End If
+            If (psData.ICD9Diagnosis = "") Then
+                errors.Add(New ValidationItem("PSC Med Tech", "Diagnosis", "Diagnosis Text Required"))
+            End If
+            'If (SpecCase.IAWAFI Is Nothing) Then
+            '    errors.Add(New ValidationItem("PSC Med Tech", "IAW AFI 48-123", "Is Condition Potentially Unfitting"))
+            'End If
+            If (SpecCase.RMU Is Nothing) Then
+                errors.Add(New ValidationItem("PSC Med Tech", "RMU", "RMU Required"))
+            End If
+            'If (SpecCase.DurationOfServiceFrom Is Nothing) Then
+            '    errors.Add(New ValidationItem("PSC Med Tech", "DurationOfServiceFrom", "Duration Of Service From Date Required"))
+            'End If
+            'If (SpecCase.DurationOfServiceTo Is Nothing) Then
+            '    errors.Add(New ValidationItem("PSC Med Tech", "DurationOfServiceTo", "Duration Of Service To Date Required"))
+            'End If
+            'PSC Board
+            If (errors.Count() > 0) Then
+                SignButton.Enabled = False
+                'For Each item As RepeaterItem In rbtOption.Items
+                '    Dim x As Int16 = 0
+                '    If (item.ToString() Like "*Return*") Then
+                '        item.
+                '    End If
+                'Next
+            End If
+            'InitNextActionOptions()
+
+        End Sub
+
+#End Region
+
+#Region "ChangeStatusAndActions"
+
+        Public Sub AddEmails(ByRef emails As MailManager, emailService As EmailService, action As WorkflowOptionAction, statusOut As Integer)
+
+            Dim toList As StringCollection
+            If (statusOut = SpecCaseRSWorkStatus.Qualified OrElse statusOut = SpecCaseRSWorkStatus.Disqualified) Then
+                'add it to the email manager
+                toList = emailService.GetDistributionListByGroupSC(SpecCase.Id, action.Target)
+            Else
+                toList = emailService.GetDistributionListByWorkflow(SpecCase.Id, statusOut, SpecCase.Workflow, action.Target)
+            End If
+
+            emails.AddTemplate(action.Data, "", toList)
+
+        End Sub
+
+        Public Sub ApplyActions(ByVal optionId As Integer, ByVal statusIn As Integer, ByVal statusOut As Integer)
+            Dim optn As ALOD.Core.Domain.Workflow.WorkflowStatusOption = WorkFlowService.GetOptionById(optionId)
+
+            If (optn Is Nothing) Then
+                Exit Sub
+            End If
+
+            Dim mailService As EmailService = New EmailService()
+            Dim emails As New ALOD.Core.Domain.Common.MailManager(mailService)
+            For Each actn As WorkflowOptionAction In optn.ActionList
+
+                Select Case actn.ActionType.Id
+
+                    Case WorkflowActionType.SaveRWOA
+                        InsertRWOA(statusIn, statusOut)
+                    Case WorkflowActionType.ReturnRWOA
+                        ReturnRWOA(statusIn)
+                    Case WorkflowActionType.AddSignature
+                        AddSignature(actn.Target)
+                    Case WorkflowActionType.RemoveSignature
+                        SpecCase.RemoveSignature(DaoFactory, statusOut)
+                    Case WorkflowActionType.SendEmail
+                        AddEmails(emails, mailService, actn, statusOut)
+                    Case WorkflowActionType.ReturnTo
+                        ReturnTo(statusIn, statusOut)
+                    Case WorkflowActionType.ReturnBack
+                        ReturnBack(statusIn, statusOut, False)
+                End Select
+
+            Next
+
+            emails.SetField("CASE_NUMBER", SpecCase.CaseId)
+            emails.SetField("APP_LINK", GetHostName())
+            emails.SendAll()
+
+        End Sub
+
+        Public Sub ChangeStatus(optionId As Integer, newStatus As Integer, text As String, comments As String)
+            Dim passed As Boolean = True
+            Dim statusIn As Integer = SpecCase.Status
+
+            If (newStatus <> SpecCase.Status) Then
+                LogManager.LogAction(ModuleType, UserAction.Signed, SpecCase.Id, Server.HtmlEncode(CommentsTextBox.Text.Trim), statusIn, newStatus)
+                LogManager.LogAction(ModuleType, UserAction.StatusChanged, SpecCase.Id, text, statusIn, newStatus)
+
+                ApplyActions(optionId, statusIn, newStatus)
+                ProcessDispositions(newStatus)
+
+                SpecCase.Status = newStatus
+                SpecCase.ModifiedBy = SESSION_USER_ID
+                SpecCase.ModifiedDate = DateTime.Now()
+
+                SCDao.SaveOrUpdate(SpecCase)
+                CommitChanges()
+            End If
+
+            Dim reminderDao = New ReminderEmailsDao()
+            reminderDao.ReminderEmailUpdateStatusChange(statusIn, newStatus, SpecCase.CaseId, "SC")
+        End Sub
+
+        Public Function CheckReturn(ByVal statusIn As Short, ByVal statusOut As Short) As Boolean
+            'Check if the case could be a return
+            If (unitStages.Contains(statusOut) AndAlso unitStages.Contains(statusOut)) Then
+                Return True
+            ElseIf (boardStages.Contains(statusOut) AndAlso boardStages.Contains(statusOut)) Then
+                Return True
+            End If
+            Return False
+        End Function
+
+        Public Sub InsertRWOA(ByVal statusIn As Integer, ByVal statusOut As Integer)
+
+            Dim statusCodeIn As Integer = WorkstatusDao.GetById(statusIn).StatusCodeType.Id
+            Dim statusCodeOut As Integer = WorkstatusDao.GetById(statusOut).StatusCodeType.Id
+
+            Dim rwoaDao As IRwoaDao = New NHibernateDaoFactory().GetRwoaDao
+
+            If (IsReturnedToUnit(statusCodeIn, statusCodeOut)) Then
+
+                If GetStatusInfo(statusCodeOut).Item1 <> 0 Then
+                    SpecCase.ReturnByGroup = SESSION_GROUP_ID
+                    SpecCase.ReturnToGroup = GetStatusInfo(statusCodeOut).Item1
+                End If
+
+                Dim rwRec As New ALOD.Core.Domain.Modules.Lod.Rwoa
+                rwRec.RefId = SpecCase.Id
+                rwRec.Workflow = SpecCase.Workflow
+                rwRec.WorkStatus = statusOut
+                rwRec.SentTo = GetStatusInfo(statusCodeOut).Item2
+                rwRec.DateSent = DateTime.Now
+                rwRec.Sender = UserGroupDao.GetNameById(SESSION_GROUP_ID, SESSION_COMPO)
+                rwRec.ExplantionSendingBack = Server.HtmlEncode(CommentsTextBox.Text)
+                rwRec.CreatedDate = DateTime.Now
+                rwRec.CreatedBy = SESSION_USER_ID
+
+                If (Not String.IsNullOrEmpty(rblReason.SelectedValue)) Then
+                    rwRec.ReasonSentBack = rblReason.SelectedValue
+                End If
+
+                rwoaDao.Save(rwRec)
+
+            End If
+
+        End Sub
+
+        Public Function IsReturnedToBoard(ByVal statusIn As Short) As Boolean
+            'If board- unit -board
+            'This will check last two stages before the current status
+            If boardStages.Contains(statusIn) Then
+                Dim ws As IList(Of WorkStatusTracking) = WorkFlowService.GetWorkStatusTracking(SpecCase.Id, ModuleType)
+                If ws IsNot Nothing Then
+                    If ws.Count > 1 Then
+                        If unitStages.Contains(ws(0).WorkflowStatus.StatusCodeType.Id) Then     'The last stage was unit stage
+                            If boardStages.Contains(ws(1).WorkflowStatus.StatusCodeType.Id) Then     'The stage before that was board
+                                Return True
+                            End If
+                        End If
+                    End If
+                End If
+            End If
+            Return False
+        End Function
+
+        Public Function IsReturnedToUnit(ByVal statusIn As Short, ByVal statusOut As Short) As Boolean
+            'Board--Unit --SImply check the last status if it  is from board and the current status is one of the units then it has been returned to Unit
+            If (boardStages.Contains(statusIn)) Then
+                If unitStages.Contains(statusOut) Then
+                    Return True
+                End If
+            End If
+            Return False
+        End Function
+
+        Public Sub ReturnBack(ByVal statusIn As Integer, ByVal statusOut As Integer, ByVal ReturnFlag As Boolean)
+            Dim statusCodeIn As Integer = WorkstatusDao.GetById(statusIn).StatusCodeType.Id
+            Dim statusCodeOut As Integer = WorkstatusDao.GetById(statusOut).StatusCodeType.Id
+
+            Dim returnDao As IReturnDao = New NHibernateDaoFactory().GetReturnDao
+
+            Dim rwRec = returnDao.GetRecentReturn(SpecCase.Workflow, SpecCase.Id)
+
+            Dim sentTo As String = GetStatusInfo(statusCodeOut).Item2
+
+            If (rwRec IsNot Nothing AndAlso rwRec.DateSentBack Is Nothing) Then
+
+                If (rwRec.WorkStatusFrom = statusOut) Then                      'Case made it back to where the Return came from
+
+                    If (rwRec.WorkStatusTo = statusIn) Then                     'Direct Reply
+                        rwRec.DateSentBack = DateTime.Now
+                        rwRec.CommentsBackToSender = ucRLB.MedTechComments
+                        rwRec.rerouting = 0
+                    Else                                                        'Case was rerouted
+                        rwRec.rerouting = 1
+                        rwRec.DateSentBack = DateTime.Now
+                    End If
+
+                ElseIf (statusCodeOut = SpecCaseRSStatusCode.Cancelled) Then           'Case was canceled during Return
+                    rwRec.DateSentBack = DateTime.Now
+                    If (String.IsNullOrEmpty(rwRec.CommentsBackToSender)) Then
+                        rwRec.CommentsBackToSender = "Case has been Cancelled: " + ucRLB.MedTechComments
+                        rwRec.rerouting = 0
+                    End If
+
+                ElseIf (statusCodeOut = SpecCaseRSStatusCode.Qualified OrElse statusCodeOut = SpecCaseRSStatusCode.Disqualified) Then            'Case was completed during Return
+
+                    If (String.IsNullOrEmpty(rwRec.CommentsBackToSender)) Then
+                        rwRec.DateSentBack = DateTime.Now
+                        rwRec.CommentsBackToSender = "Case has been Completed: " + ucRLB.MedTechComments
+                        rwRec.rerouting = 0
+                    End If
+
+                ElseIf (IsReturnedToUnit(statusCodeIn, statusCodeOut)) Then                                        'Case was returned again
+                    rwRec.DateSentBack = DateTime.Now
+                    If (String.IsNullOrEmpty(rwRec.CommentsBackToSender)) Then
+                        rwRec.CommentsBackToSender = "Case was RWOA to " + sentTo + ": " + ucRLB.MedTechComments
+                        rwRec.rerouting = 1
+                    End If
+
+                ElseIf (ReturnFlag) Then                                        'Case was returned again
+                    rwRec.DateSentBack = DateTime.Now
+                    If (String.IsNullOrEmpty(rwRec.CommentsBackToSender)) Then
+                        rwRec.CommentsBackToSender = "Case was Returned to " + sentTo + ": " + ucRLB.MedTechComments
+                        rwRec.rerouting = 1
+                    End If
+                Else                                                            'Case was forwarded
+                    rwRec.CommentsBackToSender = "Case was Forwarded to " + sentTo + ": " + ucRLB.MedTechComments
+                    rwRec.rerouting = 1
+                End If
+
+            End If
+
+        End Sub
+
+        Public Sub ReturnRWOA(ByVal statusIn As Integer)
+
+            Dim rwoaDao As IRwoaDao = New NHibernateDaoFactory().GetRwoaDao
+
+            Dim rwRec = rwoaDao.GetRecentRWOA(SpecCase.Workflow, SpecCase.Id)
+
+            If (rwRec IsNot Nothing) Then
+                If (rwRec.DateSentBack Is Nothing AndAlso rwRec.WorkStatus = statusIn) Then
+                    rwRec.DateSentBack = DateTime.Now
+                    rwRec.CommentsBackToSender = ucRLB.MedTechComments
+                    rwRec.rerouting = 0
+                ElseIf (rwRec.DateSentBack Is Nothing AndAlso Not rwRec.WorkStatus = statusIn) Then
+                    rwRec.rerouting = 1
+                    rwRec.DateSentBack = DateTime.Now
+                End If
+            End If
+
+        End Sub
+
+        Public Sub ReturnTo(ByVal statusIn As Integer, ByVal statusOut As Integer)
+            Dim statusCodeIn As Integer = WorkstatusDao.GetById(statusIn).StatusCodeType.Id
+            Dim statusCodeOut As Integer = WorkstatusDao.GetById(statusOut).StatusCodeType.Id
+
+            Dim returnDao As IReturnDao = New NHibernateDaoFactory().GetReturnDao
+
+            Dim oldReturn = returnDao.GetRecentReturn(SpecCase.Workflow, SpecCase.Id)
+            If (oldReturn IsNot Nothing AndAlso oldReturn.DateSentBack Is Nothing) Then
+                ReturnBack(statusIn, statusOut, True)
+            End If
+
+            If GetStatusInfo(statusCodeOut).Item1 <> 0 Then
+                SpecCase.ReturnByGroup = SESSION_GROUP_ID
+                SpecCase.ReturnToGroup = GetStatusInfo(statusCodeOut).Item1
+            End If
+
+            Dim rwRec As New ALOD.Core.Domain.Modules.Lod.Return
+            rwRec.RefId = SpecCase.Id
+            rwRec.Workflow = SpecCase.Workflow
+            rwRec.WorkStatusTo = statusOut
+            rwRec.WorkStatusFrom = statusIn
+            rwRec.SentTo = GetStatusInfo(statusCodeOut).Item1
+            rwRec.DateSent = DateTime.Now
+            rwRec.Sender = SESSION_GROUP_ID
+            rwRec.ExplantionSendingBack = Server.HtmlEncode(CommentsTextBox.Text)
+            rwRec.CreatedDate = DateTime.Now
+            rwRec.CreatedBy = SESSION_USER_ID
+
+            If (boardStages.Contains(statusCodeIn) AndAlso boardStages.Contains(statusCodeOut)) Then
+                rwRec.BoardReturn = 1
+            Else
+                rwRec.BoardReturn = 0
+            End If
+
+            If (Not String.IsNullOrEmpty(rblReason.SelectedValue)) Then
+                rwRec.ReasonSentBack = rblReason.SelectedValue
+            End If
+
+            returnDao.Save(rwRec)
+
+        End Sub
+
+        Private Sub AddSignature(ByVal groupId As Integer)
+            Dim user As AppUser = UserService.CurrentUser()
+            SpecCase.AddSignature(DaoFactory, groupId, user.SignatureName, user.SignatureTitle, user)
+        End Sub
+
+        Private Sub ProcessDispositions(newStatus As Integer)
+            ' Only process the disposition when moving from the Board Medical Review step to either the
+            ' Initiate step or the Final Review step...
+            If (SpecCase.Status <> SpecCaseRSWorkStatus.MedicalReview) Then
+                Exit Sub
+            End If
+
+            If (newStatus <> SpecCasePSCDWorkStatus.MedTechInit AndAlso newStatus <> SpecCaseRSWorkStatus.FinalReview) Then
+                Exit Sub
+            End If
+
+            ' If the Board Med has not made a disposition then no processing is needed...
+            If (Not SpecCase.med_off_approved.HasValue) Then
+                Exit Sub
+            End If
+        End Sub
+
+#End Region
+
+    End Class
+
+End Namespace

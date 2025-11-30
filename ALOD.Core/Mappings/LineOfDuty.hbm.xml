@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Modules.Lod">
+
+	<class name="LineOfDuty" lazy="false" table="Form348" discriminator-value="1">
+		<id name="Id" column="LODID">
+			<generator class="identity" />
+		</id>
+    <discriminator column="workflow" type="integer" />
+
+		<property name="CaseId" column="case_id" update="false" />
+		<property name="Status" column="status" />
+		<property name="Workflow" column="workflow" update="false" insert="false" />
+		<property name="CreatedBy" column="CREATED_BY" update="false" />
+		<property name="CreatedDate" column="CREATED_DATE" update="false" />
+		<property name="ModifiedBy" column="MODIFIED_BY" />
+		<property name="ModifiedDate" column="MODIFIED_DATE" />
+		<property name="IsDeleted" column="DELETED" insert="false" />
+		<property name="IoCompletionDate" column="io_completion_date" />
+		<property name="AppointingAuthorityPoc" column="io_poc_info" />
+		<property name="InstructionsToInvestigator" column="io_instructions" />
+		<property name="IoSsn" column="io_ssn" />
+		<property name="MemberName" column="MEMBER_NAME" />
+		<property name="MemberSSN" column="MEMBER_SSN" />
+		<property name="MemberCompo" column="MEMBER_COMPO" />
+		<property name="MemberUnit" column="MEMBER_UNIT" />
+		<property name="MemberUnitId" column="MEMBER_UNIT_ID" />
+		<property name="MemberDob" column="MEMBER_DOB" />
+		<property name="Formal" column="formal_inv" insert="false" />
+		<property name="RwoaReason" column="rwoa_reason" insert="false" />
+		<property name="RwoaExplanation" column="rwoa_explantion"  insert="false" />
+		<property name="RwoaDate" column="rwoa_date" insert="false" />
+		<property name="MedTechComments" column="med_tech_comments" insert="false" />
+		<property name="DocumentGroupId" column="doc_group_id" />
+		<property name="AAUserId" column="appAuthUserId" insert="false" />
+		<property name="BoardForGeneral" column="Board_For_General_YN" insert="false" />
+		<property name="FinalDecision" column="FinalDecision" insert="false" />
+		<property name="FinalFindings" column="FinalFindings" insert="false" />
+		<property name="ToUnit" column="to_unit" />
+		<property name="FromUnit" column="from_unit" />
+		<property name="SarcCase" column="sarc" />
+    <property name="IsRestricted" column="restricted" />
+    <property  name="Completed_By_Unit" column="completed_by_unit" />
+    <property name="memberNotified" column="memberNotified" />
+    <property name="IsPostProcessingComplete" column="is_post_processing_complete" />
+    <property name="ReturnComment" column="return_comment" />
+    <property name="BoardTechComments" column="board_tech_comments" />
+    <property name="ReturnToGroup" column="return_to_group" />
+    <property name="ReturnByGroup" column="return_by_group" />
+    <property name="ParentId" column="parent_id" />
+    <property name="TimelyMemberNotify" column="tmn" />
+    <property name="TimelyMemberSubmit" column="tms" />
+    <property name="LODPM" column="LOD_PM" />
+    <!--<property name="FullReview" column="full_review" />-->
+     <many-to-one name="MemberRank" class="ALOD.Core.Domain.Lookup.UserRank" column="member_grade" update="true" insert="true" />
+    <many-to-one name="AppointedIO" class="ALOD.Core.Domain.Users.AppUser" column="io_uid" />
+
+    <!--<component name="UnitCommanderSignature" class="SignatureEntry">
+			<property name="DateSigned" column="sig_date_unit_commander" />
+			<property name="NameAndRank" column="sig_name_unit_commander" />
+      <property name="Title" column="sig_title_unit_commander" />
+		</component>
+		<component name="MedicalOfficerSignature" class="SignatureEntry">
+			<property name="DateSigned" column="sig_date_med_officer" />
+			<property name="NameAndRank" column="sig_name_med_officer" />
+      <property name="Title" column="sig_title_med_officer" />
+		</component>
+		<component name="JudgeAdvocateSignature" class="SignatureEntry">
+			<property name="DateSigned" column="sig_date_legal" />
+			<property name="NameAndRank" column="sig_name_legal" />
+      <property name="Title" column="sig_title_legal" />
+		</component>
+		<component name="AppointingAuthoritySignature" class="SignatureEntry">
+			<property name="DateSigned" column="sig_date_appointing" />
+			<property name="NameAndRank" column="sig_name_appointing" />
+      <property name="Title" column="sig_title_appointing" />
+		</component>
+		<component name="BoardMedicalSignature" class="SignatureEntry">
+			<property name="DateSigned" column="sig_date_board_medical" />
+			<property name="NameAndRank" column="sig_name_board_medical" />
+      <property name="Title" column="sig_title_board_medical" />
+		</component>
+		<component name="BoardLegalSignature" class="SignatureEntry">
+			<property name="DateSigned" column="sig_date_board_legal" />
+			<property name="NameAndRank" column="sig_name_board_legal" />
+      <property name="Title" column="sig_title_board_legal" />
+		</component>
+		<component name="BoardAdminSignature" class="SignatureEntry">
+			<property name="DateSigned" column="sig_date_board_admin" />
+			<property name="NameAndRank" column="sig_name_board_admin" />
+      <property name="Title" column="sig_title_board_admin" />
+		</component>
+		<component name="ApprovalAuthoritySignature" class="SignatureEntry">
+			<property name="DateSigned" column="sig_date_approval" />
+			<property name="NameAndRank" column="sig_name_approval" />
+			<property name="Title" column="sig_title_approval" />
+		</component>
+		<component name="FormalApprovalAuthoritySignature" class="SignatureEntry">
+			<property name="DateSigned" column="sig_date_formal_approval" />
+			<property name="NameAndRank" column="sig_name_formal_approval" />
+			<property name="Title" column="sig_title_formal_approval" />
+		</component>
+    <component name="MPFSignature" class="SignatureEntry">
+      <property name="DateSigned" column="sig_date_MPF" />
+      <property name="NameAndRank" column="sig_name_MPF" />
+      <property name="Title" column="sig_title_MPF" />
+    </component>
+    <component name="LODProgramManagerSignature" class="SignatureEntry">
+      <property name="DateSigned" column="sig_date_lodPM" />
+      <property name="NameAndRank" column="sig_name_lodPM" />
+      <property name="Title" column="sig_title_lodPM" />
+    </component>
+    <component name="BoardA1Signature" class="SignatureEntry">
+      <property name="DateSigned" column="sig_date_board_a1" />
+      <property name="NameAndRank" column="sig_name_board_a1" />
+      <property name="Title" column="sig_title_board_a1" />
+    </component>-->
+
+		<bag name="LodFindings" table="FORM348_findings"  cascade="all" inverse="true">
+			<key column="LODID"></key>
+			<one-to-many class="LineOfDutyFindings" />
+		</bag>
+
+		<many-to-one name="WorkflowStatus" class="ALOD.Core.Domain.Workflow.WorkStatus" column="Status" cascade="none" update="false" insert="false" />
+
+		<one-to-one name="LODMedical" class="LineOfDutyMedical" cascade="none" />
+		<one-to-one name="LODUnit" class="LineOfDutyUnit" cascade="none" />
+		<one-to-one name="LODInvestigation" class="LineOfDutyInvestigation" cascade="none" />
+
+    <!--<bag name="BoardComments" table="form348_Lessons"  cascade="all" inverse="true">
+      <key column="LodId"></key>
+      <one-to-many class="LODComment" />
+    </bag>-->
+        <bag name="BoardComments" table="Case_Comments"  cascade="all" inverse="true">
+            <key column="LodId"></key>
+            <one-to-many class="LODComment" />
+        </bag>
+
+    <property name="isAttachPas" column="isAttachPas" />
+    <property name="MemberAttachedUnitId" column="member_attached_unit_id" />
+
+    <property name="IsFormalCancelRecommended" column="isFormalCancelRecommended" />
+    <property name="AppointingCancelReasonId" column="appointing_cancel_reason_id" />
+    <property name="AppointingCancelExplanation" column="appointing_cancel_explanation" />
+    <property name="ApprovingCancelReasonId" column="approving_cancel_reason_id" />
+    <property name="ApprovingCancelExplanation" column="approving_cancel_explanation" />
+
+    <property name="HasCredibleService" column="hasCredibleService" />
+    <property name="WasMemberOnOrders" column="wasMemberOnOrders" />
+    <property name="ApprovingAuthorityUserId" column="approvingAuthorityUserId" />
+
+    <subclass name="LineOfDuty_v2" discriminator-value="27">
+      <property name="AppointingUnit" column="appointing_unit" />
+      <property name="DirectReply" column="rwoa_direct_reply" />
+      <property name="NILODsubFinding" column="wingcc_nilod_byreasonof" />
+
+      <!--<component name="FormalJudgeAdvocateSignature" class="SignatureEntry">
+        <property name="DateSigned" column="sig_date_formal_legal" />
+        <property name="NameAndRank" column="sig_name_formal_legal" />
+        <property name="Title" column="sig_title_formal_legal" />
+      </component>
+      <component name="FormalAppointingAuthoritySignature" class="SignatureEntry">
+        <property name="DateSigned" column="sig_date_formal_appointing" />
+        <property name="NameAndRank" column="sig_name_formal_appointing" />
+        <property name="Title" column="sig_title_formal_appointing" />
+      </component>
+      <component name="FormalBoardMedicalSignature" class="SignatureEntry">
+        <property name="DateSigned" column="sig_date_formal_board_medical" />
+        <property name="NameAndRank" column="sig_name_formal_board_medical" />
+        <property name="Title" column="sig_title_formal_board_medical" />
+      </component>
+      <component name="FormalBoardLegalSignature" class="SignatureEntry">
+        <property name="DateSigned" column="sig_date_formal_board_legal" />
+        <property name="NameAndRank" column="sig_name_formal_board_legal" />
+        <property name="Title" column="sig_title_formal_board_legal" />
+      </component>
+      <component name="FormalBoardAdminSignature" class="SignatureEntry">
+        <property name="DateSigned" column="sig_date_formal_board_admin" />
+        <property name="NameAndRank" column="sig_name_formal_board_admin" />
+        <property name="Title" column="sig_title_formal_board_admin" />
+      </component>
+      <component name="FormalBoardA1Signature" class="SignatureEntry">
+        <property name="DateSigned" column="sig_date_formal_board_a1" />
+        <property name="NameAndRank" column="sig_name_formal_board_a1" />
+        <property name="Title" column="sig_title_formal_board_a1" />
+      </component>-->
+    </subclass>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<TabNavigator>
+	<Configuration>
+		<StartPage>~/Secure/Welcome.aspx</StartPage>
+		<PrintButtonVisible>False</PrintButtonVisible>
+		<PrintButtonText>Print Form 348</PrintButtonText>
+		<PrintScript>PrintForm348();</PrintScript>
+	</Configuration>
+	<Steps>
+		<Step>
+			<Title>CM Member</Title>
+			<Page>SMData.aspx</Page>
+			<Enabled>True</Enabled>
+			<Visible>True</Visible>
+		</Step>
+		<!--<Step>
+			<Title>CI Med Tech</Title>
+			<Page>MedTech.aspx</Page>
+			<Enabled>False</Enabled>
+			<Visible>False</Visible>
+		</Step>-->
+		<Step>
+			<Title>CM HQ AFRC Tech</Title>
+			<Page>HQTech.aspx</Page>
+			<Enabled>True</Enabled>
+			<Visible>True</Visible>
+		</Step>
+		<Step>
+			<Title>CM Documents</Title>
+			<Page>Documents.aspx</Page>
+			<Enabled>True</Enabled>
+			<Visible>True</Visible>
+		</Step>
+		<Step>
+			<Title>CM Next Action</Title>
+			<Page>NextAction.aspx</Page>
+			<Enabled>True</Enabled>
+			<Visible>True</Visible>
+		</Step>
+    <Step>
+      <Title>Case Dialogue</Title>
+      <Page>CaseDialogue.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+        <Step>
+            <Title>CM Case Comments</Title>
+            <Page>UnitComments.aspx</Page>
+            <Enabled>True</Enabled>
+            <Visible>True</Visible>
+        </Step>
+		<Step>
+			<Title>CM Tracking</Title>
+			<Page>Tracking.aspx</Page>
+			<Enabled>True</Enabled>
+			<Visible>True</Visible>
+		</Step>
+	</Steps>
+</TabNavigator>

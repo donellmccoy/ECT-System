@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Common">
+
+	<class name="EmailTemplate" table="core_EmailTemplates">
+		<id name="Id" column="TemplateID">
+			<generator class="identity" />
+		</id>
+
+		<property name="Compo" column="compo" />
+		<property name="Title" column="Title" />
+		<property name="Subject" column="Subject" />
+		<property name="Body" column="Body" />
+		<property name="DataProc" column="DataProc" />
+		<property name="Active" column="Active" />
+		<property name="Date" column="Sys_date" />
+	</class>
+</hibernate-mapping>

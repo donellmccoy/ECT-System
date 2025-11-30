@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Users">
+
+	<class name="UserRole" table="core_userRoles">
+		<id name="Id" column="userRoleId">
+			<generator class="identity" />
+		</id>
+
+		<property name="Status" />
+		<property name="Active" />
+
+		<many-to-one name="Group" class="UserGroup" column="groupId" />
+		<many-to-one name="User" class="AppUser" column="userId" />
+	</class>
+
+  <sql-query name="UpdateUserRole">
+    exec dbo.core_role_sp_UpdateUserGroup :roleId,:groupId,:status,:userId
+  </sql-query>
+</hibernate-mapping>

@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Users">
+
+	<class name="Unit" table="command_struct">
+		<id name="Id" column="cs_id">
+			<generator class="identity" />
+		</id>
+
+		<property name="Name" column="long_name" />
+		<property name="Address1" column="Address1" />
+		<property name="Address2" column="Address2" />
+		<property name="BaseCode" column="base_code" />
+		<property name="City" column="City" />
+		<property name="CommandCode" column="Command_Code" />
+		<property name="CommandStructUTC" column="Command_Struct_UTC" />
+		<property name="Component" column="Component" />
+		<property name="Country" column="Country" />
+		<property name="CreatedDate" column="created_date" />
+    <property name="CommandStructLevel" column="cs_level" />
+		<property name="CommandStructOperationType" column="cs_oper_type" />
+		<property name="Email" column="e_mail" />
+		<!-- <property name="GeographicLocation" column="geo_loc" /> -->
+		<property name="MedicalService" column="Medical_Service" />
+		<property name="ModifiedDate" column="modified_date" />
+		<property name="MrdssDocDate" column="mrdss_doc_date" />
+		<property name="MrdssDocId" column="mrdss_doc_id" />
+		<property name="MrdssDocReview" column="mrdss_doc_review" />
+		<property name="MrdssKind" column="mrdss_kind" />
+		<property name="PasCode" column="pas_code" />
+	  <!--	<property name="PhysicalExam" column="phys_exam_yn" type="YesNo" /> -->
+		<property name="PostalCode" column="Postal_Code" />
+		<!-- <property name="Scheduling" column="Scheduling_YN" type="YesNo" /> -->
+		<property name="State" column="State" />
+		<property name="TimeZone" column="Time_Zone" />
+		<property name="Uic" column="Uic" />
+		<property name="UnitDet" column="Unit_Det" />
+		<property name="UnitKind" column="Unit_Kind" />
+		<property name="UnitNumber" column="Unit_Nbr" />
+		<property name="UnitType" column="Unit_Type" />
+    <property name="InActive" column="inActive" />
+    <property name="UserModified" column="UserModified" />
+	  <property name="IsCollocated" column="IsCollocated" />
+		<many-to-one name="GainingCommand" column="GAINING_COMMAND_CS_ID" class="Unit" />
+    <many-to-one name="ParentUnit" column="CS_ID_PARENT" class="Unit" />
+	</class>
+</hibernate-mapping>

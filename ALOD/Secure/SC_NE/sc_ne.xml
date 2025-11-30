@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabNavigator>
+  <Configuration>
+    <StartPage>~/Secure/Welcome.aspx</StartPage>
+    <PrintButtonVisible>False</PrintButtonVisible>
+    <PrintButtonText>Print Form 348</PrintButtonText>
+    <PrintScript>PrintNE();</PrintScript>
+  </Configuration>
+  <Steps>
+    <Step>
+      <Title>NE Member</Title>
+      <Page>SMData.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+    <Step>
+      <Title>NE Med Tech</Title>
+      <Page>MedTech.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+    <Step>
+      <Title>NE Board Med</Title>
+      <Page>MedOff.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+    <Step>
+      <Title>NE Senior Med</Title>
+      <Page>SeniorMedReviewer.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+    <Step>
+      <Title>NE HQ AFRC Tech</Title>
+      <Page>HQTech.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+    <Step>
+      <Title>NE Documents</Title>
+      <Page>documents.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+    <Step>
+      <Title>NE Next Action</Title>
+      <Page>NextAction.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+    <Step>
+      <Title>Case Dialogue</Title>
+      <Page>CaseDialogue.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+    <Step>
+      <Title>NE Case Comments</Title>
+      <Page>UnitComments.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+    <Step>
+      <Title>NE Tracking</Title>
+      <Page>Tracking.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+  </Steps>
+</TabNavigator>

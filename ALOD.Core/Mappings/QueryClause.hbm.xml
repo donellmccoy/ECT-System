@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Query">
+
+	<class name="QueryClause" table="rpt_user_query_clause">
+		<id name="Id" column="id">
+			<generator class="identity" />
+		</id>
+		<property name="WhereType" column="where_type" />
+
+		<many-to-one name="Query" class="UserQuery" column="query_id" />
+
+		<bag name="Parameters" table="rpt_user_query_param" inverse="true" cascade="all">
+			<key column="clause_id" on-delete="cascade"></key>
+			<one-to-many class="QueryParameter" />
+		</bag>
+	</class>
+</hibernate-mapping>

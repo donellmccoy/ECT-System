@@ -1,0 +1,16 @@
+﻿
+html, body {
+	margin: 0px;
+	padding: 0px;
+	height: 100%;
+	border: none;
+	overflow:auto;
+}
+
+body {
+	background-color: #d3d3d3;	
+}
+
+html {
+	overflow: auto;	/* Hide disabled vertical scrollbar */
+}

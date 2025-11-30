@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Workflow">
+
+	<class name="WorkStatusTracking" table="core_workstatus_tracking">
+		<id name="Id" column="wst_id">
+			<generator class="identity" />
+		</id>
+
+		<property name="ReferenceId" column="refId" />
+		<property name="ModuleId" column="module" />
+		<property name="StartDate" column="startDate" />
+		<property name="EndDate" column="endDate" />
+		<property name="CompletedBy" column="completedBy" />
+
+		<many-to-one name="WorkflowStatus" class="WorkStatus" column="ws_id" cascade="none" insert="false" />
+	</class>
+</hibernate-mapping>

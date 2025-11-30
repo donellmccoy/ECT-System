@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Users">
+
+<!--
+	<class name="CommandStruct" table="command_struct_chain">
+
+		<composite-id>
+			<key-property name="Id" column="cs_id" />
+			<key-property name="ReportView" column="view_type" />
+		</composite-id>
+
+		<many-to-one name="Parent" column="csc_id_parent" class="PasCode" />
+		<many-to-one name="Details" column="cs_id" class="Unit" />
+
+		<bag name="ChildUnits" table="command_struct_chain">
+			<key column="csc_id_parent" />
+			<one-to-many class="PasCode" />
+		</bag>
+	</class>
+-->
+</hibernate-mapping>

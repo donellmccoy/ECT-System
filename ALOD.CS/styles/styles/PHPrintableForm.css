@@ -1,0 +1,351 @@
+﻿html, body, form {
+    height: 98%;
+    /*background-color:#EEEEEE;*/
+}
+
+.pageOuter {
+    min-height: 100%;
+    width: 980px;
+    border-left: 1px solid #08003C;
+    border-right: 1px solid #08003C;
+    color: #000;
+    margin: -32px auto 0;
+    background: #FFFFFF;
+}
+
+.keyPanel {
+    display: inline-block;
+    float: right;
+    width: 48%;
+    height: 75px;
+    /*background-color:#8AA4F2;*/
+    padding: 3px 4px 3px 4px;
+}
+
+.keyPanelTable {
+    display: table;
+    width: 100%;
+}
+
+.keyPanelTableColumn {
+    display: table-cell;
+    text-align: right;
+}
+
+.keyPanelTextbox {
+    border: 0px solid black;
+}
+
+.phFormInfoPanel {
+    border: groove 3px #CCCCCC;
+    margin: 6px 1px 6px 1px;
+    padding: 3px 3px 10px 3px;
+}
+
+.phFormHeader {
+    display: inline-block;
+    float: left;
+    width: 49%;
+    height: 75px;
+    margin-right: 3px;
+    /*background-color:#8AA4F2;*/
+    padding: 3px 4px 3px 4px;
+}
+
+.phFormHeader-Left {
+    display: inline-block;
+    float: left;
+    width: 40%;
+}
+
+.phFormHeader-Right {
+    display: inline-block;
+    width: 60%;
+}
+
+.phFormHeaderLabel {
+    font-weight: bold;
+}
+
+.mainSectionBreak {
+    page-break-before: always;
+}
+
+.pageContent {
+    margin-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.acc {
+    /*background-color:#eeeeee;*/
+}
+
+.accHeader, .accHeaderSelected {
+    font-size: 11pt;
+    letter-spacing: 1pt;
+    color: #FFFFFF;
+    padding: 3px 0px 3px 6px;
+}
+
+.accHeader {
+    background-color: #27487d;
+    margin-bottom: 1px;
+    cursor: pointer;
+}
+
+.accHeaderSelected {
+    background-color: #5078B3;
+    /*background-color:#27487d;*/
+    border-left: #8AA4F2;
+    border-top: #8AA4F2;
+    border-right: #000000;
+    border-bottom: #000000;
+    border-width: 1px;
+    border-style: solid;
+}
+
+.accContent {
+    border: solid 1px #000000;
+    padding: 10px;
+    margin-bottom: 1px;
+}
+
+.sectionHeader {
+    margin-top: 1.0em;
+    margin-bottom: 0.1em;
+    margin-left: 0.1em;
+}
+
+.sectionPanelNoTitle {
+    width: auto;
+    border: groove 3px #ffffff;
+    margin-top: 1px;
+    margin-bottom: 1px;
+    padding: 2px 1px 2px 1px;
+    overflow: hidden;
+}
+
+.sectionPanel {
+    width: auto;
+    margin-top: 1px;
+    margin-bottom: 1px;
+    padding: 2px 1px 2px 1px;
+    overflow: hidden;
+    /* Note: border set with .sectionPanel > fieldset */
+}
+
+    .sectionPanel > fieldset {
+        border: groove 3px #ffffff;
+    }
+
+        .sectionPanel > fieldset > legend {
+            font-weight: bold;
+            margin-left: 10px;
+            padding-left: 2px;
+            padding-right: 2px;
+        }
+
+.fieldGroupPanel {
+    width: 50%;
+    display: inline-block;
+}
+
+.fieldGroupPanel-1 {
+    width: 100%;
+    display: inline-block;
+    border-top: solid 1px #FFFFFF;
+    border-right: solid 1px #FFFFFF;
+    border-left: solid 1px #FFFFFF;
+}
+
+.fieldGroupPanelLeft-2 {
+    width: 49%;
+    display: inline-block;
+    float: left;
+    border-top: solid 1px #FFFFFF;
+    border-right: solid 1px #FFFFFF;
+    border-left: solid 1px #FFFFFF;
+    margin-left: 4px;
+    margin-bottom: 1px;
+}
+
+.fieldGroupPanelRight-2 {
+    width: 48%;
+    display: inline-block;
+    float: right;
+    border-top: solid 1px #FFFFFF;
+    border-right: solid 1px #FFFFFF;
+    border-left: solid 1px #FFFFFF;
+    margin-right: 4px;
+    margin-bottom: 1px;
+}
+
+.fieldGroupPanelLeft-3 {
+    width: 32%;
+    display: inline-block;
+    float: left;
+    border-top: solid 1px #FFFFFF;
+    border-right: solid 1px #FFFFFF;
+    border-left: solid 1px #FFFFFF;
+    margin-left: 4px;
+    margin-right: 7px;
+    margin-bottom: 1px;
+}
+
+.fieldGroupPanelCenter-3 {
+    width: 32%;
+    display: inline-block;
+    float: left;
+    border-top: solid 1px #FFFFFF;
+    border-right: solid 1px #FFFFFF;
+    border-left: solid 1px #FFFFFF;
+    margin-right: 1px;
+    margin-bottom: 1px;
+}
+
+.fieldGroupPanelRight-3 {
+    width: 32%;
+    display: inline-block;
+    float: right;
+    border-top: solid 1px #FFFFFF;
+    border-right: solid 1px #FFFFFF;
+    border-left: solid 1px #FFFFFF;
+    margin-right: 5px;
+    margin-bottom: 1px;
+}
+
+.fieldPanel {
+    display: flex;
+    width: 98.5%;
+    align-items: center;
+    background-color: #EEEEEE;
+    border-bottom: solid 2px white;
+    padding: 3px 3px 3px 3px;
+    min-height: 21px;
+    overflow: hidden;
+}
+
+    .fieldPanel > input {
+        margin: 2px 4px 2px 4px
+    }
+
+    .fieldPanel > span {
+        margin: 2px 4px 2px 4px
+    }
+
+.fieldLabelPanel-1 {
+    width: 15%;
+    display: inline-block;
+    float: left;
+    margin-right: 3px;
+}
+
+.fieldComponentsPanel-1 {
+    width: 85%;
+    display: inline-block;
+    min-height: 21px;
+}
+
+.fieldLabelPanel-2 {
+    width: 28%;
+    display: inline-block;
+    float: left;
+    margin-right: 3px;
+}
+
+.fieldComponentsPanel-2 {
+    width: 70%;
+    display: inline-block;
+    min-height: 21px;
+}
+
+.fieldLabelPanel-3 {
+    width: 38%;
+    display: inline-block;
+    float: left;
+    margin-right: 3px;
+}
+
+.fieldComponentsPanel-3 {
+    width: 60%;
+    display: inline-block;
+    min-height: 21px;
+}
+
+.fieldComponentsPanel-NoLabel {
+    width: 100%;
+    display: inline-block;
+    min-height: 21px;
+}
+
+.fieldTypeMS {
+    background-color: #FFFFFF;
+}
+
+.fieldTypeFR {
+    background-color: #bdd6fc;
+}
+
+.fieldTypeFO {
+    background-color: #bebdfc;
+}
+
+.fieldLabel {
+    display: inline-block;
+    width: 100%;
+    min-width: 100%;
+    word-wrap: break-word;
+}
+
+.fieldNumbersTextbox {
+    display: inline-block;
+    width: 50px;
+    min-width: 50px;
+    border: 0px solid black;
+    margin-right: 2px;
+    margin-bottom: 2px;
+}
+
+.fieldSmallTextbox {
+    display: inline-block;
+    word-wrap: break-word;
+    width: 99%;
+}
+
+.fieldLargeTextbox {
+    display: inline-block;
+    word-wrap: break-word;
+    width: 99%;
+}
+
+.fieldGiantTextbox {
+    display: inline-block;
+    word-wrap: break-word;
+    width: 99%;
+}
+
+.fieldOptionsBox {
+    width: auto;
+}
+
+.fieldMultipleOptionsBox {
+    width: auto;
+}
+
+.fieldCSVTextbox {
+    display: inline-block;
+    width: 99%;
+    word-wrap: break-word;
+}
+
+.fieldValidationError {
+    border: 2px #FF0000 solid;
+}
+
+.fieldWordWrapLabel {
+    display: inline-block;
+    width: 100%;
+    min-width: 100%;
+    word-wrap: break-word;
+}

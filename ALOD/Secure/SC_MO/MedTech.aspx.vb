@@ -1,0 +1,399 @@
+﻿Imports System.Reflection
+Imports ALOD.Core.Domain.Common
+Imports ALOD.Core.Domain.Modules.Lod
+Imports ALOD.Core.Domain.Modules.SpecialCases
+Imports ALOD.Core.Domain.Users
+Imports ALOD.Core.Domain.Workflow
+Imports ALOD.Core.Interfaces.DAOInterfaces
+Imports ALOD.Core.Utils
+Imports ALOD.Data
+Imports ALOD.Logging
+Imports ALOD.Web.UserControls
+Imports ALODWebUtility.Common
+
+Namespace Web.Special_Case.MO
+
+    Partial Class Secure_sc_mo_MedTech
+        Inherits System.Web.UI.Page
+
+        Private _MedTechSig As SignatureMetaData
+        Private _sigDao As ISignatueMetaDateDao
+
+        Public ReadOnly Property Navigator() As TabNavigator
+            Get
+                Return MasterPage.Navigator
+            End Get
+        End Property
+
+        Public ReadOnly Property TabControl() As TabControls
+            Get
+                Return Master.TabControl
+            End Get
+        End Property
+
+        Public Property UserCanEdit() As Boolean
+            Get
+                If (ViewState("UserCanEdit") Is Nothing) Then
+                    ViewState("UserCanEdit") = False
+                End If
+                Return CBool(ViewState("UserCanEdit"))
+            End Get
+            Set(value As Boolean)
+                ViewState("UserCanEdit") = value
+            End Set
+        End Property
+
+        Protected ReadOnly Property CalendarImage() As String
+            Get
+                Return Me.ResolveClientUrl("~/App_Themes/" + Page.Theme + "/Images/Calendar.gif")
+            End Get
+        End Property
+
+        Protected ReadOnly Property MasterPage() As SC_MOMaster
+            Get
+                Dim master As SC_MOMaster = CType(Page.Master, SC_MOMaster)
+                Return master
+            End Get
+        End Property
+
+        Protected ReadOnly Property SectionList() As Dictionary(Of String, ALOD.Core.Domain.Workflow.PageAccessType)
+            Get
+                If (_scAccess Is Nothing) Then
+                    _scAccess = SpecCase.ReadSectionList(CInt(Session("GroupId")))
+                End If
+                Return _scAccess
+            End Get
+        End Property
+
+        Private ReadOnly Property MedTechSig() As SignatureMetaData
+            Get
+                If (_MedTechSig Is Nothing) Then
+                    _MedTechSig = SigDao.GetByWorkStatus(SpecCase.Id, SpecCase.Workflow, SpecCaseWWDWorkStatus.InitiateCase)
+                End If
+
+                Return _MedTechSig
+            End Get
+        End Property
+
+        Private ReadOnly Property RefId() As Integer
+            Get
+                Return CInt(Request.QueryString("refId"))
+            End Get
+        End Property
+
+        Private ReadOnly Property SigDao() As SignatureMetaDataDao
+            Get
+                If (_sigDao Is Nothing) Then
+                    _sigDao = New NHibernateDaoFactory().GetSigMetaDataDao()
+                End If
+
+                Return _sigDao
+            End Get
+        End Property
+
+#Region "LODProperty"
+
+        Private _scAccess As Dictionary(Of String, ALOD.Core.Domain.Workflow.PageAccessType)
+        Dim dao As ISpecialCaseDAO
+
+        Private sc As SC_MO = Nothing
+        Private scId As Integer = 0
+
+        ReadOnly Property SCDao() As ISpecialCaseDAO
+            Get
+                If (dao Is Nothing) Then
+                    dao = New NHibernateDaoFactory().GetSpecialCaseDAO()
+                End If
+
+                Return dao
+            End Get
+        End Property
+
+        Public ReadOnly Property ReferenceId() As Integer
+            Get
+                Return Integer.Parse(Request.QueryString("refId"))
+            End Get
+        End Property
+
+        Protected ReadOnly Property SpecCase() As SC_MO
+            Get
+                If (sc Is Nothing) Then
+                    sc = SCDao.GetById(ReferenceId)
+                End If
+
+                Return sc
+            End Get
+        End Property
+
+#End Region
+
+        Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
+            ucICDCodeControl.Initialilze(Me)
+            ucICD7thCharacterControl.Initialize(ucICDCodeControl)
+
+            If (Not IsPostBack) Then
+                UserCanEdit = GetAccess(Navigator.PageAccess, True)
+                InitControls()
+                SetMaxLength(DiagnosisTextBox)
+                SetMaxLength(txtJustification)
+
+                'Validation
+                If (UserCanEdit) Then
+                    sc.Validate()
+                    If (sc.Validations.Count > 0) Then
+                        ShowPageValidationErrors(sc.Validations, Me)
+                    End If
+                End If
+
+                LogManager.LogAction(ModuleType.SpecCaseMO, UserAction.ViewPage, RefId, "Viewed Page: Modifications Medical Technician")
+
+            End If
+
+        End Sub
+
+        ' Returns the abbreviated form a special case name. The names are meant to come from the ModuleType enum in App_Code/Core/Common/Enums.vb
+        Private Function GetSpecCaseAbbreviation(ByVal name As String) As String
+            If (String.IsNullOrEmpty(name) Or Not name.Contains("SpecCase")) Then
+                Return String.Empty
+            End If
+
+            Dim abbreviation As String = name
+            Dim subStr As String = "SpecCase"
+
+            'Parse out the part of the name that exists after 'SpecCase'
+            abbreviation = name.Substring(subStr.Length).ToUpper()
+
+            Return abbreviation
+        End Function
+
+        Private Sub InitControls()
+
+            SetInputFormatRestriction(Page, DiagnosisTextBox, FormatRestriction.AlphaNumeric, PERMITTED_SPECIAL_CHAR_INPUT)
+            SetInputFormatRestriction(Page, txtJustification, FormatRestriction.AlphaNumeric, PERMITTED_SPECIAL_CHAR_INPUT)
+            SetInputFormatRestriction(Page, HYTDTextBox, FormatRestriction.Numeric, "/")
+
+            Dim uDao As UserDao = New NHibernateDaoFactory().GetUserDao()
+            Dim currUser As AppUser = uDao.GetById(SESSION_USER_ID)
+
+            'Load Findings
+
+            If Not IsNothing(SpecCase.ICD9Code) Then
+                ucICDCodeControl.InitializeHierarchy(SpecCase.ICD9Code)
+
+                If (ucICDCodeControl.IsValidICDCode(SpecCase.ICD9Code)) Then
+                    ucICDCodeControl.UpdateICDCodeDiagnosisLabel(SpecCase.ICD9Code, UserCanEdit)
+                    DiagnosisTextBox.Text = Server.HtmlDecode(SpecCase.ICD9Diagnosis)
+                End If
+
+                If (Not String.IsNullOrEmpty(SpecCase.ICD7thCharacter)) Then
+                    ucICD7thCharacterControl.InitializeCharacters(SpecCase.ICD9Code, SpecCase.ICD7thCharacter)
+                    ucICD7thCharacterControl.Update7thCharacterLabel(SpecCase.ICD9Code, SpecCase.ICD7thCharacter)
+                Else
+                    ucICD7thCharacterControl.InitializeCharacters(SpecCase.ICD9Code, String.Empty)
+                End If
+            Else
+                ucICD7thCharacterControl.InitializeCharacters(0, String.Empty)
+            End If
+
+            'Populate Case Type drop down
+            For Each currField As FieldInfo In GetType(ModuleType).GetFields
+                Dim myListItem As New ListItem
+                Dim modTypeTemp As ModuleType
+                Dim blnInsert As Boolean = True
+                Dim currValue As Integer
+                Dim abbreviation As String
+                currValue = CType(currField.GetValue(modTypeTemp), Byte)
+                abbreviation = GetSpecCaseAbbreviation(currField.Name)
+
+                ' Ignore inactive case types
+                If abbreviation.Equals("MMSO") Then
+                    Continue For
+                End If
+
+                'If the current field is a special case
+                If (currValue > 5 And Not String.IsNullOrEmpty(abbreviation)) Then
+                    myListItem.Value = currValue
+                    myListItem.Text = abbreviation 'CurrField.Name
+                    For Each currItem In ddlCaseType.Items()  'Keep from loading duplicate values on page reload
+                        If currItem.ToString() = myListItem.Text.ToString() Then
+                            blnInsert = False
+                        End If
+                    Next
+                    If blnInsert Then
+                        ddlCaseType.Items.Add(myListItem)
+                    End If
+                End If
+            Next
+
+            If Not String.IsNullOrEmpty(SpecCase.PocEmail) Then
+                txtPOCEmailLabel.Text = SpecCase.PocEmail
+            End If
+            If Not String.IsNullOrEmpty(SpecCase.PocPhoneDSN) Then
+                txtPOCPhoneLabel.Text = SpecCase.PocPhoneDSN
+            End If
+            If Not String.IsNullOrEmpty(SpecCase.PocRankAndName) Then
+                txtPOCNameLabel.Text = SpecCase.PocRankAndName
+            End If
+
+            If SpecCase.CaseType.HasValue Then
+                ddlCaseType.SelectedValue = SpecCase.CaseType
+            End If
+
+            ' Get justification
+            If Not IsNothing(SpecCase.Justification) Then
+                txtJustification.Text = Server.HtmlDecode(SpecCase.Justification.ToString())
+            End If
+
+            ' Get high tenure date
+            If SpecCase.HighTenureDate.HasValue Then
+                HYTDTextBox.Text = Server.HtmlDecode(SpecCase.HighTenureDate.Value.ToString(DATE_FORMAT))
+            End If
+
+            If UserCanEdit Then
+                'Read/Write
+
+                ucICDCodeControl.DisplayReadWrite(False)
+                ucICD7thCharacterControl.DisplayReadWrite()
+                DiagnosisTextBox.Enabled = True
+                DiagnosisTextBox.ReadOnly = False
+                txtJustification.Enabled = True
+                txtJustification.ReadOnly = False
+                HYTDTextBox.CssClass = "datePickerFuture"
+                HYTDTextBox.Enabled = True
+
+                If SpecCase.HasAdminLOD = 1 Then
+                    ddlCaseType.Enabled = False
+                Else
+                    ddlCaseType.Enabled = True
+                End If
+            Else
+                'Read Only
+                txtPOCEmailLabel.Enabled = False
+                txtPOCPhoneLabel.Enabled = False
+                txtPOCNameLabel.Enabled = False
+                ucICDCodeControl.DisplayReadOnly(True)
+                ucICD7thCharacterControl.DisplayReadOnly()
+                DiagnosisTextBox.Enabled = True
+                DiagnosisTextBox.ReadOnly = True
+                txtJustification.Enabled = True
+                txtJustification.ReadOnly = True
+                ddlCaseType.Enabled = False
+                HYTDTextBox.Enabled = False
+
+            End If
+
+        End Sub
+
+        Private Sub SaveFindings()
+
+            If (Not UserCanEdit) Then
+                Exit Sub
+            End If
+
+            Dim PageAccess As ALOD.Core.Domain.Workflow.PageAccessType
+            PageAccess = SectionList(MOSectionNames.MO_HQT_REV.ToString())  ' Originally BOARD_SG_REV
+
+            If (ucICDCodeControl.IsICDCodeSelected()) Then
+                SpecCase.ICD9Code = ucICDCodeControl.SelectedICDCodeID
+                SpecCase.ICD9Description = ucICDCodeControl.SelectedICDCodeText
+            Else
+                'SpecCase.ICD9Code = Nothing
+                'SpecCase.ICD9Description = Nothing
+            End If
+            SpecCase.ICD9Diagnosis = Server.HtmlEncode(DiagnosisTextBox.Text.Trim())
+
+            If (ucICD7thCharacterControl.Is7thCharacterSelected()) Then
+                SpecCase.ICD7thCharacter = ucICD7thCharacterControl.Selected7thCharacter
+            Else
+                SpecCase.ICD7thCharacter = Nothing
+            End If
+
+            If (Not IsNothing(SpecCase.ICD9Code)) Then
+                ucICDCodeControl.UpdateICDCodeDiagnosisLabel(SpecCase.ICD9Code, True)
+            End If
+
+            ' Save case type
+            SpecCase.CaseType = ddlCaseType.SelectedValue
+
+            ' Save justification
+            SpecCase.Justification = Server.HtmlEncode(txtJustification.Text)
+
+            ' Save high tenure date
+            If Not String.IsNullOrEmpty(HYTDTextBox.Text) Then
+                SpecCase.HighTenureDate = Server.HtmlEncode(HYTDTextBox.Text)
+            End If
+
+            If Not String.IsNullOrEmpty(txtPOCNameLabel.Text) Then
+                SpecCase.PocRankAndName = Server.HtmlEncode(txtPOCNameLabel.Text)
+            End If
+
+            If Not String.IsNullOrEmpty(txtPOCPhoneLabel.Text) Then
+                SpecCase.PocPhoneDSN = Server.HtmlEncode(txtPOCPhoneLabel.Text)
+            End If
+
+            If Not String.IsNullOrEmpty(txtPOCEmailLabel.Text) Then
+                SpecCase.PocEmail = Server.HtmlEncode(txtPOCEmailLabel.Text)
+            End If
+            If Not String.IsNullOrEmpty(txtPOCEmailLabel.Text) Then
+                SpecCase.PocEmail = Server.HtmlEncode(txtPOCEmailLabel.Text)
+            End If
+            SCDao.SaveOrUpdate(SpecCase)
+            SCDao.CommitChanges()
+
+        End Sub
+
+#Region "TabEvent"
+
+        Public Function ValidBoxLength() As Boolean
+            Dim IsValid As Boolean = True
+            If Not CheckTextLength(DiagnosisTextBox) Then
+                IsValid = False
+            End If
+
+            Return IsValid
+        End Function
+
+        Protected Sub Page_Init(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Init
+            AddHandler Me.Master.TabClick, AddressOf TabButtonClicked
+        End Sub
+
+        Protected Sub Save_Click(ByRef sender As Object, ByRef e As TabNavigationEventArgs)
+
+            If (Navigator.CurrentStep.IsReadOnly) Then
+                Exit Sub
+            End If
+
+            If (e.ButtonType = NavigatorButtonType.Save OrElse e.ButtonType = NavigatorButtonType.NavigatedAway _
+                OrElse e.ButtonType = NavigatorButtonType.NextStep OrElse e.ButtonType = NavigatorButtonType.PreviousStep) Then
+                SaveFindings()
+            End If
+
+            If Not (ValidBoxLength()) Then
+                e.Cancel = True
+                Exit Sub
+            End If
+
+        End Sub
+
+        Private Sub TabButtonClicked(ByRef sender As Object, ByRef e As TabNavigationEventArgs)
+
+            If (e.ButtonType = NavigatorButtonType.Save OrElse
+                e.ButtonType = NavigatorButtonType.NavigatedAway OrElse
+                e.ButtonType = NavigatorButtonType.NextStep OrElse
+                e.ButtonType = NavigatorButtonType.PreviousStep) Then
+                SaveFindings()
+            End If
+
+            If Not (ValidBoxLength()) Then
+                e.Cancel = True
+                Exit Sub
+            End If
+
+        End Sub
+
+#End Region
+
+    End Class
+
+End Namespace

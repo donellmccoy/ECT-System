@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Modules.SARC">
+
+  <class name="RestrictedSARCOtherICDCode" table="Form348_SARC_ICD">
+    <id name="Id" column="Id">
+      <generator class="identity" />
+    </id>
+    <property name="SARCId" column="SARCId" />
+    <many-to-one name="ICDCode" class="ALOD.Core.Domain.Common.ICD9Code" column="ICDCodeId" />
+    <property name="ICD7thCharacter" column="ICD7thChar" />
+  </class>
+</hibernate-mapping>

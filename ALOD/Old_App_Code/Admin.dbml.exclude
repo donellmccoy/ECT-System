@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database Name="LOD" Class="AdminDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=S31RCTFS-01\RC2K8;Initial Catalog=LOD;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="LOD" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.core_UserGroups" Member="core_UserGroups">
+    <Type Name="core_UserGroup">
+      <Column Name="groupId" Type="System.Byte" DbType="TinyInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="abbr" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="compo" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="accessScope" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="partialMatch" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="showInfo" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="sortOrder" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="hipaaRequired" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="canRegister" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.core_lkupChainType" Member="core_lkupChainTypes">
+    <Type Name="core_lkupChainType">
+      <Column Name="id" Type="System.Byte" DbType="TinyInt NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" CanBeNull="false" />
+      <Column Name="active" Type="System.Boolean" DbType="bit" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.core_lkupOperationType" Member="core_lkupOperationTypes">
+    <Type Name="core_lkupOperationType">
+      <Column Name="OperationTypeId" Type="System.String" DbType="NVarChar(2) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="core_lkupOperationType_COMMAND_STRUCT" Member="COMMAND_STRUCTs" ThisKey="OperationTypeId" OtherKey="CS_OPER_TYPE" Type="COMMAND_STRUCT" />
+    </Type>
+  </Table>
+  <Table Name="dbo.core_lkupUnitLevelType" Member="core_lkupUnitLevelTypes">
+    <Type Name="core_lkupUnitLevelType">
+      <Column Name="LevelID" Type="System.String" DbType="NVarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="core_lkupUnitLevelType_COMMAND_STRUCT" Member="COMMAND_STRUCTs" ThisKey="LevelID" OtherKey="CS_LEVEL" Type="COMMAND_STRUCT" />
+    </Type>
+  </Table>
+  <Table Name="dbo.vw_lkupCompos" Member="vw_lkupCompos">
+    <Type Name="vw_lkupCompo">
+      <Column Name="compo" Type="System.String" DbType="VarChar(3)" CanBeNull="true" />
+      <Column Name="Compo_Descr" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Compo_Abbr" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.vw_lkupStates" Member="vw_lkupStates">
+    <Type Name="vw_lkupState">
+      <Column Name="state" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="state_descr" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="region_num" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.COMMAND_STRUCT" Member="COMMAND_STRUCTs">
+    <Type Name="COMMAND_STRUCT">
+      <Column Name="ADDRESS1" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ADDRESS2" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="BASE_CODE" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" />
+      <Column Name="CITY" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="COMMAND_CODE" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" />
+      <Column Name="COMMAND_STRUCT_UTC" Type="System.String" DbType="NVarChar(5)" CanBeNull="true" />
+      <Column Name="COMPONENT" Type="System.String" DbType="NVarChar(4)" CanBeNull="true" />
+      <Column Name="COUNTRY" Type="System.String" DbType="NVarChar(40)" CanBeNull="true" />
+      <Column Name="CREATED_BY" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="CREATED_DATE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CS_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CS_ID_PARENT" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CS_LEVEL" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="CS_OPER_TYPE" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" />
+      <Column Name="E_MAIL" Type="System.String" DbType="NVarChar(40)" CanBeNull="true" />
+      <Column Name="GAINING_COMMAND_CS_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="GEO_LOC" Type="System.String" DbType="NVarChar(4)" CanBeNull="true" />
+      <Column Name="LONG_NAME" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="MEDICAL_SERVICE" Type="System.String" DbType="NVarChar(4)" CanBeNull="true" />
+      <Column Name="MODIFIED_BY" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="MODIFIED_DATE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="MRDSS_DOC_DATE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="MRDSS_DOC_ID" Type="System.String" DbType="NVarChar(4)" CanBeNull="true" />
+      <Column Name="MRDSS_DOC_REVIEW" Type="System.String" DbType="NVarChar(24)" CanBeNull="true" />
+      <Column Name="MRDSS_KIND" Type="System.String" DbType="NVarChar(4)" CanBeNull="true" />
+      <Column Name="PAS_CODE" Type="System.String" DbType="NVarChar(4)" CanBeNull="true" />
+      <Column Name="PHYS_EXAM_YN" Type="System.Char" DbType="NVarChar(1)" CanBeNull="true" />
+      <Column Name="POSTAL_CODE" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="SCHEDULING_YN" Type="System.Char" DbType="NVarChar(1)" CanBeNull="true" />
+      <Column Name="STATE" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" />
+      <Column Name="TIME_ZONE" Type="System.String" DbType="NVarChar(3)" CanBeNull="true" />
+      <Column Name="UIC" Type="System.String" DbType="NVarChar(6)" CanBeNull="true" />
+      <Column Name="UNIT_DET" Type="System.String" DbType="NVarChar(4)" CanBeNull="true" />
+      <Column Name="UNIT_KIND" Type="System.String" DbType="NVarChar(5)" CanBeNull="true" />
+      <Column Name="UNIT_NBR" Type="System.String" DbType="NVarChar(4)" CanBeNull="true" />
+      <Column Name="UNIT_TYPE" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" />
+      <Association Name="core_lkupOperationType_COMMAND_STRUCT" Member="core_lkupOperationType" ThisKey="CS_OPER_TYPE" OtherKey="OperationTypeId" Type="core_lkupOperationType" IsForeignKey="true" />
+      <Association Name="core_lkupUnitLevelType_COMMAND_STRUCT" Member="core_lkupUnitLevelType" ThisKey="CS_LEVEL" OtherKey="LevelID" Type="core_lkupUnitLevelType" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.core_lkupTimeZone" Member="core_lkupTimeZones">
+    <Type Name="core_lkupTimeZone">
+      <Column Name="ZoneId" Type="System.String" DbType="NVarChar(3) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Function Name="dbo.core_pascode_sp_Load" Method="core_pascode_sp_Load">
+    <Parameter Name="cs_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="core_pascode_sp_LoadResult">
+      <Column Name="CS_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LONG_NAME" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="UNIT_NBR" Type="System.String" DbType="NVarChar(4)" CanBeNull="true" />
+      <Column Name="UNIT_KIND" Type="System.String" DbType="NVarChar(5)" CanBeNull="true" />
+      <Column Name="UNIT_TYPE" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" />
+      <Column Name="UNIT_DET" Type="System.String" DbType="NVarChar(4)" CanBeNull="true" />
+      <Column Name="UIC" Type="System.String" DbType="NVarChar(6)" CanBeNull="true" />
+      <Column Name="CS_LEVEL" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="CS_ID_PARENT" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="GAINING_COMMAND_CS_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PAS_CODE" Type="System.String" DbType="NVarChar(4)" CanBeNull="true" />
+      <Column Name="BASE_CODE" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" />
+      <Column Name="CS_OPER_TYPE" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" />
+      <Column Name="TIME_ZONE" Type="System.String" DbType="NVarChar(3)" CanBeNull="true" />
+      <Column Name="COMPONENT" Type="System.String" DbType="NVarChar(4)" CanBeNull="true" />
+      <Column Name="GEO_LOC" Type="System.String" DbType="NVarChar(4)" CanBeNull="true" />
+      <Column Name="PHYS_EXAM_YN" Type="System.Char" DbType="NVarChar(1)" CanBeNull="true" />
+      <Column Name="SCHEDULING_YN" Type="System.Char" DbType="NVarChar(1)" CanBeNull="true" />
+      <Column Name="ADDRESS1" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ADDRESS2" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="CITY" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="COUNTRY" Type="System.String" DbType="NVarChar(40)" CanBeNull="true" />
+      <Column Name="STATE" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" />
+      <Column Name="POSTAL_CODE" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="E_MAIL" Type="System.String" DbType="NVarChar(40)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.core_pascode_sp_search" Method="core_pascode_sp_search">
+    <Parameter Name="pascode" Type="System.String" DbType="NVarChar(4)" />
+    <Parameter Name="longName" Type="System.String" DbType="NVarChar(100)" />
+    <ElementType Name="core_pascode_sp_searchResult">
+      <Column Name="CS_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LONG_NAME" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="PAS_CODE" Type="System.String" DbType="NVarChar(4)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.report_sp_LODActivity" Method="report_sp_LODActivity">
+    <Parameter Name="pascode" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="viewType" Type="System.Int32" DbType="Int" />
+    <ElementType Name="report_sp_LODActivityResult">
+      <Column Name="case_id" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(105) NOT NULL" CanBeNull="false" />
+      <Column Name="[Member Unit]" Member="Member_Unit" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Pascode" Type="System.String" DbType="Char(4) NOT NULL" CanBeNull="false" />
+      <Column Name="Status" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.core_pascode_sp_GetParentInfo" Method="core_pascode_sp_GetParentInfo">
+    <Parameter Name="parentUnit" Type="System.Int32" DbType="Int" />
+    <ElementType Name="core_pascode_sp_GetParentInfoResult">
+      <Column Name="CS_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="LONG_NAME" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="PAS_CODE" Type="System.String" DbType="VarChar(4)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.core_pascodes_GetChildUnits_Admin" Method="core_pascodes_GetChildUnits_Admin">
+    <Parameter Name="parentCS" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ChainType" Parameter="chainType" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="userUnit" Type="System.Int32" DbType="Int" />
+    <Parameter Name="adminUserID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="core_pascodes_GetChildUnits_AdminResult">
+      <Column Name="cs_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="childName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="childPasCode" Type="System.String" DbType="VarChar(4)" CanBeNull="true" />
+      <Column Name="parentCS_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CHAIN_TYPE" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="[Level]" Member="Level" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="userUnit" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.core_pascode_sp_GetReporting" Method="core_pascode_sp_GetReporting">
+    <Parameter Name="CS_ID" Parameter="cS_ID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="core_pascode_sp_GetReportingResult">
+      <Column Name="cs_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Chain_Type" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="parent_cs_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="parent_long_name" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Chain_Description" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+</Database>

@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain">
+
+  <sql-query name="GetUnitId">
+    exec dbo.cmdStruct_sp_GetUnitId :unitName, :pasCode, :filter
+  </sql-query>
+
+	<sql-query name="GetChainType">
+		exec dbo.core_lookUps_sp_GetPasCodeChainType
+	</sql-query>
+
+  <sql-query name="GetPEPPCaseTypes">
+    exec core_lookUps_sp_GetPEPPCaseTypes
+  </sql-query>
+
+  <sql-query name="GetRMUNames">
+    exec dbo.core_LookUps_sp_RMUNames
+  </sql-query>
+
+  <sql-query name="GetDutyStatuses">
+    exec dbo.core_LookUps_sp_DutyStatuses
+  </sql-query>
+
+  <sql-query name="GetInfoSource">
+    exec dbo.core_LookUps_sp_InfoSources
+  </sql-query>
+
+  <sql-query name="GetOccurrences">
+    exec dbo.core_LookUps_sp_Occurrences
+  </sql-query>
+
+  <sql-query name="GetCauses">
+    exec dbo.core_lookUps_sp_ProximateCause
+  </sql-query>
+
+  <sql-query name="GetFindings">
+    exec dbo.core_lookUps_sp_v1_Findings
+  </sql-query>
+
+  <sql-query name="GetComponents">
+    exec dbo.core_lookUps_sp_Component
+  </sql-query>
+
+  <sql-query name="GetCategory">
+    exec dbo.core_lookUps_sp_MemberCategory
+  </sql-query>
+
+  <sql-query name="GetStatus">
+    exec dbo.core_lookUps_sp_MemberStatus
+  </sql-query>
+
+  <sql-query name="GetFromLocation">
+    exec dbo.core_lookUps_sp_FromLocation
+  </sql-query>
+
+  <sql-query name="GetMedicalFacility">
+    exec dbo.core_lookUps_sp_MedicalFacility
+  </sql-query>
+
+  <sql-query name="GetMemberInfluence">
+    exec dbo.core_lookUps_sp_MemberInfluence
+  </sql-query>
+
+  <sql-query name="GetMedGroupNames">
+    exec dbo.core_LookUps_sp_MedGroupNames
+  </sql-query>
+
+	<sql-query name="GetCmdStrucByUnit">
+		exec dbo.cmdStructChain_sp_GetChaninByUnit :csId, :rptView
+	</sql-query>
+
+  <sql-query name="GetLODsByMemberSSN">
+    exec dbo.core_lod_sp_GetLODListByMemberSSN :memberSSN, :searchType, :userId
+  </sql-query>
+
+  <sql-query name="GetWWDsByMemberSSN">
+    exec dbo.core_lod_sp_GetWWDListByMemberSSN :memberSSN, :searchType, :userId
+  </sql-query>
+
+  <sql-query name="GetWorkflowFindings">
+    exec dbo.core_workflow_sp_GetFindings :workflowId, :groupId
+  </sql-query>
+</hibernate-mapping>

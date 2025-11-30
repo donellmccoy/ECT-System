@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Workflow">
+
+	<class name="PageAccess" table="core_pageAccess">
+		<id name="Id" column="mapId">
+			<generator class="identity" />
+		</id>
+
+		<property name="WorkflowId" column="workflowId" />
+		<property name="WorkStatusId" column="statusId" />
+		<property name="GroupId" column="groupId" />
+		<property name="PageId" column="pageId" />
+		<property name="Access" column="access" />
+
+		<property name="PageTitle" column="PageTitle" />
+	</class>
+
+	<sql-query name="UpdatePageAccess">
+		exec dbo.core_workflow_sp_UpdatePageAccess :compo, :workflow, :status, :xml
+	</sql-query>
+
+	<sql-query name="GetByWorkflowStatusAndGroup" read-only="true">
+		exec dbo.core_workflow_sp_GetPageAccessByGroup :workflow, :status, :group
+	</sql-query>
+
+	<sql-query name="GetByWorkflowAndStatus" read-only="true">
+		exec dbo.core_workflow_sp_GetPageAccessByWorkflowView :compo, :workflow, :status
+	</sql-query>
+</hibernate-mapping>

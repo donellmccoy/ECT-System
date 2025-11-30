@@ -1,0 +1,367 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 21.375, 19.125" name="AFLOD">
+  <DataContextMoniker Name="/AFLODDataContext" />
+  <nestedChildShapes>
+    <classShape Id="9d938dd3-5643-4eb8-beb5-bc498f2be1f1" absoluteBounds="0.5, 5.5, 2, 1.75354248046875">
+      <DataClassMoniker Name="/AFLODDataContext/core_lkupRule" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f00ac30c-427c-4438-a058-389647a0c17a" absoluteBounds="0.515, 5.96, 1.9700000000000002, 1.19354248046875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="cbad3526-a763-4d5c-bc8f-148cedce74a2" absoluteBounds="2.875, 0.5, 2, 1.0961531575520833">
+      <DataClassMoniker Name="/AFLODDataContext/core_lkupRuleTypes" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1163eefd-1de2-484c-8c93-09b1fbcffb06" absoluteBounds="2.89, 0.96, 1.9700000000000002, 0.53615315755208326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.875 : 1.04807657877604); (2.5625 : 1.04807657877604); (2.5625 : 5.40625); (2.14583333333333 : 5.40625 : JumpStart); (1.97916666666667 : 5.40625 : JumpEnd); (1.5 : 5.40625); (1.5 : 5.5)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AFLODDataContext/core_lkupRuleTypes/core_lkupRuleTypes_core_lkupRule" />
+      <nodes>
+        <classShapeMoniker Id="cbad3526-a763-4d5c-bc8f-148cedce74a2" />
+        <classShapeMoniker Id="9d938dd3-5643-4eb8-beb5-bc498f2be1f1" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="e2467b58-242d-4051-b421-00bcaef5e468" absoluteBounds="3.875, 4.25, 2, 1.4248478190104168">
+      <DataClassMoniker Name="/AFLODDataContext/core_WorkStatus" />
+      <nestedChildShapes>
+        <elementListCompartment Id="63faffd5-8b11-4ba5-ae92-bde146922ea9" absoluteBounds="3.89, 4.71, 1.9700000000000002, 0.86484781901041674" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b5924f85-f5c8-4e9f-8a1d-469890bf2d70" absoluteBounds="0.5, 0.5, 2, 2.4109318033854166">
+      <DataClassMoniker Name="/AFLODDataContext/core_StatusCode" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3968d3de-19a9-4b92-a2fd-5e003b993f46" absoluteBounds="0.515, 0.96, 1.9700000000000002, 1.8509318033854165" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(1.5 : 2.91093180338542); (1.5 : 3.1875); (2.59375 : 3.1875); (2.59375 : 4.8281255); (2.80728941666667 : 4.8281255 : JumpStart); (2.97395608333333 : 4.8281255 : JumpEnd); (3.13541716666667 : 4.8281255 : JumpStart); (3.30208383333333 : 4.8281255 : JumpEnd); (3.43229191666667 : 4.8281255 : JumpStart); (3.59895858333333 : 4.8281255 : JumpEnd); (3.875 : 4.8281255)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AFLODDataContext/core_StatusCode/core_StatusCode_core_WorkStatus" />
+      <nodes>
+        <classShapeMoniker Id="b5924f85-f5c8-4e9f-8a1d-469890bf2d70" />
+        <classShapeMoniker Id="e2467b58-242d-4051-b421-00bcaef5e468" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="be2520b9-91fa-4914-9ff7-bb138348d5c3" absoluteBounds="0.5, 10.625, 2, 1.5891951497395831">
+      <DataClassMoniker Name="/AFLODDataContext/core_WorkStatus_Rule" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8977b758-bacb-43f0-9947-a8fdf74c61f6" absoluteBounds="0.51500000000000012, 11.085, 1.9700000000000002, 1.0291951497395833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(0.5 : 7.25354248046875); (0.371425565098879 : 7.38211691536987 : JumpStart); (0.253574434901121 : 7.49996804556763 : JumpEnd); (0.125 : 7.62854248046875); (0.125 : 10.25); (0.5 : 10.625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AFLODDataContext/core_lkupRule/core_lkupRule_core_WorkStatus_Rule" />
+      <nodes>
+        <classShapeMoniker Id="9d938dd3-5643-4eb8-beb5-bc498f2be1f1" />
+        <classShapeMoniker Id="be2520b9-91fa-4914-9ff7-bb138348d5c3" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="a0992416-6ad1-47c3-adbd-2b1bf8e62720" absoluteBounds="4.625, 2.75, 2, 1.0961531575520833">
+      <DataClassMoniker Name="/AFLODDataContext/core_lkupWorkflowAction" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e444c816-5f5e-4b21-bb80-68b38df8a21f" absoluteBounds="4.64, 3.21, 1.9700000000000002, 0.53615315755208326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b760f570-1f3e-4d99-a721-01c1e81aa51f" absoluteBounds="0.5, 8.5, 2, 1.9178898111979166">
+      <DataClassMoniker Name="/AFLODDataContext/core_WorkStatus_Option" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a7d932fa-95bc-4974-b761-a9b6fdd3e99b" absoluteBounds="0.515, 8.96, 1.9700000000000002, 1.3578898111979165" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(1.5312525 : 10.4178898111979); (1.5312525 : 10.625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AFLODDataContext/core_WorkStatus_Option/core_WorkStatus_Option_core_WorkStatus_Rule" />
+      <nodes>
+        <classShapeMoniker Id="b760f570-1f3e-4d99-a721-01c1e81aa51f" />
+        <classShapeMoniker Id="be2520b9-91fa-4914-9ff7-bb138348d5c3" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(0.561537461538462 : 2.91093180338542); (0.3125 : 3.15996926492388); (0.3125 : 8.3125); (0.5 : 8.5)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AFLODDataContext/core_StatusCode/core_StatusCode_core_WorkStatus_Option" />
+      <nodes>
+        <classShapeMoniker Id="b5924f85-f5c8-4e9f-8a1d-469890bf2d70" />
+        <classShapeMoniker Id="b760f570-1f3e-4d99-a721-01c1e81aa51f" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(4.8125 : 5.67484781901042); (4.8125 : 9.56878083444759); (2.67708333333333 : 9.56878083444759 : JumpStart); (2.51041666666667 : 9.56878083444759 : JumpEnd); (2.5 : 9.56878083444759)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AFLODDataContext/core_WorkStatus/core_WorkStatus_core_WorkStatus_Option" />
+      <nodes>
+        <classShapeMoniker Id="e2467b58-242d-4051-b421-00bcaef5e468" />
+        <classShapeMoniker Id="b760f570-1f3e-4d99-a721-01c1e81aa51f" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.2079043738732 : 8.5); (1.2079043738732 : 8.25); (1.80600494165665 : 8.25); (1.80600494165665 : 8.5)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AFLODDataContext/core_WorkStatus_Option/core_WorkStatus_Option_core_WorkStatus_Option" />
+      <nodes>
+        <classShapeMoniker Id="b760f570-1f3e-4d99-a721-01c1e81aa51f" />
+        <classShapeMoniker Id="b760f570-1f3e-4d99-a721-01c1e81aa51f" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="a70f700b-d501-483b-8c64-edb8475bb95e" absoluteBounds="2.625, 7.625, 2, 1.0961531575520833">
+      <DataClassMoniker Name="/AFLODDataContext/core_lkupModule" />
+      <nestedChildShapes>
+        <elementListCompartment Id="6e66ff94-31d4-4ee6-9a28-b9edfe94cf54" absoluteBounds="2.64, 8.085, 1.9700000000000002, 0.53615315755208326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(3.2187505 : 7.625); (3.2187505 : 3.21362548828125); (2.53125 : 3.21362548828125); (2.53125 : 1.97950369108073); (2.5 : 1.97950369108073)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AFLODDataContext/core_lkupModule/core_lkupModule_core_StatusCode" />
+      <nodes>
+        <classShapeMoniker Id="a70f700b-d501-483b-8c64-edb8475bb95e" />
+        <classShapeMoniker Id="b5924f85-f5c8-4e9f-8a1d-469890bf2d70" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="a1936ed9-ab54-43fe-8489-36f67ffd1f23" absoluteBounds="2.75, 13.875, 2, 1.0961531575520833">
+      <DataClassMoniker Name="/AFLODDataContext/core_MemoWorkFlow" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c95c95c4-f109-40e2-9d82-ff58feb43e0a" absoluteBounds="2.765, 14.335, 1.9700000000000002, 0.53615315755208326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="e9c22a48-15af-4214-a670-abd9f8065e6c" absoluteBounds="2.875, 15.375, 2, 2.0822371419270831">
+      <DataClassMoniker Name="/AFLODDataContext/core_EmailTemplate" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e6462d04-7185-4266-9416-9a7efa1d1f5f" absoluteBounds="2.89, 15.835, 1.9700000000000002, 1.5222371419270833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="5160707f-bf31-4759-9b3d-81fff7fa8bae" absoluteBounds="2.75, 11.375, 2, 1.5891951497395831">
+      <DataClassMoniker Name="/AFLODDataContext/core_WorkStatus_Action" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b4f2c3e2-cc74-4883-ad92-9a944ba08daf" absoluteBounds="2.765, 11.835, 1.9700000000000002, 1.0291951497395833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.5624995 : 3.84615315755208); (5.5624995 : 4); (6.125 : 4); (6.125 : 5.875); (4.75 : 5.875); (4.75 : 7.375); (4.875 : 7.375); (4.875 : 11.125); (5 : 11.125); (5 : 12.1695975748698); (4.75 : 12.1695975748698)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AFLODDataContext/core_lkupWorkflowAction/core_lkupWorkflowAction_core_WorkStatus_Action" />
+      <nodes>
+        <classShapeMoniker Id="a0992416-6ad1-47c3-adbd-2b1bf8e62720" />
+        <classShapeMoniker Id="5160707f-bf31-4759-9b3d-81fff7fa8bae" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.5 : 10.0245878228228); (2.51041666666667 : 10.0245878228228 : JumpStart); (2.67708333333333 : 10.0245878228228 : JumpEnd); (4.71875 : 10.0245878228228); (4.71875 : 11.375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AFLODDataContext/core_WorkStatus_Option/core_WorkStatus_Option_core_WorkStatus_Action" />
+      <nodes>
+        <classShapeMoniker Id="b760f570-1f3e-4d99-a721-01c1e81aa51f" />
+        <classShapeMoniker Id="5160707f-bf31-4759-9b3d-81fff7fa8bae" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="75b3b150-ece4-4c6d-9a9a-1c4a7f77593c" absoluteBounds="5, 6.125, 2, 2.0822371419270831">
+      <DataClassMoniker Name="/AFLODDataContext/core_Witness" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f4586fe5-f40e-417c-b4d1-8eaadc185d97" absoluteBounds="5.015, 6.585, 1.9700000000000002, 1.5222371419270833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="d7180617-586d-4584-82cc-e6f608ea9b17" absoluteBounds="6.5, 3.5, 2, 1.26050048828125">
+      <DataClassMoniker Name="/AFLODDataContext/core_lkUpFinding" />
+      <nestedChildShapes>
+        <elementListCompartment Id="34aa3612-8b6c-4cf9-80b9-145c9095dc00" absoluteBounds="6.515, 3.96, 1.9700000000000002, 0.70050048828125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="ba4d885b-b374-4db2-b36c-c675e3a71623" absoluteBounds="2.625, 1.875, 2, 1.26050048828125">
+      <DataClassMoniker Name="/AFLODDataContext/core_lkUpFindings" />
+      <nestedChildShapes>
+        <elementListCompartment Id="732c3587-5655-4d38-9d8f-bc7f5f272749" absoluteBounds="2.64, 2.335, 1.9700000000000002, 0.70050048828125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="7ca5f2ed-55b8-4684-b772-cca5158bd972" absoluteBounds="9, 1.75, 2, 2.0822371419270831">
+      <DataClassMoniker Name="/AFLODDataContext/Form348_Unit" />
+      <nestedChildShapes>
+        <elementListCompartment Id="497384d9-731b-4ae7-bc99-c52df28343fb" absoluteBounds="9.015, 2.21, 1.9700000000000002, 1.5222371419270833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="fa15ee06-c3df-46b8-b8d3-63de991e8cf2" absoluteBounds="12.375, 2.125, 2, 1.5891951497395831">
+      <DataClassMoniker Name="/AFLODDataContext/core_lkupICD9" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d4e96f42-5201-47f1-9ed7-4c8186f78f78" absoluteBounds="12.39, 2.585, 1.9700000000000002, 1.0291951497395833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="710d9c6e-4543-4cd7-9223-4f9af0f99902" absoluteBounds="18.375, 0.75, 2, 1.26050048828125">
+      <DataClassMoniker Name="/AFLODDataContext/core_lkupRWOAReason" />
+      <nestedChildShapes>
+        <elementListCompartment Id="7a329376-13f9-4e94-b9ed-0e5e5b861248" absoluteBounds="18.39, 1.21, 1.9700000000000002, 0.70050048828125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="6f85cf8c-fa26-4932-b6e0-b404a1322b49" absoluteBounds="19.125, 2.75, 2, 2.9039737955729166">
+      <DataClassMoniker Name="/AFLODDataContext/Rwoa" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d3c94fea-9bac-4979-8a6a-e3fbc2d5fbc5" absoluteBounds="19.14, 3.21, 1.9700000000000002, 2.3439737955729165" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="fb3f42df-30af-4a6c-aaab-7231c0bee985" absoluteBounds="0.5, 0.5, 2, 1.26050048828125">
+      <DataClassMoniker Name="/AFLODDataContext/core_lkupIncidentType" />
+      <nestedChildShapes>
+        <elementListCompartment Id="54b2726c-c792-4e78-b24c-cc62f2aeec53" absoluteBounds="0.515, 0.96, 1.9700000000000002, 0.70050048828125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="1a7510c9-a74a-43b3-862e-6bc5bde9df3c" absoluteBounds="5.5, 11.25, 2, 7.6700463867187505">
+      <DataClassMoniker Name="/AFLODDataContext/Form261" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a1afb744-b9bd-414e-a0c3-70a7ffbdc628" absoluteBounds="5.515, 11.71, 1.9700000000000002, 7.11004638671875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(7.28125 : 4.76050048828125); (7.28125 : 11.25)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AFLODDataContext/core_lkUpFinding/core_lkUpFinding_Form261" />
+      <nodes>
+        <classShapeMoniker Id="d7180617-586d-4584-82cc-e6f608ea9b17" />
+        <classShapeMoniker Id="1a7510c9-a74a-43b3-862e-6bc5bde9df3c" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(3.51562525 : 3.13550048828125); (3.51562525 : 7.375); (4.72916666666667 : 7.375 : JumpStart); (4.89583333333333 : 7.375 : JumpEnd); (4.9375 : 7.375); (4.9375 : 10.875); (5.125 : 10.875); (5.125 : 15.5448214807943); (5.5 : 15.5448214807943)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AFLODDataContext/core_lkUpFindings/core_lkUpFindings_Form261" />
+      <nodes>
+        <classShapeMoniker Id="ba4d885b-b374-4db2-b36c-c675e3a71623" />
+        <classShapeMoniker Id="1a7510c9-a74a-43b3-862e-6bc5bde9df3c" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="b181280e-bb24-4187-a802-ea487ab58c57" absoluteBounds="12.75, 4.375, 2, 9.14917236328125">
+      <DataClassMoniker Name="/AFLODDataContext/Form348" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ee0d6e27-ca32-43fc-9732-8e088a86074b" absoluteBounds="12.765, 4.835, 1.9700000000000002, 8.58917236328125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(12.75 : 8.94958618164063); (11.6770808333333 : 8.94958618164063 : JumpStart); (11.5104141666667 : 8.94958618164063 : JumpEnd); (10 : 8.94958618164063); (10 : 3.83223714192708)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AFLODDataContext/Form348/Form348_Form348_Unit" />
+      <nodes>
+        <classShapeMoniker Id="b181280e-bb24-4187-a802-ea487ab58c57" />
+        <classShapeMoniker Id="7ca5f2ed-55b8-4684-b772-cca5158bd972" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.5 : 4.56775024414063); (9.91666666666667 : 4.56775024414063 : JumpStart); (10.0833333333333 : 4.56775024414063 : JumpEnd); (11.5104141666667 : 4.56775024414063 : JumpStart); (11.6770808333333 : 4.56775024414063 : JumpEnd); (12.75 : 4.56775024414063)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AFLODDataContext/core_lkUpFinding/core_lkUpFinding_Form348" />
+      <nodes>
+        <classShapeMoniker Id="d7180617-586d-4584-82cc-e6f608ea9b17" />
+        <classShapeMoniker Id="b181280e-bb24-4187-a802-ea487ab58c57" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(4.625 : 2.01114676871745); (8.9375 : 2.01114676871745); (8.9375 : 3.89473714192708); (11.5104141666667 : 3.89473714192708 : JumpStart); (11.6770808333333 : 3.89473714192708 : JumpEnd); (12.0416666666667 : 3.89473714192708 : JumpStart); (12.2083333333333 : 3.89473714192708 : JumpEnd); (13.1828788394056 : 3.89473714192708); (13.1828788394056 : 4.375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AFLODDataContext/core_lkUpFindings/core_lkUpFindings_Form348" />
+      <nodes>
+        <classShapeMoniker Id="ba4d885b-b374-4db2-b36c-c675e3a71623" />
+        <classShapeMoniker Id="b181280e-bb24-4187-a802-ea487ab58c57" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(18.71875 : 2.01050048828125); (18.71875 : 9.62032307942708); (14.75 : 9.62032307942708)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AFLODDataContext/core_lkupRWOAReason/core_lkupRWOAReason_Form348" />
+      <nodes>
+        <classShapeMoniker Id="710d9c6e-4543-4cd7-9223-4f9af0f99902" />
+        <classShapeMoniker Id="b181280e-bb24-4187-a802-ea487ab58c57" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.5 : 4.40887512207031); (9.91666666666667 : 4.40887512207031 : JumpStart); (10.0833333333333 : 4.40887512207031 : JumpEnd); (11.5104141666667 : 4.40887512207031 : JumpStart); (11.6770808333333 : 4.40887512207031 : JumpEnd); (12.75 : 4.40887512207031)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AFLODDataContext/core_lkUpFinding/core_lkUpFinding_Form3481" />
+      <nodes>
+        <classShapeMoniker Id="d7180617-586d-4584-82cc-e6f608ea9b17" />
+        <classShapeMoniker Id="b181280e-bb24-4187-a802-ea487ab58c57" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(4.625 : 2.47990126871745); (8.75 : 2.47990126871745); (8.75 : 4.14473714192708); (9.91666666666667 : 4.14473714192708 : JumpStart); (10.0833333333333 : 4.14473714192708 : JumpEnd); (11.5104141666667 : 4.14473714192708 : JumpStart); (11.6770808333333 : 4.14473714192708 : JumpEnd); (12.8518540863695 : 4.14473714192708 : JumpStart); (13.0185207530361 : 4.14473714192708 : JumpEnd); (13.0995455060723 : 4.14473714192708 : JumpStart); (13.2662121727389 : 4.14473714192708 : JumpEnd); (13.347236925775 : 4.14473714192708 : JumpStart); (13.5139035924416 : 4.14473714192708 : JumpEnd); (13.784731425775 : 4.14473714192708 : JumpStart); (13.9513980924416 : 4.14473714192708 : JumpEnd); (14.1828778394056 : 4.14473714192708); (14.1828778394056 : 4.375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AFLODDataContext/core_lkUpFindings/core_lkUpFindings_Form3481" />
+      <nodes>
+        <classShapeMoniker Id="ba4d885b-b374-4db2-b36c-c675e3a71623" />
+        <classShapeMoniker Id="b181280e-bb24-4187-a802-ea487ab58c57" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.5 : 4.72662536621094); (9.91666666666667 : 4.72662536621094 : JumpStart); (10.0833333333333 : 4.72662536621094 : JumpEnd); (11.5104141666667 : 4.72662536621094 : JumpStart); (11.6770808333333 : 4.72662536621094 : JumpEnd); (12.75 : 4.72662536621094)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AFLODDataContext/core_lkUpFinding/core_lkUpFinding_Form3482" />
+      <nodes>
+        <classShapeMoniker Id="d7180617-586d-4584-82cc-e6f608ea9b17" />
+        <classShapeMoniker Id="b181280e-bb24-4187-a802-ea487ab58c57" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(4.625 : 2.61495313435872); (8.60416666666667 : 2.61495313435872 : JumpStart); (8.77083333333333 : 2.61495313435872 : JumpEnd); (8.8125 : 2.61495313435872); (8.8125 : 4.01973714192708); (9.91666666666667 : 4.01973714192708 : JumpStart); (10.0833333333333 : 4.01973714192708 : JumpEnd); (11.5104141666667 : 4.01973714192708 : JumpStart); (11.6770808333333 : 4.01973714192708 : JumpEnd); (12.0416666666667 : 4.01973714192708 : JumpStart); (12.2083333333333 : 4.01973714192708 : JumpEnd); (13.0995455060723 : 4.01973714192708 : JumpStart); (13.2662121727389 : 4.01973714192708 : JumpEnd); (13.347236925775 : 4.01973714192708 : JumpStart); (13.5139035924416 : 4.01973714192708 : JumpEnd); (13.5324233454778 : 4.01973714192708 : JumpStart); (13.6990900121444 : 4.01973714192708 : JumpEnd); (13.8680647591083 : 4.01973714192708); (13.8680647591083 : 4.375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AFLODDataContext/core_lkUpFindings/core_lkUpFindings_Form3482" />
+      <nodes>
+        <classShapeMoniker Id="ba4d885b-b374-4db2-b36c-c675e3a71623" />
+        <classShapeMoniker Id="b181280e-bb24-4187-a802-ea487ab58c57" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.5 : 3.98848714192708); (8.66666666666667 : 3.98848714192708 : JumpStart); (8.83333333333333 : 3.98848714192708 : JumpEnd); (9.91666666666667 : 3.98848714192708 : JumpStart); (10.0833333333333 : 3.98848714192708 : JumpEnd); (11.5104141666667 : 3.98848714192708 : JumpStart); (11.6770808333333 : 3.98848714192708 : JumpEnd); (12.0416666666667 : 3.98848714192708 : JumpStart); (12.2083333333333 : 3.98848714192708 : JumpEnd); (12.9351874197028 : 3.98848714192708); (12.9351874197028 : 4.375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AFLODDataContext/core_lkUpFinding/core_lkUpFinding_Form3483" />
+      <nodes>
+        <classShapeMoniker Id="d7180617-586d-4584-82cc-e6f608ea9b17" />
+        <classShapeMoniker Id="b181280e-bb24-4187-a802-ea487ab58c57" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(4.625 : 2.34484940307617); (8.60416666666667 : 2.34484940307617 : JumpStart); (8.77083333333333 : 2.34484940307617 : JumpEnd); (8.875 : 2.34484940307617); (8.875 : 3.95723714192708); (9.91666666666667 : 3.95723714192708 : JumpStart); (10.0833333333333 : 3.95723714192708 : JumpEnd); (11.5104141666667 : 3.95723714192708 : JumpStart); (11.6770808333333 : 3.95723714192708 : JumpEnd); (12.0416666666667 : 3.95723714192708 : JumpStart); (12.2083333333333 : 3.95723714192708 : JumpEnd); (13.5324233454778 : 3.95723714192708 : JumpStart); (13.6990900121444 : 3.95723714192708 : JumpEnd); (14.4976909197028 : 3.95723714192708); (14.4976909197028 : 4.375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AFLODDataContext/core_lkUpFindings/core_lkUpFindings_Form3483" />
+      <nodes>
+        <classShapeMoniker Id="ba4d885b-b374-4db2-b36c-c675e3a71623" />
+        <classShapeMoniker Id="b181280e-bb24-4187-a802-ea487ab58c57" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(8.5 : 4.05098714192708); (8.66666666666667 : 4.05098714192708 : JumpStart); (8.83333333333333 : 4.05098714192708 : JumpEnd); (9.91666666666667 : 4.05098714192708 : JumpStart); (10.0833333333333 : 4.05098714192708 : JumpEnd); (11.5104141666667 : 4.05098714192708 : JumpStart); (11.6770808333333 : 4.05098714192708 : JumpEnd); (12.0416666666667 : 4.05098714192708 : JumpStart); (12.2083333333333 : 4.05098714192708 : JumpEnd); (13.0995455060723 : 4.05098714192708 : JumpStart); (13.2662121727389 : 4.05098714192708 : JumpEnd); (13.347236925775 : 4.05098714192708 : JumpStart); (13.5139035924416 : 4.05098714192708 : JumpEnd); (13.5324233454778 : 4.05098714192708 : JumpStart); (13.6990900121444 : 4.05098714192708 : JumpEnd); (14.4976909197028 : 4.05098714192708); (14.4976909197028 : 4.375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AFLODDataContext/core_lkUpFinding/core_lkUpFinding_Form3484" />
+      <nodes>
+        <classShapeMoniker Id="d7180617-586d-4584-82cc-e6f608ea9b17" />
+        <classShapeMoniker Id="b181280e-bb24-4187-a802-ea487ab58c57" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(4.625 : 2.11047215307617); (8.6875 : 2.11047215307617); (8.6875 : 3.89473714192708); (12.0416666666667 : 3.89473714192708 : JumpStart); (12.2083333333333 : 3.89473714192708 : JumpEnd); (13.4305702591083 : 3.89473714192708); (13.4305702591083 : 4.375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AFLODDataContext/core_lkUpFindings/core_lkUpFindings_Form3484" />
+      <nodes>
+        <classShapeMoniker Id="ba4d885b-b374-4db2-b36c-c675e3a71623" />
+        <classShapeMoniker Id="b181280e-bb24-4187-a802-ea487ab58c57" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="da0193f0-5f0b-4081-bd84-80db5cade437" absoluteBounds="11.125, 0.625, 2, 2.73962646484375">
+      <DataClassMoniker Name="/AFLODDataContext/Form348_Medical" />
+      <nestedChildShapes>
+        <elementListCompartment Id="71909cbd-ae12-4ff3-a4b0-2d8b963040ae" absoluteBounds="11.14, 1.085, 1.9700000000000002, 2.17962646484375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(13.6157566788111 : 3.71419514973958); (13.6157566788111 : 4.21419514973958); (12.125 : 4.21419514973958); (12.125 : 3.36462646484375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AFLODDataContext/core_lkupICD9/core_lkupICD9_Form348_Medical" />
+      <nodes>
+        <classShapeMoniker Id="fa15ee06-c3df-46b8-b8d3-63de991e8cf2" />
+        <classShapeMoniker Id="da0193f0-5f0b-4081-bd84-80db5cade437" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(12.75 : 11.2681317724609); (11.5937475 : 11.2681317724609); (11.5937475 : 3.36462646484375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AFLODDataContext/Form348/Form348_Form348_Medical" />
+      <nodes>
+        <classShapeMoniker Id="b181280e-bb24-4187-a802-ea487ab58c57" />
+        <classShapeMoniker Id="da0193f0-5f0b-4081-bd84-80db5cade437" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="4b00dcdb-b199-4ab1-be60-84ff1c232e35" absoluteBounds="13.75, 0.5, 2, 1.26050048828125">
+      <DataClassMoniker Name="/AFLODDataContext/core_lkupPhyCancelReason" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4615892e-eec8-4623-9717-462e977681f4" absoluteBounds="13.765, 0.96, 1.9700000000000002, 0.70050048828125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c30c2ac3-7385-4a17-a387-adb0f6cb3658" absoluteBounds="0.5, 3.25, 2, 1.9178898111979166">
+      <DataClassMoniker Name="/AFLODDataContext/core_Workflow" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9e88218d-bb5d-4f92-8ecb-b4c5b9fbc492" absoluteBounds="0.515, 3.71, 1.9700000000000002, 1.3578898111979165" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.0625 : 5.16788981119792); (2.0625 : 5.5)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AFLODDataContext/core_Workflow/core_Workflow_core_lkupRule" />
+      <nodes>
+        <classShapeMoniker Id="c30c2ac3-7385-4a17-a387-adb0f6cb3658" />
+        <classShapeMoniker Id="9d938dd3-5643-4eb8-beb5-bc498f2be1f1" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.5 : 4.47656275); (2.51041666666667 : 4.47656275 : JumpStart); (2.67708333333333 : 4.47656275 : JumpEnd); (2.80728941666667 : 4.47656275 : JumpStart); (2.97395608333333 : 4.47656275 : JumpEnd); (3.13541716666667 : 4.47656275 : JumpStart); (3.30208383333333 : 4.47656275 : JumpEnd); (3.43229191666667 : 4.47656275 : JumpStart); (3.59895858333333 : 4.47656275 : JumpEnd); (3.875 : 4.47656275)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AFLODDataContext/core_Workflow/core_Workflow_core_WorkStatus" />
+      <nodes>
+        <classShapeMoniker Id="c30c2ac3-7385-4a17-a387-adb0f6cb3658" />
+        <classShapeMoniker Id="e2467b58-242d-4051-b421-00bcaef5e468" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(1.9999995 : 5.16788981119792); (1.9999995 : 5.3125); (2.59375 : 5.3125); (2.59375 : 14.423076578776); (2.75 : 14.423076578776)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AFLODDataContext/core_Workflow/core_Workflow_core_MemoWorkFlow" />
+      <nodes>
+        <classShapeMoniker Id="c30c2ac3-7385-4a17-a387-adb0f6cb3658" />
+        <classShapeMoniker Id="a1936ed9-ab54-43fe-8489-36f67ffd1f23" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.89062275 : 7.625); (2.89062275 : 4.03906325); (2.67708333333333 : 4.03906325 : JumpStart); (2.51041666666667 : 4.03906325 : JumpEnd); (2.5 : 4.03906325)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/AFLODDataContext/core_lkupModule/core_lkupModule_core_Workflow" />
+      <nodes>
+        <classShapeMoniker Id="a70f700b-d501-483b-8c64-edb8475bb95e" />
+        <classShapeMoniker Id="c30c2ac3-7385-4a17-a387-adb0f6cb3658" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(3.875 : 5.06050765559896); (3.59895858333333 : 5.06050765559896 : JumpStart); (3.43229191666667 : 5.06050765559896 : JumpEnd); (3.30208383333333 : 5.06050765559896 : JumpStart); (3.13541716666667 : 5.06050765559896 : JumpEnd); (2.97395608333333 : 5.06050765559896 : JumpStart); (2.80728941666667 : 5.06050765559896 : JumpEnd); (2.5 : 5.06050765559896)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/AFLODDataContext/core_WorkStatus/core_WorkStatus_core_Workflow" />
+      <nodes>
+        <classShapeMoniker Id="e2467b58-242d-4051-b421-00bcaef5e468" />
+        <classShapeMoniker Id="c30c2ac3-7385-4a17-a387-adb0f6cb3658" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\SixLabors.ImageSharp.3.0.2\build\SixLabors.ImageSharp.props" Condition="Exists('..\packages\SixLabors.ImageSharp.3.0.2\build\SixLabors.ImageSharp.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>ALODWebUtility</RootNamespace>
+    <AssemblyName>ALODWebUtility.CS</AssemblyName>
+    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Production|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Production\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Staging|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Staging\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Testing|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Testing\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+   <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Web" />
+    <Reference Include="ABCpdf">
+      <HintPath>..\Dependencies\ABCpdf.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="AjaxControlToolkit">
+      <HintPath>..\packages\AjaxControlToolkit.20.1.0\lib\net40\AjaxControlToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.ExceptionHandling">
+      <HintPath>$(UserProfile)\.nuget\packages\enterpriselibrary.exceptionhandling\6.0.1304\lib\NET45\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common">
+      <HintPath>$(UserProfile)\.nuget\packages\enterpriselibrary.common\6.0.1304\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="**\*.cs" Exclude="obj\**;bin\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ALOD.Core\ALOD.Core.csproj">
+      <Project>{72e099c6-293d-4131-9263-41a2479d78be}</Project>
+      <Name>ALOD.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ALOD.Data\ALOD.Data.csproj">
+      <Project>{6bae87c1-7081-4dc5-9db3-b1d19a99f954}</Project>
+      <Name>ALOD.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ALOD.Logging\ALOD.Logging.csproj">
+      <Project>{d9ef4c09-ac2a-4a32-9c92-29bb73b90f23}</Project>
+      <Name>ALOD.Logging</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="ABCpdf" Version="12.5.1" />
+    <PackageReference Include="AjaxControlToolkit" Version="20.1.0" />
+    <PackageReference Include="Antlr3.Runtime" Version="3.5.1" />
+    <PackageReference Include="AutoMapper" Version="10.0.0" />
+    <PackageReference Include="EnterpriseLibrary.ExceptionHandling" Version="6.0.1304" />
+    <PackageReference Include="Portable.BouncyCastle" Version="1.9.0" />
+    <PackageReference Include="BouncyCastle.Cryptography" Version="2.2.1" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="NHibernate" Version="5.5.2" />
+    <PackageReference Include="System.CodeDom" Version="7.0.0" />
+    <PackageReference Include="Unity" Version="5.11.10" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

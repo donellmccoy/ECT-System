@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Modules.SpecialCases">
+
+  <class name="SC_PSCD_Findings" table="Form348_PSCD_Findings">
+    <id name="Id" column="ID">
+      <generator class="identity" />
+    </id>
+    <property name="PSCDId" column="PSCD_ID" />
+    <property name="Name" column="Name" />
+    <property name="PType" column="PType" />
+    <property name="Remarks" column="Remarks" />
+    <property name="Finding" column="Finding" />
+    <property name="FindingText" column="FindingText" />
+    <property name="CreatedBy" column="CreatedBy" />
+    <property name="CreatedDate" column="CreatedDate" />
+    <property name="ModifiedBy" column="ModifiedBy" />
+    <property name="ModifiedDate" column="ModifiedDate" />
+    <property name="AdditionalRemarks" column="AdditionalRemarks" />
+    <property name="ReferToDES" column="ReferToDES" />
+  </class>
+</hibernate-mapping>

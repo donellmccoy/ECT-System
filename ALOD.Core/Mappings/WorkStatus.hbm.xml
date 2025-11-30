@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Workflow">
+
+	<class name="WorkStatus" table="core_WorkStatus">
+		<id name="Id" column="ws_id">
+			<generator class="identity" />
+		</id>
+
+		<property name="WorkflowId" />
+    <!-- 07-17-2019 S32019 - Curt Lucas -->
+    <property name="Compo" column="compo" />
+		<property name="SortOrder" column="sortOrder" />
+    <property name="IsBoardStatus" column="isBoardStatus" />
+    <property name="DisplayText" column="displayText" />
+
+    <many-to-one name="StatusCodeType" class="StatusCode" column="statusId" cascade="none" insert="false" update="false" lazy="false" fetch="join">
+    </many-to-one>
+
+      <bag name="WorkStatusOptionList" table="core_WorkStatus_Options" cascade="all">
+			<key column="ws_id"></key>
+			<one-to-many class="WorkflowStatusOption" />
+		</bag>
+	</class>
+
+	<sql-query name="GetInitialStatus" read-only="true">
+		exec dbo.workflow_sp_GetInitStatus :userId, :workflow, :groupId
+	</sql-query>
+</hibernate-mapping>

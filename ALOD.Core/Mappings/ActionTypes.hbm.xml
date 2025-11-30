@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Workflow">
+
+  <class name="ActionTypes" table="core_lkupAction">
+  <id name="Id" column="actionId">
+    <generator class="identity" />
+  </id>
+
+  <property name="ActionName" column="ActionName" />
+  <property name="Hide" column="hide" />
+  <property name="LogChanges" column="logChnages" />
+</class>
+</hibernate-mapping>

@@ -1,0 +1,112 @@
+<%@ Page Title="" Language="VB" MasterPageFile="~/Secure/Secure.master" AutoEventWireup="false"
+    Async="true" Inherits="ALOD.Web.APSA.Secure_apsa_MyRequests" Codebehind="MyRequests.aspx.vb" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentMain" runat="Server">
+   
+    <div class="indent">
+        <div class="border-thin">
+        </div>
+        <br />
+        <br />
+    </div>
+    <asp:UpdatePanel ID="resultsUpdatePanel" runat="server" ChildrenAsTriggers="True">
+        <ContentTemplate>
+            <div id="spSpacer" class="emptyItem" style="margin-top: 0px; margin-bottom: 4px;
+                height: 22px;">
+                <div id="spWait" class="" style="display: none;">
+                    &nbsp;<asp:Image runat="server" ID="imgWait" SkinID="imgBusy" AlternateText="busy"
+                        ImageAlign="AbsMiddle" />&nbsp;Loading...
+                </div>
+            </div>
+            <div style="font-weight:bold">My Appeal Requests:</div>
+            <asp:GridView ID="gvResults" runat="server" EmptyDataText="No records found" EmptyDataRowStyle-CssClass="emptyItem"
+                AutoGenerateColumns="False" PageSize="20" Width="100%" DataSourceID="SarcData"
+                AllowPaging="True" AllowSorting="True">
+                <Columns>
+                    <asp:TemplateField>
+                        <ItemTemplate>
+                            <asp:Image runat="server" ID="LockImage" ImageAlign="AbsMiddle" ImageUrl="~/images/lock.gif"
+                                Visible="false" AlternateText="This case is locked for editing by another user" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Case Id" SortExpression="Case_Id" ItemStyle-Width="150px">
+                        <ItemTemplate>
+                            <asp:LinkButton ID="lnkRefID" runat="server" CommandArgument='<%# Eval("appeal_sarc_Id").ToString()%>'
+                                CommandName="view" Text='<%# Eval("Case_Id") %>'>
+                            </asp:LinkButton>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:BoundField DataField="Protected_SSN" HeaderText="SSN" SortExpression="SSN" />
+                    <asp:TemplateField HeaderText="Name" ItemStyle-Width="200px" SortExpression="Member_Name">
+                        <ItemTemplate>
+                            <%# Eval("Member_Name").ToString().ToUpper()%>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:BoundField DataField="Unit_Name" HeaderText="Unit" SortExpression="Unit_Name" />
+                    <asp:BoundField DataField="Receive_Date" HeaderText="Date Received" SortExpression="Receive_Date" />
+                    <asp:BoundField DataField="Days" HeaderText="Days" SortExpression="Days" />
+                    <asp:BoundField DataField="Status" HeaderText="Status" SortExpression="Status" />
+                </Columns>
+            </asp:GridView>
+            <br /><br />
+            <div style="font-weight:bold">Completed Requests/Admin View:</div>
+            <br />
+            <asp:GridView ID="gvResults2" runat="server" EmptyDataText="No records found" EmptyDataRowStyle-CssClass="emptyItem"
+                AutoGenerateColumns="False" PageSize="20" Width="100%" DataSourceID="SarcData2"
+                AllowPaging="True" AllowSorting="True">
+                <Columns>
+                    <asp:TemplateField>
+                        <ItemTemplate>
+                            <asp:Image runat="server" ID="LockImage" ImageAlign="AbsMiddle" ImageUrl="~/images/lock.gif"
+                                Visible="false" AlternateText="This case is locked for editing by another user" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Case Id" SortExpression="Case_Id" ItemStyle-Width="150px">
+                        <ItemTemplate>
+                            <asp:LinkButton ID="lnkRefID" runat="server" CommandArgument='<%# Eval("appeal_sarc_Id").ToString()%>'
+                                CommandName="view" Text='<%# Eval("Case_Id") %>'>
+                            </asp:LinkButton>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:BoundField DataField="Protected_SSN" HeaderText="SSN" SortExpression="SSN" />
+                    <asp:TemplateField HeaderText="Name" ItemStyle-Width="200px" SortExpression="Member_Name">
+                        <ItemTemplate>
+                            <%# Eval("Member_Name").ToString().ToUpper()%>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:BoundField DataField="Unit_Name" HeaderText="Unit" SortExpression="Unit_Name" />
+                    <asp:BoundField DataField="Receive_Date" HeaderText="Date Received" SortExpression="Receive_Date" />
+                    <asp:BoundField DataField="Days" HeaderText="Days" SortExpression="Days" />
+                    <asp:BoundField DataField="Status" HeaderText="Status" SortExpression="Status" />
+                </Columns>
+            </asp:GridView>
+        </ContentTemplate>
+        <Triggers>
+        </Triggers>
+    </asp:UpdatePanel>
+    <asp:ObjectDataSource ID="SarcData"  runat="server" OldValuesParameterFormatString="original_{0}"
+        SelectMethod="GetSARCAppealRequests" TypeName="ALOD.Data.Services.LodService">
+        <SelectParameters>
+            <asp:SessionParameter Name="userId" SessionField="UserId" Type="Int32" />
+            <asp:SessionParameter Name="sarc" SessionField="sarc" Type="Byte" />
+        </SelectParameters>
+    </asp:ObjectDataSource>
+    <asp:ObjectDataSource ID="SarcData2"  runat="server" OldValuesParameterFormatString="original_{0}"
+        SelectMethod="GetCompletedSARCAPs" TypeName="ALOD.Data.Services.LodService">
+        <SelectParameters>
+            <asp:SessionParameter Name="userId" SessionField="UserId" Type="Int32" />
+            <asp:SessionParameter Name="sarc" SessionField="sarc" Type="Byte" />
+        </SelectParameters>
+    </asp:ObjectDataSource>
+    <ajax:UpdatePanelAnimationExtender ID="resultsUpdatePanelAnimationExtender" runat="server"
+        TargetControlID="resultsUpdatePanel">
+        <Animations>
+                <OnUpdating>
+                    <ScriptAction script="searchStart();" />
+                </OnUpdating>  
+                <OnUpdated>     
+                    <ScriptAction script="searchEnd();" />
+                </OnUpdated>           
+        </Animations>
+    </ajax:UpdatePanelAnimationExtender>
+</asp:Content>

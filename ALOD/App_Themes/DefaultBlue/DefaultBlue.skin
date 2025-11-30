@@ -1,0 +1,70 @@
+<%-- Default Controls --%>
+
+<%-- Images --%>
+<asp:Image runat="server" ImageAlign="left" CssClass="imgLogo" SkinId="imgLogo" ImageUrl="~/App_Themes/DefaultBlue/images/headerLogoFront.jpg" AlternateText="Home" />
+<asp:Image runat="server" ImageAlign="left" CssClass="imgLogo" SkinId="imgLogoPopup" ImageUrl="~/App_Themes/DefaultBlue/images/menuLogo.jpg" AlternateText="ECT Banner" />
+                                                                                                                           <%--    headerPopup.jpg  --%>
+<asp:Image runat="server" ImageAlign="left" CssClass="imgLogo" SkinId="imgLogoMenu" ImageUrl="~/App_Themes/DefaultBlue/images/menuLogo.jpg" AlternateText="ECT Banner" />
+
+<asp:Image runat="server" ImageAlign="left" CssClass="imgLogo" SkinId="imgLogoFront" ImageUrl="~/App_Themes/DefaultBlue/images/headerLogoFront.jpg" AlternateText="ECT Banner" />
+<asp:Image runat="server" SkinId="imgBusy" ImageUrl="~/App_Themes/DefaultBlue/images/busy.gif" AlternateText="busy" />
+<asp:Image runat="server" SkinId="imgDelete" ImageUrl="~/App_Themes/DefaultBlue/images/delete.gif" AlternateText="Delete" />
+<asp:Image runat="server" SkinId="imgEditSmall" ImageUrl="~/App_Themes/DefaultBlue/images/edit.gif" AlternateText="Edit" />
+<asp:Image runat="server" SkinId="imgEdit" ImageUrl="~/App_Themes/DefaultBlue/images/edit-large.gif" AlternateText="Edit" />
+<asp:Image runat="server" SkinId="imgDownload" ImageUrl="~/App_Themes/DefaultBlue/images/download.gif" AlternateText="Download" />
+<asp:Image runat="server" SkinId="imgUpload" ImageUrl="~/App_Themes/DefaultBlue/images/upload.gif" AlternateText="Upload Document" />
+<asp:Image runat="server" SkinId="imgHelp" ImageUrl="~/App_Themes/DefaultBlue/images/help.gif" AlternateText="ECT User Manual" />
+<asp:Image runat="server" SkinId="imgLocked" ImageUrl="~/App_Themes/DefaultBlue/images/lock.gif" />
+<asp:Image runat="server" SkinId="imgExclamation" ImageUrl="~/App_Themes/DefaultBlue/images/exclamation.gif" AlternateText="Info" />
+<asp:Image runat="server" SkinId="imgCalendar" CssClass="calendar" ImageAlign="AbsMiddle" ImageUrl="~/App_Themes/DefaultBlue/images/calendar.gif" />
+<asp:Image runat="server" SkinId="iconPdf" ImageAlign="AbsMiddle" ImageUrl="~/Images/pdf.ico" />
+<asp:Image runat="server" SkinId="imgSearchSmall" ImageUrl="~/App_Themes/DefaultBlue/images/search-small.gif" AlternateText="Search" />
+<asp:Image runat="server" SkinId="imgUserSmall" ImageUrl="~/App_Themes/DefaultBlue/images/user-small.gif" AlternateText="User Info" />
+<asp:Image runat="server" SkinId="imgPrintSmall" ImageUrl="~/App_Themes/DefaultBlue/images/printer-small.gif" AlternateText="Print" />
+<asp:Image runat="server" SkinId="imgArrowUp" ImageUrl="~/App_Themes/DefaultBlue/images/arrow_up.gif"  />
+<asp:Image runat="server" SkinId="imgArrowDown" ImageUrl="~/App_Themes/DefaultBlue/images/arrow_down.gif"  />
+<asp:Image runat="server" SkinId="imgCheck" ImageUrl="~/App_Themes/DefaultBlue/images/check.gif"  />
+<asp:Image runat="server" SkinId="imgAdd" ImageUrl="~/App_Themes/DefaultBlue/images/add.gif"  />
+
+
+<%-- Link Buttons --%>
+<asp:LinkButton runat="server" SkinId="BoldLink" CssClass="LinkBold" />
+<asp:LinkButton runat="server" SkinId="BoldLinkWhite" CssClass="LinkBoldWhite" />
+<asp:LinkButton runat="server" SkinId="BoldLinkBlue" CssClass="LinkBoldBlue" />
+
+<%-- Image buttons --%>
+<asp:ImageButton runat="server" SkinId="buttonDelete" ImageUrl="~/App_Themes/DefaultBlue/images/delete.gif" />
+<asp:ImageButton runat="server" SkinId="buttonEdit" ImageUrl="~/App_Themes/DefaultBlue/images/edit.gif" />
+<asp:ImageButton runat="server" SkinId="imgUserEdit" ImageUrl="~/App_Themes/DefaultBlue/images/user_edit.gif"  />
+<asp:ImageButton runat="server" SkinId="imgUserActivity" ImageUrl="~/App_Themes/DefaultBlue/images/user_activity.gif" Tooltip="User Activity" />
+<asp:ImageButton runat="server" SkinId="imgUserPerms" ImageUrl="~/App_Themes/DefaultBlue/images/user_perms.gif" Tooltip="User Permissions" />
+
+
+<%-- Menus --%>
+<asp:Menu runat="server" SkinId="MainMenu" Orientation="Horizontal" StaticEnableDefaultPopOutImage="False" 
+    DynamicEnableDefaultPopOutImage="False" DynamicHorizontalOffset="1" StaticSubMenuIndent="0" ReneringMode="Table">
+    <StaticMenuStyle CssClass="MainMenuStaticStyle" />
+    <StaticMenuItemStyle CssClass="MainMenuStaticItemStyle" ItemSpacing="0px" />
+    <DynamicHoverStyle CssClass="MainMenuDynamicItemHoverStyle" />
+    <DynamicMenuItemStyle CssClass="MainMenuDynamicItemStyle" />
+    <StaticHoverStyle CssClass="MainMenuStaticItemHoverStyle" />
+</asp:Menu>
+
+<%-- Grid Views --%>
+<asp:GridView runat="server" CssClass="gridViewMain" GridLines="Horizontal" CellPadding="0">
+   <AlternatingRowStyle CssClass="gridViewAlternateRow" />
+   <HeaderStyle CssClass="gridViewHeader" />
+   <PagerStyle CssClass="gridViewPager" />
+   <RowStyle CssClass="gridViewRow" />
+   <EditRowStyle CssClass="gridViewEdit" />
+   <SelectedRowStyle CssClass="gridViewSelected" />
+</asp:GridView>
+
+<asp:GridView runat="server" SkinId="TestGV" CssClass="gridViewMain" GridLines="Horizontal" CellPadding="0">
+   <AlternatingRowStyle CssClass="newGridViewAlternateRow" />
+   <HeaderStyle CssClass="newGridViewHeader" />
+   <PagerStyle CssClass="gridViewPager" />
+   <RowStyle CssClass="newGridViewRow" />
+   <EditRowStyle CssClass="gridViewEdit" />
+   <SelectedRowStyle CssClass="gridViewSelected" />
+</asp:GridView>

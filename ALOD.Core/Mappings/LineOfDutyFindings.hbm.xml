@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Modules.Lod">
+
+  <class name="LineOfDutyFindings" table="Form348_findings">
+    <id name="Id" column="ID">
+      <generator class="identity" />
+    </id>
+    <property name="LODID" column="LODID" />
+    <property name="PType" column="ptype" />
+    <property name="SSN" column="ssn" />
+    <property name="Name" column="name" />
+    <property name="Grade" column="grade" />
+    <property name="Rank" column="rank" />
+    <property name="Compo" column="compo" />
+    <property name="Pascode" column="pascode" />
+    <property name="DecisionYN" column="decision_yn" />
+    <property name="Finding" column="finding" />
+    <property name="Explanation" column="explanation" />
+    <property name="FindingsText" column="FindingsText" />
+    <property name="CreatedBy" column="created_by" />
+    <property name="CreatedDate" column="created_date" />
+    <property name="ModifiedBy" column="modified_by" />
+    <property name="ModifiedDate" column="modified_date" />
+    <property name="ReferDES" column="refer_des" />
+    <property name="LODInitiation" column="LODInitiation" />
+    <property name="WrittenDiagnosis" column="WrittenDiagnosis" />
+    <property name="MemberRequest" column="MemberRequest" />
+    <property name="CorrectlyIdentified" column="CorrectlyIdentified" />
+    <property name="VerifiedAndAttached" column="VerifiedAndAttached" />
+    <property name="IDTStatus" column="IDTStatus" />
+    <property name="IPCARSAttached" column="IPCARSAttached" />
+    <property name="EightYearRule" column="EightYearRule" />
+    <property name="PriorToDutytatus" column="PriorToDutytatus" />
+    <property name="StatusWorsened" column="StatusWorsened" />
+    <!--<many-to-one name="Unit" column="pascode" property-ref="PasCode"  fetch="join" class="ALOD.Core.Domain.Users.Unit" cascade="none" update="false" insert="false" />-->
+  </class>
+</hibernate-mapping>

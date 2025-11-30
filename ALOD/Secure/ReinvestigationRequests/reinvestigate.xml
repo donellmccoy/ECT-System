@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<TabNavigator>
+	<Configuration>
+		<StartPage>~/Secure/Welcome.aspx</StartPage>
+		<PrintButtonVisible>True</PrintButtonVisible>
+		<PrintButtonText>Print Form 348</PrintButtonText>
+		<PrintScript>PrintForm348();</PrintScript>
+	</Configuration>
+	<Steps>
+		<Step>
+			<Title>RR Member</Title>
+			<Page>SMData.aspx</Page>
+			<Enabled>True</Enabled>
+			<Visible>True</Visible>
+		</Step>
+		<Step>
+			<Title>RR Wing JA</Title>
+			<Page>WingJA.aspx</Page>
+			<Enabled>True</Enabled>
+			<Visible>True</Visible>
+		</Step>
+		<Step>
+			<Title>RR Wing CC</Title>
+			<Page>WingCC.aspx</Page>
+			<Enabled>True</Enabled>
+			<Visible>True</Visible>
+		</Step>
+	  <Step>
+	    <Title>RR Senior Med</Title>
+	    <Page>SeniorMedReviewer.aspx</Page>
+	    <Enabled>True</Enabled>
+	    <Visible>True</Visible>
+	  </Step>
+		<Step>
+			<Title>RR Documents</Title>
+			<Page>documents.aspx</Page>
+			<Enabled>True</Enabled>
+			<Visible>True</Visible>
+		</Step>
+		<Step>
+			<Title>RR Board Review</Title>
+			<Page>lodBoard.aspx</Page>
+			<Enabled>True</Enabled>
+			<Visible>True</Visible>
+		</Step>
+		<Step>
+			<Title>RR Next Action</Title>
+			<Page>NextAction.aspx</Page>
+			<Enabled>True</Enabled>
+			<Visible>True</Visible>
+		</Step>
+    <Step>
+      <Title>Case Dialogue</Title>
+      <Page>CaseDialogue.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+    <Step>
+      <Title>RR Case Comments</Title>
+      <Page>UnitComments.aspx</Page>
+      <Enabled>True</Enabled>
+      <Visible>True</Visible>
+    </Step>
+		<Step>
+			<Title>RR Tracking</Title>
+			<Page>Tracking.aspx</Page>
+			<Enabled>True</Enabled>
+			<Visible>True</Visible>
+		</Step>
+	</Steps>
+</TabNavigator>

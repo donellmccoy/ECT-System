@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Documents">
+
+	<class name="Memorandum2" table="core_Memos2">
+		<id name="Id" column="memoId">
+			<generator class="identity" />
+		</id>
+
+		<property name="ReferenceId" column="refId" />
+    <property name="ModuleId" column="moduleId" />
+    <property name="Deleted" column="deleted" />
+		<property name="CreatedDate" column="created_date" />
+
+		<many-to-one name="Template" cascade="none" column="templateId" />
+		<many-to-one name="Letterhead" cascade="none" column="letterHead" />
+		<many-to-one name="CreatedBy" cascade="none" column="created_by" />
+
+		<bag name="Contents" table="core_MemoContents2" cascade="all">
+			<key column="memoId"></key>
+			<one-to-many class="ALOD.Core.Domain.Documents.MemoContent2" />
+		</bag>
+	</class>
+</hibernate-mapping>

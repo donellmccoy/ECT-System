@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Query">
+
+	<class name="QueryParameter" table="rpt_user_query_param">
+		<id name="Id" column="id">
+			<generator class="identity" />
+		</id>
+		<property name="Operator" column="operator_type" />
+		<property name="WhereType" column="where_type" />
+		<property name="StartValue" column="start_value" />
+		<property name="StartDisplay" column="start_display" />
+		<property name="EndValue" column="end_value" />
+		<property name="EndDisplay" column="end_display" />
+    <property name="ExecuteOrder" column="execute_order" />
+
+		<many-to-one name="Clause" class="QueryClause" column="clause_id" />
+		<many-to-one name="Source" class="InputSource" column="source_id" />
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Workflow">
+
+	<class name="RuleType" table="core_lkupRules">
+		<id name="Id" column="Id">
+			<generator class="identity" />
+		</id>
+		<property name="Name" column="Name" />
+		<property name="Prompt" column="Prompt" />
+		<property name="ruleTypeId" column="ruleType" />
+		<property name="Active" column="Active" />
+
+    <bag name="OptionList" table="core_WorkStatus_Rules" cascade="all">
+			<key column="ruleId"></key>
+			<one-to-many class="WorkflowOptionRule" />
+		</bag>
+    <many-to-one name="Workflow" class="Workflow" column="workFlow" />
+  </class>
+</hibernate-mapping>

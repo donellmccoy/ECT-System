@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Modules.Lod">
+
+    <class name="LODComment" table="Case_Comments">
+        <id name="Id" column="id">
+            <generator class="identity" />
+        </id>
+        <property name="LodId" column="lodid" />
+        <property name="Comments" column="comments" />
+        <property name="CreatedDate" column="created_date" />
+        <property name="Deleted" column="deleted" />
+        <property name="ModuleID" column="ModuleID" />
+        <property name="CommentType" column="CommentType" />
+        <many-to-one name="CreatedBy" class="ALOD.Core.Domain.Users.AppUser" column="created_by" />
+    </class>
+</hibernate-mapping>

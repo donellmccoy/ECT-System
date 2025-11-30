@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Documents">
+
+	<class name="MemoTemplate" table="core_MemoTemplates">
+		<id name="Id" column="templateId">
+			<generator class="identity" />
+		</id>
+
+		<property name="Title" column="title" />
+		<property name="Body" column="body" />
+		<property name="Attachments" />
+		<property name="SignatureBlock" column="sigBlock" />
+		<property name="Active" column="active" />
+		<property name="AddDate" column="addDate" />
+		<property name="AddSuspenseDate" column="addSuspenseDate" />
+		<property name="DataSource" column="dataSource" />
+		<property name="Component" column="compo" />
+		<property name="ContainsPhi" column="phi" />
+		<property name="AddSignature" column="addSignature" />
+		<property name="ModuleType" column="module" />
+    <property name="FontSize" column="font_size" />
+
+		<property name="CreatedDate" column="created_date" />
+		<property name="ModifiedDate" column="modified_date" />
+		<many-to-one name="CreatedBy" cascade="none" column="created_by" />
+		<many-to-one name="ModifiedBy" cascade="none" column="modified_by" />
+
+		<bag name="GroupPermissions" table="core_MemoGroups" cascade="none">
+			<key column="templateId"></key>
+			<one-to-many class="MemoGroup" />
+		</bag>
+	</class>
+</hibernate-mapping>

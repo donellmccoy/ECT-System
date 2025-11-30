@@ -1,0 +1,250 @@
+# --------------------------------------------------------------
+# Azure Pipelines – Production Build for SRXLite (.NET Framework 4.8.1 VB Web Site)
+# --------------------------------------------------------------
+# This pipeline builds the SRXLite document management web application and creates a deployment artifact.
+#
+# Trigger: Runs on commits to main, develop, release/*, and donell_mccoy_development branches
+# Output: ZIP artifact containing the compiled web application
+#
+# Artifact Details:
+#   - Container Name: "SRXLite - Production"
+#   - ZIP File Name: "SRXLite.<Configuration>.<BuildNumber>.zip"
+#     Example: SRXLite.Production.20251114.15.zip
+#
+# Pipeline Architecture:
+#   Stage 1 - Build: Compile solution and publish build outputs
+#   Stage 2 - Package: Create deployment ZIP (tests excluded - SRXLite has no test project)
+#
+# Build Process:
+#   1. NuGet package restore from Azure Artifacts feed and NuGet.org
+#   2. MSBuild compilation (AnyCPU, minimal verbosity)
+#   3. Publish build outputs as pipeline artifact for downstream stages
+#   4. Web app packaging with CopyFiles@2, web.config transform, ZIP creation
+#   5. Artifact publication to pipeline
+#
+# Performance Optimization:
+#   - NuGet packages cached by packages.config hash
+#   - MSBuild outputs disabled (cache slower than clean compile)
+#
+# Parameters:
+#   - buildConfiguration: Build configuration (default: Production)
+#   - artifactFeed: Azure Artifacts feed name (default: ECT System/ECT-NuGet)
+#   - deployToProd: Future deployment flag (default: false)
+# --------------------------------------------------------------
+trigger: none   # Manual triggers only
+
+pr: none   # Disable PR triggers – enable only if needed
+
+# --------------------------------------------------------------
+# PARAMETERS (can be overridden from UI or CLI)
+# --------------------------------------------------------------
+parameters:
+  - name: buildConfiguration
+    type: string
+    default: Production
+  - name: artifactFeed
+    type: string
+    default: ECT System/ECT-NuGet
+  - name: deployToProd
+    type: boolean
+    default: false
+
+# --------------------------------------------------------------
+# VARIABLES
+# --------------------------------------------------------------
+variables:
+  solution: 'AFLOD.sln'
+  buildPlatform: 'Any CPU'
+  artifactName: 'SRXLite.${{ parameters.buildConfiguration }}.v$(Build.BuildNumber)'
+  artifactContainer: 'SRXLite - Production'
+  nugetCacheKey: 'nuget | "${{ parameters.artifactFeed }}" | "$(Agent.OS)" | $(Build.SourcesDirectory)/**/packages.config'
+
+pool:
+  vmImage: 'windows-2022'
+
+# --------------------------------------------------------------
+# STAGES
+# --------------------------------------------------------------
+stages:
+# ==============================================================
+# STAGE 1: BUILD
+# ==============================================================
+- stage: Build
+  displayName: Build Solution
+  jobs:
+  - job: Compile
+    displayName: Compile and Publish Build Outputs
+    steps:
+    # Install NuGet CLI tool (version 5.0 or higher)
+    # Required for package restore from Azure Artifacts and NuGet.org
+    - task: NuGetToolInstaller@1
+      displayName: Install NuGet
+      inputs:
+        versionSpec: '>=5.0'
+
+    # Authenticate with Azure Artifacts feed using pipeline service connection
+    # Enables access to private NuGet packages in 'ECT System/ECT-NuGet' feed
+    - task: NuGetAuthenticate@1
+      displayName: Authenticate Azure Artifacts
+
+    # Cache NuGet packages to speed up subsequent builds
+    # Key: Hash of packages.config files (invalidates when dependencies change)
+    # Fallback: Restore from feed + OS-specific cache
+    - task: Cache@2
+      displayName: Cache NuGet Packages
+      inputs:
+        key: $(nugetCacheKey)
+        path: '$(Build.SourcesDirectory)\packages'
+        restoreKeys: |
+          nuget | "${{ parameters.artifactFeed }}" | "$(Agent.OS)"
+
+    # Restore NuGet packages for all projects in the solution
+    # Sources: Azure Artifacts feed (ECT System/ECT-NuGet) + NuGet.org
+    # Uses cache from previous step if available
+    - task: NuGetCommand@2
+      displayName: NuGet Restore
+      inputs:
+        command: restore
+        restoreSolution: '$(solution)'
+        feedsToUse: select
+        vstsFeed: '${{ parameters.artifactFeed }}'
+        includeNuGetOrg: true
+        verbosityRestore: Quiet
+        noWarn: 'NU1701,NU1603,NU1902'
+
+    # Compile the solution using MSBuild
+    # Platform: AnyCPU (compatible with x86 and x64)
+    # Configuration: From pipeline parameter (Production/Staging/Testing/Debug/Release)
+    # Features: Parallel compilation (/m), incremental builds (clean: false), minimal logging
+    # Timeout: 10 minutes to prevent hung builds
+    - task: MSBuild@1
+      displayName: Build Solution
+      timeoutInMinutes: 10
+      inputs:
+        solution: '$(solution)'
+        platform: '$(buildPlatform)'
+        configuration: '${{ parameters.buildConfiguration }}'
+        clean: false
+        msbuildArchitecture: x64
+        msbuildArguments: '/p:WarningLevel=4 /m /verbosity:minimal'
+
+    # Publish build outputs for downstream stages
+    # Publishes: Entire source directory including compiled bin folders
+    # Used by: Package job in next stage
+    - task: PublishPipelineArtifact@1
+      displayName: Publish Build Outputs
+      inputs:
+        targetPath: '$(Build.SourcesDirectory)'
+        artifact: 'BuildOutputs'
+        publishLocation: pipeline
+
+# ==============================================================
+# STAGE 2: PACKAGE
+# ==============================================================
+- stage: Package
+  displayName: Create Deployment Package
+  dependsOn: Build
+  jobs:
+  - job: CreateArtifact
+    displayName: Create Deployment Artifact
+    steps:
+    # Download build outputs from Build stage
+    - task: DownloadPipelineArtifact@2
+      displayName: Download Build Outputs
+      inputs:
+        artifact: 'BuildOutputs'
+        path: '$(Build.SourcesDirectory)'
+
+    # Copy web application files to staging directory
+    # Excludes: Build artifacts (obj, bin folders), project files, packages.config
+    # Uses CopyFiles@2 for optimized file operations and better performance
+    # CleanTargetFolder automatically creates directory if it doesn't exist
+    - task: CopyFiles@2
+      displayName: Copy Web App Files
+      inputs:
+        SourceFolder: '$(Build.SourcesDirectory)\SRXLite'
+        Contents: |
+          **
+          !obj/**
+          !bin/**
+          !**/*.vbproj
+          !**/*.user
+          !**/packages.config
+          !My Project/**
+          !Old_App_Code/**
+          !Screenshots/**
+          !README.md
+          !SRXLIte_IIS_Setup.md
+        TargetFolder: '$(Build.ArtifactStagingDirectory)\SRXLite'
+        CleanTargetFolder: true
+        OverWrite: true
+
+    # Copy bin folder separately to staging directory
+    # Copies compiled assemblies and dependencies from build output
+    # Ensures bin folder structure is preserved correctly
+    - task: CopyFiles@2
+      displayName: Copy Bin Folder
+      inputs:
+        SourceFolder: '$(Build.SourcesDirectory)\SRXLite\bin'
+        Contents: '**'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)\SRXLite\bin'
+        OverWrite: true
+
+    # Apply environment-specific web.config transformation
+    # Transform File: web.<Configuration>.config (e.g., web.Production.config)
+    # Uses XDT (XML Document Transform) rules to merge configuration settings
+    # Result: web.config contains environment-specific connection strings, app settings, etc.
+    # Note: Requires enableXmlTransform=true and explicit transformation rules
+    - task: FileTransform@2
+      displayName: Transform Web.Config
+      inputs:
+        folderPath: '$(Build.ArtifactStagingDirectory)\SRXLite'
+        xmlTransformationRules: '-transform **\web.${{ parameters.buildConfiguration }}.config -xml **\web.config'
+
+    # Clean up environment-specific transform files from artifact
+    # Removes: web.Debug.config, web.Release.config, web.Production.config, etc.
+    # Keeps: web.config (already transformed)
+    # Purpose: Security (prevents leaking configs) and artifact size reduction
+    - task: PowerShell@2
+      displayName: Remove Transform Files
+      inputs:
+        targetType: inline
+        script: |
+          # Remove all web.*.config files except web.config
+          Get-ChildItem "$(Build.ArtifactStagingDirectory)\SRXLite" -Filter "web.*.config" | Remove-Item -Force
+          Write-Host "Removed web transform files"
+
+    # Create deployment ZIP archive from staged web application
+    # Source: $(Build.ArtifactStagingDirectory)\SRXLite
+    # Output: SRXLite.<Configuration>.<BuildNumber>.zip
+    # Contents: web.config (transformed), bin folder, all .aspx/.ascx files, etc.
+    - task: ArchiveFiles@2
+      displayName: Zip Website Artifact
+      inputs:
+        rootFolderOrFile: '$(Build.ArtifactStagingDirectory)\SRXLite'
+        includeRootFolder: false
+        archiveFile: '$(Build.ArtifactStagingDirectory)/$(artifactName).zip'
+        replaceExistingArchive: true
+
+    # Publish ZIP file to pipeline artifacts
+    # Container Name: "SRXLite - Production" (constant across all builds)
+    # Artifact Name: SRXLite.<Configuration>.<BuildNumber>.zip
+    # Location: Azure DevOps pipeline artifacts (accessible from build summary)
+    # Retention: Follows project retention policies
+    - task: PublishPipelineArtifact@1
+      displayName: Publish ZIP to Artifacts
+      inputs:
+        targetPath: '$(Build.ArtifactStagingDirectory)/$(artifactName).zip'
+        artifact: '$(artifactContainer)'
+        publishLocation: pipeline
+
+    # Display pipeline execution summary
+    # Condition: Always runs (even if previous tasks fail)
+    # Output: Build ID and configuration for troubleshooting
+    - task: PowerShell@2
+      displayName: Pipeline Summary
+      condition: always()
+      inputs:
+        targetType: inline
+        script: |
+          Write-Host "Pipeline completed. Build ID: $(Build.BuildId), Configuration: ${{ parameters.buildConfiguration }}"

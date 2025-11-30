@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Modules.Appeals">
+
+  <class name="LODAppeal" table="form348_AP" lazy="false">
+    <id name="Id" column="appeal_id">
+      <generator class="identity" />
+    </id>
+    <!--<property name="AppealLodId" column="appeal_lod_id" />-->
+    <property name="InitialLodId" column="initial_lod_id" />
+    <property name="CaseId" column="case_id" />
+    <property name="CreatedBy" column="created_by" />
+    <property name="CreatedDate" column="created_date" />
+    <property name="ModifiedBy" column="modified_by" />
+    <property name="ModifiedDate" column="modified_date" />
+    <property name="Workflow" column="workflow" />
+    <property name="Status" column="status" />
+    <property name="Cancel_Reason" column="cancel_reason" />
+    <property name="Cancel_Explanation" column="cancel_explanation" />
+    <property name="Cancel_Date" column="cancel_date" />
+    <property name="RWOA_Reason" column="rwoa_reason" />
+    <property name="RWOA_Date" column="rwoa_date" />
+    <property name="RWOA_Explanation" column="rwoa_explanation" />
+    <property name="ReturnToGroup" column="return_to_group" />
+    <property name="ReturnByGroup" column="return_by_group" />
+    <property name="MemberNotified" column="member_notified" />
+    <property name="IsPostProcessingComplete" column="is_post_processing_complete" />
+    <property name="IsNonDBSignCase" column="is_non_dbsign_case" />
+
+    <!--component name="LODProgramManagerSignature" class="ALOD.Core.Domain.Modules.Lod.SignatureEntry">
+      <property name="DateSigned" column="sig_date_pm" />
+      <property name="NameAndRank" column="sig_name_pm" />
+      <property name="Title" column="sig_title_pm" />
+    </component>
+    <component name="BoardTechSignature" class="ALOD.Core.Domain.Modules.Lod.SignatureEntry">
+      <property name="DateSigned" column="sig_date_board_tech" />
+      <property name="NameAndRank" column="sig_name_board_tech" />
+      <property name="Title" column="sig_title_board_tech" />
+    </component>
+    <component name="BoardMedicalSignature" class="ALOD.Core.Domain.Modules.Lod.SignatureEntry">
+      <property name="DateSigned" column="sig_date_board_medical" />
+      <property name="NameAndRank" column="sig_name_board_medical" />
+      <property name="Title" column="sig_title_board_medical" />
+    </component>
+    <component name="BoardLegalSignature" class="ALOD.Core.Domain.Modules.Lod.SignatureEntry">
+      <property name="DateSigned" column="sig_date_board_legal" />
+      <property name="NameAndRank" column="sig_name_board_legal" />
+      <property name="Title" column="sig_title_board_legal" />
+    </component>
+    <component name="BoardAdminSignature" class="ALOD.Core.Domain.Modules.Lod.SignatureEntry">
+      <property name="DateSigned" column="sig_date_board_admin" />
+      <property name="NameAndRank" column="sig_name_board_admin" />
+      <property name="Title" column="sig_title_board_admin" />
+    </component>
+    <component name="ApprovingAuthoritySignature" class="ALOD.Core.Domain.Modules.Lod.SignatureEntry">
+      <property name="DateSigned" column="sig_date_approving_auth" />
+      <property name="NameAndRank" column="sig_name_approving_auth" />
+      <property name="Title" column="sig_title_approving_auth" />
+    </component>
+    <component name="AppellateAuthoritySignature" class="ALOD.Core.Domain.Modules.Lod.SignatureEntry">
+      <property name="DateSigned" column="sig_date_appellate_auth" />
+      <property name="NameAndRank" column="sig_name_appellate_auth" />
+      <property name="Title" column="sig_title_appellate_auth" />
+    </component>-->
+
+    <bag name="Findings" table="Form348_AP_Findings"  cascade="all" inverse="true">
+      <key column="appeal_id"></key>
+      <one-to-many class="LODAppealFindings" />
+    </bag>
+
+    <many-to-one name="WorkflowStatus" class="ALOD.Core.Domain.Workflow.WorkStatus" column="Status" cascade="none" update="false" insert="false" />
+
+    <property name="Return_Comment" column="return_comment" />
+    <property name="MemberSSN" column="member_ssn" />
+    <property name="MemberName" column="member_name" />
+    <property name="MemberUnit" column="member_unit" />
+    <property name="MemberUnitId" column="member_unit_id" />
+    <property name="MemberCompo" column="member_compo" />
+    <property name="DocumentGroupId" column="doc_group_id" />
+
+    <many-to-one name="MemberRank" class="ALOD.Core.Domain.Lookup.UserRank" column="member_grade" update="true" insert="true" />
+  </class>
+</hibernate-mapping>

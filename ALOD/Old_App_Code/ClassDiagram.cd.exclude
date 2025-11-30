@@ -1,0 +1,1005 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AFLODDataContext" Collapsed="true">
+    <Position X="13" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>aEIFMq2EGA6IK5CQAIqgAEEOaKUQaQoUAfsMBAKopIg=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="core_lkupRule" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAiIAARAAAIIAABYAGgFAAJjCCEQQAAANBQKIAUAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="core_lkupRuleTypes" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAiAAABCAEgAAAAQAEAAAABjCAAAAAEAAQAAAEUAAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="core_WorkStatus" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="6" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ggIgAAAVQAQSKAAEYIFAACABiDAAAAAAkBAAASAQIBA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="core_StatusCode" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="20" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgIlAaBBYkESDADFZAEAmABBqCJQAICQAAQAqCQAiIg=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="core_WorkStatus_Rule" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAggAAABCAADAAAAQAMAgQDhqDAAADAAAAgCABABhIg=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="core_lkupWorkflowAction" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAABAwCAAATAQAEAAAAhiCABAAAIAAAAAAAABAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="core_WorkStatus_Option" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgIgAAAFCQSDOADFQIFABARJiDEEAAAAEIAQKSgRpAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="core_lkupModule" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="6" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAwABgAAAJACAUAEAACBBiCAAAEAAABAAAAYgIAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="core_MemoWorkFlow" Collapsed="true">
+    <Position X="16.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAQAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="core_EmailTemplate" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAIABhgAAAFAG4IERRAAFifAIEAAgAIAQDAAAECA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="core_WorkStatus_Action" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAggAABjAADRAAAcAkAAABByCAAAAAAAAgSGABBBAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="core_Witness" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="21.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAiIYABAgAIAACMYAFAAAZBnCIERAAAAAAACERYAgA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="core_lkUpFinding" Collapsed="true">
+    <Position X="18.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAgAAAAAAAAAAAgAAAAAAAEAAAQAAAEAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="core_lkUpFindings" Collapsed="true">
+    <Position X="20" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAgAAAAAAAAAAAgAAAAAAAEAAAQAAAEAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Form348_Unit" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAgRAgBADpgABRCQJMACgAFiCAAYAMAQQBAQCAGEEA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="core_lkupICD9" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="21.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAkAAIFAgQAAAAEQIEAAAAhiCDAEDEoEAAACgAABAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="core_lkupRWOAReason" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="13" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAIBAgEggABAQAEEAAABiCEAAAAEARYAAAAEBAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Rwoa" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="13" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AE0gNRsBgACASEACSEEBACEFiDQGRMIgFMMgAwAARIA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="core_lkupIncidentType" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="23.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAhAAABACAAAAACQAFAAAADjCAAAAQSAAAAAAAQAgI=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Form261" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="20" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>Qu7i3gghccTKPTsuzXXYj70jzC+0voVCbAFjAw/p6pY=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Form348" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="21.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AE6pbgrR+DbvDerM023f+L0z777WleI5E1U3a+pu5K0=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Form348_Medical" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="23.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAgRAiBIAMAAFBi8EGAOAQLmChBMQDCgAABRAGMYgQ=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="core_lkupPhyCancelReason" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAABAgEggABAQAEEAAABiCAAAAAEARQAAAAEBAA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="core_Workflow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="23.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gABkAYEBSoAwAACAagEBDABBiCEAgACBgIAQLBUAgBA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="core_rule_sp_InsertRuleResult" Collapsed="true">
+    <Position X="18.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAgAABAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Print_sp_Form348Result" Collapsed="true">
+    <Position X="16.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABQAgAgAAAAAACEASAEAACBAAAAAAAAAAAAAAAEAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Form348_sp_GetIolistResult" Collapsed="true">
+    <Position X="6" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAABAAiAAAAAAAAAAEBAAIAQAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="lod_sp_AccessHeaderResult" Collapsed="true">
+    <Position X="14.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AERAJSAAwMAABAAEKAAACAAQAAAwAABFAFAAYAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChangeRow" Collapsed="true">
+    <Position X="23.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAmCBAAAAAAAABAAABBAAgUAAAAAABIAQIEAIAAgAA=</HashCode>
+      <FileName>App_Code\Core\Common\ChangeRow.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChangeSet" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="6" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEIAAOAAAAAAABASAAAABgYEBAADCAGECAAAAABQIAA=</HashCode>
+      <FileName>App_Code\Core\Common\ChangeSet.vb</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ChangeSetDetails" Collapsed="true">
+    <Position X="7.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEBAEEAAAAAAAAEABEBAAgQAAAAAAAIAAAAAEAAAAo=</HashCode>
+      <FileName>App_Code\Core\Common\ChangeSetDetails.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="childunit" Collapsed="true">
+    <Position X="9.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAiQAAAAAABAEAAAICACAAIAAAAAADQAAAQQEAAAQ=</HashCode>
+      <FileName>App_Code\Core\Common\childunit.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="childUnitsList" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IEIAAEAAAAAAABAQAAEABQQkAAACAAAACAAAAABQIBA=</HashCode>
+      <FileName>App_Code\Core\Common\childUnitsList.vb</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ModControl" Collapsed="true">
+    <Position X="14.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAgAAAAAAAAAAAAAAABAICBAAAAAQAIAQhAAAA=</HashCode>
+      <FileName>App_Code\Core\Common\ControlCheck.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ModControls" Collapsed="true">
+    <Position X="16.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAQAAAAAAAAAAAAAAAAAAAAAAIAIAAAAgAA=</HashCode>
+      <FileName>App_Code\Core\Common\ControlCheck.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ControlLoad" Collapsed="true">
+    <Position X="13" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAAEAAAAAAAAAAAAEAAAAAAAAIA=</HashCode>
+      <FileName>App_Code\Core\Common\ControlCheck.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ControlValues" Collapsed="true">
+    <Position X="14.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAIAAAAIAAgAAAAAAAAAAIBAAAAAACAAAA=</HashCode>
+      <FileName>App_Code\Core\Common\ControlValues.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DutyStatus" Collapsed="true">
+    <Position X="18.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>DAAAAAAAAAAAAAAgAAAAAAAACAAAAAAACAAAAAAEAAg=</HashCode>
+      <FileName>App_Code\Core\Common\Enums.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InvestigationDecision" Collapsed="true">
+    <Position X="11.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAIAAAAAAAAAABAAAAAACEIAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Code\Core\Common\Enums.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="lodControl" Collapsed="true">
+    <Position X="16.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABCEIAAAAAAAAAABAAAAAAQEAAAAAAAAAQAgAIAAgAA=</HashCode>
+      <FileName>App_Code\Core\Common\lodControl.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="lodControlList" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEIAAEAAAQIAABAQAAAABAQkAAACAEAACAAAAAFQYAA=</HashCode>
+      <FileName>App_Code\Core\Common\lodControlList.vb</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Message" Collapsed="true">
+    <Position X="11.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>JAEAICAEIJAABEGAAQAAAAQAKAAgAAIEEBAAIACAAgE=</HashCode>
+      <FileName>App_Code\Core\Common\Message.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MessageList" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="13" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEYAIEAAEAIAABAQAAAABBQEAAAKCAAAOAAAIABSIAA=</HashCode>
+      <FileName>App_Code\Core\Common\MessageList.vb</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="pascode" Collapsed="true">
+    <Position X="23.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AtABBKQ0gaAiEAFEJEIGWMAwhIAAARAXZADjEEoSYwc=</HashCode>
+      <FileName>App_Code\Core\Common\PasCode.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="pasCodeList" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="6" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AFIAAMAAAAAAABAQAAAABAQEAAACAAAACAAACADQIAA=</HashCode>
+      <FileName>App_Code\Core\Common\PasCodeList.vb</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PwaiverDate" Collapsed="true">
+    <Position X="21.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAAAAAAAAAAAIAAAEAAAAACAAAAAg=</HashCode>
+      <FileName>App_Code\Core\Common\PwaiverDate.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SecureQueryString" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQYgACAgAACIAZAUCAgAPA8kAAAWEARSIlAwAABYIGA=</HashCode>
+      <FileName>App_Code\Core\Common\SecureQueryString.vb</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="UserPreferences" Collapsed="true">
+    <Position X="11.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAAgAAAAAAAAABAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Code\Core\Common\UserPreferences.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VerifyIOSignature" Collapsed="true">
+    <Position X="13" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ARAAAAAAACAAAAAAAAAAAAABAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>App_Code\Core\Common\VerifyIOSignature.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WorkingEnum(Of T)" Collapsed="true">
+    <Position X="11.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAhgAAAIAAAAQAAAAAAhAAAAAAAAAAACIAgAIAABAA=</HashCode>
+      <FileName>App_Code\Core\Common\WorkingEnum.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="XMLString" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="6" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAEQACAAAAAEAAAAAAAAAAQAAAAAAAAgAgCAAJA=</HashCode>
+      <FileName>App_Code\Core\Common\XMLString.vb</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="LookUp" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAABAhgAAAAAAAAAABAAAABgAAEEAAAAEAAwAA=</HashCode>
+      <FileName>App_Code\Core\LookUps\LookUp.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LookUpRow" Collapsed="true">
+    <Position X="7.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAAAAAAAAAAAACAIAAAAAAAAAAA=</HashCode>
+      <FileName>App_Code\Core\LookUps\LookUpRow.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LookUpTable" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IEYAAEAgAAAAABCQAABABQQEAAAKAAAAGAAAAABQoBI=</HashCode>
+      <FileName>App_Code\Core\LookUps\LookUpTable.vb</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Memo" Collapsed="true">
+    <Position X="9.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EwQaApkIBoshhCgVBkhILQQgABCAS5BhoRjmhSBigDI=</HashCode>
+      <FileName>App_Code\Core\Memo\Memo.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PageTitle" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACCAEAAAIAAAEAAAAAAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>App_Code\Core\PageTitles\PageTitle.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PageTitleList" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="21.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEIAAEAAAAAAABAQAAAABEQEABACIAAADAAAAABQYBA=</HashCode>
+      <FileName>App_Code\Core\PageTitles\PageTitleList.vb</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="OnlineUserList" Collapsed="true">
+    <Position X="18.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAACAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Code\Core\Perms\OnlineUserList.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Permission" Collapsed="true">
+    <Position X="9.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEDCIAAEAAAkAAAEIIBAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Code\Core\Perms\Permission.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PermissionList" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEIAAEAAAACBABIUAAIABQQEAAIKgCEICgAAAABUYCA=</HashCode>
+      <FileName>App_Code\Core\Perms\PermissionList.vb</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PermRequest" Collapsed="true">
+    <Position X="13" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEIAAIAAAAgAAAQQEBBEgAgAgAAACEAIAQIAAAAAAAA=</HashCode>
+      <FileName>App_Code\Core\Perms\PermRequest.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PermRequestList" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEIAAMAAAAAAABAQEAAgBAQEAAACAAAASAAAAABQIAA=</HashCode>
+      <FileName>App_Code\Core\Perms\PermRequestList.vb</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AppSearch" Collapsed="true">
+    <Position X="16.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EkSFIKAOgGAADAaAIFADkAQAgJSAAAAJgEDEABAAACA=</HashCode>
+      <FileName>App_Code\Core\Perms\Search\AppSearch.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AppSearchList" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CEYgAECAAAAAgBAQAAAgFQQEARAKgAAAiAAAIABQYBA=</HashCode>
+      <FileName>App_Code\Core\Perms\Search\AppSearchList.vb</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ItemSelectedEventArgs" Collapsed="true">
+    <Position X="13" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IEQBAAAEAAAAAAYAIEACAIAAAASAQFQIiQCAgAAAAAA=</HashCode>
+      <FileName>App_Code\Core\Perms\Search\ItemSelectedEventArgs.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PDFDocument" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAQAQAAAAAAAAAAAABAAAgCKAAA=</HashCode>
+      <FileName>App_Code\Core\Printing\PDFDocument.vb</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PDFForm" Collapsed="true">
+    <Position X="3.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>KAAAAQkAACABAABAAQAASAAoIAAAAAACABAYAgCAwQA=</HashCode>
+      <FileName>App_Code\Core\Printing\PDFForm.vb</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="PrintDocument" Collapsed="true">
+    <Position X="3.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>SEAAAgAAAAQAAAYAIAAAgAAAQACAAAIAAEAAAABAAIA=</HashCode>
+      <FileName>App_Code\Core\Printing\PrintDocument.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PrintStore" Collapsed="true">
+    <Position X="18.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgKAAAABABAAAAQCQAAAUAABAAEAAAAAAAAAAAAABA=</HashCode>
+      <FileName>App_Code\Core\Printing\PrintStore.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AuthenticationHandler" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="20" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAQAAAAAIIAAAAAgAAAAAACAAAACAA=</HashCode>
+      <FileName>App_Code\Core\Providers\AuthenticationHandler.vb</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AuthProvider" Collapsed="true">
+    <Position X="21.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAQgAABAIAAAAQAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>App_Code\Core\Providers\AuthProvider.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LodCrypto" Collapsed="true">
+    <Position X="20" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAQAAAEAAAAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>App_Code\Core\Providers\LodCrypto.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LodPrinciple" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="23.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAEEABAAAAABA=</HashCode>
+      <FileName>App_Code\Core\Providers\LodPrinciple.vb</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="LodSiteMapProvider" Collapsed="true">
+    <Position X="6" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Code\Core\Providers\LodSiteMapProvider.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UserAuthentication" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAABAAAAiAAAAAQgAgAAAAAAEQIAAIAAAAA=</HashCode>
+      <FileName>App_Code\Core\Providers\UserAuthentication.vb</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ALodRptList" Collapsed="true">
+    <Position X="14.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEACAgChKEgAAgAAkAAAAAAgQYIAAAgAIAAAAIQ=</HashCode>
+      <FileName>App_Code\Core\Reports\ALodRptList.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QueryBuilder" Collapsed="true">
+    <Position X="23.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAEEJAATAAgAABAABAAEAAAEAAAAAAAAQIAIBA=</HashCode>
+      <FileName>App_Code\Core\Reports\QueryBuilder.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QueryCondition" Collapsed="true">
+    <Position X="6" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAIAAAAAAAAAQAAAAAAAQAABAAAIAAAAAgAAAAkAA=</HashCode>
+      <FileName>App_Code\Core\Reports\QueryCondition.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuerySource" Collapsed="true">
+    <Position X="7.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAEAIgAAAADAAQQCgEAABAAAAgAAAAASgIA=</HashCode>
+      <FileName>App_Code\Core\Reports\QuerySource.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TabControlBase" Collapsed="true">
+    <Position X="23.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAQAAAAAIAA=</HashCode>
+      <FileName>App_Code\Core\TabNavigator\TabControlBase.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TabItem" Collapsed="true">
+    <Position X="6" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAACAIEQAMIQAAAAABEAAAAJIAE4AACQAAAAAgA=</HashCode>
+      <FileName>App_Code\Core\TabNavigator\TabItem.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TabItemList" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEIAAEAAAAAAABAQAAAABAQEAAACAAAASAAAAABQIAA=</HashCode>
+      <FileName>App_Code\Core\TabNavigator\TabItemList.vb</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ActiveCase" Collapsed="true">
+    <Position X="6" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQCAAAAAAIAgAUQEEGAAAAAAAACAQAAAAwEAAAAAAAA=</HashCode>
+      <FileName>App_Code\Core\Workflow\ActiveCase.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ActiveCaseList" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAEAAAAAAAABAQAAAABAQAAAACACAAQAAAAABQIAA=</HashCode>
+      <FileName>App_Code\Core\Workflow\ActiveCaseList.vb</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ActiveTask" Collapsed="true">
+    <Position X="9.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AhAEAIAAAIEAAAAAAAQAAgEIAAQAAAiAgAAAAIAAAAA=</HashCode>
+      <FileName>App_Code\Core\Workflow\ActiveTask.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ActiveTaskList" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEIAAEAAAAAAARAQAAAABAQEAgQiIAAECAAAAIBQIAA=</HashCode>
+      <FileName>App_Code\Core\Workflow\ActiveTaskList.vb</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="OptionRule" Collapsed="true">
+    <Position X="20" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACICAABAAACAAAAAAAAAAAAABgDAAAAAAAAAAAgA=</HashCode>
+      <FileName>App_Code\Core\Workflow\OptionRule.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rule" Collapsed="true">
+    <Position X="9.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Code\Core\Workflow\Rule.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RuleList" Collapsed="true">
+    <Position X="11.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Code\Core\Workflow\RuleList.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SignCompletedEventArgs" Collapsed="true">
+    <Position X="16.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IgAAAABAEAAIAAAAAUAAAAAAAAQAQBAICAgACAwAIgA=</HashCode>
+      <FileName>App_Code\Core\Workflow\SignCompletedEventArgs.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SignStartedEventArgs" Collapsed="true">
+    <Position X="18.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgACAgBAUAAIAAAAAUACAAABAAAAQgAAAAAAAAwAIAA=</HashCode>
+      <FileName>App_Code\Core\Workflow\SignStartedEventArgs.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StatusCode" Collapsed="true">
+    <Position X="20" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgCAQGBMAAAgBCKEMAAAAASAABAQgAACABAAAAAgAIE=</HashCode>
+      <FileName>App_Code\Core\Workflow\StatusCode.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StatusCodeList" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="21.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEIAAHAAAAIAABAQAAAABRYEEDAKAAAACAABBABwYBA=</HashCode>
+      <FileName>App_Code\Core\Workflow\StatusCodeList.vb</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Workflow" Collapsed="true">
+    <Position X="14.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AhBDImAAIIACAEIAIABAAAwAAAAAhAEiAADQAAgAAIA=</HashCode>
+      <FileName>App_Code\Core\Workflow\Workflow.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WorkflowAction" Collapsed="true">
+    <Position X="16.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAkBABAAAAAQAAQBAACAAQAAEABAIAQAACAAAAAA=</HashCode>
+      <FileName>App_Code\Core\Workflow\WorkflowAction.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WorkflowActionList" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEIAAkAAIgAAABAQAAAABAQEAAAGAAAASAEAABBQIAA=</HashCode>
+      <FileName>App_Code\Core\Workflow\WorkflowActionList.vb</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WorkFlowList" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="20" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEMACEAAACAAAFJQAAAABhQEAAAKAAAACggABABQoBA=</HashCode>
+      <FileName>App_Code\Core\Workflow\WorkFlowList.vb</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WorkflowPermission" Collapsed="true">
+    <Position X="21.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAKBEAAAAAQAAABAAAAAAAAAAAAABgBAAAAAAAAE=</HashCode>
+      <FileName>App_Code\Core\Workflow\WorkflowPermission.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WorkflowPermissionList" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="23.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEIAAEEAACAAABIQAAAADAYEAAACAAAAiAAAAABQKBA=</HashCode>
+      <FileName>App_Code\Core\Workflow\WorkflowPermissionList.vb</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WorkflowStep" Collapsed="true">
+    <Position X="6" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgSiRMAAEKAIAVIAAABAACFAACEYAGCoCEAwCQwAIBg=</HashCode>
+      <FileName>App_Code\Core\Workflow\WorkflowStep.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WorkflowStepList" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QEICIEAAQAAAABIRAAAABAQEAAACAAAAiAAAABBQYBA=</HashCode>
+      <FileName>App_Code\Core\Workflow\WorkflowStepList.vb</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WorkflowView" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAAAAAAAAAAAAEgAAAAAiAAAAAAAAAA=</HashCode>
+      <FileName>App_Code\Core\Workflow\WorkflowView.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WorkflowViewList" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEIEAEACAAAAABIQAAAABAQEABACAAAACEAAAABQYBA=</HashCode>
+      <FileName>App_Code\Core\Workflow\WorkflowViewList.vb</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WorkOptionRule" Collapsed="true">
+    <Position X="13" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAIBAIAAIAEAAAQBAAAAAAAAAAAQAAAAAAIABAAA=</HashCode>
+      <FileName>App_Code\Core\Workflow\WorkOptionRule.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WorkOptionRuleList" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AmIAAEAAAAAAABIQAAAABAQEAAACAAAASAAAAABQIBA=</HashCode>
+      <FileName>App_Code\Core\Workflow\WorkOptionRuleList.vb</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WorkStatus" Collapsed="true">
+    <Position X="16.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EEACBKAEACAgAAAEACBAAAAAAAAAAAAAAFAAAAAAAAE=</HashCode>
+      <FileName>App_Code\Core\Workflow\WorkStatus.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WorkStatusLinqExt" Collapsed="true">
+    <Position X="18.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAABAAAAAAAAgAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>App_Code\Core\Workflow\WorkStatusLinqExt.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WorkStatusList" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="20" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAABCQAAAABAQAIAACAAAAQAAAAABQIAA=</HashCode>
+      <FileName>App_Code\Core\Workflow\WorkStatusList.vb</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WorkStatusOption" Collapsed="true">
+    <Position X="21.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIACBKAGEAAIAACAEABAAAAAAAkBAAAoABAUDQQAAAE=</HashCode>
+      <FileName>App_Code\Core\Workflow\WorkStatusOption.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WorkStatusOptionList" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="23.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAEAAAAAAABAQAAAABAYAgAACAAAAQAAAAABQIAA=</HashCode>
+      <FileName>App_Code\Core\Workflow\WorkStatusOptionList.vb</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="DataSets" Collapsed="true">
+    <Position X="14.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>wQBxJCREQ4QAwAJgDAAWYAABhYkqQBgAKAAhJIEABBA=</HashCode>
+      <FileName>C:\Windows\Microsoft.NET\Framework\v4.0.30319\Temporary ASP.NET Files\alod\2197c7a0\2419c640\Sources_App_Code\datasets.xsd.c710a8de.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DTPrinting" Collapsed="true">
+    <Position X="16.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgBAMAAwEAESJABBSASAAASAqCUBwEAACAAAkgBBQ=</HashCode>
+      <FileName>C:\Windows\Microsoft.NET\Framework\v4.0.30319\Temporary ASP.NET Files\alod\2197c7a0\2419c640\Sources_App_Code\dtprinting.xsd.66023afb.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LODDataSet" Collapsed="true">
+    <Position X="21.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAwAAAAJABEAAQBAAAAgCYBgAAAAAAAEABBA=</HashCode>
+      <FileName>C:\Windows\Microsoft.NET\Framework\v4.0.30319\Temporary ASP.NET Files\alod\2197c7a0\2419c640\Sources_App_Code\loddataset.xsd.72cecc2a.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PublicDataService" Collapsed="true">
+    <Position X="20" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Code\PublicDataService.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ALOD.DataService" Collapsed="true">
+    <Position X="13" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gASAIQEEgIAAQABCAhAACASIAAIAGIEAAAAQBIAAgAA=</HashCode>
+      <FileName>App_Code\Core\Common\DataService.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LODDataSetTableAdapters.Form348TableAdapter" Collapsed="true">
+    <Position X="9.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQAAGAAEAAAAAMAIAAAAAAAACEICAAAAAAAAAAABBA=</HashCode>
+      <FileName>C:\Windows\Microsoft.NET\Framework\v4.0.30319\Temporary ASP.NET Files\alod\2197c7a0\2419c640\Sources_App_Code\loddataset.xsd.72cecc2a.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="DocumentClass" Collapsed="true">
+    <Position X="14.75" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>App_Code\Core\Common\Enums.vb</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="WebServiceType" Collapsed="true">
+    <Position X="20" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Code\Core\Common\Enums.vb</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="WorkflowType" Collapsed="true">
+    <Position X="23.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAFAAAAAACABAMABACAAAAgAAAAAMAAAAAAAAAA=</HashCode>
+      <FileName>App_Code\Core\Common\Enums.vb</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="JoinType" Collapsed="true">
+    <Position X="20" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAIAAAAggAAAAEAAAA=</HashCode>
+      <FileName>App_Code\Core\Common\Enums.vb</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="PrintDocuments" Collapsed="true">
+    <Position X="11.25" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>App_Code\Core\Common\Enums.vb</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="PageAccessType" Collapsed="true">
+    <Position X="7.75" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAIAAEAAAA=</HashCode>
+      <FileName>App_Code\Core\Common\Enums.vb</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="WorkflowActionType" Collapsed="true">
+    <Position X="21.75" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAAoBCAgAgAAAIACgAEAAAEAAgA=</HashCode>
+      <FileName>App_Code\Core\Common\Enums.vb</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ItemSeverity" Collapsed="true">
+    <Position X="18.25" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAABAAAAAAAACAAAAAIAAAAAA=</HashCode>
+      <FileName>App_Code\Core\Common\Enums.vb</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="DecisionType" Collapsed="true">
+    <Position X="11.25" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>App_Code\Core\Common\Enums.vb</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="UserGroups" Collapsed="true">
+    <Position X="18.25" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAABAAAAAMAABAAAABBAAgAgAmAAQABIKQkoEAAIAQw=</HashCode>
+      <FileName>App_Code\Core\Common\Enums.vb</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="SectionNames" Collapsed="true">
+    <Position X="16.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAgAEAAAAAQRAAAAACABgAASCAAABQgAAIAkiA=</HashCode>
+      <FileName>App_Code\Core\Common\Enums.vb</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="ModuleType" Collapsed="true">
+    <Position X="23.5" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAFAAIiAACABAMABACAAAAAAAAAAMAAAAAAAAAA=</HashCode>
+      <FileName>App_Code\Core\Common\Enums.vb</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="DeployMode" Collapsed="true">
+    <Position X="13" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAEAAAAAAACAAECAAAAAA=</HashCode>
+      <FileName>App_Code\Core\Common\Enums.vb</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="FormatRestriction" Collapsed="true">
+    <Position X="16.5" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAAAAAAAAAAAgACAAAAABAAAAAAAAAAEAA=</HashCode>
+      <FileName>App_Code\Core\Common\Enums.vb</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="DataSource" Collapsed="true">
+    <Position X="9.5" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAgA=</HashCode>
+      <FileName>App_Code\Core\Common\Enums.vb</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="RuleType" Collapsed="true">
+    <Position X="13" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Code\Core\Common\Enums.vb</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="CopyAction" Collapsed="true">
+    <Position X="7.75" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Code\Core\Common\Enums.vb</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="SearchCaller" Collapsed="true">
+    <Position X="14.75" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABIAAAAAAAAA=</HashCode>
+      <FileName>App_Code\Core\Common\Enums.vb</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="OptionRules" Collapsed="true">
+    <Position X="6" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAACgAAAACAAAEAAAAAgAAAACAAAAAAAAQAA=</HashCode>
+      <FileName>App_Code\Core\Common\Enums.vb</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="CHAINTYPES" Collapsed="true">
+    <Position X="6" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAACAAAAAAIAAAAgAAAAQAAAAAAAgAAQAAAgAAAAA=</HashCode>
+      <FileName>App_Code\Core\Common\Enums.vb</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="LodStatus" Collapsed="true">
+    <Position X="21.75" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>DAAQAAUCAKgAACIgAAAAEAAAEAAAAAAYAAAQABAOgAA=</HashCode>
+      <FileName>App_Code\Core\Common\Enums.vb</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="PersonnelTypes" Collapsed="true">
+    <Position X="9.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAgNAABAAAEAAAAgAgAiIAQAAAAQCIEAAAAAg=</HashCode>
+      <FileName>App_Code\Core\Common\Enums.vb</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Module Name="Utility" Collapsed="true">
+    <Position X="6" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>wND1k5cTZFANZ4cXIzQ6ZCBoF8AIQXsiZAtcj5tC8cg=</HashCode>
+      <FileName>App_Code\Core\Common\Utility.vb</FileName>
+    </TypeIdentifier>
+  </Module>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

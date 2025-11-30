@@ -1,0 +1,27 @@
+﻿<%@ Master Language="VB" MasterPageFile="~/Secure/Secure.master" AutoEventWireup="false" Inherits="ALOD.Web.Special_Case.AGR.SC_AGRCertMaster" Codebehind="SC_AGRCert.master.vb" %>
+
+
+ <%@ Reference Control="~/Secure/Shared/UserControls/TabNavigator.ascx" %>
+ <%@ Reference Control="~/Secure/Shared/UserControls/TabControls.ascx" %>
+ <%@ Reference Control="~/Secure/Shared/UserControls/ModuleHeader.ascx" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <asp:ContentPlaceHolder ID="HeaderNested" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentMain" runat="Server">
+    <lod:ModuleHeader ID="ModuleHeader_agr" runat="server" />
+    
+    <lod:TabNavigator ID="TabNavigator_agr" runat="server" SourceFile="~/Secure/SC_AGRCert/sc_AGRCert.xml" />
+     <div id="wizard">
+         
+        <asp:ContentPlaceHolder ID="ContentNested" runat="server">
+        </asp:ContentPlaceHolder>
+        
+    </div>
+    <lod:TabControls ID="TabControls_agr" runat="server" />
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="ContentFooter" runat="Server">
+    <asp:ContentPlaceHolder ID="FooterNested" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>

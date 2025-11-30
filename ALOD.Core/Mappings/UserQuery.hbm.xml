@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Query">
+
+	<class name="UserQuery" table="rpt_user_query">
+		<id name="Id" column="id">
+			<generator class="identity" />
+		</id>
+		<property name="Title" column="title" />
+		<property name="CreatedDate" column="created_date" />
+		<property name="ModifiedDate" column="modified_date" />
+		<property name="Transient" column="transient" />
+    <property name="Shared" column="shared" />
+		<property name="FieldList" column="output_fields" />
+		<property name="SortFields" column="sort_fields" />
+
+		<many-to-one name="User" class="ALOD.Core.Domain.Users.AppUser" column="user_id" />
+
+		<bag name="Clauses" table="rpt_user_query_clause" inverse="true" cascade="all">
+			<key column="query_id" on-delete="cascade"></key>
+			<one-to-many class="QueryClause" />
+		</bag>
+	</class>
+</hibernate-mapping>

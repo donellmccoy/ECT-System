@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Modules.Lod">
+
+	<sql-query  name="GetAllLods">
+		exec dbo.form348_sp_Search :caseID ,:ssn, :name,:status,:userId,:rptView,:compo,:maxCount,:moduleId,:isFormal,:unitId,:sarcpermission
+	</sql-query>
+	<sql-query  name="GetLodsByUser">
+		exec dbo.form348_sp_GroupSearch :caseID ,:ssn, :name,:status,:userId,:rptView,:compo,:maxCount,:moduleId,:isFormal,:unitId,:sarcpermission
+	</sql-query>
+	<sql-query  name="GetPasCodeList">
+		exec dbo.GetPassCodeList :type ,:pascode, :rptView
+	</sql-query>
+
+	<sql-query  name="GetPasCodes">
+		exec dbo.GetPasCodes :type ,:cs_id, :rptView
+	</sql-query>
+</hibernate-mapping>

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Documents">
+
+	<class name="MemoContent2" table="core_MemoContents2">
+		<id name="Id" column="id">
+			<generator class="identity" />
+		</id>
+
+		<property name="Body" column="body" />
+		<property name="Attachments" />
+		<property name="SignatureBlock" column="sigBlock" />
+		<property name="SuspenseDate" column="suspenseDate" />
+		<property name="MemoDate" column="memoDate" />
+		<property name="CreatedDate" column="created_date" />
+
+		<many-to-one name="CreatedBy" cascade="none" column="created_by" />
+		<many-to-one name="Parent" cascade="none" column="memoId" />
+	</class>
+</hibernate-mapping>

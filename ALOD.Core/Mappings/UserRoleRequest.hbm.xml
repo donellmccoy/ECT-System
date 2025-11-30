@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Users">
+
+	<class name="UserRoleRequest" table="core_userRoleRequests">
+		<id name="Id" column="id">
+			<generator class="identity" />
+		</id>
+
+		<many-to-one name="User" class="AppUser" column="userId" />
+		<property name="Status" />
+		<many-to-one name="RequestedGroup" class="UserGroup" column="requested_group_id" />
+		<many-to-one name="CurrentGroup" class="UserGroup" column="existing_group_id" />
+
+		<property name="IsNewRole" column="new_role" />
+		<property name="RequestorComments" column="requestor_comment" />
+		<property name="DateRequested" column="requested_date" />
+
+		<many-to-one name="CompletedBy" class="AppUser" column="completed_by" />
+
+		<property name="DateCompleted" column="completed_date" />
+		<property name="CompletedComments" column="completed_comment" />
+	</class>
+</hibernate-mapping>

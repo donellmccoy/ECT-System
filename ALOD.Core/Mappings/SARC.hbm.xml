@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Modules.SARC">
+
+  <class name="RestrictedSARC" table="Form348_SARC" lazy="false">
+    <id name="Id" column="sarc_id">
+      <generator class="identity" />
+    </id>
+
+    <property name="CaseId" column="case_id" />
+    <property name="CreatedBy" column="created_by" />
+    <property name="CreatedDate" column="created_date" />
+    <property name="ModifiedBy" column="modified_by" />
+    <property name="ModifiedDate" column="modified_date" />
+    <property name="Workflow" column="workflow" />
+    <property name="Status" column="status" />
+
+    <property name="MemberSSN" column="member_ssn" />
+    <property name="MemberName" column="member_name" />
+    <property name="MemberUnit" column="member_unit" />
+    <property name="MemberUnitId" column="member_unit_id" />
+    <property name="MemberCompo" column="member_compo" />
+    <property name="MemberDOB" column="member_DOB" />
+    <many-to-one name="MemberRank" class="ALOD.Core.Domain.Lookup.UserRank" column="member_grade" update="true" insert="true" />
+
+    <property name="IncidentDate" column="incident_date" />
+    <property name="DefenseSexualAssaultDBCaseNumber" column="def_sex_assault_db_case_num" />
+    <property name="DutyStatus" column="duty_status" />
+    <property name="DurationStart" column="duration_start_date" />
+    <property name="DurationEnd" column="duration_end_date" />
+    <property name="InDutyStatus" column="in_duty_status" />
+    <property name="IsPostProcessingComplete" column="is_post_processing_complete" />
+    <property name="DocumentGroupId" column="doc_group_id" />
+    <property name="ICDE968" column="ICD_E968_8" />
+    <property name="ICDE969" column="ICD_E969_9" />
+    <property name="ICDOther" column="ICD_other" />
+
+    <many-to-one name="WorkflowStatus" class="ALOD.Core.Domain.Workflow.WorkStatus" column="Status" cascade="none" update="false" insert="false" />
+
+    <!--<component name="RSLWingSignature" class="ALOD.Core.Domain.Modules.Lod.SignatureEntry">
+      <property name="DateSigned" column="sig_date_rsl_wing_sarc" />
+      <property name="NameAndRank" column="sig_name_rsl_wing_sarc" />
+      <property name="Title" column="sig_title_rsl_wing_sarc" />
+    </component>
+
+    <component name="SARCAdminSignature" class="ALOD.Core.Domain.Modules.Lod.SignatureEntry">
+      <property name="DateSigned" column="sig_date_sarc_a1" />
+      <property name="NameAndRank" column="sig_name_sarc_a1" />
+      <property name="Title" column="sig_title_sarc_a1" />
+    </component>
+
+    <component name="BoardMedicalSignature" class="ALOD.Core.Domain.Modules.Lod.SignatureEntry">
+      <property name="DateSigned" column="sig_date_board_medical" />
+      <property name="NameAndRank" column="sig_name_board_medical" />
+      <property name="Title" column="sig_title_board_medical" />
+    </component>
+
+    <component name="BoardJASignature" class="ALOD.Core.Domain.Modules.Lod.SignatureEntry">
+      <property name="DateSigned" column="sig_date_board_ja" />
+      <property name="NameAndRank" column="sig_name_board_ja" />
+      <property name="Title" column="sig_title_board_ja" />
+    </component>
+
+    <component name="BoardAdminSignature" class="ALOD.Core.Domain.Modules.Lod.SignatureEntry">
+      <property name="DateSigned" column="sig_date_board_admin" />
+      <property name="NameAndRank" column="sig_name_board_admin" />
+      <property name="Title" column="sig_title_board_admin" />
+    </component>
+
+    <component name="ApprovingSignature" class="ALOD.Core.Domain.Modules.Lod.SignatureEntry">
+      <property name="DateSigned" column="sig_date_approving" />
+      <property name="NameAndRank" column="sig_name_approving" />
+      <property name="Title" column="sig_title_approving" />
+    </component>-->
+
+    <bag name="SARCFindings" table="FORM348_SARC_findings"  cascade="all" inverse="true">
+      <key column="SARC_ID"></key>
+      <one-to-many class="RestrictedSARCFindings" />
+    </bag>
+
+    <bag name="ICDList" table="Form348_SARC_ICD" cascade="all-delete-orphan" inverse="true">
+      <key column="SARCId"></key>
+      <one-to-many class="RestrictedSARCOtherICDCode" />
+    </bag>
+
+    <property name="Return_Comment" column="return_comment" />
+    <property name="ReturnToGroup" column="return_to_group" />
+    <property name="ReturnByGroup" column="return_by_group" />
+    <property name="RWOA_Reason" column="rwoa_reason" />
+    <property name="RWOA_Explanation" column="rwoa_explanation" />
+    <property name="RWOA_Date" column="rwoa_date" />
+    <property name="Cancel_Reason" column="cancel_reason" />
+    <property name="Cancel_Explanation" column="cancel_explanation" />
+    <property name="Cancel_Date" column="cancel_date" />
+    <property name="ConsultationFromUserGroupId" column="consultation_from_usergroup_id" />
+  </class>
+</hibernate-mapping>

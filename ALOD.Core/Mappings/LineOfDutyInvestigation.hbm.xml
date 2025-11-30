@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Modules.Lod">
+
+	<class name="LineOfDutyInvestigation" table="Form261">
+		<id name="Id" column="lodId">
+			<generator class="assigned" />
+		</id>
+		<property name="ReportDate" column="reportDate" />
+		<property name="InvestigationOf" column="investigationOf" />
+		<property name="Status" column="status" />
+		<property name="InactiveDutyTraining" column="inactiveDutyTraining" />
+		<property name="DurationStart" column="durationStartDate" />
+		<property name="DurationEnd" column="durationFinishDate" />
+		<property name="FindingsDate" column="findingsDate" />
+		<property name="Place" column="place" />
+		<property name="HowSustained" column="howSustained" />
+		<property name="MedicalDiagnosis" column="medicalDiagnosis" />
+		<property name="PresentForDuty" column="presentForDuty" />
+		<property name="AbsentWithAuthority" column="absentWithAuthority" />
+		<property name="IntentionalMisconduct" column="intentionalMisconduct" />
+		<property name="MentallySound" column="mentallySound" />
+		<property name="Remarks" column="remarks" />
+
+		<property name="FinalApprovalFindings" column="final_approval_findings" />
+
+		<property name="IoUserId" column="IoUserId" />
+
+		<property name="ModifiedBy" column="MODIFIED_BY" />
+		<property name="ModifiedDate" column="MODIFIED_DATE" />
+
+		<property name="OtherPersonnel" column="otherPersonnels" type="ALOD.Data.Types.PersonnelDataListType, ALOD.Data" />
+
+		<property name="DateSignedIO" column="sig_date_io" />
+		<property name="SignatureInfoIO" column="sig_info_io" type="ALOD.Data.Types.PersonnelDataType, ALOD.Data" />
+
+		<property name="DateSignedAppointing" column="sig_date_appointing" />
+		<property name="SignatureInfoAppointing" column="sig_info_appointing" type="ALOD.Data.Types.PersonnelDataType, ALOD.Data" />
+	</class>
+</hibernate-mapping>

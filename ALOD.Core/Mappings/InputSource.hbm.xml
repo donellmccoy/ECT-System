@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Query">
+
+	<class name="InputSource" table="rpt_query_source" mutable="false">
+		<id name="Id" column="id">
+			<generator class="identity" />
+		</id>
+		<property name="DisplayName" column="display_name" />
+		<property name="FieldName" column="field_name" />
+		<property name="TableName" column="table_name" />
+		<property name="DataType" column="data_type" />
+		<property name="LookupSource" column="lookup_source" />
+		<property name="LookupValue" column="lookup_value" />
+		<property name="LookupText" column="lookup_text" />
+		<property name="LookupSort" column="lookup_sort" />
+    <property name="LookupWhere" column="lookup_where" />
+    <property name="LookupWhereValue" column="lookup_where_value" />
+	</class>
+</hibernate-mapping>

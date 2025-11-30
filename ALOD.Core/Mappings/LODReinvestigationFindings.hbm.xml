@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Modules.Reinvestigations">
+
+  <class name="LODReinvestigationFindings" table="Form348_RR_Findings">
+    <id name="Id" column="Id">
+      <generator class="identity" />
+    </id>
+    <property name="RefId" column="request_id" />
+    <property name="PType" column="ptype" />
+    <property name="LastName" column="last_name" />
+    <property name="FirstName" column="first_name" />
+    <property name="MiddleName" column="middle_name" />
+    <property name="Grade" column="grade" />
+    <property name="Rank" column="rank" />
+    <property name="Compo" column="compo" />
+    <property name="PasCode" column="pascode" />
+    <property name="Finding" column="finding" />
+    <property name="Concur" column="concur" />
+    <property name="Explanation" column="explanation" />
+    <property name="IsLegacyFinding" column="is_legacy_finding" />
+    <property name="CreatedBy" column="created_by" />
+    <property name="CreatedDate" column="created_date" />
+    <property name="ModifiedBy" column="modified_by" />
+    <property name="ModifiedDate" column="modified_date" />
+  </class>
+</hibernate-mapping>

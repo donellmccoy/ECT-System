@@ -1,0 +1,466 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database Name="LOD" Class="AFLODDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=S31RCTFS-01\RC2K8;Initial Catalog=LOD;User ID=lod.local" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="LOD" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.core_lkupRules" Member="core_lkupRules">
+    <Type Name="core_lkupRule">
+      <Column Name="Id" Type="System.Byte" DbType="TinyInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="workFlow" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="ruleType" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="prompt" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="core_lkupRule_core_WorkStatus_Rule" Member="core_WorkStatus_Rules" ThisKey="Id" OtherKey="ruleId" Type="core_WorkStatus_Rule" />
+      <Association Name="core_lkupRuleTypes_core_lkupRule" Member="core_lkupRuleTypes" ThisKey="ruleType" OtherKey="Id" Type="core_lkupRuleTypes" IsForeignKey="true" />
+      <Association Name="core_Workflow_core_lkupRule" Member="core_Workflow" ThisKey="workFlow" OtherKey="workflowId" Type="core_Workflow" IsForeignKey="true" />
+    </Type>
+    <InsertFunction FunctionId="FunctionId1">
+      <Argument Parameter="workFlow" Member="workFlow" />
+      <Argument Parameter="ruleType" Member="ruleType" />
+      <Argument Parameter="name" Member="name" />
+      <Argument Parameter="prompt" Member="prompt" />
+      <Argument Parameter="active" Member="active" />
+    </InsertFunction>
+    <UpdateFunction FunctionId="FunctionId1">
+      <Argument Parameter="workFlow" Member="workFlow" />
+      <Argument Parameter="ruleType" Member="ruleType" />
+      <Argument Parameter="name" Member="name" />
+      <Argument Parameter="prompt" Member="prompt" />
+      <Argument Parameter="active" Member="active" />
+    </UpdateFunction>
+    <DeleteFunction FunctionId="FunctionId2">
+      <Argument Parameter="ruleId" Member="Id" Version="Original" />
+    </DeleteFunction>
+  </Table>
+  <Table Name="dbo.core_lkupRuleTypes" Member="core_lkupRuleTypes">
+    <Type Name="core_lkupRuleTypes">
+      <Column Name="Id" Type="System.Byte" DbType="TinyInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="core_lkupRuleTypes_core_lkupRule" Member="core_lkupRules" ThisKey="Id" OtherKey="ruleType" Type="core_lkupRule" />
+    </Type>
+  </Table>
+  <Table Name="dbo.core_WorkStatus" Member="core_WorkStatus">
+    <Type Name="core_WorkStatus">
+      <Column Name="ws_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="workflowId" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="statusId" Type="System.Int32" DbType="INT NOT NULL" CanBeNull="false" />
+      <Column Name="sortOrder" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Association Name="core_WorkStatus_core_WorkStatus_Option" Member="core_WorkStatus_Options" ThisKey="ws_id" OtherKey="ws_id" Type="core_WorkStatus_Option" />
+      <Association Name="core_WorkStatus_core_Workflow" Member="core_Workflows" ThisKey="ws_id" OtherKey="initialStatus" Type="core_Workflow" />
+      <Association Name="core_StatusCode_core_WorkStatus" Member="core_StatusCode" ThisKey="statusId" OtherKey="statusId" Type="core_StatusCode" IsForeignKey="true" />
+      <Association Name="core_Workflow_core_WorkStatus" Member="core_Workflow" ThisKey="workflowId" OtherKey="workflowId" Type="core_Workflow" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.core_StatusCodes" Member="core_StatusCodes">
+    <Type Name="core_StatusCode">
+      <Column Name="statusId" Type="System.Int32" DbType="INT NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="moduleId" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="compo" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="groupId" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="isFinal" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isApproved" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="canAppeal" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="filter" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="displayOrder" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Association Name="core_StatusCode_core_WorkStatus" Member="core_WorkStatus" ThisKey="statusId" OtherKey="statusId" Type="core_WorkStatus" />
+      <Association Name="core_StatusCode_core_WorkStatus_Option" Member="core_WorkStatus_Options" ThisKey="statusId" OtherKey="statusId" Type="core_WorkStatus_Option" />
+      <Association Name="core_lkupModule_core_StatusCode" Member="core_lkupModule" ThisKey="moduleId" OtherKey="moduleId" Type="core_lkupModule" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.core_WorkStatus_Rules" Member="core_WorkStatus_Rules">
+    <Type Name="core_WorkStatus_Rule">
+      <Column Name="wsr_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="wso_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ruleId" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="ruleData" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="checkAll" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="core_lkupRule_core_WorkStatus_Rule" Member="core_lkupRule" ThisKey="ruleId" OtherKey="Id" Type="core_lkupRule" IsForeignKey="true" />
+      <Association Name="core_WorkStatus_Option_core_WorkStatus_Rule" Member="core_WorkStatus_Option" ThisKey="wso_id" OtherKey="wso_id" Type="core_WorkStatus_Option" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.core_lkupWorkflowAction" Member="core_lkupWorkflowActions">
+    <Type Name="core_lkupWorkflowAction">
+      <Column Name="type" Type="System.Byte" DbType="TinyInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="text" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="core_lkupWorkflowAction_core_WorkStatus_Action" Member="core_WorkStatus_Actions" ThisKey="type" OtherKey="actionType" Type="core_WorkStatus_Action" />
+    </Type>
+  </Table>
+  <Table Name="dbo.core_WorkStatus_Options" Member="core_WorkStatus_Options">
+    <Type Name="core_WorkStatus_Option">
+      <Column Name="wso_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ws_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="statusId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="displayText" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="sortOrder" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="template" Type="System.Byte" CanBeNull="false" />
+      <Association Name="core_WorkStatus_Option_core_WorkStatus_Rule" Member="core_WorkStatus_Rules" ThisKey="wso_id" OtherKey="wso_id" Type="core_WorkStatus_Rule" />
+      <Association Name="core_WorkStatus_Option_core_WorkStatus_Option" Member="core_WorkStatus_Option1" ThisKey="wso_id" OtherKey="wso_id" Type="core_WorkStatus_Option" Cardinality="One" />
+      <Association Name="core_WorkStatus_Option_core_WorkStatus_Action" Member="core_WorkStatus_Actions" ThisKey="wso_id" OtherKey="wso_id" Type="core_WorkStatus_Action" />
+      <Association Name="core_StatusCode_core_WorkStatus_Option" Member="core_StatusCode" ThisKey="statusId" OtherKey="statusId" Type="core_StatusCode" IsForeignKey="true" />
+      <Association Name="core_WorkStatus_core_WorkStatus_Option" Member="core_WorkStatus" ThisKey="ws_id" OtherKey="ws_id" Type="core_WorkStatus" IsForeignKey="true" />
+      <Association Name="core_WorkStatus_Option_core_WorkStatus_Option" Member="core_WorkStatus_Option" ThisKey="wso_id" OtherKey="wso_id" Type="core_WorkStatus_Option" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.core_lkupModule" Member="core_lkupModules">
+    <Type Name="core_lkupModule">
+      <Column Name="moduleId" Type="System.Byte" DbType="TinyInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="moduleName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="core_lkupModule_core_StatusCode" Member="core_StatusCodes" ThisKey="moduleId" OtherKey="moduleId" Type="core_StatusCode" />
+      <Association Name="core_lkupModule_core_Workflow" Member="core_Workflows" ThisKey="moduleId" OtherKey="moduleId" Type="core_Workflow" />
+    </Type>
+  </Table>
+  <Table Name="dbo.core_MemoWorkFlows" Member="core_MemoWorkFlows">
+    <Type Name="core_MemoWorkFlow">
+      <Column Name="templateId" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="workflowId" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Association Name="core_Workflow_core_MemoWorkFlow" Member="core_Workflow" ThisKey="workflowId" OtherKey="workflowId" Type="core_Workflow" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.core_EmailTemplates" Member="core_EmailTemplates">
+    <Type Name="core_EmailTemplate">
+      <Column Name="TemplateID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="compo" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="Title" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Subject" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Body" Type="System.String" DbType="VarChar(1000) NOT NULL" CanBeNull="false" />
+      <Column Name="DataProc" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Sys_Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.core_WorkStatus_Actions" Member="core_WorkStatus_Actions">
+    <Type Name="core_WorkStatus_Action">
+      <Column Name="wsa_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="wso_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="actionType" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="target" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="data" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="core_lkupWorkflowAction_core_WorkStatus_Action" Member="core_lkupWorkflowAction" ThisKey="actionType" OtherKey="type" Type="core_lkupWorkflowAction" IsForeignKey="true" />
+      <Association Name="core_WorkStatus_Option_core_WorkStatus_Action" Member="core_WorkStatus_Option" ThisKey="wso_id" OtherKey="wso_id" Type="core_WorkStatus_Option" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.core_Witness" Member="core_Witnesses">
+    <Type Name="core_Witness">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="lodID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="moduleId" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="compo" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="address" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="modified_by" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="modified_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.core_lkUpFindings" Member="core_lkUpFindings">
+    <Type Name="core_lkUpFinding">
+      <Column Name="Id" Type="System.Byte" DbType="TinyInt NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="findingType" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="core_lkUpFinding_Form261" Member="Form261s" ThisKey="Id" OtherKey="final_approval_findings" Type="Form261" />
+      <Association Name="core_lkUpFinding_Form348" Member="Form348s" ThisKey="Id" OtherKey="hqbd_findings" Type="Form348" />
+      <Association Name="core_lkUpFinding_Form3481" Member="Form348s1" ThisKey="Id" OtherKey="hqaa_findings" Type="Form348" />
+      <Association Name="core_lkUpFinding_Form3482" Member="Form348s2" ThisKey="Id" OtherKey="hqja_findings" Type="Form348" />
+      <Association Name="core_lkUpFinding_Form3483" Member="Form348s3" ThisKey="Id" OtherKey="hqsg_findings" Type="Form348" />
+      <Association Name="core_lkUpFinding_Form3484" Member="Form348s4" ThisKey="Id" OtherKey="hqsr_findings" Type="Form348" />
+    </Type>
+  </Table>
+  <Table Name="dbo.core_lkUpFindings" Member="core_lkUpFindings1">
+    <Type Name="core_lkUpFindings">
+      <Column Name="Id" Type="System.Byte" DbType="TinyInt NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="findingType" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="core_lkUpFindings_Form261" Member="Form261s" ThisKey="Id" OtherKey="final_approval_findings" Type="Form261" />
+      <Association Name="core_lkUpFindings_Form348" Member="Form348s" ThisKey="Id" OtherKey="hqbd_findings" Type="Form348" />
+      <Association Name="core_lkUpFindings_Form3481" Member="Form348s1" ThisKey="Id" OtherKey="hqaa_findings" Type="Form348" />
+      <Association Name="core_lkUpFindings_Form3482" Member="Form348s2" ThisKey="Id" OtherKey="hqja_findings" Type="Form348" />
+      <Association Name="core_lkUpFindings_Form3483" Member="Form348s3" ThisKey="Id" OtherKey="hqsg_findings" Type="Form348" />
+      <Association Name="core_lkUpFindings_Form3484" Member="Form348s4" ThisKey="Id" OtherKey="hqsr_findings" Type="Form348" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Form348_Unit" Member="Form348_Units">
+    <Type Name="Form348_Unit">
+      <Column Name="lodid" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="cmdr_circ_details" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="cmdr_duty_determination" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="cmdr_duty_from" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="cmdr_duty_others" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="cmdr_duty_to" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="cmdr_rec_findings" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="cmdr_activated_yn" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Association Name="Form348_Form348_Unit" Member="Form348" ThisKey="lodid" OtherKey="lodId" Type="Form348" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.core_lkupICD9" Member="core_lkupICD9s">
+    <Type Name="core_lkupICD9">
+      <Column Name="ICD9_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="value" Type="System.String" DbType="VarChar(7)" CanBeNull="true" />
+      <Column Name="text" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="parentId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="sortOrder" Type="System.Int32" DbType="int" CanBeNull="true" />
+      <Association Name="core_lkupICD9_Form348_Medical" Member="Form348_Medicals" ThisKey="ICD9_ID" OtherKey="icd9Id" Type="Form348_Medical" />
+    </Type>
+  </Table>
+  <Table Name="dbo.core_lkupRWOAReasons" Member="core_lkupRWOAReasons">
+    <Type Name="core_lkupRWOAReason">
+      <Column Name="ID" Type="System.Byte" DbType="TinyInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="Type" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="core_lkupRWOAReason_Form348" Member="Form348s" ThisKey="ID" OtherKey="rwoa_reason" Type="Form348" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Rwoa" Member="Rwoas">
+    <Type Name="Rwoa">
+      <Column Name="rwoaId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="refId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="status" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="workflow" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="sent_to" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="reason_sent_back" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="explanation_for_sending_back" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
+      <Column Name="sender" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="date_sent" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="comments_back_to_sender" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
+      <Column Name="date_sent_back" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="created_by" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="created_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.core_lkupIncidentType" Member="core_lkupIncidentTypes">
+    <Type Name="core_lkupIncidentType">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="incidentType" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="incidentDescr" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Form261" Member="Form261s">
+    <Type Name="Form261">
+      <Column Name="lodId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="reportDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="investigationOf" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="status" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="inactiveDutyTraining" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="durationStartDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="durationFinishDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="IoUserId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ioPersonnel" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="appointerApproved" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="appointerFindings" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="app_auth_poc" Type="System.String" DbType="VarChar(400)" CanBeNull="true" />
+      <Column Name="io_completionDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="io_instructions" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="finalFindings" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="otherPersonnels" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="mpf_personnel" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="wing_ja_personnel" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="wing_ja_approved_yn" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="wing_ja_reasons" Type="System.String" DbType="VarChar(4000)" CanBeNull="true" />
+      <Column Name="wing_aa_personnel" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="wing_aa_approved_yn" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="wing_aa_reasons" Type="System.String" DbType="VarChar(4000)" CanBeNull="true" />
+      <Column Name="wing_aa_findings" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="hqsgPersonnel" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="hqsg_reasons" Type="System.String" DbType="VarChar(4000)" CanBeNull="true" />
+      <Column Name="hqsg_findings_concur_yn" Type="System.Char" DbType="VarChar(1)" CanBeNull="true" />
+      <Column Name="hqjaPersonnel" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="hqja_reasons" Type="System.String" DbType="VarChar(4000)" CanBeNull="true" />
+      <Column Name="hqja_findings_concur_yn" Type="System.Char" DbType="VarChar(1)" CanBeNull="true" />
+      <Column Name="hqaaPersonnel" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="hqaa_reasons" Type="System.String" DbType="VarChar(4000)" CanBeNull="true" />
+      <Column Name="final_approval_findings" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="hqsrPersonnel" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="hqsr_reasons" Type="System.String" DbType="VarChar(4000)" CanBeNull="true" />
+      <Column Name="hqsr_findings_concur_yn" Type="System.Char" DbType="VarChar(1)" CanBeNull="true" />
+      <Column Name="hqbd_ra_personnel" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="hqbd_ra_reasons" Type="System.String" DbType="VarChar(4000)" CanBeNull="true" />
+      <Column Name="modified_by" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="modified_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="created_by" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="created_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="core_lkUpFinding_Form261" Member="core_lkUpFinding" ThisKey="final_approval_findings" OtherKey="Id" Type="core_lkUpFinding" IsForeignKey="true" />
+      <Association Name="core_lkUpFindings_Form261" Member="core_lkUpFindings" ThisKey="final_approval_findings" OtherKey="Id" Type="core_lkUpFindings" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Form348" Member="Form348s">
+    <Type Name="Form348">
+      <Column Name="lodId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="status" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="workflow" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="member_name" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="member_ssn" Type="System.String" DbType="NVarChar(9)" CanBeNull="true" />
+      <Column Name="member_grade" Type="System.String" DbType="NVarChar(4)" CanBeNull="true" />
+      <Column Name="member_unit" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="member_unit_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="member_DOB" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="member_compo" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="created_by" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="created_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="modified_by" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="modified_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="doc_group_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="formal_inv_yn" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="hqjaPersonnel" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="hqja_concur_yn" Type="System.Char" DbType="VarChar(1)" CanBeNull="true" />
+      <Column Name="hqja_findings" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="hqja_explanation" Type="System.String" DbType="VarChar(4000)" CanBeNull="true" />
+      <Column Name="hqsgPersonnel" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="hqsg_concur_yn" Type="System.Char" DbType="VarChar(1)" CanBeNull="true" />
+      <Column Name="hqsg_findings" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="hqsg_explanation" Type="System.String" DbType="VarChar(4000)" CanBeNull="true" />
+      <Column Name="hqsrPersonnel" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="hqsr_concur_yn" Type="System.Char" DbType="VarChar(1)" CanBeNull="true" />
+      <Column Name="hqsr_findings" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="hqsr_explanation" Type="System.String" DbType="VarChar(4000)" CanBeNull="true" />
+      <Column Name="hqaaPersonnel" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="hqaa_findings" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="hqaa_explanation" Type="System.String" DbType="VarChar(4000)" CanBeNull="true" />
+      <Column Name="hqbdPersonnel" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="hqbd_findings" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="hqbd_explanation" Type="System.String" DbType="VarChar(4000)" CanBeNull="true" />
+      <Column Name="rwoa_reason" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="rwoa_explantion" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="rwoa_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="med_tech_comments" Type="System.String" DbType="VarChar(4000)" CanBeNull="true" />
+      <Column Name="medTech_Personnel" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="unitCommander_Personnel" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="unit_cmdr_findings" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="unit_cmdr_explanation" Type="System.String" DbType="VarChar(4000)" CanBeNull="true" />
+      <Column Name="appAuthUserId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="appAuth_Personnel" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="medOff_Personnel" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="wingJa_Personnel" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="wingJa_concur_yn" Type="System.Char" DbType="VarChar(1)" CanBeNull="true" />
+      <Column Name="wingJa_findings" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="wingJa_explanation" Type="System.String" DbType="VarChar(4000)" CanBeNull="true" />
+      <Column Name="physician_cancel_reason" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="physician_cancel_explanation" Type="System.String" DbType="VarChar(4000)" CanBeNull="true" />
+      <Association Name="Form348_Form348_Unit" Member="Form348_Unit" ThisKey="lodId" OtherKey="lodid" Type="Form348_Unit" Cardinality="One" />
+      <Association Name="Form348_Form348_Medical" Member="Form348_Medical" ThisKey="lodId" OtherKey="lodid" Type="Form348_Medical" Cardinality="One" />
+      <Association Name="core_lkUpFinding_Form348" Member="core_lkUpFinding" ThisKey="hqbd_findings" OtherKey="Id" Type="core_lkUpFinding" IsForeignKey="true" />
+      <Association Name="core_lkUpFindings_Form348" Member="core_lkUpFindings" ThisKey="hqbd_findings" OtherKey="Id" Type="core_lkUpFindings" IsForeignKey="true" />
+      <Association Name="core_lkupRWOAReason_Form348" Member="core_lkupRWOAReason" ThisKey="rwoa_reason" OtherKey="ID" Type="core_lkupRWOAReason" IsForeignKey="true" />
+      <Association Name="core_lkUpFinding_Form3481" Member="core_lkUpFinding1" ThisKey="hqaa_findings" OtherKey="Id" Type="core_lkUpFinding" IsForeignKey="true" />
+      <Association Name="core_lkUpFindings_Form3481" Member="core_lkUpFindings1" ThisKey="hqaa_findings" OtherKey="Id" Type="core_lkUpFindings" IsForeignKey="true" />
+      <Association Name="core_lkUpFinding_Form3482" Member="core_lkUpFinding2" ThisKey="hqja_findings" OtherKey="Id" Type="core_lkUpFinding" IsForeignKey="true" />
+      <Association Name="core_lkUpFindings_Form3482" Member="core_lkUpFindings2" ThisKey="hqja_findings" OtherKey="Id" Type="core_lkUpFindings" IsForeignKey="true" />
+      <Association Name="core_lkUpFinding_Form3483" Member="core_lkUpFinding3" ThisKey="hqsg_findings" OtherKey="Id" Type="core_lkUpFinding" IsForeignKey="true" />
+      <Association Name="core_lkUpFindings_Form3483" Member="core_lkUpFindings3" ThisKey="hqsg_findings" OtherKey="Id" Type="core_lkUpFindings" IsForeignKey="true" />
+      <Association Name="core_lkUpFinding_Form3484" Member="core_lkUpFinding4" ThisKey="hqsr_findings" OtherKey="Id" Type="core_lkUpFinding" IsForeignKey="true" />
+      <Association Name="core_lkUpFindings_Form3484" Member="core_lkUpFindings4" ThisKey="hqsr_findings" OtherKey="Id" Type="core_lkUpFindings" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Form348_Medical" Member="Form348_Medicals">
+    <Type Name="Form348_Medical">
+      <Column Name="lodid" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="member_status" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="event_nature_type" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="event_nature_details" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="medical_facility" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="medical_facility_type" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="treatment_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="death_involved_yn" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="mva_involved_yn" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="icd9Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="epts_yn" Type="System.Char" DbType="VarChar(1)" CanBeNull="true" />
+      <Column Name="physician_approval_comments" Type="System.String" DbType="VarChar(4000)" CanBeNull="true" />
+      <Association Name="core_lkupICD9_Form348_Medical" Member="core_lkupICD9" ThisKey="icd9Id" OtherKey="ICD9_ID" Type="core_lkupICD9" IsForeignKey="true" />
+      <Association Name="Form348_Form348_Medical" Member="Form348" ThisKey="lodid" OtherKey="lodId" Type="Form348" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.core_lkupPhyCancelReasons" Member="core_lkupPhyCancelReasons">
+    <Type Name="core_lkupPhyCancelReason">
+      <Column Name="ID" Type="System.Byte" DbType="TinyInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="Type" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.core_Workflow" Member="core_Workflows">
+    <Type Name="core_Workflow">
+      <Column Name="workflowId" Type="System.Byte" DbType="TinyInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="moduleId" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="compo" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="formal" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="initialStatus" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="core_Workflow_core_lkupRule" Member="core_lkupRules" ThisKey="workflowId" OtherKey="workFlow" Type="core_lkupRule" />
+      <Association Name="core_Workflow_core_WorkStatus" Member="core_WorkStatus" ThisKey="workflowId" OtherKey="workflowId" Type="core_WorkStatus" />
+      <Association Name="core_Workflow_core_MemoWorkFlow" Member="core_MemoWorkFlows" ThisKey="workflowId" OtherKey="workflowId" Type="core_MemoWorkFlow" />
+      <Association Name="core_lkupModule_core_Workflow" Member="core_lkupModule" ThisKey="moduleId" OtherKey="moduleId" Type="core_lkupModule" IsForeignKey="true" />
+      <Association Name="core_WorkStatus_core_Workflow" Member="core_WorkStatus1" ThisKey="initialStatus" OtherKey="ws_id" Type="core_WorkStatus" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Function Id="FunctionId2" Name="dbo.core_rule_sp_DeleteRule" Method="core_rule_sp_DeleteRule">
+    <Parameter Name="ruleId" Type="System.Byte" DbType="TinyInt" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.core_rule_sp_DeleteOptionRule" Method="core_rule_sp_DeleteOptionRule">
+    <Parameter Name="wsrid" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.core_actions_sp_DeleteOptionAction" Method="core_actions_sp_DeleteOptionAction">
+    <Parameter Name="wsaid" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Id="FunctionId1" Name="dbo.core_rule_sp_InsertRule" Method="core_rule_sp_InsertRule">
+    <Parameter Name="workFlow" Type="System.Byte" DbType="TinyInt" />
+    <Parameter Name="ruleType" Type="System.Byte" DbType="TinyInt" />
+    <Parameter Name="name" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="prompt" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="active" Type="System.Boolean" DbType="Bit" />
+    <ElementType Name="core_rule_sp_InsertRuleResult">
+      <Column Name="Column1" Type="System.Decimal" DbType="Decimal(0,0)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.core_workflow_sp_CopyRules" Method="core_workflow_sp_CopyRules">
+    <Parameter Name="dest_wsoid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="src_wsoid" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.core_workflow_sp_CopyActions" Method="core_workflow_sp_CopyActions">
+    <Parameter Name="dest_wsoid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="src_wsoid" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Print_sp_Form348" Method="Print_sp_Form348">
+    <Parameter Name="lodId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="Print_sp_Form348Result">
+      <Column Name="member_name" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="member_ssn" Type="System.String" DbType="NVarChar(9)" CanBeNull="true" />
+      <Column Name="member_grade" Type="System.String" DbType="NVarChar(4)" CanBeNull="true" />
+      <Column Name="member_unit" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="event_nature_details" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="cmdr_circ_details" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Form348_sp_GetIolist" Method="Form348_sp_GetIolist">
+    <Parameter Name="aaUserId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="chain_type" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="Form348_sp_GetIolistResult">
+      <Column Name="userId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(101)" CanBeNull="true" />
+      <Column Name="grade" Type="System.String" DbType="VarChar(6)" CanBeNull="true" />
+      <Column Name="pascode" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.lod_sp_AccessHeader" Method="lod_sp_AccessHeader">
+    <Parameter Name="lodid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="chain_type" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="userId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="lod_sp_AccessHeaderResult">
+      <Column Name="lodid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="status" Type="System.Int" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="groupId" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="groupName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="MEMBER_SSN" Type="System.String" DbType="NVarChar(9)" CanBeNull="true" />
+      <Column Name="MEMBER_NAME" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="MEMBER_COMPO" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="workflow" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="formal" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Column1" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="pas_code" Type="System.String" DbType="NVarChar(4)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+</Database>

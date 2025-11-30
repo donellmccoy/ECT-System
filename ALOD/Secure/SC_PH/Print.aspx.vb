@@ -1,0 +1,98 @@
+﻿Imports ALOD.Core.Domain.Documents
+Imports ALOD.Core.Domain.Modules.SpecialCases
+Imports ALOD.Core.Interfaces.DAOInterfaces
+Imports ALOD.Data
+Imports ALODWebUtility.Printing
+Imports WebSupergoo.ABCpdf8
+
+Namespace Web.Special_Case.PH
+
+    Public Class Print
+        Inherits System.Web.UI.Page
+
+        Private _documentDao As IDocumentDao
+        Private _documents As IList(Of ALOD.Core.Domain.Documents.Document)
+        Private _specCaseDao As ISpecialCaseDAO
+        Private _viewDocURL As String = String.Empty
+
+        Public ReadOnly Property ReferenceId() As Integer
+            Get
+                Return Integer.Parse(Request.QueryString("refId"))
+            End Get
+        End Property
+
+        Public Property ViewDocURL As String
+            Get
+                Return _viewDocURL
+            End Get
+            Private Set(value As String)
+                _viewDocURL = value
+            End Set
+        End Property
+
+        Protected ReadOnly Property DocumentDao() As IDocumentDao
+            Get
+                If (_documentDao Is Nothing) Then
+                    _documentDao = New SRXDocumentStore(CStr(HttpContext.Current.Session("UserName")))
+                End If
+
+                Return _documentDao
+            End Get
+        End Property
+
+        Protected ReadOnly Property SpecCaseDao() As ISpecialCaseDAO
+            Get
+                If (_specCaseDao Is Nothing) Then
+                    _specCaseDao = New NHibernateDaoFactory().GetSpecialCaseDAO()
+                End If
+
+                Return _specCaseDao
+            End Get
+        End Property
+
+        Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+            ' Determine if the case's PDF should be grabbed from SRXLite or dynamically generated...
+            Dim specCase As SpecialCase = SpecCaseDao.GetById(ReferenceId)
+
+            If (specCase Is Nothing) Then
+                Exit Sub
+            End If
+
+            If (specCase.DocumentGroupId.HasValue) Then
+                _documents = DocumentDao.GetDocumentsByGroupId(specCase.DocumentGroupId)
+            End If
+
+            Dim javaScriptCall As String = ViewForms.PHFormPDFLinkAttribute(specCase, _documents)
+
+            If (javaScriptCall.Contains("viewDoc")) Then
+                ' Grab from SRXLite...
+                ViewDocURL = Me.ResolveClientUrl(ExtractViewDocURL(javaScriptCall))
+            Else
+                ' Dynamically generate PDF...
+                Dim doc As PDFDocument = New PDFDocument()
+
+                If (doc Is Nothing) Then
+                    Exit Sub
+                End If
+
+                doc.SetRenderingEngine(EngineType.Gecko)
+                doc.AddWebPage(Server, "~/Secure/SC_PH/PrintableForm.aspx?refId=" & ReferenceId, 1)
+                doc.AddPageNumbers(0.47, 0.015)
+                doc.IncludeFOUOWatermark = False
+                doc.Render(Response)
+                doc.Close()
+            End If
+        End Sub
+
+        Private Function ExtractViewDocURL(ByVal javaScriptCall As String) As String
+            Dim url As String = String.Empty
+
+            Dim startIndex As Integer = javaScriptCall.IndexOf("(") + 1
+            Dim length As Integer = javaScriptCall.LastIndexOf(")") - startIndex
+
+            Return javaScriptCall.Substring(startIndex, length)
+        End Function
+
+    End Class
+
+End Namespace

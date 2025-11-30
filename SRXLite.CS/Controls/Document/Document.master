@@ -1,0 +1,82 @@
+<%@ Master Language="C#" Inherits="SRXLite.Web.Controls.Document.DocumentMaster" CodeBehind="Document.master.cs" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head runat="server">
+    <title></title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link href="/srxlite/styles.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript">
+function Delete() {
+	if (element("divContent").children.length==1) {
+		alert("Unable to delete this page because it is the only page in the document.");
+		
+	} else if (confirm("Are you sure you want to delete this page?")) {
+
+		
+		//Svc.TestService.DoWork(testcb);
+		
+		//var service = ScriptSvc.DocumentScriptService;
+//		var service = Svc.TestService
+//		
+//		alert(service);
+//		service.DeletePage(getImageID(),OnDeleteSuccess,OnDeleteFailed);
+	}
+}
+		function testcb(result) {
+			alert(result);
+		}
+	</script>
+    <asp:ContentPlaceHolder id="head" runat="server" />
+</head>
+<body style="overflow:hidden">
+    <form id="form1" runat="server">
+		<asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true">
+			<Scripts>
+				<asp:ScriptReference Path="~/Includes/Util.js" />
+				<asp:ScriptReference Path="~/Controls/Document/Document.js" />
+			</Scripts>
+			<Services>
+				<asp:ServiceReference Path="~/Services/DocumentScriptService.svc" />
+			</Services>
+		</asp:ScriptManager>
+
+		<ul id="menu" runat="server" class="contextMenu" oncontextmenu="return HideMenu();">
+			<li onclick="Zoom(1);"><div class="contextMenu_ZoomIn">Zoom In (+)</div></li>
+			<li onclick="Zoom(-1);"><div class="contextMenu_ZoomOut">Zoom Out (-)</div></li>
+			<li onclick="Rotate(-1);"><div class="contextMenu_RotateCCW">Rotate Counterclockwise (Ctrl+K)</div></li>
+			<li onclick="Rotate(1);"><div class="contextMenu_RotateCW">Rotate Clockwise (Ctrl+L)</div></li>
+			<li onclick="Resize(0);"><div class="contextMenu_FitWidth">Fit Width (Ctrl+W)</div></li>
+			<li onclick="Resize(1);"><div class="contextMenu_BestFit">Best Fit (Ctrl+B)</div></li>
+			<li onclick="Resize(2);"><div class="contextMenu_ActualSize">Actual Size (Ctrl+A)</div></li>
+			<li id="menuDelete" runat="server" onclick="Delete();"><div class="contextMenu_Delete">Delete (Ctrl+D)</div></li>
+		</ul>
+		<div style="height:100%; width:100%">
+		
+			<div style="float:left; width:100%; margin-left:-180px; height:100%; overflow:hidden">
+				<div style="height:100%; margin-left:180px; overflow-y:scroll; overflow-x:auto">
+					<div style="padding:10px; background-color:white; border-bottom:solid 1px gray">
+						<asp:Label ID="lblDocType" runat="server" Font-Bold="true" Font-Size="1.4em"></asp:Label>
+					</div>
+					<div id="divContent" runat="server" style="text-align:center; background-color:#d3d3d3"></div>
+				</div>
+			</div>
+			
+			<div style="float:left; height:100%; width:180px; overflow:scroll; overflow-x:hidden">
+				<div id="divThumbnails" runat="server" style="text-align:center; background-color:#d3d3d3"></div>
+			</div>
+
+		</div>
+		
+		
+		
+	    <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+
+		
+    </form>
+</body>
+</html>

@@ -1,0 +1,27 @@
+﻿<%@ Master Language="VB" MasterPageFile="~/Secure/Secure.master" AutoEventWireup="false" Inherits="ALOD.Web.Special_Case.PW.SC_PWaiverMaster" Codebehind="SC_PWaiver.master.vb" %>
+
+
+ <%@ Reference Control="~/Secure/Shared/UserControls/TabNavigator.ascx" %>
+ <%@ Reference Control="~/Secure/Shared/UserControls/TabControls.ascx" %>
+ <%@ Reference Control="~/Secure/Shared/UserControls/ModuleHeader.ascx" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
+    <asp:ContentPlaceHolder ID="HeaderNested" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentMain" runat="Server">
+    <lod:ModuleHeader ID="ModuleHeader1" runat="server" />
+    
+    <lod:TabNavigator ID="TabNavigator1" runat="server" SourceFile="~/Secure/SC_PWaivers/sc_PWaiver.xml" />
+     <div id="wizard">
+         
+        <asp:ContentPlaceHolder ID="ContentNested" runat="server">
+        </asp:ContentPlaceHolder>
+        
+    </div>
+    <lod:TabControls ID="TabControls1" runat="server" />
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="ContentFooter" runat="Server">
+    <asp:ContentPlaceHolder ID="FooterNested" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>

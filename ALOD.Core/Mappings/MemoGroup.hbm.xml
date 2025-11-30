@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Documents">
+
+	<class name="MemoGroup" table="core_MemoGroups">
+		<id name="Id" column="id">
+			<generator class="identity" />
+		</id>
+
+		<property name="CanCreate" />
+		<property name="CanEdit" />
+		<property name="CanView" />
+		<property name="CanDelete" />
+
+		<many-to-one name="Group" cascade="none" column="groupId" />
+		<many-to-one name="Template" cascade="none" column="templateId" />
+	</class>
+</hibernate-mapping>

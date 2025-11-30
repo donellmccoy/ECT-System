@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.WelcomePageBanner">
+
+  <class name="HyperLink" table="HyperLink">
+    <id name="Id" column="Id">
+      <generator class="identity" />
+    </id>
+
+    <property name="Name" column="Name" />
+    <property name="DisplayText" column="DisplayText" />
+    <property name="Value" column="Value" />
+
+    <many-to-one name="Type" class="ALOD.Core.Domain.WelcomePageBanner.HyperLinkType" column="TypeId" cascade="none" />
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,70 @@
+﻿.visuallyHidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    width: 1px;
+    margin: 1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+}
+
+.LODDocuments {
+    background-color: #FFFFFF;
+}
+
+.LODHeader, .LODHeaderSelected {
+    font-size: 11pt;
+    letter-spacing: 1pt;
+    color: white;
+    padding: 3px 0px 3px 6px;
+    text-decoration: underline;
+    font-family: Verdana;
+    cursor: pointer;
+}
+
+.LODHeader {
+    background-image: url('../App_Themes/DefaultBlue/images/add.gif');
+    background-repeat: no-repeat;
+    background-position: 98% 50%;
+    background-color: #27487d;
+    margin-bottom: 1px;
+    cursor: pointer;
+    color: white;
+}
+
+.LODHeaderSelected {
+    background-image: url('../App_Themes/DefaultBlue/images/subtract.gif');
+    background-repeat: no-repeat;
+    background-position: 98% 50%;
+    background-color: #5078B3;
+    /*background-color:#27487d;*/
+    border-left: #8AA4F2;
+    border-top: #8AA4F2;
+    border-right: #000000;
+    border-bottom: #000000;
+    border-width: 1px;
+    border-style: solid;
+}
+
+.LODContent {
+    border: solid 1px #000000;
+    padding: 10px;
+    margin-bottom: 1px;
+}
+
+/* Make the main section header links NOT look like links */
+.LODHeader a, LODHeader:visited, LODHeader:hover {
+    text-decoration: underline;
+    font-family: Verdana;
+    cursor: pointer;
+    color: white;
+}
+
+/* Make the main section header links NOT look like links */
+.LODHeaderSelected a, LODHeaderSelected:visited, LODHeaderSelected:hover {
+    text-decoration: underline;
+    font-family: Verdana;
+    cursor: pointer;
+    color: white;
+}

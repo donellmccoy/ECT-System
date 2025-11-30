@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Modules.SpecialCases">
+
+  <class name="SC_IncapAppeal_Findings" table="Form348_INCAP_Appeal">
+    <id name="AP_Id" column="ap_Id">
+      <generator class="identity" />
+    </id>
+    <!--<property name="Case_Id" column="case_Id" />-->
+    <property name="SC_Id" column="sc_Id" />
+    <property name="EXT_Id" column="ext_Id" />
+    <property name="WCC_AppealApproval" column="wcc_AppealApproval" />
+    <property name="OPR_AppealApproval" column="opr_AppealApproval" />
+    <property name="OCR_AppealApproval" column="ocr_AppealApproval" />
+    <property name="DOS_AppealApproval" column="dos_AppealApproval" />
+    <property name="CCR_AppealApproval" column="ccr_AppealApproval" />
+    <property name="VCR_AppealApproval" column="vcr_AppealApproval" />
+    <property name="DOP_AppealApproval" column="dop_AppealApproval" />
+    <property name="CAFR_AppealApproval" column="cafr_AppealApproval" />
+  </class>
+</hibernate-mapping>

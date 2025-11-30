@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Modules.SpecialCases">
+
+  <class name="SC_Incap_Findings" table="Form348_INCAP_Findings">
+    <id name="SC_Id" column="sc_Id">
+      <generator class="identity" />
+    </id>
+    <!--<property name="Case_Id" column="case_Id" />-->
+    <property name="Init_StartDate" column="init_StartDate" />
+    <property name="Init_EndDate" column="init_EndDate" />
+    <property name="Init_ExtOrComplete" column="init_ExtOrComplete" />
+    <property name="Init_AppealOrComplete" column="init_AppealOrComplete" />
+    <property name="Med_ReportType" column="med_ReportType" />
+    <property name="Med_AbilityToPreform" column="med_AbilityToPreform" />
+    <property name="IC_Recommendation" column="iC_Recommendation" />
+    <property name="Wing_Ja_Concur" column="wing_Ja_Concur" />
+    <property name="Fin_IncomeLost" column="fin_IncomeLost" />
+    <property name="WCC_InitApproval" column="wcc_InitApproval" />
+    <property name="Init_LateSubmission" column="init_LateSubmission" />
+    <property name="Fin_SelfEmployed" column="fin_SelfEmployed" />
+  </class>
+</hibernate-mapping>

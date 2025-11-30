@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Messaging">
+
+    <class name="Message" table="core_Messages">
+        <id name="Id" column="messageID">
+            <generator class="identity" />
+        </id>
+
+        <property name="Body" column="message" />
+        <property name="Title" column="title" />
+        <property name="Name" column="name" />
+        <property name="IsPopup" column="popup" />
+        <property name="StartDate" column="startTime" />
+        <property name="EndDate" column="endTime" />
+        <property name="IsAdminMessage" column="IsAdminMessage" />
+
+        <many-to-one name="CreatedBy" class="ALOD.Core.Domain.Users.AppUser" column="createdBy" />
+    </class>
+</hibernate-mapping>

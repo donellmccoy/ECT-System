@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Modules.SARC">
+
+  <class name="SARCAppeal" table="form348_AP_SARC" lazy="false">
+    <id name="Id" column="appeal_sarc_id">
+      <generator class="identity" />
+    </id>
+
+    <property name="InitialId" column="initial_id" />
+    <property name="InitialWorkflow" column="initial_workflow" />
+    <property name="CaseId" column="case_id" />
+    <property name="CreatedBy" column="created_by" />
+    <property name="CreatedDate" column="created_date" />
+
+    <property name="ModifiedBy" column="modified_by" />
+    <property name="ModifiedDate" column="modified_date" />
+    <property name="Status" column="status" />
+    <property name="Workflow" column="workflow" />
+    <property name="Cancel_Reason" column="cancel_reason" />
+    <property name="Cancel_Explanation" column="cancel_explanation" />
+    <property name="Cancel_Date" column="cancel_date" />
+    <property name="RWOA_Reason" column="rwoa_reason" />
+    <property name="RWOA_Reply" column="rwoa_reply" />
+
+    <property name="Return_comment" column="return_comment" />
+    <property name="RWOA_Explanation" column="rwoa_explanation" />
+    <property name="RWOA_Date" column="rwoa_date" />
+    <property name="ReturnToGroup" column="return_to_group" />
+    <property name="ReturnByGroup" column="return_by_group" />
+    <property name="MemberName" column="member_name" />
+    <property name="MemberSSN" column="member_ssn" />
+    <property name="MemberNotified" column="member_notified" />
+    <property name="MemberUnit" column="member_unit" />
+    <property name="MemberUnitId" column="member_unit_id" />
+    <property name="MemberCompo" column="member_compo" />
+    <property name="IsPostProcessingComplete" column="is_post_processing_complete" />
+    <property name="DocumentGroupId" column="doc_group_id" />
+    <property name="IsNonDBSignCase" column="is_non_dbsign_case" />
+
+    <many-to-one name="MemberRank" class="ALOD.Core.Domain.Lookup.UserRank" column="member_grade" update="true" insert="true" />
+
+    <!--<component name="WingSARCSignature" class="ALOD.Core.Domain.Modules.Lod.SignatureEntry">
+      <property name="DateSigned" column="sig_date_wing_sarc" />
+      <property name="NameAndRank" column="sig_name_wing_sarc" />
+      <property name="Title" column="sig_title_wing_sarc" />
+    </component>
+
+    <component name="SARCAdminSignature" class="ALOD.Core.Domain.Modules.Lod.SignatureEntry">
+      <property name="DateSigned" column="sig_date_sarc_admin" />
+      <property name="NameAndRank" column="sig_name_sarc_admin" />
+      <property name="Title" column="sig_title_sarc_admin" />
+    </component>
+
+    <component name="BoardMedicalSignature" class="ALOD.Core.Domain.Modules.Lod.SignatureEntry">
+      <property name="DateSigned" column="sig_date_board_medical" />
+      <property name="NameAndRank" column="sig_name_board_medical" />
+      <property name="Title" column="sig_title_board_medical" />
+    </component>
+
+    <component name="BoardLegalSignature" class="ALOD.Core.Domain.Modules.Lod.SignatureEntry">
+      <property name="DateSigned" column="sig_date_board_legal" />
+      <property name="NameAndRank" column="sig_name_board_legal" />
+      <property name="Title" column="sig_title_board_legal" />
+    </component>
+
+    <component name="BoardAdminSignature" class="ALOD.Core.Domain.Modules.Lod.SignatureEntry">
+      <property name="DateSigned" column="sig_date_board_admin" />
+      <property name="NameAndRank" column="sig_name_board_admin" />
+      <property name="Title" column="sig_title_board_admin" />
+    </component>
+
+    <component name="AppellateAuthoritySignature" class="ALOD.Core.Domain.Modules.Lod.SignatureEntry">
+      <property name="DateSigned" column="sig_date_appellate_auth" />
+      <property name="NameAndRank" column="sig_name_appellate_auth" />
+      <property name="Title" column="sig_title_appellate_auth" />
+    </component>-->
+
+    <!--<property name="sarc_admin_approved" column="sarc_admin_approved" />
+    <property name="board_medical_approved" column="board_medical_approved" />
+    <property name="board_legal_approved" column="board_legal_approved" />
+    <property name="board_admin_approved" column="board_admin_approved" />
+    <property name="appellate_auth_approved" column="appellate_auth_approved" />
+
+    <property name="sarc_admin_comment" column="sarc_admin_comment" />
+    <property name="board_medical_comment" column="board_medical_comment" />
+    <property name="board_legal_comment" column="board_legal_comment" />
+    <property name="board_admin_comment" column="board_admin_comment" />
+    <property name="appellate_auth_comment" column="appellate_auth_comment" />-->
+
+    <many-to-one name="WorkflowStatus" class="ALOD.Core.Domain.Workflow.WorkStatus" column="Status" cascade="none" update="false" insert="false" />
+    <property name="ConsultationFromUserGroupId" column="consultation_from_usergroup_id" />
+
+    <bag name="AppealFindings" table="FORM348_AP_SARC_findings"  cascade="all" inverse="true">
+      <key column="appeal_id"></key>
+      <one-to-many class="SARCAppealFindings" />
+    </bag>
+  </class>
+</hibernate-mapping>

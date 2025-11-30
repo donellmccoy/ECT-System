@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Workflow">
+
+	<class name="Workflow" table="core_Workflow">
+		<id name="Id" column="workflowId">
+			<generator class="identity" />
+		</id>
+
+		<property name="ModuleId" column="moduleId" />
+		<property name="Compo" column="compo" />
+		<property name="Title" column="title" />
+		<property name="Formal" column="formal" />
+		<property name="Active" column="active" />
+		<property name="InitialStatus" column="initialStatus" />
+	</class>
+</hibernate-mapping>

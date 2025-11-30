@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Query">
+
+  <class name="PHQueryOutputField" table="rpt_ph_user_query_output_fields">
+    <id name="Id" column="Id">
+      <generator class="identity" />
+    </id>
+    <property name="SectionId" column="SectionId" />
+    <property name="FieldId" column="FieldId" />
+    <property name="FieldTypeId" column="FieldTypeId" />
+    <many-to-one name="Query" class="PHUserQuery" column="PHQueryId" />
+  </class>
+</hibernate-mapping>

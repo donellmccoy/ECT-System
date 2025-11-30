@@ -1,0 +1,44 @@
+﻿Imports Microsoft.VisualBasic
+Imports System.Linq
+
+
+Partial Public Class core_WorkStatus_Option
+    Inherits WorkStatusLinqExt
+
+End Class
+
+<Serializable()> _
+Partial Public Class lod_sp_AccessHeaderResult
+
+End Class
+
+Partial Public Class AFLODDataContext
+    Public ReadOnly Property Form261() As System.Data.Linq.Table(Of Form261)
+        Get
+            Return Me.GetTable(Of Form261)()
+        End Get
+    End Property
+
+    Public ReadOnly Property Form348() As System.Data.Linq.Table(Of Form348)
+        Get
+            Return Me.GetTable(Of Form348)()
+        End Get
+    End Property
+
+    Public ReadOnly Property rwoa() As System.Data.Linq.Table(Of Rwoa)
+        Get
+            Return Me.GetTable(Of Rwoa)()
+        End Get
+    End Property
+    Public ReadOnly Property core_lkupIncidentType() As System.Data.Linq.Table(Of core_lkupIncidentType)
+        Get
+            Return Me.GetTable(Of core_lkupIncidentType)()
+        End Get
+    End Property
+End Class
+
+
+
+
+
+

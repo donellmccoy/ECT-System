@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Query">
+
+  <class name="PHQueryParameter" table="rpt_ph_user_query_param">
+    <id name="Id" column="Id">
+      <generator class="identity" />
+    </id>
+    <property name="Operator" column="OperatorType" />
+    <property name="WhereType" column="WhereType" />
+    <property name="StartValue" column="StartValue" />
+    <property name="StartDisplay" column="StartDisplay" />
+    <property name="EndValue" column="EndValue" />
+    <property name="EndDisplay" column="EndDisplay" />
+    <property name="ExecuteOrder" column="ExecuteOrder" />
+
+    <many-to-one name="Clause" class="PHQueryClause" column="PHClauseId" />
+  </class>
+</hibernate-mapping>

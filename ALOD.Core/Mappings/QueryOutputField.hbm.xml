@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Query">
+
+	<class name="QueryOutputField" table="rpt_query_fields">
+		<id name="Id" column="id">
+			<generator class="identity" />
+		</id>
+		<property name="FieldName" column="field_name" />
+		<property name="QueryType" column="query_type" />
+		<property name="SortOrder" column="sort_order" />
+    <property name="TableName" column="table_name" />
+	</class>
+</hibernate-mapping>

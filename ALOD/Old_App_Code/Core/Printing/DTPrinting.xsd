@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DTPrinting" targetNamespace="http://tempuri.org/Printing.xsd" xmlns:mstns="http://tempuri.org/Printing.xsd" xmlns="http://tempuri.org/Printing.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="1" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="MND_2ConnectionString" IsAppSettingsProperty="True" Modifier="Assembly" Name="MND_2ConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.Mnd.DataTypes.Properties.Settings.GlobalReference.Default.MND_2ConnectionString" Provider="System.Data.SqlClient">
+          </Connection>
+          <Connection AppSettingsObjectName="Web.config" AppSettingsPropertyName="LOD_Admin" IsAppSettingsProperty="True" Modifier="Assembly" Name="LOD_Admin (Web.config)" ParameterPrefix="@" PropertyReference="AppConfig.System.Configuration.ConfigurationManager.0.ConnectionStrings.LOD_Admin.ConnectionString" Provider="System.Data.SqlClient">
+          </Connection>
+        </Connections>
+        <Tables>
+        </Tables>
+        <Sources>
+        </Sources>
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DTPrinting" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="Printing" msprop:Generator_DataSetName="Printing">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="PrintDocumentDetails" msprop:Generator_UserTableName="PrintDocumentDetails" msprop:Generator_RowDeletedName="PrintDocumentDetailsRowDeleted" msprop:Generator_RowChangedName="PrintDocumentDetailsRowChanged" msprop:Generator_RowClassName="PrintDocumentDetailsRow" msprop:Generator_RowChangingName="PrintDocumentDetailsRowChanging" msprop:Generator_RowEvArgName="PrintDocumentDetailsRowChangeEvent" msprop:Generator_RowEvHandlerName="PrintDocumentDetailsRowChangeEventHandler" msprop:Generator_TableClassName="PrintDocumentDetailsDataTable" msprop:Generator_TableVarName="tablePrintDocumentDetails" msprop:Generator_RowDeletingName="PrintDocumentDetailsRowDeleting" msprop:Generator_TablePropName="PrintDocumentDetails">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="docid" msprop:Generator_UserColumnName="docid" msprop:Generator_ColumnVarNameInTable="columndocid" msprop:Generator_ColumnPropNameInRow="docid" msprop:Generator_ColumnPropNameInTable="docidColumn" type="xs:short" />
+              <xs:element name="doc_name" msprop:Generator_UserColumnName="doc_name" msprop:Generator_ColumnVarNameInTable="columndoc_name" msprop:Generator_ColumnPropNameInRow="doc_name" msprop:Generator_ColumnPropNameInTable="doc_nameColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="filename" msprop:Generator_UserColumnName="filename" msprop:Generator_ColumnVarNameInTable="columnfilename" msprop:Generator_ColumnPropNameInRow="filename" msprop:Generator_ColumnPropNameInTable="filenameColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="filetype" msprop:Generator_UserColumnName="filetype" msprop:Generator_ColumnVarNameInTable="columnfiletype" msprop:Generator_ColumnPropNameInRow="filetype" msprop:Generator_ColumnPropNameInTable="filetypeColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="compo" msprop:Generator_UserColumnName="compo" msprop:Generator_ColumnVarNameInTable="columncompo" msprop:Generator_ColumnPropNameInRow="compo" msprop:Generator_ColumnPropNameInTable="compoColumn" type="xs:short" />
+              <xs:element name="sp_getdata" msprop:Generator_UserColumnName="sp_getdata" msprop:Generator_ColumnVarNameInTable="columnsp_getdata" msprop:Generator_ColumnPropNameInRow="sp_getdata" msprop:Generator_ColumnPropNameInTable="sp_getdataColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="DocumentProperties" msprop:Generator_UserTableName="DocumentProperties" msprop:Generator_RowDeletedName="DocumentPropertiesRowDeleted" msprop:Generator_RowChangedName="DocumentPropertiesRowChanged" msprop:Generator_RowClassName="DocumentPropertiesRow" msprop:Generator_RowChangingName="DocumentPropertiesRowChanging" msprop:Generator_RowEvArgName="DocumentPropertiesRowChangeEvent" msprop:Generator_RowEvHandlerName="DocumentPropertiesRowChangeEventHandler" msprop:Generator_TableClassName="DocumentPropertiesDataTable" msprop:Generator_TableVarName="tableDocumentProperties" msprop:Generator_RowDeletingName="DocumentPropertiesRowDeleting" msprop:Generator_TablePropName="DocumentProperties">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="PropertyId" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:Generator_UserColumnName="PropertyId" msprop:Generator_ColumnVarNameInTable="columnPropertyId" msprop:Generator_ColumnPropNameInRow="PropertyId" msprop:Generator_ColumnPropNameInTable="PropertyIdColumn" type="xs:int" />
+              <xs:element name="DocId" msprop:Generator_UserColumnName="DocId" msprop:Generator_ColumnVarNameInTable="columnDocId" msprop:Generator_ColumnPropNameInRow="DocId" msprop:Generator_ColumnPropNameInTable="DocIdColumn" type="xs:short" />
+              <xs:element name="PropertyName" msprop:Generator_UserColumnName="PropertyName" msprop:Generator_ColumnVarNameInTable="columnPropertyName" msprop:Generator_ColumnPropNameInRow="PropertyName" msprop:Generator_ColumnPropNameInTable="PropertyNameColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PropertyValue" msprop:Generator_UserColumnName="PropertyValue" msprop:Generator_ColumnVarNameInTable="columnPropertyValue" msprop:Generator_ColumnPropNameInRow="PropertyValue" msprop:Generator_ColumnPropNameInTable="PropertyValueColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="MemoList" msprop:Generator_UserTableName="MemoList" msprop:Generator_RowDeletedName="MemoListRowDeleted" msprop:Generator_RowChangedName="MemoListRowChanged" msprop:Generator_RowClassName="MemoListRow" msprop:Generator_RowChangingName="MemoListRowChanging" msprop:Generator_RowEvArgName="MemoListRowChangeEvent" msprop:Generator_RowEvHandlerName="MemoListRowChangeEventHandler" msprop:Generator_TableClassName="MemoListDataTable" msprop:Generator_TableVarName="tableMemoList" msprop:Generator_RowDeletingName="MemoListRowDeleting" msprop:Generator_TablePropName="MemoList">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="LetterId" type="xs:int" minOccurs="0" />
+              <xs:element name="CreatedDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Description" type="xs:string" minOccurs="0" />
+              <xs:element name="TemplateId" type="xs:int" minOccurs="0" />
+              <xs:element name="AccessLevelId" type="xs:unsignedByte" minOccurs="0" />
+              <xs:element name="IsRestricted" type="xs:boolean" minOccurs="0" />
+              <xs:element name="UserRole" type="xs:string" minOccurs="0" />
+              <xs:element name="AccessLevel" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="MemoTemplates">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TemplateId" type="xs:int" minOccurs="0" />
+              <xs:element name="Description" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Letter">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Content" type="xs:string" minOccurs="0" />
+              <xs:element name="SigBlock" type="xs:string" minOccurs="0" />
+              <xs:element name="MailingAddress" type="xs:string" minOccurs="0" />
+              <xs:element name="Description" type="xs:string" minOccurs="0" />
+              <xs:element name="OfficeSymbol" type="xs:string" minOccurs="0" />
+              <xs:element name="MemoDate" type="xs:string" minOccurs="0" />
+              <xs:element name="SuspenseDate" type="xs:string" minOccurs="0" />
+              <xs:element name="LetterHead" type="xs:short" minOccurs="0" />
+              <xs:element name="TemplateFile" type="xs:string" minOccurs="0" />
+              <xs:element name="TemplateId" type="xs:int" minOccurs="0" />
+              <xs:element name="LetterId" type="xs:int" minOccurs="0" />
+              <xs:element name="SecondaryId" type="xs:int" minOccurs="0" />
+              <xs:element name="PrimaryId" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="LetterTemplate">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Description" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Content" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="7500" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="State" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="MailingAddress" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="300" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="addSignature" type="xs:boolean" minOccurs="0" />
+              <xs:element name="dataProc" type="xs:string" minOccurs="0" />
+              <xs:element name="officeSymbol" type="xs:string" minOccurs="0" />
+              <xs:element name="addDate" type="xs:boolean" minOccurs="0" />
+              <xs:element name="addSuspenseDate" type="xs:boolean" minOccurs="0" />
+              <xs:element name="ApprovalRequired" type="xs:boolean" minOccurs="0" />
+              <xs:element name="sigBlock" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ApprovalAuthority">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="SigBlock" type="xs:string" minOccurs="0" />
+              <xs:element name="BlockId" type="xs:string" minOccurs="0" />
+              <xs:element name="DefaultId" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="LetterContents">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Key" type="xs:string" minOccurs="0" />
+              <xs:element name="Value" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:PrintDocumentDetails" />
+      <xs:field xpath="mstns:docid" />
+    </xs:unique>
+    <xs:unique name="DocumentProperties_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:DocumentProperties" />
+      <xs:field xpath="mstns:PropertyId" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

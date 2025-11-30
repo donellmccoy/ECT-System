@@ -1,0 +1,47 @@
+﻿.docHeader {
+    border: 1px solid #08003c;
+    color: #08003c;
+    background-color: White;
+    height: 30px;
+    font-weight: bold;
+    font-size: 12px;
+    font-family: Verdana, Arial, 'Microsoft Sans Serif';
+}
+
+.docDetails {
+    background-color: transparent;
+    border-left: 1px solid #08003c;
+    border-right: 1px solid #08003c;
+    border-bottom: 1px solid #08003c;
+}
+
+    .docDetails a:link, .docDetails a:active {
+        color: black;
+    }
+
+.docRow {
+    height: 24px;
+}
+
+    .docRow td {
+        border-bottom: 1px solid #C0C0C0;
+    }
+
+.docRowOver {
+    background-color: #C0C0C0;
+    color: black;
+}
+
+    .docRowOver a:link {
+        color: black;
+    }
+
+.iconUpload {
+    cursor: pointer;
+    float: right;
+}
+
+.iconImg {
+    padding: 2px;
+    margin-right: 6px;
+}

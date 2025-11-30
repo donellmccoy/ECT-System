@@ -1,0 +1,1112 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        // ========================================
+        // BUILD TASKS
+        // ========================================
+        // Solution Builds
+        {
+            "label": "build solution",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/AFLOD.sln",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "build solution (Release)",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/AFLOD.sln",
+                "/property:Configuration=Release",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile",
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "build solution (Testing)",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/AFLOD.sln",
+                "/property:Configuration=Testing",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile",
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "build solution (Staging)",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/AFLOD.sln",
+                "/property:Configuration=Staging",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile",
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "build solution (Production)",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/AFLOD.sln",
+                "/property:Configuration=Production",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile",
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "clean solution",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "clean",
+                "${workspaceFolder}/AFLOD.sln"
+            ],
+            "problemMatcher": "$msCompile",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "rebuild solution",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/AFLOD.sln",
+                "/t:Rebuild",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile",
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        // ========================================
+        // PUBLISH TASKS
+        // ========================================
+        // ALOD - IIS - Debug
+        {
+            "label": "publish ALOD to IIS (Debug)",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "publish ALOD to IIS (Debug) - no prompt",
+                "restart IIS"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "publish ALOD to IIS (Debug) - no prompt",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "publish ALOD binaries (Debug)",
+                "transform ALOD web.config (Debug)"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "publish ALOD binaries (Debug)",
+            "type": "shell",
+            "command": "dotnet",
+            "args": [
+                "publish",
+                "${workspaceFolder}/ALOD/ALOD.vbproj",
+                "/p:Configuration=Debug",
+                "/p:Platform=Any CPU",
+                "/p:WebPublishMethod=FileSystem",
+                "/p:PublishUrl=C:\\inetpub\\ALOD",
+                "/p:DeployOnBuild=true"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "transform ALOD web.config (Debug)",
+            "type": "shell",
+            "command": "powershell.exe",
+            "args": [
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                "${workspaceFolder}\\Scripts\\Apply-WebConfigTransform.ps1",
+                "-SourceConfig",
+                "${workspaceFolder}\\ALOD\\web.config",
+                "-TransformConfig",
+                "${workspaceFolder}\\ALOD\\web.Debug.config",
+                "-DestinationConfig",
+                "C:\\inetpub\\ALOD\\web.config"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        // ALOD - IIS - Release
+        {
+            "label": "publish ALOD to IIS (Release)",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "publish ALOD to IIS (Release) - no prompt",
+                "restart IIS"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "publish ALOD to IIS (Release) - no prompt",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "publish ALOD binaries (Release)",
+                "transform ALOD web.config (Release)"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "publish ALOD binaries (Release)",
+            "type": "shell",
+            "command": "dotnet",
+            "args": [
+                "publish",
+                "${workspaceFolder}/ALOD/ALOD.vbproj",
+                "/p:Configuration=Release",
+                "/p:Platform=Any CPU",
+                "/p:WebPublishMethod=FileSystem",
+                "/p:PublishUrl=C:\\inetpub\\ALOD",
+                "/p:DeployOnBuild=true"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "transform ALOD web.config (Release)",
+            "type": "shell",
+            "command": "powershell.exe",
+            "args": [
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                "${workspaceFolder}\\Scripts\\Apply-WebConfigTransform.ps1",
+                "-SourceConfig",
+                "${workspaceFolder}\\ALOD\\web.config",
+                "-TransformConfig",
+                "${workspaceFolder}\\ALOD\\web.Release.config",
+                "-DestinationConfig",
+                "C:\\inetpub\\ALOD\\web.config"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        // ALOD - IIS - Testing
+        {
+            "label": "publish ALOD to IIS (Testing)",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "publish ALOD to IIS (Testing) - no prompt",
+                "restart IIS"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "publish ALOD to IIS (Testing) - no prompt",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "publish ALOD binaries (Testing)",
+                "transform ALOD web.config (Testing)"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "publish ALOD binaries (Testing)",
+            "type": "shell",
+            "command": "dotnet",
+            "args": [
+                "publish",
+                "${workspaceFolder}/ALOD/ALOD.vbproj",
+                "/p:Configuration=Testing",
+                "/p:Platform=Any CPU",
+                "/p:WebPublishMethod=FileSystem",
+                "/p:PublishUrl=C:\\inetpub\\ALOD",
+                "/p:DeployOnBuild=true"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "transform ALOD web.config (Testing)",
+            "type": "shell",
+            "command": "powershell.exe",
+            "args": [
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                "${workspaceFolder}\\Scripts\\Apply-WebConfigTransform.ps1",
+                "-SourceConfig",
+                "${workspaceFolder}\\ALOD\\web.config",
+                "-TransformConfig",
+                "${workspaceFolder}\\ALOD\\web.Testing.config",
+                "-DestinationConfig",
+                "C:\\inetpub\\ALOD\\web.config"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        // ALOD - IIS - Staging
+        {
+            "label": "publish ALOD to IIS (Staging)",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "publish ALOD to IIS (Staging) - no prompt",
+                "restart IIS"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "publish ALOD to IIS (Staging) - no prompt",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "publish ALOD binaries (Staging)",
+                "transform ALOD web.config (Staging)"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "publish ALOD binaries (Staging)",
+            "type": "shell",
+            "command": "dotnet",
+            "args": [
+                "publish",
+                "${workspaceFolder}/ALOD/ALOD.vbproj",
+                "/p:Configuration=Staging",
+                "/p:Platform=Any CPU",
+                "/p:WebPublishMethod=FileSystem",
+                "/p:PublishUrl=C:\\inetpub\\ALOD",
+                "/p:DeployOnBuild=true"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "transform ALOD web.config (Staging)",
+            "type": "shell",
+            "command": "powershell.exe",
+            "args": [
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                "${workspaceFolder}\\Scripts\\Apply-WebConfigTransform.ps1",
+                "-SourceConfig",
+                "${workspaceFolder}\\ALOD\\web.config",
+                "-TransformConfig",
+                "${workspaceFolder}\\ALOD\\web.Staging.config",
+                "-DestinationConfig",
+                "C:\\inetpub\\ALOD\\web.config"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        // ALOD - IIS - Production
+        {
+            "label": "publish ALOD to IIS (Production)",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "publish ALOD to IIS (Production) - no prompt",
+                "restart IIS"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "publish ALOD to IIS (Production) - no prompt",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "publish ALOD binaries (Production)",
+                "transform ALOD web.config (Production)"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "publish ALOD binaries (Production)",
+            "type": "shell",
+            "command": "dotnet",
+            "args": [
+                "publish",
+                "${workspaceFolder}/ALOD/ALOD.vbproj",
+                "/p:Configuration=Production",
+                "/p:Platform=Any CPU",
+                "/p:WebPublishMethod=FileSystem",
+                "/p:PublishUrl=C:\\inetpub\\ALOD",
+                "/p:DeployOnBuild=true"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "transform ALOD web.config (Production)",
+            "type": "shell",
+            "command": "powershell.exe",
+            "args": [
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                "${workspaceFolder}\\Scripts\\Apply-WebConfigTransform.ps1",
+                "-SourceConfig",
+                "${workspaceFolder}\\ALOD\\web.config",
+                "-TransformConfig",
+                "${workspaceFolder}\\ALOD\\web.Production.config",
+                "-DestinationConfig",
+                "C:\\inetpub\\ALOD\\web.config"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        // SRXLite - IIS - Debug
+        {
+            "label": "publish SRXLite to IIS (Debug)",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "publish SRXLite to IIS (Debug) - no prompt",
+                "restart IIS"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "publish SRXLite to IIS (Debug) - no prompt",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "publish SRXLite binaries (Debug)",
+                "transform SRXLite web.config (Debug)"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "publish SRXLite binaries (Debug)",
+            "type": "shell",
+            "command": "dotnet",
+            "args": [
+                "publish",
+                "${workspaceFolder}/SRXLite/SRXLite.vbproj",
+                "/p:Configuration=Debug",
+                "/p:Platform=Any CPU",
+                "/p:WebPublishMethod=FileSystem",
+                "/p:PublishUrl=C:\\inetpub\\SRXLite",
+                "/p:DeployOnBuild=true"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "transform SRXLite web.config (Debug)",
+            "type": "shell",
+            "command": "powershell.exe",
+            "args": [
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                "${workspaceFolder}\\Scripts\\Apply-WebConfigTransform.ps1",
+                "-SourceConfig",
+                "${workspaceFolder}\\SRXLite\\web.config",
+                "-TransformConfig",
+                "${workspaceFolder}\\SRXLite\\web.Debug.config",
+                "-DestinationConfig",
+                "C:\\inetpub\\SRXLite\\web.config"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        // SRXLite - IIS - Release
+        {
+            "label": "publish SRXLite to IIS (Release)",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "publish SRXLite to IIS (Release) - no prompt",
+                "restart IIS"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "publish SRXLite to IIS (Release) - no prompt",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "publish SRXLite binaries (Release)",
+                "transform SRXLite web.config (Release)"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "publish SRXLite binaries (Release)",
+            "type": "shell",
+            "command": "dotnet",
+            "args": [
+                "publish",
+                "${workspaceFolder}/SRXLite/SRXLite.vbproj",
+                "/p:Configuration=Release",
+                "/p:Platform=Any CPU",
+                "/p:WebPublishMethod=FileSystem",
+                "/p:PublishUrl=C:\\inetpub\\SRXLite",
+                "/p:DeployOnBuild=true"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "transform SRXLite web.config (Release)",
+            "type": "shell",
+            "command": "powershell.exe",
+            "args": [
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                "${workspaceFolder}\\Scripts\\Apply-WebConfigTransform.ps1",
+                "-SourceConfig",
+                "${workspaceFolder}\\SRXLite\\web.config",
+                "-TransformConfig",
+                "${workspaceFolder}\\SRXLite\\web.Release.config",
+                "-DestinationConfig",
+                "C:\\inetpub\\SRXLite\\web.config"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        // SRXLite - IIS - Testing
+        {
+            "label": "publish SRXLite to IIS (Testing)",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "publish SRXLite to IIS (Testing) - no prompt",
+                "restart IIS"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "publish SRXLite to IIS (Testing) - no prompt",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "publish SRXLite binaries (Testing)",
+                "transform SRXLite web.config (Testing)"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "publish SRXLite binaries (Testing)",
+            "type": "shell",
+            "command": "dotnet",
+            "args": [
+                "publish",
+                "${workspaceFolder}/SRXLite/SRXLite.vbproj",
+                "/p:Configuration=Testing",
+                "/p:Platform=Any CPU",
+                "/p:WebPublishMethod=FileSystem",
+                "/p:PublishUrl=C:\\inetpub\\SRXLite",
+                "/p:DeployOnBuild=true"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "transform SRXLite web.config (Testing)",
+            "type": "shell",
+            "command": "powershell.exe",
+            "args": [
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                "${workspaceFolder}\\Scripts\\Apply-WebConfigTransform.ps1",
+                "-SourceConfig",
+                "${workspaceFolder}\\SRXLite\\web.config",
+                "-TransformConfig",
+                "${workspaceFolder}\\SRXLite\\web.Testing.config",
+                "-DestinationConfig",
+                "C:\\inetpub\\SRXLite\\web.config"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        // SRXLite - IIS - Staging
+        {
+            "label": "publish SRXLite to IIS (Staging)",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "publish SRXLite to IIS (Staging) - no prompt",
+                "restart IIS"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "publish SRXLite to IIS (Staging) - no prompt",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "publish SRXLite binaries (Staging)",
+                "transform SRXLite web.config (Staging)"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "publish SRXLite binaries (Staging)",
+            "type": "shell",
+            "command": "dotnet",
+            "args": [
+                "publish",
+                "${workspaceFolder}/SRXLite/SRXLite.vbproj",
+                "/p:Configuration=Staging",
+                "/p:Platform=Any CPU",
+                "/p:WebPublishMethod=FileSystem",
+                "/p:PublishUrl=C:\\inetpub\\SRXLite",
+                "/p:DeployOnBuild=true"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "transform SRXLite web.config (Staging)",
+            "type": "shell",
+            "command": "powershell.exe",
+            "args": [
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                "${workspaceFolder}\\Scripts\\Apply-WebConfigTransform.ps1",
+                "-SourceConfig",
+                "${workspaceFolder}\\SRXLite\\web.config",
+                "-TransformConfig",
+                "${workspaceFolder}\\SRXLite\\web.Staging.config",
+                "-DestinationConfig",
+                "C:\\inetpub\\SRXLite\\web.config"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        // SRXLite - IIS - Production
+        {
+            "label": "publish SRXLite to IIS (Production)",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "publish SRXLite to IIS (Production) - no prompt",
+                "restart IIS"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "publish SRXLite to IIS (Production) - no prompt",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "publish SRXLite binaries (Production)",
+                "transform SRXLite web.config (Production)"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "publish SRXLite binaries (Production)",
+            "type": "shell",
+            "command": "dotnet",
+            "args": [
+                "publish",
+                "${workspaceFolder}/SRXLite/SRXLite.vbproj",
+                "/p:Configuration=Production",
+                "/p:Platform=Any CPU",
+                "/p:WebPublishMethod=FileSystem",
+                "/p:PublishUrl=C:\\inetpub\\SRXLite",
+                "/p:DeployOnBuild=true"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "transform SRXLite web.config (Production)",
+            "type": "shell",
+            "command": "powershell.exe",
+            "args": [
+                "-ExecutionPolicy",
+                "Bypass",
+                "-File",
+                "${workspaceFolder}\\Scripts\\Apply-WebConfigTransform.ps1",
+                "-SourceConfig",
+                "${workspaceFolder}\\SRXLite\\web.config",
+                "-TransformConfig",
+                "${workspaceFolder}\\SRXLite\\web.Production.config",
+                "-DestinationConfig",
+                "C:\\inetpub\\SRXLite\\web.config"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        // Both Websites - IIS - Debug
+        {
+            "label": "publish both websites to IIS (Debug)",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "build solution",
+                "publish ALOD to IIS (Debug) - no prompt",
+                "publish SRXLite to IIS (Debug) - no prompt",
+                "restart IIS"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        // Both Websites - IIS - Release
+        {
+            "label": "publish both websites to IIS (Release)",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "build solution (Release)",
+                "publish ALOD to IIS (Release) - no prompt",
+                "publish SRXLite to IIS (Release) - no prompt",
+                "restart IIS"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        // Both Websites - IIS - Testing
+        {
+            "label": "publish both websites to IIS (Testing)",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "build solution (Testing)",
+                "publish ALOD to IIS (Testing) - no prompt",
+                "publish SRXLite to IIS (Testing) - no prompt",
+                "restart IIS"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        // Both Websites - IIS - Staging
+        {
+            "label": "publish both websites to IIS (Staging)",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "build solution (Staging)",
+                "publish ALOD to IIS (Staging) - no prompt",
+                "publish SRXLite to IIS (Staging) - no prompt",
+                "restart IIS"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        // Both Websites - IIS - Production
+        {
+            "label": "publish both websites to IIS (Production)",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "build solution (Production)",
+                "publish ALOD to IIS (Production) - no prompt",
+                "publish SRXLite to IIS (Production) - no prompt",
+                "restart IIS"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        // ========================================
+        // LAUNCH TASKS
+        // ========================================
+        // ALOD - IIS Express
+        {
+            "label": "launch ALOD with IIS Express",
+            "type": "shell",
+            "command": "powershell.exe",
+            "args": [
+                "-ExecutionPolicy", "Bypass",
+                "-File",
+                "${workspaceFolder}\\Scripts\\clear-cache-and-launch.ps1",
+                "-ALODOnly"
+            ],
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "new",
+                "focus": true
+            },
+            "isBackground": true,
+            "runOptions": {
+                "instanceLimit": 1
+            }
+        },
+        {
+            "label": "build and launch ALOD",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "build solution",
+                "launch ALOD with IIS Express"
+            ],
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        // SRXLite - IIS Express
+        {
+            "label": "launch SRXLite with IIS Express",
+            "type": "shell",
+            "command": "powershell.exe",
+            "args": [
+                "-ExecutionPolicy", "Bypass",
+                "-File",
+                "${workspaceFolder}\\Scripts\\launch-iisexpress.ps1",
+                "-SRXLiteOnly"
+            ],
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "new",
+                "focus": true
+            },
+            "isBackground": true,
+            "runOptions": {
+                "instanceLimit": 1
+            }
+        },
+        {
+            "label": "build and launch SRXLite",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "build solution",
+                "launch SRXLite with IIS Express"
+            ],
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        // Both Websites - IIS Express
+        {
+            "label": "launch both websites with IIS Express",
+            "type": "shell",
+            "command": "powershell.exe",
+            "args": [
+                "-ExecutionPolicy", "Bypass",
+                "-File",
+                "${workspaceFolder}\\Scripts\\launch-iisexpress.ps1"
+            ],
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "new",
+                "focus": true
+            },
+            "isBackground": true,
+            "runOptions": {
+                "instanceLimit": 1
+            }
+        },
+        {
+            "label": "build and launch both websites",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "build solution",
+                "launch both websites with IIS Express"
+            ],
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        // ========================================
+        // TEST TASKS
+        // ========================================
+        {
+            "label": "run tests",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "test",
+                "${workspaceFolder}/ALOD.Tests/ALOD.Tests.csproj",
+                "--configuration",
+                "Debug",
+                "--verbosity",
+                "normal",
+                "--logger",
+                "console;verbosity=detailed"
+            ],
+            "problemMatcher": "$msCompile",
+            "group": "test",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        // ========================================
+        // UTILITY TASKS
+        // ========================================
+        {
+            "label": "stop IIS Express",
+            "type": "shell",
+            "command": "Get-Process iisexpress -ErrorAction SilentlyContinue | Stop-Process -Force",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "restart IIS",
+            "type": "shell",
+            "command": "powershell.exe -ExecutionPolicy Bypass -Command \"Write-Host 'Clearing browser cache...'; Remove-Item -Path '$env:LOCALAPPDATA\\Microsoft\\Windows\\INetCache\\*' -Recurse -Force -ErrorAction SilentlyContinue; Remove-Item -Path '$env:LOCALAPPDATA\\Microsoft\\Edge\\User Data\\Default\\Cache\\*' -Recurse -Force -ErrorAction SilentlyContinue; Write-Host 'Cache cleared'; iisreset\"",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "runOptions": {
+                "runOn": "folderOpen"
+            }
+        }
+    ],
+    "inputs": [
+        {
+            "id": "alodPublishPath",
+            "description": "Enter the IIS path for ALOD deployment (e.g., C:\\inetpub\\ALOD)",
+            "default": "C:\\inetpub\\ALOD",
+            "type": "promptString"
+        },
+        {
+            "id": "srxlitePublishPath", 
+            "description": "Enter the IIS path for SRXLite deployment (e.g., C:\\inetpub\\SRXLite)",
+            "default": "C:\\inetpub\\SRXLite",
+            "type": "promptString"
+        }
+    ]
+}

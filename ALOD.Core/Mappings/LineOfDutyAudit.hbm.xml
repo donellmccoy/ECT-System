@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+               assembly="ALOD.Core"
+               namespace="ALOD.Core.Domain.Modules.Lod">
+
+  <class name="LineOfDutyAudit" table="Form348_Audit" discriminator-value="1">
+    <id name="AuditId" column="AuditID">
+      <generator class="assigned" />
+    </id>
+    <property name="MedicallyAppropriate" column="MedicallyAppropriate" />
+    <property name="LegallySufficient" column="LegallySufficient" />
+    <property name="StatusValidated" column="StatusValidated" />
+  </class>
+</hibernate-mapping>

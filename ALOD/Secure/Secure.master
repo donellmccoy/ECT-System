@@ -1,0 +1,120 @@
+<%@ Master Language="VB" Inherits="ALOD.Web.Secure" EnableTheming="true" Codebehind="Secure.master.vb" %>
+<%@ Import Namespace="System.Web.Optimization" %>
+
+<%@ Register Src="Shared/UserControls/PHIBanner.ascx" TagName="PHIBanner" TagPrefix="uc2" %>
+<%@ Register Src="Shared/UserControls/ModalDialog.ascx" TagName="ModalDialog" TagPrefix="uc1" %>
+<%@ Register Src="~/Secure/Shared/UserControls/popupMessage.ascx" TagName="popupMessage" TagPrefix="uc1" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <title>LOD</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    
+    <%-- CSS now loaded via StyleSheetTheme (see web.config) --%>
+    <%--= Styles.Render("~/Content/css") --%>
+    <%--= Styles.Render("~/Content/jqueryui") --%>
+    
+    <%-- Bundled and minified JavaScript (using PlaceHolder to avoid theming conflict) --%>
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/jquery") %>
+        <%: Scripts.Render("~/bundles/jqueryui") %>
+        <%: Scripts.Render("~/bundles/common") %>
+        <%: Scripts.Render("~/bundles/app") %>
+    </asp:PlaceHolder>
+    
+    <asp:ContentPlaceHolder ID="head" runat="server" />
+</head>
+<body>
+    <form id="form1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" EnablePageMethods="true"  runat="server" />
+    <div id="outer">
+        <div id="header">
+            <div id="header-logo">
+                <asp:HyperLink runat="server" ID="lnkHome" NavigateUrl="~/Secure/Welcome.aspx">
+                    <asp:Image runat="server" ID="imgLogo" SkinID="imgLogo" ImageAlign="left"/>
+                </asp:HyperLink>
+                
+            <div id="header-right-user">
+                <asp:Label runat="server" ID="lblCurrentUser" Text="Cpt John Q User"></asp:Label><br />
+                <asp:Label runat="server" ID="UserRoleLabel" Text="User Role"></asp:Label><br />
+                <asp:Label runat="server" ID="LastLoginLabel" Text="Last Login: MM/DD/YYYY"></asp:Label>
+            </div>
+        </div>
+
+            
+            <div id="menuWrapper">
+                <div id="menuLogo">
+                    <asp:HyperLink runat="server" ID="lnkHome2"  NavigateUrl="~/Secure/Welcome.aspx">
+                        <asp:Image runat="server" ID="imgMenuLogo" SkinID="imgLogoMenu" />
+                    </asp:HyperLink>
+                </div>            
+            
+                <div id="main-menu">
+                    <asp:Menu ID="MainMenu" runat="server" DataSourceID="SiteMapDataSource1" OnMenuItemDataBound="ItemDataBound"
+                        Orientation="Horizontal" SkinID="MainMenu" SkipLinkText="" 
+                        DynamicEnableDefaultPopOutImage="False" RenderingMode="Table">
+                        <StaticMenuItemStyle CssClass="MainMenuStaticItemStyle" />
+                    </asp:Menu>
+                    <asp:SiteMapDataSource ID="SiteMapDataSource1" runat="server" ShowStartingNode="False" />
+                </div>
+            </div>
+
+            <div id="linksPanel">
+                <asp:Panel runat="server" ID="pnlLinks" HorizontalAlign="Left">
+                        <asp:LinkButton runat="server" ID="lnkLogOut" PostBackUrl="~/Public/logout.aspx"
+                            SkinID="BoldLinkWhite" Text="<%$ Resources:MasterPage, LogoutLink %>"></asp:LinkButton>
+                        &nbsp;<asp:Literal runat="server" ID="SVSeparator" Text="|" />&nbsp;
+                        <asp:LinkButton runat="server" ID="lnkSessionViewer" SkinID="BoldLinkWhite" Text="<%$ Resources:MasterPage, SessionViewerLink %>"></asp:LinkButton>
+                </asp:Panel>
+            </div>
+
+        </div>
+
+        <div id="content">
+            <asp:Label runat="server" ID="lblPageTitle" />
+            <asp:HyperLink runat="server" ID="HelpLink" Target="_blank" NavigateUrl="~/Secure/help/files/ALOD_V_1.0.pdf">
+                <asp:Image Visible="true" runat="Server" ID="btnHelp" SkinID="imgHelp" CssClass="imgHelp" />
+            </asp:HyperLink>
+            <br />
+            <uc2:PHIBanner ID="banner" runat="server" Visible="false" />
+            <asp:ContentPlaceHolder ID="ContentMain" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+        <br />
+        <br />
+        <div class="clearer">
+        </div>
+    </div>
+    <div id="footer">
+        <div id="footer-left">
+            <p>
+                <span runat="server" id="spnHIPPAPolicy" visible="false">
+                    <asp:HyperLink ID="HIPAAPolicy" runat="server" CssClass="LinkBoldWhite" NavigateUrl="~/Public/HIPPA.aspx" Target="_blank" Text="<%$ Resources:Global, HIPAALink %>"></asp:HyperLink>
+                    &nbsp; &nbsp;
+                </span>
+                <asp:HyperLink ID="Section508" runat="server" CssClass="LinkBoldWhite" NavigateUrl="~/Public/Section508.aspx"
+                    Target="_blank" Text="<%$ Resources:Global, Section508 %>"></asp:HyperLink>
+                    &nbsp; &nbsp;
+
+                <asp:HyperLink ID="PrivacyAndSecurity" runat="server" CssClass="LinkBoldWhite" NavigateUrl="~/Public/Privacy.aspx"
+                    Target="_blank" Text="<%$ Resources:Global, PrivacyLink %>"></asp:HyperLink>
+            </p>
+        </div>
+        <div id="footer-right">
+            <p>
+                <asp:Label ID="SystemDisclaimer" runat="server" Text="<%$ Resources:Global, SystemDisclaimer %>"></asp:Label>
+                &nbsp; &nbsp;
+                <asp:Label ID="VersionLabel" runat="server" CssClass="LinkBoldWhite"></asp:Label>
+            </p>
+        </div>
+    </div>
+    <asp:ContentPlaceHolder ID="ContentFooter" runat="server">
+    </asp:ContentPlaceHolder>
+    <uc1:ModalDialog ID="ModalDialog1" runat="server" RedirectURL="~/Default.aspx" />
+    </form>
+</body>
+</html>

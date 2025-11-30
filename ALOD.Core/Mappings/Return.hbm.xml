@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                     namespace="ALOD.Core.Domain.Modules.Lod">
+
+  <class name="Return" table="Returns">
+    <id name="Id" column="return_id">
+      <generator class="identity" />
+    </id>
+
+    <property name="RefId" column="refId" />
+    <property name="WorkStatusTo" column="workstatus_to" />
+    <property name="WorkStatusFrom" column="workstatus_from" />
+    <property name="Workflow" column="workflow" />
+    <property name="SentTo" column="sent_to" />
+    <property name="ReasonSentBack" column="reason_sent_back" />
+    <property name="ExplantionSendingBack" column="explanation_for_sending_back" />
+    <property name="Sender" column="sender" />
+    <property name="DateSent" column="date_sent" />
+    <property name="CommentsBackToSender" column="comments_back_to_sender" />
+    <property name="DateSentBack" column="date_sent_back" />
+    <property name="CreatedBy" column="created_by" />
+    <property name="CreatedDate" column="created_date" />
+    <property name="rerouting" column="rerouting" />
+    <property name="BoardReturn" column="board_return" />
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="ALOD.Core"
+                   namespace="ALOD.Core.Domain.Modules.SpecialCases">
+
+  <class name="SC_IncapExt_Findings" table="Form348_INCAP_Ext">
+    <id name="EXT_Id" column="ext_Id">
+      <generator class="identity" />
+    </id>
+    <!--<property name="Case_Id" column="case_Id" />-->
+    <property name="EXT_Number" column="ext_Number" />
+    <property name="EXT_StartDate" column="ext_StartDate" />
+    <property name="EXT_EndDate" column="ext_EndDate" />
+    <property name="MED_ExtRecommendation" column="med_ExtRecommendation" />
+    <property name="IC_ExtRecommendation" column="iC_ExtRecommendation" />
+    <property name="WJA_ConcurWithIC" column="wJA_ConcurWithIC" />
+    <property name="FIN_ExtIncomeLost" column="fin_IncomeLost" />
+    <property name="WCC_ExtApproval" column="wcc_ExtApproval" />
+    <property name="OPR_ExtApproval" column="opr_ExtApproval" />
+    <property name="OCR_ExtApproval" column="ocr_ExtApproval" />
+    <property name="DOS_ExtApproval" column="dos_ExtApproval" />
+    <property name="CCR_ExtApproval" column="ccr_ExtApproval" />
+    <property name="VCR_ExtApproval" column="vcr_ExtApproval" />
+    <property name="DOP_ExtApproval" column="dop_ExtApproval" />
+    <property name="CAFR_ExtApproval" column="cafr_ExtApproval" />
+    <property name="MED_AMROStartDate" column="med_AMROStartDate" />
+    <property name="MED_AMROEndDate" column="med_AMROEndDate" />
+    <property name="med_AMRODisposition" column="med_AMRODisposition" />
+    <property name="MED_NextAMROStartDate" column="med_NextAMROStartDate" />
+    <property name="MED_NextAMROEndDate" column="med_NextAMROEndDate" />
+    <property name="MED_IRILOStatus" column="med_IRILOStatus" />
+  </class>
+</hibernate-mapping>

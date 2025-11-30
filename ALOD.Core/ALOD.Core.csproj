@@ -1,0 +1,1162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\SixLabors.ImageSharp.3.0.2\build\SixLabors.ImageSharp.props" Condition="Exists('..\packages\SixLabors.ImageSharp.3.0.2\build\SixLabors.ImageSharp.props')" />
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{72E099C6-293D-4131-9263-41A2479D78BE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ALOD.Core</RootNamespace>
+    <AssemblyName>ALOD.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <CopyDebugSymbolFilesFromPackages>false</CopyDebugSymbolFilesFromPackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <Prefer32Bit>false</Prefer32Bit>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Testing|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Testing\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <Prefer32Bit>false</Prefer32Bit>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Staging|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Staging\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <DebugSymbols>false</DebugSymbols>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Production|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Production\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <DebugSymbols>false</DebugSymbols>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <DebugSymbols>false</DebugSymbols>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ABCpdf, Version=12.5.1.0, Culture=neutral, PublicKeyToken=a7a0b3f5184f2169, processorArchitecture=MSIL">
+      <HintPath>..\Dependencies\ABCpdf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AjaxControlToolkit, Version=20.1.0.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <HintPath>..\packages\AjaxControlToolkit.20.1.0\lib\net40\AjaxControlToolkit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr3.Runtime.3.5.1\lib\net40-client\Antlr3.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AutoMapper, Version=10.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.10.0.0\lib\net461\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="BouncyCastle.Crypto, Version=1.9.0.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
+      <HintPath>..\packages\Portable.BouncyCastle.1.9.0\lib\net40\BouncyCastle.Crypto.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="BouncyCastle.Cryptography, Version=2.0.0.0, Culture=neutral, PublicKeyToken=072edcf4a5328938, processorArchitecture=MSIL">
+      <HintPath>..\packages\BouncyCastle.Cryptography.2.2.1\lib\net461\BouncyCastle.Cryptography.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Castle.Core, Version=1.2.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.1.2.0\lib\Castle.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Castle.DynamicProxy2, Version=2.2.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.DynamicProxy.2.2.0\lib\Castle.DynamicProxy2.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Castle.Services.Logging.log4netIntegration, Version=1.2.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.1.2.0\lib\Castle.Services.Logging.log4netIntegration.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Castle.Services.Logging.NLogIntegration, Version=1.2.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.1.2.0\lib\Castle.Services.Logging.NLogIntegration.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Chinchilla.Logging, Version=4.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Chinchilla.Logging.4.5.29\lib\net40\Chinchilla.Logging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Chinchilla.StateManagement, Version=4.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Chinchilla.StateManagement.4.2.5\lib\net40\Chinchilla.StateManagement.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ChineseConverter, Version=1.0.0.0, Culture=neutral, PublicKeyToken=9ecab500adebae88, processorArchitecture=MSIL">
+      <HintPath>..\packages\ChineseConverter.1.0.0\lib\net20\ChineseConverter.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ChnCharInfo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=18f031bd02e5e291, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.International.Converters.PinYinConverter.1.0.0\lib\ChnCharInfo.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Cqrs, Version=4.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Cqrs.4.4.1.24\lib\net40\Cqrs.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="CsvHelper, Version=30.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
+      <HintPath>..\packages\CsvHelper.30.0.1\lib\net47\CsvHelper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Enums.NET, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7ea1c1650d506225, processorArchitecture=MSIL">
+      <HintPath>..\packages\Enums.NET.4.0.1\lib\net45\Enums.NET.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=1.4.2.13, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.1.4.2\lib\netstandard2.0\ICSharpCode.SharpZipLib.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.15\lib\net45\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MailKit, Version=4.2.0.0, Culture=neutral, PublicKeyToken=4e064fe7c44a8f1b, processorArchitecture=MSIL">
+      <HintPath>..\packages\MailKit.4.2.0\lib\net48\MailKit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MathNet.Numerics, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cd8b63ad3d691a37, processorArchitecture=MSIL">
+      <HintPath>..\packages\MathNet.Numerics.Signed.5.0.0\lib\net48\MathNet.Numerics.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.7.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.HashCode, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.HashCode.1.1.1\lib\net461\Microsoft.Bcl.HashCode.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.IO.RecyclableMemoryStream, Version=2.3.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IO.RecyclableMemoryStream.2.3.2\lib\net462\Microsoft.IO.RecyclableMemoryStream.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Practices.EnterpriseLibrary.2008.4.1\lib\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Practices.EnterpriseLibrary.2008.4.1\lib\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.ExceptionHandling, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Practices.EnterpriseLibrary.2008.4.1\lib\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Practices.EnterpriseLibrary.2008.4.1\lib\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Logging, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Practices.EnterpriseLibrary.2008.4.1\lib\Microsoft.Practices.EnterpriseLibrary.Logging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Logging.Database, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Practices.EnterpriseLibrary.2008.4.1\lib\Microsoft.Practices.EnterpriseLibrary.Logging.Database.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ObjectBuilder2, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Practices.EnterpriseLibrary.2008.4.1\lib\Microsoft.Practices.ObjectBuilder2.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=59d6d24383174ac4, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocation.1.0.0\lib\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=2.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Cquential.Microsoft.Practices.Unity.2.0.414\lib\net35\Microsoft.Practices.Unity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.Common.10.0.40219.1\lib\Microsoft.ReportViewer.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.Common.10.0.40219.1\lib\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.Common.10.0.40219.1\lib\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.WebForms.10.0.40219.1\lib\Microsoft.ReportViewer.WebForms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.Administration, Version=10.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Administration.11.1.0\lib\netstandard1.5\Microsoft.Web.Administration.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Win32.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Win32.Primitives.4.3.0\lib\net46\Microsoft.Win32.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Win32.Registry, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Win32.Registry.5.0.0\lib\net461\Microsoft.Win32.Registry.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MimeKit, Version=4.2.0.0, Culture=neutral, PublicKeyToken=bede1c8a46c66814, processorArchitecture=MSIL">
+      <HintPath>..\packages\MimeKit.4.2.0\lib\net48\MimeKit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.5.2.4\lib\net46\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI.Core, Version=2.6.2.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.6.2\lib\net472\NPOI.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI.OOXML, Version=2.6.2.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.6.2\lib\net472\NPOI.OOXML.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.6.2.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.6.2\lib\net472\NPOI.OpenXml4Net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.6.2.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.6.2\lib\net472\NPOI.OpenXmlFormats.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SharpCompress, Version=0.33.0.0, Culture=neutral, PublicKeyToken=afb0a02973931d96, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpCompress.0.33.0\lib\net462\SharpCompress.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SixLabors.Fonts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d998eea7b14cab13, processorArchitecture=MSIL">
+      <HintPath>..\packages\SixLabors.Fonts.1.0.0\lib\netstandard2.0\SixLabors.Fonts.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.AppContext, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.AppContext.4.3.0\lib\net463\System.AppContext.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Console, Version=4.0.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Console.4.3.1\lib\net46\System.Console.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=7.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.7.0.2\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Diagnostics.EventLog, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.EventLog.7.0.0\lib\net462\System.Diagnostics.EventLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Diagnostics.TraceSource, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.TraceSource.4.3.0\lib\net46\System.Diagnostics.TraceSource.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Diagnostics.Tracing, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.Tracing.4.3.0\lib\net462\System.Diagnostics.Tracing.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Formats.Asn1, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Formats.Asn1.7.0.0\lib\net462\System.Formats.Asn1.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Globalization.Calendars, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Globalization.Calendars.4.3.0\lib\net46\System.Globalization.Calendars.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Compression.4.3.0\lib\net46\System.IO.Compression.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.IO.Compression.ZipFile, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Compression.ZipFile.4.3.0\lib\net46\System.IO.Compression.ZipFile.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.4.3.0\lib\net46\System.IO.FileSystem.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.Primitives.4.3.0\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Linq, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.4.3.0\lib\net463\System.Linq.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Linq.Expressions, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.Expressions.4.3.0\lib\net463\System.Linq.Expressions.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http, Version=4.1.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.4.3.4\lib\net46\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Sockets, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Sockets.4.3.0\lib\net46\System.Net.Sockets.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Reflection, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reflection.4.3.0\lib\net462\System.Reflection.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Reflection.TypeExtensions, Version=4.1.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reflection.TypeExtensions.4.7.0\lib\net461\System.Reflection.TypeExtensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.4.3.1\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Extensions, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.Extensions.4.3.1\lib\net462\System.Runtime.Extensions.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.4.3.0\lib\net463\System.Runtime.InteropServices.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Security.AccessControl, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.AccessControl.6.0.0\lib\net461\System.Security.AccessControl.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.1\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.2\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Xml, Version=7.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Xml.7.0.1\lib\net462\System.Security.Cryptography.Xml.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Principal.Windows, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Principal.Windows.5.0.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.ServiceProcess.ServiceController, Version=7.0.0.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ServiceProcess.ServiceController.7.0.1\lib\net462\System.ServiceProcess.ServiceController.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Text.Encoding.CodePages, Version=7.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encoding.CodePages.7.0.0\lib\net462\System.Text.Encoding.CodePages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Text.RegularExpressions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.RegularExpressions.4.3.1\lib\net463\System.Text.RegularExpressions.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xml.ReaderWriter, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Xml.ReaderWriter.4.3.1\lib\net46\System.Xml.ReaderWriter.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ViajaNet.Cms.Domain, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Vjn.Cms.Domain.1.4.0\lib\net45\ViajaNet.Cms.Domain.dll</HintPath>
+    </Reference>
+  <!-- StyleCop configuration removed -->
+    <Compile Include="Domain\Common\CaseComments.cs" />
+    <Compile Include="Domain\Common\CaseDialogueComments.cs" />
+    <Compile Include="Domain\Common\ChildCaseComments.cs" />
+    <Compile Include="Domain\Common\MemoSignature.cs" />
+    <Compile Include="Domain\Common\DropDownListEdit.cs" />
+    <Compile Include="Domain\Common\WitnessData.cs" />
+    <Compile Include="Domain\Common\CustomServerControls\ValueRadioButton.cs" />
+    <Compile Include="Domain\Common\KeyVal\KeyValKey.cs" />
+    <Compile Include="Domain\Common\KeyVal\KeyValKeyType.cs" />
+    <Compile Include="Domain\Common\KeyVal\KeyValValue.cs" />
+    <Compile Include="Domain\Common\Log\ChangeRow.cs" />
+    <Compile Include="Domain\Common\Log\ChangeSet.cs" />
+    <Compile Include="Domain\Common\Log\ILogDao.cs" />
+    <Compile Include="Domain\Common\NullableFields.cs" />
+    <Compile Include="Domain\Common\ValidationItem.cs" />
+    <Compile Include="Domain\DBSign\DBSignEnums.cs" />
+    <Compile Include="Domain\DBSign\DigitalSignatureInfo.cs" />
+    <Compile Include="Domain\DBSign\DBSignTemplate.cs" />
+    <Compile Include="Domain\Documents\AbstractMemoContent.cs" />
+    <Compile Include="Domain\Documents\AbstractMemorandum.cs" />
+    <Compile Include="Domain\Documents\DocCategoryView.cs" />
+    <Compile Include="Domain\Documents\DocumentCategory2.cs" />
+    <Compile Include="Domain\Documents\Document.cs" />
+    <Compile Include="Domain\Documents\DocumentCreatedEventArgs.cs" />
+    <Compile Include="Domain\Documents\DocumentView.cs" />
+    <Compile Include="Domain\Documents\IDocumentSource.cs" />
+    <Compile Include="Domain\Documents\IDocumentStore.cs" />
+    <Compile Include="Domain\Documents\MemoContent.cs" />
+    <Compile Include="Domain\Documents\MemoContent2.cs" />
+    <Compile Include="Domain\Documents\MemoGroup.cs" />
+    <Compile Include="Domain\Documents\MemoLetterhead.cs" />
+    <Compile Include="Domain\Documents\Memorandum.cs" />
+    <Compile Include="Domain\Documents\Memorandum2.cs" />
+    <Compile Include="Domain\Documents\MemoTemplate.cs" />
+    <Compile Include="Domain\Documents\PDFTable.cs" />
+    <Compile Include="Domain\Documents\PDFTableHTMLData.cs" />
+    <Compile Include="Domain\Documents\WorkflowDocument.cs" />
+    <Compile Include="Domain\Lookup\CaseType.cs" />
+    <Compile Include="Domain\Lookup\CertificationStamp.cs" />
+    <Compile Include="Domain\Lookup\CancelReasons.cs" />
+    <Compile Include="Domain\Lookup\CompletedByGroup.cs" />
+    <Compile Include="Domain\Lookup\Disposition.cs" />
+    <Compile Include="Domain\Lookup\FindingByReasonOf.cs" />
+    <Compile Include="Domain\Lookup\FindingsLookUp.cs" />
+    <Compile Include="Domain\Lookup\ReserveMedicalUnit.cs" />
+    <Compile Include="Domain\Lookup\SuicideMethod.cs" />
+    <Compile Include="Domain\Messaging\Message.cs" />
+    <Compile Include="Domain\Modules\Appeals\AppealInitiateCaseArgs.cs" />
+    <Compile Include="Domain\Modules\Appeals\AppealPostProcessing.cs" />
+    <Compile Include="Domain\Modules\Appeals\LODAppeal.cs" />
+    <Compile Include="Domain\Modules\Appeals\LODAppealDeterminationMemoArgs.cs" />
+    <Compile Include="Domain\Modules\Appeals\LODAppealFindings.cs" />
+    <Compile Include="Domain\Modules\Common\AbstractWorkflowCaseFindings.cs" />
+    <Compile Include="Domain\Modules\Common\UserGroupContainsDecisionRuleData.cs" />
+    <Compile Include="Domain\Modules\Common\PetitionWorkflowInitiateCaseArgs.cs" />
+    <Compile Include="Domain\Modules\Lod\ANGLineOfDuty.cs" />
+    <Compile Include="Domain\Modules\Lod\LineOfDutyAudit.cs" />
+    <Compile Include="Domain\Modules\Lod\LineOfDutyUnit_v2.cs" />
+    <Compile Include="Domain\Modules\Lod\LineOfDutyMedical_v2.cs" />
+    <Compile Include="Domain\Modules\Lod\ANGLineOfDuty_v2.cs" />
+    <Compile Include="Domain\Modules\Lod\LineOfDuty_v2.cs" />
+    <Compile Include="Domain\Modules\Lod\LineOfDutyPostProcessing.cs" />
+    <Compile Include="Domain\Modules\Lod\NatureOfIncident.cs" />
+    <Compile Include="Domain\Modules\Lod\Return.cs" />
+    <Compile Include="Domain\Modules\Reinvestigations\LODReinvestigationFindings.cs" />
+    <Compile Include="Domain\Modules\Reinvestigations\RRDeterminationMemoArgs.cs" />
+    <Compile Include="Domain\Modules\Reinvestigations\RRInitiateCaseArgs.cs" />
+    <Compile Include="Domain\Modules\SARC\AppealSARCPostProcessing.cs" />
+    <Compile Include="Domain\Modules\SARC\RestrictedSARC.cs" />
+    <Compile Include="Domain\Modules\SARC\RestrictedSARCFindings.cs" />
+    <Compile Include="Domain\Modules\SARC\RestrictedSARCOtherICDCode.cs" />
+    <Compile Include="Domain\Modules\SARC\RestrictedSARCPostProcessing.cs" />
+    <Compile Include="Domain\Modules\SARC\SARCAppeal.cs" />
+    <Compile Include="Domain\Modules\SARC\SARCAppealInitiateCaseArgs.cs" />
+    <Compile Include="Domain\Modules\SARC\SARCAppealFindings.cs" />
+    <Compile Include="Domain\Modules\SpecialCases\AssociatedCase.cs" />
+    <Compile Include="Domain\Modules\SpecialCases\SC_AGRCert.cs" />
+    <Compile Include="Domain\Modules\SpecialCases\SC_DW.cs" />
+    <Compile Include="Domain\Modules\SpecialCases\SC_IncapAppeal_Findings.cs" />
+    <Compile Include="Domain\Modules\SpecialCases\SC_IncapExt_Findings.cs" />
+    <Compile Include="Domain\Modules\SpecialCases\SC_Incap_Findings.cs" />
+    <Compile Include="Domain\Modules\SpecialCases\SC_MO.cs" />
+    <Compile Include="Domain\Modules\SpecialCases\SC_MH.cs" />
+    <Compile Include="Domain\Modules\SpecialCases\PAL_Data.cs" />
+    <Compile Include="Domain\Modules\SpecialCases\SC_MEB.cs" />
+    <Compile Include="Domain\Modules\SpecialCases\SC_MMSO.cs" />
+    <Compile Include="Domain\Modules\SpecialCases\SC_NE.cs" />
+    <Compile Include="Domain\Modules\SpecialCases\SC_PEPP.cs" />
+    <Compile Include="Domain\Modules\SpecialCases\SC_PH.cs" />
+    <Compile Include="Domain\Modules\SpecialCases\SC_PSCD.cs" />
+    <Compile Include="Domain\Modules\SpecialCases\SC_PSCD_Findings.cs" />
+    <Compile Include="Domain\Modules\SpecialCases\SC_PWaivers.cs" />
+    <Compile Include="Domain\Modules\SpecialCases\SC_RS.cs" />
+    <Compile Include="Domain\Modules\SpecialCases\SC_RW.cs" />
+    <Compile Include="Domain\Modules\SpecialCases\SC_WWD.cs" />
+    <Compile Include="Domain\Modules\SpecialCases\SC_FastTrack.cs" />
+    <Compile Include="Domain\Modules\SpecialCases\SC_CMAS.cs" />
+    <Compile Include="Domain\Modules\SpecialCases\SC_BCMR.cs" />
+    <Compile Include="Domain\Modules\SpecialCases\SpecialCase.cs" />
+    <Compile Include="Domain\Modules\SpecialCases\SC_BMT.cs" />
+    <Compile Include="Domain\Modules\SpecialCases\SC_Congress.cs" />
+    <Compile Include="Domain\Modules\SpecialCases\SC_Incap.cs" />
+    <Compile Include="Domain\Modules\Lod\LODComment.cs" />
+    <Compile Include="Domain\Modules\Lod\SignatureEntry.cs" />
+    <Compile Include="Domain\Common\EmailTemplate.cs" />
+    <Compile Include="Domain\BaseObject.cs" />
+    <Compile Include="Domain\Entity.cs" />
+    <Compile Include="Domain\Documents\DocumentEnums.cs" />
+    <Compile Include="Domain\IEntityWithTypedId.cs" />
+    <Compile Include="Domain\Modules\Lod\LineOfDuty.cs" />
+    <Compile Include="Domain\Modules\Lod\LineOfDutyFindings.cs" />
+    <Compile Include="Domain\Modules\Lod\LineOfDutyInvestigation.cs" />
+    <Compile Include="Domain\Modules\Lod\LineOfDutyMedical.cs" />
+    <Compile Include="Domain\Modules\Lod\LineOfDutyUnit.cs" />
+    <Compile Include="Domain\Modules\Lod\LodEnums.cs" />
+    <Compile Include="Domain\Modules\Lod\LodSearch.cs" />
+    <Compile Include="Domain\Lookup\ILookupDao.cs" />
+    <Compile Include="Domain\Reports\ARCNetLookupReportArgs.cs" />
+    <Compile Include="Domain\ServiceMembers\ServiceMember.cs" />
+    <Compile Include="Domain\Lookup\State.cs" />
+    <Compile Include="Domain\Common\MailManager.cs" />
+    <Compile Include="Domain\Common\EMailMessage.cs" />
+    <Compile Include="Domain\Common\PersonnelData.cs" />
+    <Compile Include="Domain\Modules\Lod\Rwoa.cs" />
+    <Compile Include="Domain\Modules\Lod\RwoaReason.cs" />
+    <Compile Include="Domain\Common\TabNavigationEventArgs.cs" />
+    <Compile Include="Domain\Common\TrackingItem.cs" />
+    <Compile Include="Domain\Lookup\Address.cs" />
+    <Compile Include="Domain\Modules\Reinvestigations\LODReinvestigation.cs" />
+    <Compile Include="Domain\PsychologicalHealth\PHField.cs" />
+    <Compile Include="Domain\PsychologicalHealth\PHFieldType.cs" />
+    <Compile Include="Domain\PsychologicalHealth\PHFormFieldPair.cs" />
+    <Compile Include="Domain\PsychologicalHealth\PHFormFieldTotal.cs" />
+    <Compile Include="Domain\PsychologicalHealth\PHFormFieldUpdateEventArgs.cs" />
+    <Compile Include="Domain\PsychologicalHealth\PHFormValue.cs" />
+    <Compile Include="Domain\PsychologicalHealth\PHForm.cs" />
+    <Compile Include="Domain\PsychologicalHealth\PHFormField.cs" />
+    <Compile Include="Domain\PsychologicalHealth\PHSection.cs" />
+    <Compile Include="Domain\PsychologicalHealth\PHTotalsReport.cs" />
+    <Compile Include="Domain\PsychologicalHealth\PHTotalsReportArgs.cs" />
+    <Compile Include="Domain\PsychologicalHealth\PHTotalsReportStringValue.cs" />
+    <Compile Include="Domain\Query\InputParam.cs" />
+    <Compile Include="Domain\Query\InputSource.cs" />
+    <Compile Include="Domain\Query\PHQueryClause.cs" />
+    <Compile Include="Domain\Query\PHQueryOutputField.cs" />
+    <Compile Include="Domain\Query\PHQueryParameter.cs" />
+    <Compile Include="Domain\Query\PHUserQuery.cs" />
+    <Compile Include="Domain\Query\QueryOutputField.cs" />
+    <Compile Include="Domain\Query\QueryClause.cs" />
+    <Compile Include="Domain\Query\QueryOperator.cs" />
+    <Compile Include="Domain\Query\QueryParameter.cs" />
+    <Compile Include="Domain\Query\QuerySource.cs" />
+    <Compile Include="Domain\Query\UserQuery.cs" />
+    <Compile Include="Domain\Query\UserQueryArgs.cs" />
+    <Compile Include="Domain\Query\UserQueryResult.cs" />
+    <Compile Include="Domain\Query\WhereType.cs" />
+    <Compile Include="Domain\Reports\LODActivitiesMetricsReportArgs.cs" />
+    <Compile Include="Domain\Reports\LODAvgTimesMetricsReportArgs.cs" />
+    <Compile Include="Domain\Reports\LODCategoryCountReportArgs.cs" />
+    <Compile Include="Domain\Reports\LODComplianceAccuracyReportResultItem.cs" />
+    <Compile Include="Domain\Reports\LODComplianceQualityReportResultItem.cs" />
+    <Compile Include="Domain\Reports\LODComplianceReport.cs" />
+    <Compile Include="Domain\Reports\LODComplianceReportArgs.cs" />
+    <Compile Include="Domain\Reports\LODDisapprovedReportArgs.cs" />
+    <Compile Include="Domain\Reports\LODDispositionReportArgs.cs" />
+    <Compile Include="Domain\Reports\LODGraphReportArgs.cs" />
+    <Compile Include="Domain\Reports\LODPhysicianCancelledReportArgs.cs" />
+    <Compile Include="Domain\Reports\LODProgramStatusReport.cs" />
+    <Compile Include="Domain\Reports\LODProgramStatusReportArgs.cs" />
+    <Compile Include="Domain\Reports\LODProgramStatusReportResultItem.cs" />
+    <Compile Include="Domain\Reports\LODRWOAReportArgs.cs" />
+    <Compile Include="Domain\Reports\LODSARCCasesReport.cs" />
+    <Compile Include="Domain\Reports\LODSARCCasesReportArgs.cs" />
+    <Compile Include="Domain\Reports\LODSARCCasesReportResultItem.cs" />
+    <Compile Include="Domain\Reports\LODStatisticsReportArgs.cs" />
+    <Compile Include="Domain\Reports\LODStatusDaysResultItem.cs" />
+    <Compile Include="Domain\Reports\LODSuspenseMonitoringReport.cs" />
+    <Compile Include="Domain\Reports\LODSuspenseMonitoringReportArgs.cs" />
+    <Compile Include="Domain\Reports\LODSuspenseMonitoringReportResultItem.cs" />
+    <Compile Include="Domain\Reports\LODTotalCountByProcessReportArgs.cs" />
+    <Compile Include="Domain\Reports\PWaiversReportArgs.cs" />
+    <Compile Include="Domain\Reports\ReportEnums.cs" />
+    <Compile Include="Domain\Reports\ReportUtility.cs" />
+    <Compile Include="Domain\Reports\RSDispositionReportArgs.cs" />
+    <Compile Include="Domain\ServiceMembers\ServiceMemberMILPDSChangeHistory.cs" />
+    <Compile Include="Domain\Users\ApprovalAuthority.cs" />
+    <Compile Include="Domain\Users\AppUser.cs" />
+    <Compile Include="Domain\Users\CommandStruct.cs" />
+    <Compile Include="Domain\Users\LookUpItem.cs" />
+    <Compile Include="Domain\Users\Unit.cs" />
+    <Compile Include="Domain\Users\UnitChainEntry.cs" />
+    <Compile Include="Domain\Users\UnitChainType.cs" />
+    <Compile Include="Domain\Users\UnitLookup.cs" />
+    <Compile Include="Domain\Users\UserEnums.cs" />
+    <Compile Include="Domain\Users\UserGroup.cs" />
+    <Compile Include="Domain\Lookup\UserRank.cs" />
+    <Compile Include="Domain\Users\UserGroupLevel.cs" />
+    <Compile Include="Domain\Users\UserRole.cs" />
+    <Compile Include="Domain\Common\ICD9Code.cs" />
+    <Compile Include="Domain\Users\UserRoleRequest.cs" />
+    <Compile Include="Domain\WelcomePageBanner\HyperLink.cs" />
+    <Compile Include="Domain\WelcomePageBanner\BannerLinkType.cs" />
+    <Compile Include="Domain\WelcomePageBanner\WelcomePageBanner.cs" />
+    <Compile Include="Domain\Workflow\ActionTypes.cs" />
+    <Compile Include="Domain\Workflow\ALODPermission.cs" />
+    <Compile Include="Domain\Workflow\CaseLock.cs" />
+    <Compile Include="Domain\Workflow\Module.cs" />
+    <Compile Include="Domain\Workflow\SignatureMetaData.cs" />
+    <Compile Include="Domain\Workflow\WorkflowActionTypes.cs" />
+    <Compile Include="Domain\Workflow\PageAccess.cs" />
+    <Compile Include="Domain\Workflow\RuleType.cs" />
+    <Compile Include="Domain\Workflow\StatusCode.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\Workflow\Workflow.cs" />
+    <Compile Include="Domain\Workflow\WorkflowEnums.cs" />
+    <Compile Include="Domain\Workflow\WorkflowOptionAction.cs" />
+    <Compile Include="Domain\Workflow\WorkflowOptionRule.cs" />
+    <Compile Include="Domain\Workflow\WorkflowStatusOption.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Domain\Workflow\WorkStatus.cs" />
+    <Compile Include="Domain\Workflow\WorkStatusTracking.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\IActionTypesDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\IALODPermissionDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\IAppealPostProcessingDAO.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\IApplicationWarmupProcessDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\ICaseCommentsDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\ICaseLockDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\ICaseTypeDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\ICertificationStampDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\ICompletedByGroupDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\IDocCategoryViewDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\IDocumentViewDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\IEmailTemplateDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\IHyperLinkDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\IHyperLinkTypeDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\IICD9CodeDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\ANGILineOfDutyDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\ILineOfDutyAuditDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\ILineOfDutyFindingsDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\ILineOfDutyInvestigationDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\ILineOfDutyMedicalDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\ILineOfDutyPostProcessingDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\ILineOfDutyUnitDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\ILODAppealDAO.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\ILODCommentsDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\ILODReinvestigateDAO.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\ILodSearchDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\ILookupCancelReasonsDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\ILookupDispositionDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\IMemberDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\IMessageDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\IPageAccessDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\IPALDataDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\IRestrictedSARCOtherICDCodeDAO.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\IReturnDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\IRuleTypeDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\IRwoaDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\IRwoaReasonDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\ISARCAppealDAO.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\ISARCAppealPostProcessingDAO.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\ISARCDAO.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\ISARCPostProcessingDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\ISignatueMetaDateDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\ISpecialCaseDAO.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\IStatusCodeDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\ISuicideMethodDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\ITrackingDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\IUnitChainEntryDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\IUnitChainTypeDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\IUnitDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\IUserGroupLevelDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\IUserRoleRequestDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\IARCNetDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\IWorkflowDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\IWorkflowOptionActionsDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\IWorkflowOptionDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\IWorkflowOptionRulesDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\IWorkStatusDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\IWorkStatusTrackingDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\IAssociatedCaseDao.cs" />
+    <Compile Include="Interfaces\IAuditable.cs" />
+    <Compile Include="Interfaces\IMemoSignatureDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\IDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\IDaoFactory.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\IDBSignTemplateDao.cs" />
+    <Compile Include="Interfaces\IDocumentProcessingStrategy.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\IEmailDao.cs" />
+    <Compile Include="Interfaces\IExtractedEntity.cs" />
+    <Compile Include="Interfaces\IHasAssignedId.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\IKeyValDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\ILineOfDutyDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\IMemoDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\IMemoDao2.cs" />
+    <Compile Include="Interfaces\IPDFFormFieldParser.cs" />
+    <Compile Include="Interfaces\IPHFormUIBuildingBlock.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\IPHQueryDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\IPsychologicalHealthDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\IQueryDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\IReminderEmailDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\IReportsDao.cs" />
+    <Compile Include="Interfaces\IDigitalSignatureService.cs" />
+    <Compile Include="Interfaces\ITrackingSource.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\IUserDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\IUserGroupDao.cs" />
+    <Compile Include="Interfaces\DAOInterfaces\IUserRoleDao.cs" />
+    <Compile Include="Interfaces\IValidatable.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\ABCPDFUtility.cs" />
+    <Compile Include="Utils\AdHocQueryHelpers.cs" />
+    <Compile Include="Utils\CollectionHelpers.cs" />
+    <Compile Include="Utils\DataHelpers.cs" />
+    <Compile Include="Utils\DataTransferObjects\IRILOMedicalOfficerTabInitMemosDropdownListDto.cs" />
+    <Compile Include="Utils\DataTransferObjects\RwMedicalOfficerTabInitDropdownListDto.cs" />
+    <Compile Include="Utils\DesignByContract.cs" />
+    <Compile Include="Utils\DynamicQueryable.cs" />
+    <Compile Include="Utils\Enum.cs" />
+    <Compile Include="Utils\Helpers.cs" />
+    <Compile Include="Utils\IUtilityDao.cs" />
+    <Compile Include="Utils\MemoHelpers.cs" />
+    <Compile Include="Utils\NextActionHelpers.cs" />
+    <Compile Include="Utils\RegexValidation.cs" />
+    <Compile Include="Utils\XMLString.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\LineOfDuty.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\LineOfDutyUnit.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\LineOfDutyMedical.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\LineOfDutyInvestigation.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\TrackingItem.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\LineOfDutyFindings.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\DocumentView.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\AppUser.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\UserRank.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\UserGroup.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\UserRole.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\CommandStruct.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\Unit.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\State.hbm.xml" />
+    <EmbeddedResource Include="Mappings\ServiceMember.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappings\WorkStatus.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\StatusCode.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\WorkOptionRule.hbm.xml" />
+    <EmbeddedResource Include="Mappings\WorkStatusOption.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\RuleType.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\LodSearch.hbm.xml" />
+    <EmbeddedResource Include="Mappings\PageAccess.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\Workflow.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\WorkStatusTracking.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\ICD9Code.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\ActionTypes.hbm.xml" />
+    <EmbeddedResource Include="Mappings\WorkflowOptionAction.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\Rwoa.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\RwoaReason.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\EmailTemplate.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\Lookup.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\MemoTemplate.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\MemoContent.hbm.xml" />
+    <EmbeddedResource Include="Mappings\MemoLetterhead.hbm.xml" />
+    <EmbeddedResource Include="Mappings\Memorandum.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\MemoGroup.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\UserRoleRequest.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\ALODPermission.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\ApprovalAuthority.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\InputSource.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\UserQuery.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\QueryClause.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappings\QueryParameter.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\QueryOutputField.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\CaseLock.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\UnitChainEntry.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\LODComment.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\Message.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\FindingsLookUp.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\WorkflowActionTypes.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\UnitChainType.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\LODReinvestigation.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappings\MemoContent2.hbm.xml" />
+    <EmbeddedResource Include="Mappings\Memorandum2.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\DocCategoryView.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\DocumentCategory2.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\SpecialCase.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\PHQueryClause.hbm.xml" />
+    <EmbeddedResource Include="Mappings\PHQueryOutputField.hbm.xml" />
+    <EmbeddedResource Include="Mappings\PHQueryParameter.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mappings\PHUserQuery.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\BannerLink.hbm.xml" />
+    <EmbeddedResource Include="Mappings\BannerLinkType.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\SuicideMethod.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\LODAppeal.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\SARC.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\RestrictedSARCFindings.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\RestrictedSARCOtherICDCode.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\AbstractMemorandum.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\AbstractMemoContent.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\SARCAppeal.hbm.xml" />
+    <EmbeddedResource Include="Mappings\SARCAppealFindings.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\Return.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\LODAppealFindings.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\LODReinvestigationFindings.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Mappings\UserGroupLevel.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ABCpdfQuickStart.txt" />
+    <Content Include="Mappings\LineOfDutyAudit.hbm.xml" />
+    <EmbeddedResource Include="Mappings\SC_IncapAppeal_Findings.hbm.xml" />
+    <EmbeddedResource Include="Mappings\SC_IncapExt_Findings.hbm.xml" />
+    <EmbeddedResource Include="Mappings\SC_Incap_Findings.hbm.xml" />
+    <EmbeddedResource Include="Mappings\SC_PSCD_Findings.hbm.xml" />
+    <EmbeddedResource Include="Mappings\ANGLineOfDuty.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ABCpdf.chm" />
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ALOD.Logging\ALOD.Logging.csproj">
+      <Project>{d9ef4c09-ac2a-4a32-9c92-29bb73b90f23}</Project>
+      <Name>ALOD.Logging</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Domain\Modules\ANG\" />
+  </ItemGroup>
+  <!-- StyleCop analyzers removed -->
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets'))" />
+    <Error Condition="!Exists('..\packages\SixLabors.ImageSharp.3.0.2\build\SixLabors.ImageSharp.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SixLabors.ImageSharp.3.0.2\build\SixLabors.ImageSharp.props'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+  <Import Project="..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
