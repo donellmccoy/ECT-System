@@ -51,7 +51,7 @@ namespace ALODWebUtility.Printing
 
             LineOfDuty lineOfDuty = null;
 
-            lineOfDuty = LodService.GetById(refID);
+            lineOfDuty = LodService.GetById(int.Parse(refID));
 
             if (lineOfDuty != null && _documents != null)
             {

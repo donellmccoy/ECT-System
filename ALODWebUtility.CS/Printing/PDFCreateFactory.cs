@@ -103,7 +103,7 @@ namespace ALODWebUtility.Printing
             bool isRLod = false;
             bool updatedRR = false;
             NHibernateDaoFactory factory = new NHibernateDaoFactory();
-            LineOfDutyDao dao = factory.GetLineOfDutyDao();
+            ILineOfDutyDao dao = factory.GetLineOfDutyDao();
             LineOfDuty lod = new LineOfDuty();
             LineOfDuty origLod = new LineOfDuty();
             PDFDocument doc = new PDFDocument();
@@ -246,18 +246,18 @@ namespace ALODWebUtility.Printing
             {
                 if (lod.AppointingCancelReasonId.HasValue && lod.AppointingCancelReasonId != 0)
                 {
-                    reason = LookupService.GetCancelReasonDescription(lod.AppointingCancelReasonId);
+                    reason = LookupService.GetCancelReasonDescription(lod.AppointingCancelReasonId.Value);
                 }
                 else if (lod.ApprovingCancelReasonId.HasValue && lod.AppointingCancelReasonId != 0)
                 {
-                    reason = LookupService.GetCancelReasonDescription(lod.ApprovingCancelReasonId);
+                    reason = LookupService.GetCancelReasonDescription(lod.ApprovingCancelReasonId.Value);
                 }
                 else
                 {
                     reason = "Unknown";
                 }
 
-                SignatureMetaData WingCCsig = ((SignatureMetaDataDao)SigDao).GetByWorkStatus(lod.Id, lod.Workflow, LodWorkStatus_v2.AppointingAutorityReview);
+                SignatureMetaData WingCCsig = ((SignatureMetaDataDao)SigDao).GetByWorkStatus(lod.Id, lod.Workflow, (int)LodWorkStatus_v2.AppointingAutorityReview);
 
                 sigLine = GetWatermarkSignature(WingCCsig, DBSignTemplateId.WingCC, lod.Id, PersonnelTypes.APPOINT_AUTH);
             }
@@ -272,7 +272,7 @@ namespace ALODWebUtility.Printing
                     reason = "Unknown";
                 }
 
-                SignatureMetaData Medsig = ((SignatureMetaDataDao)SigDao).GetByWorkStatus(lod.Id, lod.Workflow, LodWorkStatus_v2.MedicalOfficerReview);
+                SignatureMetaData Medsig = ((SignatureMetaDataDao)SigDao).GetByWorkStatus(lod.Id, lod.Workflow, (int)LodWorkStatus_v2.MedicalOfficerReview);
 
                 sigLine = GetWatermarkSignature(Medsig, DBSignTemplateId.Form348Medical, lod.Id, PersonnelTypes.MED_OFF);
             }
@@ -307,7 +307,7 @@ namespace ALODWebUtility.Printing
             }
 
             // This signature occurred after the epoch, so verify it
-            VerifySource = new DBSignService(template, refId, ptype);
+            VerifySource = new DBSignService(template, refId, (int)ptype);
 
             DBSignResult signatureStatus = VerifySource.VerifySignature();
 
@@ -343,7 +343,7 @@ namespace ALODWebUtility.Printing
         {
             try
             {
-                if (!Utility.UserHasPermission(Utility.PERMISSION_VIEW_SARC_CASES))
+                if (!SessionInfo.UserHasPermission(SessionInfo.PERMISSION_VIEW_SARC_CASES))
                 {
                     LogSARCDeniedError(refId);
                     return null;
@@ -414,7 +414,7 @@ namespace ALODWebUtility.Printing
                     reason = LookupService.GetCancelReasonDescription(sarc.Cancel_Reason.Value);
                 }
 
-                SignatureMetaData sig = ((SignatureMetaDataDao)SigDao).GetByWorkStatus(sarc.Id, sarc.Workflow, SARCRestrictedWorkStatus.SARCInitiate);
+                SignatureMetaData sig = ((SignatureMetaDataDao)SigDao).GetByWorkStatus(sarc.Id, sarc.Workflow, (int)SARCRestrictedWorkStatus.SARCInitiate);
 
                 sigLine = GetWatermarkSignature(sig, DBSignTemplateId.Form348SARC, sarc.Id, PersonnelTypes.WING_SARC_RSL);
 

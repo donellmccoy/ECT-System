@@ -36,7 +36,7 @@ namespace ALODWebUtility.Printing
         // Assuming SESSION_COMPO is available via session or utility
         private string SESSION_COMPO
         {
-            get { return SessionInfo.Session_Compo; } // Using SessionInfo from Common
+            get { return SessionInfo.SESSION_COMPO; } // Using SessionInfo from Common
         }
 
         SignatureMetaDataDao SigDao
@@ -69,7 +69,7 @@ namespace ALODWebUtility.Printing
             this.replaceIOSig = replaceIOsig;
             string strComments = "Generated Form 261 PDF";
             NHibernateDaoFactory factory = new NHibernateDaoFactory();
-            LineOfDutyDao dao = factory.GetLineOfDutyDao();
+            ILineOfDutyDao dao = factory.GetLineOfDutyDao();
             LineOfDuty lod = new LineOfDuty();
 
             if (dao.GetWorkflow(refId) == 27)
@@ -83,7 +83,7 @@ namespace ALODWebUtility.Printing
             WorkStatusDao wsdao = new WorkStatusDao();
             ALOD.Core.Domain.Workflow.WorkStatus lodCurrStatus = wsdao.GetById(lod.Status);
 
-            PDFForm form261 = new PDFForm(PrintDocuments.FormDD261);
+            PDFForm form261 = new PDFForm((int)PrintDocuments.FormDD261);
 
             PrintingUtil.PrintingUtil.SetFormField(form261, "lodCaseNumberP1", lod.CaseId);
             PrintingUtil.PrintingUtil.SetFormField(form261, "lodCaseNumberP2", lod.CaseId);
@@ -310,13 +310,13 @@ namespace ALODWebUtility.Printing
                 }
 
                 LineOfDutyFindings ioFinding;
-                ioFinding = lod.FindByType(PersonnelTypes.IO);
+                ioFinding = lod.FindByType((short)PersonnelTypes.IO);
 
                 if (ioFinding != null)
                 {
                     if (ioFinding.Finding != null)
                     {
-                        switch (ioFinding.Finding)
+                        switch ((Finding)ioFinding.Finding)
                         {
                             case Finding.In_Line_Of_Duty: PrintingUtil.PrintingUtil.SetFormField(form261, "findinga", "Yes"); break; // ILD
                             case Finding.Nlod_Not_Due_To_OwnMisconduct: PrintingUtil.PrintingUtil.SetFormField(form261, "findingb", "Yes"); break; // NDOM
@@ -337,7 +337,7 @@ namespace ALODWebUtility.Printing
                 // Appointing Authority ---------------------------------------------------------------------
 
                 LineOfDutyFindings appointingFormalFinding;
-                appointingFormalFinding = lod.FindByType(PersonnelTypes.FORMAL_APP_AUTH);
+                appointingFormalFinding = lod.FindByType((short)PersonnelTypes.FORMAL_APP_AUTH);
 
                 if (appointingFormalFinding != null)
                 {
@@ -365,13 +365,13 @@ namespace ALODWebUtility.Printing
                     {
                         // Final/Approving Authority ----------------------------------------------------------------------
 
-                        SignatureMetaData sig = SigDao.GetByWorkStatus(lod.Id, lod.Workflow, LodWorkStatus_v2.FormalApprovingAuthorityAction);
+                        SignatureMetaData sig = SigDao.GetByWorkStatus(lod.Id, lod.Workflow, (int)LodWorkStatus_v2.FormalApprovingAuthorityAction);
 
                         if (sig != null)
                         {
                             if (lod.LODInvestigation.FinalApprovalFindings != null)
                             {
-                                switch (lod.LODInvestigation.FinalApprovalFindings)
+                                switch ((Finding)lod.LODInvestigation.FinalApprovalFindings)
                                 {
                                     case Finding.In_Line_Of_Duty:
                                         PrintingUtil.PrintingUtil.SetFormField(form261, "final_approval_findings", "In Line of Duty");
@@ -402,7 +402,7 @@ namespace ALODWebUtility.Printing
                         }
                         // need to determine how much of the endless findings field will go here
                         LineOfDutyFindings approvingFormalFinding;
-                        approvingFormalFinding = lod.FindByType(PersonnelTypes.FORMAL_BOARD_AA);
+                        approvingFormalFinding = lod.FindByType((short)PersonnelTypes.FORMAL_BOARD_AA);
                         if (approvingFormalFinding != null)
                         {
                             AddFormalFinding_v2(form261, approvingFormalFinding, "approvingSubstitutedFindings", "approvingFindings");
@@ -410,14 +410,14 @@ namespace ALODWebUtility.Printing
                     }
                 }
 
-                if (lod.CurrentStatusCode != LodStatusCode.Complete)
+                if (lod.CurrentStatusCode != (int)LodStatusCode.Complete)
                 {
                     // Suppress the page
                     form261.SuppressSecondPage();
                 }
             }
 
-            LogManager.LogAction(ModuleType.LOD, UserAction.ViewDocument, lodid, strComments);
+            LogManager.LogAction((int)ModuleType.LOD, UserAction.ViewDocument, lodid, strComments);
 
             return form261;
         }
@@ -447,7 +447,7 @@ namespace ALODWebUtility.Printing
                 if (boardFinding.Finding.HasValue)
                 {
                     valid = true;
-                    newFinding = PrintingUtil.PrintingUtil.GetFindingFormText(boardFinding.Finding.Value);
+                    newFinding = PrintingUtil.PrintingUtil.GetFindingFormText((Finding)boardFinding.Finding.Value);
                 }
             }
 
@@ -510,7 +510,7 @@ namespace ALODWebUtility.Printing
             }
 
             // this signature occured after the epoch, so verify it
-            VerifySource = new DBSignService(template, lodid, ptype);
+            VerifySource = new DBSignService(template, lodid, (int)ptype);
 
             bool valid = false;
 
@@ -575,7 +575,7 @@ namespace ALODWebUtility.Printing
 
             DateTime dateSigned = signature.date;
 
-            VerifySource = new DBSignService(template, refId, ptype);
+            VerifySource = new DBSignService(template, refId, (int)ptype);
 
             bool valid = false;
 

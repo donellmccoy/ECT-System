@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using ALOD.Core.Domain.Users;
+using ALOD.Core.Interfaces.DAOInterfaces;
 using ALOD.Data;
 
 namespace ALODWebUtility.Common
@@ -375,7 +376,7 @@ namespace ALODWebUtility.Common
         public void LoadPasCode()
         {
             // Do not use Iif (evaluates both results [Then and Else] before the conditional [If]) - which causes errors
-            UnitDao unitDao = new NHibernateDaoFactory().GetUnitDao();
+            IUnitDao unitDao = new NHibernateDaoFactory().GetUnitDao();
             Unit pCodeInfo = unitDao.GetById(cs_id);
             if (pCodeInfo.Name == null)
             {
@@ -593,9 +594,9 @@ namespace ALODWebUtility.Common
             foreach (KeyValuePair<string, int> entry in reportingStructure)
             {
                 xml.BeginElement("command");
-                xml.WriteAttribute("cs_id", cs_id);
+                xml.WriteAttribute("cs_id", cs_id.ToString());
                 xml.WriteAttribute("chain_type", entry.Key);
-                xml.WriteAttribute("parent_cs_id", entry.Value);
+                xml.WriteAttribute("parent_cs_id", entry.Value.ToString());
                 xml.EndElement();
             }
 

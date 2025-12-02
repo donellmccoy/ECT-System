@@ -1,11 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.Web;
 using ALOD.Core.Domain.Modules.Lod;
 using ALOD.Core.Domain.Workflow;
 using ALOD.Core.Interfaces.DAOInterfaces;
 using ALOD.Data;
 using ALODWebUtility.Common;
 using ALODWebUtility.Printing;
+using static ALODWebUtility.Common.SessionInfo;
+using static ALODWebUtility.Common.Utility;
 
 namespace ALOD.Web.LOD
 {
@@ -67,14 +70,14 @@ namespace ALOD.Web.LOD
             //********************************************
             // Resets Print button to view Final form 284/261
             PrintFinal docUrl348 = new PrintFinal();
-            url348 = docUrl348.GetURL348(lodid, HttpContext.Current.Session["UserName"].ToString(), dao);
+            url348 = docUrl348.GetURL348(lodid.ToString(), HttpContext.Current.Session["UserName"].ToString(), dao);
 
             if (url348?.Length > 1)
             {
                 url348 = this.ResolveClientUrl(url348);
 
                 PrintFinal docUrl261 = new PrintFinal();
-                url261 = docUrl261.GetURL261(lodid, HttpContext.Current.Session["UserName"].ToString(), dao);
+                url261 = docUrl261.GetURL261(lodid.ToString(), HttpContext.Current.Session["UserName"].ToString(), dao);
                 if (url261?.Length > 1)
                 {
                     url261 = this.ResolveClientUrl(url261);
@@ -86,7 +89,7 @@ namespace ALOD.Web.LOD
                 PDFDocument doc;
                 PDFCreateFactory create = new PDFCreateFactory();
 
-                doc = create.GeneratePdf(Id, ModuleType.LOD);
+                doc = create.GeneratePdf(Id, (int)ModuleType.LOD);
 
                 List<int> numbers = new List<int> { 325, 326, 327, 328, 329, 330, 331, 332, 333, 334, 335, 336 };
                 if (numbers.Contains(LOD.Status))

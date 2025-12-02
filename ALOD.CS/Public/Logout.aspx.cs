@@ -1,4 +1,5 @@
 using System;
+using System.Web.Security;
 using ALODWebUtility.Providers;
 
 namespace ALOD.Web
@@ -7,7 +8,7 @@ namespace ALOD.Web
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            ALOD.Data.Services.UserService.Logout(Session["UserId"]);
+            ALOD.Data.Services.UserService.Logout(Session["UserId"] != null ? (int)Session["UserId"] : 0);
             Session.Clear();
             Session.Abandon();
             AuthenticationHandler.Logout();

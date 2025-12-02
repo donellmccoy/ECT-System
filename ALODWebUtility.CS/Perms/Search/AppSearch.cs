@@ -116,7 +116,7 @@ namespace ALODWebUtility.Perms.Search
             row.recId = _recId;
             row.parentId = _parentId;
             row.workflow = _workflow;
-            row.workflowId = _workflowId;
+            row.workflowId = (byte)_workflowId;
             row.name = _name;
             row.uic = _uic;
             row.regions = _region;
@@ -127,12 +127,12 @@ namespace ALODWebUtility.Perms.Search
             row.canView = _canView;
             row.moduleId = (byte)_type;
             row.dateFinal = _dateFinal;
-            row.baseType = _baseType;
-            row.baseType = _baseType;
+            row.baseType = (byte)_baseType;
+            row.baseType = (byte)_baseType;
             row.dateCreated = DateCreated;
             row.returned = _returned;
             row.overdue = Overdue;
-            row.isFormal = _isFormal;
+            row.isFormal = _isFormal != 0;
             row.dateReceived = _dateReceived;
             row.isFinal = _isFinal;
         }

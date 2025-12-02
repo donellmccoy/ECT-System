@@ -3,6 +3,7 @@ using System.Configuration;
 using System.Web.UI;
 using ALOD.Core.Utils;
 using ALODWebUtility.Common;
+using static ALODWebUtility.Common.Utility;
 
 namespace ALOD.Web
 {
@@ -12,7 +13,7 @@ namespace ALOD.Web
         {
             if (!IsPostBack)
             {
-                if (AppMode != DeployMode.Production && ConfigurationManager.AppSettings["DevLoginEnabled"] == "Y")
+                if (Utility.AppMode != DeployMode.Production && ConfigurationManager.AppSettings["DevLoginEnabled"] == "Y")
                 {
                     lnkDevLogin.Visible = true;
                 }

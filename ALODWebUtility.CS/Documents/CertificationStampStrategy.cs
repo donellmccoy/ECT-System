@@ -148,7 +148,7 @@ namespace ALODWebUtility.Documents
                 return 0;
             }
 
-            LogManager.LogAction(ModuleType.System, UserAction.AddedDocument, "Added Certification Stamped document: " + metaData.OriginalFileName + ". RefId = " + refId + ". DocGroupId = " + groupId + ". DocId = " + docId + ".");
+            LogManager.LogAction((int)ModuleType.System, UserAction.AddedDocument, "Added Certification Stamped document: " + metaData.OriginalFileName + ". RefId = " + refId + ". DocGroupId = " + groupId + ". DocId = " + docId + ".");
 
             return docId;
         }

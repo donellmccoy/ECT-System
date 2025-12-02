@@ -10,7 +10,7 @@ namespace ALODWebUtility.Common
         public static SARCAppealFindings CreateSARCFinding(int appealId)
         {
             SARCAppealFindings cFinding = new SARCAppealFindings();
-            var currUser = UserService.CurrentUser;
+            var currUser = UserService.CurrentUser();
 
             cFinding.AppealID = appealId;
             cFinding.SSN = currUser.SSN;

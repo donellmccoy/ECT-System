@@ -10,7 +10,7 @@ namespace ALODWebUtility.Common
         public static RestrictedSARCFindings CreateSARCFinding(int sarcId)
         {
             RestrictedSARCFindings cFinding = new RestrictedSARCFindings();
-            var currUser = UserService.CurrentUser;
+            var currUser = UserService.CurrentUser();
 
             cFinding.SARCID = sarcId;
             cFinding.SSN = currUser.SSN;

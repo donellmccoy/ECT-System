@@ -21,6 +21,7 @@ namespace ALODWebUtility.Printing
     {
         protected static readonly DateTime EpochDate = new DateTime(2010, 1, 29);
         private const string BRANCH_AFRC = "AFRC";
+        private const string DATE_FORMAT = "ddMMMyyyy";
         private const string DIGITAL_SIGNATURE_DATE_FORMAT = "yyyy.MM.dd HH:mm:ss zz'00'";
         private const int ROTC_CADET_ID = 5;
         private const string SIGNED_TEXT = "//SIGNED//";
@@ -35,7 +36,7 @@ namespace ALODWebUtility.Printing
         // Assuming SESSION_COMPO is available via session or utility
         private string SESSION_COMPO
         {
-            get { return SessionInfo.Session_Compo; } // Using SessionInfo from Common
+            get { return SessionInfo.SESSION_COMPO; } // Using SessionInfo from Common
         }
 
         SignatureMetaDataDao SigDao
@@ -95,7 +96,7 @@ namespace ALODWebUtility.Printing
             {
                 RestrictedSARC sarc = null;
 
-                PDFForm form348R = new PDFForm(PrintDocuments.FormAFRC348R);
+                PDFForm form348R = new PDFForm((int)PrintDocuments.FormAFRC348R);
 
                 sarc = SARCDao.GetById(refId);
 
@@ -148,7 +149,7 @@ namespace ALODWebUtility.Printing
 
             DateTime dateSigned = signature.date;
 
-            VerifySource = new DBSignService(template, refId, ptype);
+            VerifySource = new DBSignService(template, refId, (int)ptype);
 
             bool valid = false;
 
@@ -228,13 +229,13 @@ namespace ALODWebUtility.Printing
         {
             try
             {
-                if (SigDao.GetByWorkStatus(sarc.Id, sarc.Workflow, SARCRestrictedWorkStatus.SARCAdminReview) == null)
+                if (SigDao.GetByWorkStatus(sarc.Id, sarc.Workflow, (int)SARCRestrictedWorkStatus.SARCAdminReview) == null)
                 {
                     return string.Empty;
                 }
 
                 string sarcAdminRemarksHeader = "SARC Administrator Remarks: ";
-                RestrictedSARCFindings sarcAdminFindings = sarc.FindByType(PersonnelTypes.SARC_ADMIN);
+                RestrictedSARCFindings sarcAdminFindings = sarc.FindByType((short)PersonnelTypes.SARC_ADMIN);
                 string newLines = Environment.NewLine + Environment.NewLine;
 
                 if (sarcAdminFindings == null)
@@ -255,13 +256,13 @@ namespace ALODWebUtility.Printing
         {
             try
             {
-                if (SigDao.GetByWorkStatus(sarc.Id, sarc.Workflow, SARCRestrictedWorkStatus.SARCApprovingAuthorityReview) == null)
+                if (SigDao.GetByWorkStatus(sarc.Id, sarc.Workflow, (int)SARCRestrictedWorkStatus.SARCApprovingAuthorityReview) == null)
                 {
                     return string.Empty;
                 }
 
                 string approvingAuthorityFindingsHeader = "Reviewing Authority (ARC/A1) Findings: ";
-                RestrictedSARCFindings approvingAuthorityFindings = sarc.FindByType(PersonnelTypes.BOARD_AA);
+                RestrictedSARCFindings approvingAuthorityFindings = sarc.FindByType((short)PersonnelTypes.BOARD_AA);
                 string newLines = Environment.NewLine + Environment.NewLine;
 
                 if (approvingAuthorityFindings == null || approvingAuthorityFindings.Finding == null)
@@ -269,12 +270,12 @@ namespace ALODWebUtility.Printing
                     return (approvingAuthorityFindingsHeader + "FINDINGS NOT FOUND!" + newLines);
                 }
 
-                if (approvingAuthorityFindings.Finding == Finding.Request_Consultation)
+                if (approvingAuthorityFindings.Finding == (short)Finding.Request_Consultation)
                 {
                     return string.Empty;
                 }
 
-                return (approvingAuthorityFindingsHeader + PrintingUtil.PrintingUtil.GetFindingFormText(approvingAuthorityFindings.Finding.Value) + newLines);
+                return (approvingAuthorityFindingsHeader + PrintingUtil.PrintingUtil.GetFindingFormText((Finding)approvingAuthorityFindings.Finding.Value) + newLines);
             }
             catch (Exception ex)
             {
@@ -379,7 +380,7 @@ namespace ALODWebUtility.Printing
                     return;
                 }
 
-                AddSignatureInformationToForm(sarc.Id, form348R, SigDao.GetByWorkStatus(sarc.Id, sarc.Workflow, SARCRestrictedWorkStatus.SARCApprovingAuthorityReview),
+                AddSignatureInformationToForm(sarc.Id, form348R, SigDao.GetByWorkStatus(sarc.Id, sarc.Workflow, (int)SARCRestrictedWorkStatus.SARCApprovingAuthorityReview),
                                                   "Sec9DateFill", "LODReviewSign", "Sec9NameRank",
                                                   DBSignTemplateId.Form348SARCFindings, PersonnelTypes.BOARD_AA);
             }
@@ -423,7 +424,7 @@ namespace ALODWebUtility.Printing
             try
             {
 
-                AddSignatureInformationToForm(sarc.Id, form348R, SigDao.GetByWorkStatus(sarc.Id, sarc.Workflow, SARCRestrictedWorkStatus.SARCInitiate),
+                AddSignatureInformationToForm(sarc.Id, form348R, SigDao.GetByWorkStatus(sarc.Id, sarc.Workflow, (int)SARCRestrictedWorkStatus.SARCInitiate),
                                                   "Sec7DateFill", "WingSARCSignAFROTC", "Sec7NameRank",
                                                   DBSignTemplateId.Form348SARCWing, PersonnelTypes.WING_SARC_RSL);
             }
@@ -448,7 +449,7 @@ namespace ALODWebUtility.Printing
                     reason = LookupService.GetCancelReasonDescription(sarc.Cancel_Reason.Value);
                 }
 
-                SignatureMetaData sig = SigDao.GetByWorkStatus(sarc.Id, sarc.Workflow, SARCRestrictedWorkStatus.SARCInitiate);
+                SignatureMetaData sig = SigDao.GetByWorkStatus(sarc.Id, sarc.Workflow, (int)SARCRestrictedWorkStatus.SARCInitiate);
 
                 sigLine = GetWatermarkSignature(sig, DBSignTemplateId.Form348SARC, sarc.Id, PersonnelTypes.WING_SARC_RSL);
 
@@ -488,7 +489,7 @@ namespace ALODWebUtility.Printing
             }
 
             // This signature occured after the epoch, so verify it
-            VerifySource = new DBSignService(template, refId, ptype);
+            VerifySource = new DBSignService(template, refId, (int)ptype);
 
             DBSignResult signatureStatus = VerifySource.VerifySignature();
 

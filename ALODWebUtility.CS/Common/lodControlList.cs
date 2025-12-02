@@ -24,7 +24,8 @@ namespace ALODWebUtility.Common
         {
             // Set the Initial Hash Value
             string tmpVal;
-            tmpVal = ControlValues.GetKeyValues(ctls, this, "");
+            lodControlList self = this;
+            tmpVal = ControlValues.GetKeyValues(ctls, ref self, "");
         }
 
         public bool LogChanges(lodControlList newList, ModuleType modtype, UserAction actionType, int refId, string comment, int status)
@@ -65,7 +66,7 @@ namespace ALODWebUtility.Common
             }
             if (changes.Count > 0)
             {
-                int actionId = LogManager.LogAction(modtype, actionType, refId, comment, status);
+                int actionId = LogManager.LogAction((int)modtype, actionType, refId, comment, status);
                 changes.Save(actionId);
             }
             return true;

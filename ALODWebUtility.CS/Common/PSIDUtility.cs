@@ -38,9 +38,9 @@ namespace ALODWebUtility.Common
         public static SC_PSCD_Findings CreatePSIDFinding(int psidID)
         {
             SC_PSCD_Findings cFinding = new SC_PSCD_Findings();
-            var currUser = UserService.CurrentUser;
+            var currUser = UserService.CurrentUser();
 
-            cFinding.PSIDId = psidID;
+            cFinding.PSCDId = psidID;
             cFinding.Name = currUser.FullName;
             cFinding.ModifiedBy = currUser.Id;
             cFinding.ModifiedDate = DateTime.Now;

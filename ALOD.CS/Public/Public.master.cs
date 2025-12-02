@@ -2,6 +2,7 @@ using System;
 using System.Reflection;
 using System.Web.UI;
 using ALODWebUtility.Common;
+using static ALODWebUtility.Common.Utility;
 
 namespace ALOD.Web
 {

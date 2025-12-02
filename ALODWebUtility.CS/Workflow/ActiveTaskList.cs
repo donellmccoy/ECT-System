@@ -22,9 +22,9 @@ namespace ALODWebUtility.Workflow
             DbCommand cmd;
 
             cmd = adapter.GetStoredProcCommand("form2173_sp_GetActivityByRegion");
-            adapter.AddInParameter(cmd, "@workflow", ALOD.Data.DbType.String, workflow);
-            adapter.AddInParameter(cmd, "@userId", ALOD.Data.DbType.Int32, Convert.ToInt32(HttpContext.Current.Session["UserId"]));
-            adapter.AddInParameter(cmd, "@compo", ALOD.Data.DbType.String, Convert.ToString(HttpContext.Current.Session["Compo"]));
+            adapter.AddInParameter(cmd, "@workflow", System.Data.DbType.String, workflow);
+            adapter.AddInParameter(cmd, "@userId", System.Data.DbType.Int32, Convert.ToInt32(HttpContext.Current.Session["UserId"]));
+            adapter.AddInParameter(cmd, "@compo", System.Data.DbType.String, Convert.ToString(HttpContext.Current.Session["Compo"]));
             adapter.ExecuteReader(ActivityListReader, cmd);
 
             return this;
@@ -35,9 +35,9 @@ namespace ALODWebUtility.Workflow
             SqlDataStore adapter = new SqlDataStore();
             DbCommand cmd;
             cmd = adapter.GetStoredProcCommand("core_workflow_sp_GetAORActivity");
-            adapter.AddInParameter(cmd, "@compo", ALOD.Data.DbType.String, Convert.ToString(HttpContext.Current.Session["Compo"]));
-            adapter.AddInParameter(cmd, "@workflow", ALOD.Data.DbType.String, workflow);
-            adapter.AddInParameter(cmd, "@userId", ALOD.Data.DbType.Int32, Convert.ToInt32(HttpContext.Current.Session["UserId"]));
+            adapter.AddInParameter(cmd, "@compo", System.Data.DbType.String, Convert.ToString(HttpContext.Current.Session["Compo"]));
+            adapter.AddInParameter(cmd, "@workflow", System.Data.DbType.String, workflow);
+            adapter.AddInParameter(cmd, "@userId", System.Data.DbType.Int32, Convert.ToInt32(HttpContext.Current.Session["UserId"]));
             adapter.ExecuteReader(StatusByAorReader, cmd);
             return this;
         }
@@ -46,8 +46,8 @@ namespace ALODWebUtility.Workflow
         {
             SqlDataStore adapter = new SqlDataStore();
             DbCommand cmd = adapter.GetStoredProcCommand("core_workflow_sp_GetWorkflowByCompo");
-            adapter.AddInParameter(cmd, "@compo", ALOD.Data.DbType.String, Convert.ToString(HttpContext.Current.Session["Compo"]));
-            adapter.AddInParameter(cmd, "@userId", ALOD.Data.DbType.Int32, Convert.ToInt32(HttpContext.Current.Session["UserId"]));
+            adapter.AddInParameter(cmd, "@compo", System.Data.DbType.String, Convert.ToString(HttpContext.Current.Session["Compo"]));
+            adapter.AddInParameter(cmd, "@userId", System.Data.DbType.Int32, Convert.ToInt32(HttpContext.Current.Session["UserId"]));
             adapter.ExecuteReader(WorkflowListReader, cmd);
             return this;
         }

@@ -28,7 +28,7 @@ namespace ALODWebUtility.Printing
 
             if (_documents == null)
             {
-                _documents = DocumentDao.GetDocumentsByGroupId(instance.DocumentGroupId);
+                _documents = DocumentDao.GetDocumentsByGroupId(instance.DocumentGroupId.Value);
             }
 
             bool isDoc = false;
@@ -67,7 +67,7 @@ namespace ALODWebUtility.Printing
                 instance.CreateDocumentGroup(DocumentDao);
             }
 
-            _documents = DocumentDao.GetDocumentsByGroupId(instance.DocumentGroupId);
+            _documents = DocumentDao.GetDocumentsByGroupId(instance.DocumentGroupId.Value);
 
             if (instance.WorkflowStatus.StatusCodeType.IsFinal)
             {

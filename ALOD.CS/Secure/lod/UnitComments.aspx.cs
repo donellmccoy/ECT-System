@@ -1,6 +1,6 @@
 using System;
 using ALOD.Core.Domain.Workflow;
-using ALOD.Web.UserControls;
+// TODO: Convert UserControls - using ALOD.Web.UserControls;
 
 namespace ALOD.Web.LOD
 {
@@ -16,13 +16,14 @@ namespace ALOD.Web.LOD
             }
         }
 
-        protected TabNavigator Navigator
-        {
-            get
-            {
-                return Master.Navigator;
-            }
-        }
+        // TODO: Convert TabNavigator user control
+        // protected TabNavigator Navigator
+        // {
+        //     get
+        //     {
+        //         return Master.Navigator;
+        //     }
+        // }
 
         protected int RequestId
         {
@@ -32,13 +33,14 @@ namespace ALOD.Web.LOD
             }
         }
 
-        protected TabControls TabControl
-        {
-            get
-            {
-                return Master.TabControl;
-            }
-        }
+        // TODO: Convert TabControls user control
+        // protected TabControls TabControl
+        // {
+        //     get
+        //     {
+        //         return Master.TabControl;
+        //     }
+        // }
 
         #endregion
 
@@ -46,10 +48,11 @@ namespace ALOD.Web.LOD
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack)
-            {
-                CaseComment.Initialize(this, ModuleType, RequestId, Navigator, false);
-            }
+            // TODO: Uncomment when CaseComment control is converted
+            // if (!Page.IsPostBack)
+            // {
+            //     CaseComment.Initialize(this, ModuleType, RequestId, Navigator, false);
+            // }
         }
 
         #endregion

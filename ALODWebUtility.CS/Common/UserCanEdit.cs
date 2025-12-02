@@ -77,7 +77,7 @@ namespace ALODWebUtility.Common
                         if (LOD.isAttachPas)
                         {
                             //First , evaluate if the user is part of the Attach PASSCODE
-                            if (UserService.IsMemberPartOfAttachUnit(SessionInfo.SESSION_USER_ID, LOD.MemberAttachedUnitId))
+                            if (UserService.IsMemberPartOfAttachUnit(SessionInfo.SESSION_USER_ID, LOD.MemberAttachedUnitId.Value))
                             {
                                 //User is from the Attach PASSCODE, can have write access
                                 return true;

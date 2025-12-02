@@ -8,6 +8,8 @@ using ALOD.Core.Domain.Workflow;
 using ALOD.Core.Utils;
 using ALOD.Data.Services;
 using ALODWebUtility.Common;
+using static ALODWebUtility.Common.SessionInfo;
+using static ALODWebUtility.Common.Utility;
 
 namespace ALOD.Web.LOD
 {
@@ -201,7 +203,7 @@ namespace ALOD.Web.LOD
         protected void ResultGrid_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             const string CONTROL_LOCK_IMAGE = "LockImage";
-            HeaderRowBinding(sender, e, DEFAULT_SORT_COLUMN);
+            HeaderRowBinding((GridView)sender, e, DEFAULT_SORT_COLUMN);
 
             if (e.Row.RowType == DataControlRowType.DataRow)
             {

@@ -57,7 +57,7 @@ namespace ALODWebUtility.Common
         public MessageList RetrieveMessageGroups(short messageId, string compo)
         {
             SqlDataStore adapter = new SqlDataStore();
-            AppUser user = ALOD.Data.Services.UserService.CurrentUser;
+            AppUser user = ALOD.Data.Services.UserService.CurrentUser();
             DbCommand cmd = adapter.GetStoredProcCommand("core_messages_sp_GetMessagesGroups", messageId, compo, user.CurrentRole.Id);
             adapter.ExecuteReader(RetrieveMessageGroupsReader, cmd);
             return this;

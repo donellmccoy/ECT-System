@@ -22,8 +22,7 @@ namespace ALODWebUtility.Common
 
             cookie[key] = "";
 
-            // Assuming AppMode is available from ALOD.Core.Utils.Utility or similar
-            if (ALOD.Core.Utils.Utility.AppMode == DeployMode.Production)
+            if (Utility.AppMode == DeployMode.Production)
             {
                 cookie.Secure = true;
             }
@@ -63,7 +62,7 @@ namespace ALODWebUtility.Common
             cookie.HttpOnly = true;
             cookie.Expires = DateTime.Now.AddYears(1);
 
-            if (ALOD.Core.Utils.Utility.AppMode == DeployMode.Production)
+            if (Utility.AppMode == DeployMode.Production)
             {
                 cookie.Secure = true;
             }

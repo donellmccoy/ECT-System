@@ -1,7 +1,7 @@
 using System;
 using System.Web.UI;
 
-namespace Web.LOD
+namespace ALOD.Web.LOD
 {
     public partial class Secure_lod_lodBoard : Page
     {

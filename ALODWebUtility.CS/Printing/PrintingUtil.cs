@@ -13,15 +13,15 @@ namespace ALODWebUtility.PrintingUtil
         {
             LineOfDuty lod = LodService.GetById(refId);
 
-            if (status == LodStatusCode.Complete)
+            if (status == (short)LodStatusCode.Complete)
             {
-                IList<WorkStatusTracking> ws = WorkFlowService.GetWorkStatusTracking(lod.Id, ModuleType.LOD);
+                IList<WorkStatusTracking> ws = WorkFlowService.GetWorkStatusTracking(lod.Id, (int)ModuleType.LOD);
 
                 if (ws != null)
                 {
                     if (ws.Count > 1)
                     {
-                        if (ws[1].WorkflowStatus.StatusCodeType.Id == LodStatusCode.AppointingAutorityReview)
+                        if (ws[1].WorkflowStatus.StatusCodeType.Id == (int)LodStatusCode.AppointingAutorityReview)
                         {
                             return true;
                         }

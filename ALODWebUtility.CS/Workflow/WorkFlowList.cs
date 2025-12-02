@@ -28,7 +28,7 @@ namespace ALODWebUtility.Workflow
         {
             DbCommand cmd = Adapter.GetSqlStringCommand(
                 "DELETE FROM core_Workflow WHERE workflowId = @workflowId");
-            Adapter.AddInParameter(cmd, "@workflowId", ALOD.Data.DbType.Byte, id);
+            Adapter.AddInParameter(cmd, "@workflowId", System.Data.DbType.Byte, id);
             Adapter.ExecuteNonQuery(cmd);
         }
 
@@ -54,13 +54,13 @@ namespace ALODWebUtility.Workflow
 
         public IList<Workflow> GetByAllowedCreate(string compo, ModuleType type, byte groupId)
         {
-            Adapter.ExecuteReader(WorkFlowReader, "core_workflow_sp_GetCreatableByGroup", compo, type, groupId);
+            Adapter.ExecuteReader(WorkFlowReader, "core_workflow_sp_GetCreatableByGroup", compo, (int)type, groupId);
             return this;
         }
 
         public WorkFlowList GetByAllowedToView(short groupId, ModuleType type)
         {
-            Adapter.ExecuteReader(WorkFlowReader, "core_workflow_sp_GetViewableByGroup", groupId, type);
+            Adapter.ExecuteReader(WorkFlowReader, "core_workflow_sp_GetViewableByGroup", groupId, (int)type);
             return this;
         }
 
@@ -68,7 +68,7 @@ namespace ALODWebUtility.Workflow
         {
             DbCommand cmd = Adapter.GetSqlStringCommand(
                 "SELECT workFlowId, a.compo, title, formal, a.moduleId, active, initialStatus, b.description FROM core_Workflow a LEFT JOIN core_StatusCodes b ON b.statusId = a.initialStatus WHERE a.compo = @compo");
-            Adapter.AddInParameter(cmd, "@compo", ALOD.Data.DbType.String, compo);
+            Adapter.AddInParameter(cmd, "@compo", System.Data.DbType.String, compo);
             Adapter.ExecuteReader(WorkFlowReader, cmd);
             return this;
         }
@@ -77,8 +77,8 @@ namespace ALODWebUtility.Workflow
         {
             DbCommand cmd = Adapter.GetSqlStringCommand(
                 "SELECT a.workFlowId, a.compo, title, formal, a.moduleId, active, initialStatus, c.description FROM core_Workflow a LEFT JOIN core_WorkStatus b ON b.ws_id = a.initialStatus LEFT JOIN core_StatusCodes c ON c.statusId = b.statusId WHERE a.compo = @compo AND a.moduleId = @module");
-            Adapter.AddInParameter(cmd, "@compo", ALOD.Data.DbType.String, compo);
-            Adapter.AddInParameter(cmd, "@module", ALOD.Data.DbType.Byte, type);
+            Adapter.AddInParameter(cmd, "@compo", System.Data.DbType.String, compo);
+            Adapter.AddInParameter(cmd, "@module", System.Data.DbType.Byte, (byte)type);
             Adapter.ExecuteReader(WorkFlowReader, cmd);
             return this;
         }
@@ -87,7 +87,7 @@ namespace ALODWebUtility.Workflow
         {
             string sql = "SELECT workFlowId, a.compo, title, formal, a.moduleId, active, initialStatus, b.description FROM core_Workflow a LEFT JOIN core_StatusCodes b ON b.statusId = a.initialStatus WHERE a.compo = @compo AND a.moduleId IN(2,8)";
             DbCommand cmd = Adapter.GetSqlStringCommand(sql);
-            Adapter.AddInParameter(cmd, "@compo", ALOD.Data.DbType.String, compo);
+            Adapter.AddInParameter(cmd, "@compo", System.Data.DbType.String, compo);
             Adapter.ExecuteReader(WorkFlowReader, cmd);
             return this;
         }
@@ -100,7 +100,7 @@ namespace ALODWebUtility.Workflow
                 sql += " AND workflowid NOT IN(9,17)";
             }
             DbCommand cmd = Adapter.GetSqlStringCommand(sql);
-            Adapter.AddInParameter(cmd, "@compo", ALOD.Data.DbType.String, compo);
+            Adapter.AddInParameter(cmd, "@compo", System.Data.DbType.String, compo);
             Adapter.ExecuteReader(WorkFlowReader, cmd);
             return this;
         }
@@ -110,7 +110,7 @@ namespace ALODWebUtility.Workflow
             string sql = "SELECT workFlowId, a.compo, title, formal, a.moduleId, active, initialStatus, b.description FROM core_Workflow a LEFT JOIN core_StatusCodes b ON b.statusId = a.initialStatus WHERE a.compo = @compo AND a.moduleId IN(8)";
 
             DbCommand cmd = Adapter.GetSqlStringCommand(sql);
-            Adapter.AddInParameter(cmd, "@compo", ALOD.Data.DbType.String, compo);
+            Adapter.AddInParameter(cmd, "@compo", System.Data.DbType.String, compo);
             Adapter.ExecuteReader(WorkFlowReader, cmd);
             return this;
         }

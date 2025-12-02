@@ -12,7 +12,6 @@ namespace ALOD.Web.LOD
     {
         private ILineOfDutyDao _dao;
         private IDaoFactory _daoFactory;
-        private IQueryable<TrackingItem> _details;
         private LineOfDuty _lod;
 
         protected ILineOfDutyDao LODDao
@@ -28,7 +27,7 @@ namespace ALOD.Web.LOD
             }
         }
 
-        public ModuleType ModuleType
+        public ModuleType PageModuleType
         {
             get
             {
@@ -73,7 +72,8 @@ namespace ALOD.Web.LOD
         {
             if (!IsPostBack)
             {
-                CaseTracking.Initialize(this, ModuleType, RequestId, LOD.CaseId, LOD.Status, GetUnitId());
+                // TODO: CaseTracking is a UserControl that needs to be converted
+                // CaseTracking.Initialize(this, (byte)PageModuleType, RequestId, LOD.CaseId, LOD.Status, GetUnitId());
             }
         }
 
@@ -81,7 +81,7 @@ namespace ALOD.Web.LOD
         {
             if (LOD.isAttachPas)
             {
-                return LOD.MemberAttachedUnitId;
+                return LOD.MemberAttachedUnitId ?? 0;
             }
             else
             {

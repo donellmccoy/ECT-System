@@ -1,14 +1,22 @@
 using System;
 using ALOD.Core.Domain.Modules.Lod;
 using ALOD.Core.Domain.Workflow;
+using ALOD.Core.Interfaces.DAOInterfaces;
 using ALOD.Data;
-using ALOD.Web.UserControls;
+// TODO: Convert UserControls - using ALOD.Web.UserControls;
 using ALODWebUtility.Common;
+using static ALODWebUtility.Common.SessionInfo;
+using static ALODWebUtility.Common.Utility;
 
 namespace ALOD.Web.LOD
 {
     public partial class Secure_lod_init : System.Web.UI.Page
     {
+        // Resource string constants - normally from App_GlobalResources
+        private const string ERROR_LOADING_CASE = "An error has occurred loading the requested case";
+        private const string ERROR_NO_ACCESS = "You do not have access to view the requested case";
+        private const string START_PAGE = "~/Secure/lod/Inbox.aspx";
+
         private NHibernateDaoFactory _daoFactory;
 
         public NHibernateDaoFactory DaoFactory
@@ -24,22 +32,24 @@ namespace ALOD.Web.LOD
             }
         }
 
-        public TabNavigator Navigator
-        {
-            get
-            {
-                return MasterPage.Navigator();
-            }
-        }
+        // TODO: Convert TabNavigator user control
+        // public TabNavigator Navigator
+        // {
+        //     get
+        //     {
+        //         return MasterPage.Navigator();
+        //     }
+        // }
 
-        protected LodMaster MasterPage
-        {
-            get
-            {
-                LodMaster master = (LodMaster)Page.Master;
-                return master;
-            }
-        }
+        // TODO: Convert LodMaster master page
+        // protected LodMaster MasterPage
+        // {
+        //     get
+        //     {
+        //         LodMaster master = (LodMaster)Page.Master;
+        //         return master;
+        //     }
+        // }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -55,44 +65,48 @@ namespace ALOD.Web.LOD
 
             if (refId == 0)
             {
-                SetErrorMessage(Resources.Messages.ERROR_LOADING_CASE);
-                Response.Redirect(Resources._Global.StartPage, true);
+                SetErrorMessage(ERROR_LOADING_CASE);
+                Response.Redirect(START_PAGE, true);
             }
 
-            int ws_id = SESSION_WS_ID(refId);
+            // TODO: SESSION_WS_ID requires refId lookup - implement when MasterPage is ready
+            // int ws_id = SESSION_WS_ID(refId);
             LineOfDuty lod;
-            LineOfDutyDao dao = DaoFactory.GetLineOfDutyDao();
+            ILineOfDutyDao dao = DaoFactory.GetLineOfDutyDao();
 
+            // TODO: Implement status-based access check when MasterPage is ready
             // Make sure the user has access to this case
-            switch (ws_id)
-            {
-                case LodWorkStatus_v3.MedicalOfficerReview_LODV3:
-                case LodWorkStatus_v3.MedicalTechReview_LODV3:
-                case LodWorkStatus_v3.UnitCommanderReview_LODV3:
-                case LodWorkStatus_v3.AppointingAutorityReview_LODV3:
-                case LodWorkStatus_v3.WingJA_LODV3:
-                    userAccess = dao.GetUserAccess_LOD_V3(SESSION_USER_ID, refId);
-                    break;
-                default:
-                    userAccess = dao.GetUserAccess(SESSION_USER_ID, refId);
-                    break;
-            }
+            // switch (ws_id)
+            // {
+            //     case (int)LodWorkStatus_v3.MedicalOfficerReview_LODV3:
+            //     case (int)LodWorkStatus_v3.MedicalTechReview_LODV3:
+            //     case (int)LodWorkStatus_v3.UnitCommanderReview_LODV3:
+            //     case (int)LodWorkStatus_v3.AppointingAutorityReview_LODV3:
+            //     case (int)LodWorkStatus_v3.WingJA_LODV3:
+            //         userAccess = dao.GetUserAccess_LOD_V3(SESSION_USER_ID, refId);
+            //         break;
+            //     default:
+            //         userAccess = dao.GetUserAccess(SESSION_USER_ID, refId);
+            //         break;
+            // }
+            userAccess = dao.GetUserAccess(SESSION_USER_ID, refId);
 
-            Utility.VerifyUserAccess(userAccess, Resources.Messages.ERROR_NO_ACCESS, Resources._Global.StartPage);
+            Utility.VerifyUserAccess(userAccess, ERROR_NO_ACCESS, START_PAGE);
 
-            lod = MasterPage.LoadCase(refId, dao);
+            // TODO: MasterPage functions require conversion
+            // lod = MasterPage.LoadCase(refId, dao);
 
             Session["RefId"] = refId;
 
             Utility.UpdateCaseLock(userAccess, refId, ModuleType.LOD);
-            MasterPage.InitPageAccess(lod);
+            // MasterPage.InitPageAccess(lod);
 
-            string startPage = MasterPage.GetStartPageTitle(lod.CurrentStatusCode, lod.Formal);
+            // string startPage = MasterPage.GetStartPageTitle(lod.CurrentStatusCode, lod.Formal);
 
             // Remove the LOD from the DAO so no changes are persisted back
-            dao.Evict(lod);
+            // dao.Evict(lod);
 
-            Navigator.MoveToPage(startPage);
+            // Navigator.MoveToPage(startPage);
         }
     }
 }

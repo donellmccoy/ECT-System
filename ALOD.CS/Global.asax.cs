@@ -13,6 +13,8 @@ using ALOD.Core.Utils;
 using ALOD.Data;
 using ALOD.Data.Services;
 using ALODWebUtility.Common;
+using static ALODWebUtility.Common.SessionInfo;
+using static ALODWebUtility.Common.Utility;
 using WebSupergoo.ABCpdf12;
 
 namespace ALOD
@@ -178,7 +180,7 @@ namespace ALOD
             // since we encountered an error, rollback any pending database actions
             NHibernateSessionManager.Instance.RollbackTransaction();
 
-            if (AppMode != DeployMode.Development)
+            if (Utility.AppMode != DeployMode.Development)
             {
                 if (Server.GetLastError() is HttpRequestValidationException)
                 {

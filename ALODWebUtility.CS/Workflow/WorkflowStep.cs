@@ -193,7 +193,7 @@ namespace ALODWebUtility.Workflow
 
             DbCommand cmd = Adapter.GetSqlStringCommand(
                 "DELETE FROM core_workflowSteps WHERE stepId = @stepId");
-            Adapter.AddInParameter(cmd, "@stepId", ALOD.Data.DbType.Int16, _id);
+            Adapter.AddInParameter(cmd, "@stepId", System.Data.DbType.Int16, _id);
             Adapter.ExecuteNonQuery(cmd);
         }
 
@@ -221,13 +221,13 @@ namespace ALODWebUtility.Workflow
             row.text = _text;
             row.workflow = _workflow;
             row.workflowDescription = _workflowDescr;
-            row.groupInId = _groupInId;
+            row.groupInId = _groupInId.ToString();
             row.groupInDescr = _groupInDescr;
-            row.groupOutId = _groupOutId;
+            row.groupOutId = _groupOutId.ToString();
             row.groupOutDescr = _groupOutDescr;
             row.dbSignTemplate = (byte)_dbSignTemplate;
             row.actionCount = _actionCount;
-            row.deathStatus = _deathStatus.ToString();
+            row.deathStatus = _deathStatus;
             row.memoTemplate = _memoTemplate;
         }
 

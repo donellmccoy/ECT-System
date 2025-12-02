@@ -55,7 +55,7 @@ namespace ALODWebUtility.Workflow
             foreach (WorkflowView page in _workflow)
             {
                 row = data.NewPageTitlesRow();
-                page.ToDataRow(row);
+                page.ToDataRow(ref row);
                 data.Rows.Add(row);
             }
 

@@ -1,11 +1,13 @@
 using System;
 using System.Data;
 using System.Data.Common;
+using System.Web;
 using System.Web.Script.Services;
 using System.Web.Services;
 using System.Xml;
 using ALOD.Data;
 using ALODWebUtility.Common;
+using static ALODWebUtility.Common.SessionInfo;
 
 namespace ALOD
 {
@@ -25,7 +27,9 @@ namespace ALOD
         {
             XmlDocument xmlDoc = new XmlDocument();
 
-            if (!string.IsNullOrEmpty(SESSION_EDIPIN))
+            // SESSION_EDIPIN is static and requires HttpContext.Current.Session
+            string edipin = HttpContext.Current.Session["EDIPIN"]?.ToString();
+            if (!string.IsNullOrEmpty(edipin))
             {
                 string pascode = p.Trim();
                 string longName = descr.Trim();

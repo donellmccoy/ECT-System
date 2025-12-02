@@ -46,7 +46,7 @@ namespace ALODWebUtility.Common
 
             if (formField.FieldType.Length.HasValue)
             {
-                uc.MaxLength = formField.FieldType.Length;
+                uc.MaxLength = formField.FieldType.Length.Value;
             }
         }
 
@@ -252,21 +252,21 @@ namespace ALODWebUtility.Common
             List<PHFormValue> testValues = new List<PHFormValue>();
 
             // Human Performance Improvement/Outreach
-            testValues.Add(new PHFormValue(0, 1, 21, 1, 85));
+            testValues.Add(new PHFormValue(0, 1, 21, 1, "85"));
 
             // Walkabout/Unit Visits
-            testValues.Add(new PHFormValue(0, 6, 1, 1, 5));
-            testValues.Add(new PHFormValue(0, 6, 1, 2, 15));
+            testValues.Add(new PHFormValue(0, 6, 1, 1, "5"));
+            testValues.Add(new PHFormValue(0, 6, 1, 2, "15"));
 
-            testValues.Add(new PHFormValue(0, 6, 2, 1, 55));
-            testValues.Add(new PHFormValue(0, 6, 2, 3, 515));
+            testValues.Add(new PHFormValue(0, 6, 2, 1, "55"));
+            testValues.Add(new PHFormValue(0, 6, 2, 3, "515"));
 
-            testValues.Add(new PHFormValue(0, 6, 133, 1, 75));
-            testValues.Add(new PHFormValue(0, 6, 133, 1, 715));
+            testValues.Add(new PHFormValue(0, 6, 133, 1, "75"));
+            testValues.Add(new PHFormValue(0, 6, 133, 1, "715"));
             testValues.Add(new PHFormValue(0, 6, 133, 5, "Test Value"));
 
             // Abuse
-            testValues.Add(new PHFormValue(0, 10, 29, 1, 1313));
+            testValues.Add(new PHFormValue(0, 10, 29, 1, "1313"));
 
             // Suidice Method
             testValues.Add(new PHFormValue(0, 8, 49, 4, "2,4,1,5,3"));

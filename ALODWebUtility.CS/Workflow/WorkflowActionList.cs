@@ -41,7 +41,7 @@ namespace ALODWebUtility.Workflow
             SqlDataStore adapter = new SqlDataStore();
             DbCommand cmd = adapter.GetSqlStringCommand(
             "DELETE FROM core_WorkStatus_Actions WHERE wsa_id = @actionId");
-            adapter.AddInParameter(cmd, "@actionId", ALOD.Data.DbType.Int32, (int)id);
+            adapter.AddInParameter(cmd, "@actionId", System.Data.DbType.Int32, (int)id);
             adapter.ExecuteNonQuery(cmd);
         }
 

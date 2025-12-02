@@ -1,16 +1,25 @@
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
+using System.Web;
+using System.Web.Security;
 using System.Web.UI.WebControls;
 using ALOD.Core.Domain.Users;
 using ALOD.Core.Utils;
 using ALOD.Data.Services;
 using ALODWebUtility.Common;
+using static ALODWebUtility.Common.SessionInfo;
+using static ALODWebUtility.Common.Utility;
+using static ALODWebUtility.Common.WebControlSetters;
 
 namespace ALOD.Web
 {
     public partial class Public_DevLogin : System.Web.UI.Page
     {
+        // Resource string constant - normally from App_GlobalResources
+        private const string START_PAGE = "~/Secure/lod/Inbox.aspx";
+
         protected void btnLogin_Click(object sender, EventArgs e)
         {
             if (EDIPIN.Text.Trim().Length == 0)
@@ -54,7 +63,7 @@ namespace ALOD.Web
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (AppMode == DeployMode.Production || ConfigurationManager.AppSettings["DevLoginEnabled"] != "Y")
+            if (Utility.AppMode == DeployMode.Production || ConfigurationManager.AppSettings["DevLoginEnabled"] != "Y")
             {
                 UserPreferences.SaveSetting("devLogin", "0");
                 Response.Redirect("~/Default.aspx", false);
@@ -75,7 +84,7 @@ namespace ALOD.Web
 
         protected void ProcessDevLogin(string edipin)
         {
-            if (AppMode == DeployMode.Production)
+            if (Utility.AppMode == DeployMode.Production)
             {
                 return;
             }
@@ -105,7 +114,7 @@ namespace ALOD.Web
             }
 
             // The user has at least one valid account
-            string url = Resources._Global.StartPage;
+            string url = START_PAGE;
 
             if (validAccounts.Count == 1)
             {

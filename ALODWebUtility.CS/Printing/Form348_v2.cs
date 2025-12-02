@@ -41,18 +41,18 @@ namespace ALODWebUtility.Printing
         // Assuming SESSION_COMPO is available via session or utility
         private string SESSION_COMPO
         {
-            get { return SessionInfo.Session_Compo; }
+            get { return SessionInfo.SESSION_COMPO; }
         }
 
         // Assuming PERMISSION_VIEW_SARC_CASES is available via session or utility
         private string PERMISSION_VIEW_SARC_CASES
         {
-            get { return "ViewSARCCases"; } // Placeholder
+            get { return SessionInfo.PERMISSION_VIEW_SARC_CASES; }
         }
 
         private bool UserHasPermission(string permission)
         {
-            return SessionInfo.UserPermissions.Contains(permission);
+            return SessionInfo.UserHasPermission(permission);
         }
 
         SignatureMetaDataDao SigDao
@@ -129,7 +129,7 @@ namespace ALODWebUtility.Printing
 
             ALOD.Core.Domain.Workflow.WorkStatus lodCurrStatus = wsdao.GetById(lod.Status);
 
-            PDFForm form348_v2 = new PDFForm(PrintDocuments.FormARFC348_v2);
+            PDFForm form348_v2 = new PDFForm((int)PrintDocuments.FormARFC348_v2);
 
             PrintingUtil.PrintingUtil.SetFormField(form348_v2, "lodCaseNumberP1", lod.CaseId);
             PrintingUtil.PrintingUtil.SetFormField(form348_v2, "lodCaseNumberP2", lod.CaseId);
@@ -159,7 +159,7 @@ namespace ALODWebUtility.Printing
             // *************************************
             // If form 348 is not "Complete", we suppress the whole second page, Print-Out/PDF
             // *************************************
-            if (lod.CurrentStatusCode == LodStatusCode.Complete)
+            if (lod.CurrentStatusCode == (int)LodStatusCode.Complete)
             {
 
                 if (lod.Formal)
@@ -196,7 +196,7 @@ namespace ALODWebUtility.Printing
                 }
             }
 
-            LogManager.LogAction(ModuleType.LOD, UserAction.ViewDocument, lodid, strComments);
+            LogManager.LogAction((int)ModuleType.LOD, UserAction.ViewDocument, lodid, strComments);
 
             form348_v2.SuppressInstructionPages();
 
@@ -242,7 +242,7 @@ namespace ALODWebUtility.Printing
 
                 if (boardFinding.Finding.HasValue)
                 {
-                    newFinding = PrintingUtil.PrintingUtil.GetFindingFormText(boardFinding.Finding.Value);
+                    newFinding = PrintingUtil.PrintingUtil.GetFindingFormText((Finding)boardFinding.Finding.Value);
 
                     if (findingField == "part6MedicalReview")
                     {
@@ -284,7 +284,7 @@ namespace ALODWebUtility.Printing
 
             DateTime dateSigned = signature.date;
 
-            VerifySource = new DBSignService(template, lodid, ptype);
+            VerifySource = new DBSignService(template, lodid, (int)ptype);
 
             bool valid = false;
 
@@ -367,7 +367,7 @@ namespace ALODWebUtility.Printing
             }
 
             // This signature occured after the epoch, so verify it
-            VerifySource = new DBSignService(template, refId, ptype);
+            VerifySource = new DBSignService(template, refId, (int)ptype);
 
             DBSignResult signatureStatus = VerifySource.VerifySignature();
 
@@ -519,21 +519,21 @@ namespace ALODWebUtility.Printing
 
         private void SetBoardAdminInfo(PDFForm form348_v2, LineOfDuty_v2 lod)
         {
-            SignatureMetaData sig = SigDao.GetByWorkStatus(lod.Id, lod.Workflow, LodWorkStatus_v2.BoardPersonnelReview);
+            SignatureMetaData sig = SigDao.GetByWorkStatus(lod.Id, lod.Workflow, (int)LodWorkStatus_v2.BoardPersonnelReview);
 
             if (sig != null)
             {
-                LineOfDutyFindings boardAdminFindings = lod.FindByType(PersonnelTypes.BOARD_A1);
+                LineOfDutyFindings boardAdminFindings = lod.FindByType((short)PersonnelTypes.BOARD_A1);
 
                 if (boardAdminFindings != null)
                 {
                     if (boardAdminFindings.DecisionYN == "Y")
                     {
-                        LineOfDutyFindings appointingfinding = lod.FindByType(PersonnelTypes.APPOINT_AUTH);
+                        LineOfDutyFindings appointingfinding = lod.FindByType((short)PersonnelTypes.APPOINT_AUTH);
 
                         if (appointingfinding.Finding.HasValue)
                         {
-                            switch (appointingfinding.Finding.Value)
+                            switch ((Finding)appointingfinding.Finding.Value)
                             {
                                 case Finding.In_Line_Of_Duty:
                                     PrintingUtil.PrintingUtil.SetFormField(form348_v2, "part6Check32ILOD", "1");
@@ -549,7 +549,7 @@ namespace ALODWebUtility.Printing
                     }
                     else if (boardAdminFindings.Finding.HasValue)
                     {
-                        switch (boardAdminFindings.Finding.Value)
+                        switch ((Finding)boardAdminFindings.Finding.Value)
                         {
                             case Finding.In_Line_Of_Duty:
                                 PrintingUtil.PrintingUtil.SetFormField(form348_v2, "part6Check32ILOD", "1");
@@ -583,17 +583,17 @@ namespace ALODWebUtility.Printing
 
             if (lodCurrStatus.StatusCodeType.IsFinal)
             {
-                SignatureMetaData sig = SigDao.GetByWorkStatus(lod.Id, lod.Workflow, LodWorkStatus_v2.ApprovingAuthorityAction);
+                SignatureMetaData sig = SigDao.GetByWorkStatus(lod.Id, lod.Workflow, (int)LodWorkStatus_v2.ApprovingAuthorityAction);
 
                 if (sig != null)
                 {
-                    LineOfDutyFindings approvingfinding = lod.FindByType(PersonnelTypes.BOARD_AA);
+                    LineOfDutyFindings approvingfinding = lod.FindByType((short)PersonnelTypes.BOARD_AA);
 
                     if (approvingfinding != null)
                     {
                         if (approvingfinding.Finding.HasValue)
                         {
-                            switch (approvingfinding.Finding.Value)
+                            switch ((Finding)approvingfinding.Finding.Value)
                             {
                                 case Finding.In_Line_Of_Duty:
                                     PrintingUtil.PrintingUtil.SetFormField(form348_v2, "part7Check34ILOD", "1");
@@ -621,7 +621,7 @@ namespace ALODWebUtility.Printing
                         {
                             // add the board members name to the signature
 
-                            SignatureMetaData Techsig = SigDao.GetByWorkStatus(lod.Id, lod.Workflow, LodWorkStatus_v2.BoardReview);
+                            SignatureMetaData Techsig = SigDao.GetByWorkStatus(lod.Id, lod.Workflow, (int)LodWorkStatus_v2.BoardReview);
 
                             if (Techsig != null)
                             {
@@ -649,11 +649,11 @@ namespace ALODWebUtility.Printing
 
         private void SetBoardLegalInfo(PDFForm form348_v2, LineOfDuty_v2 lod)
         {
-            SignatureMetaData sig = SigDao.GetByWorkStatus(lod.Id, lod.Workflow, LodWorkStatus_v2.BoardLegalReview);
+            SignatureMetaData sig = SigDao.GetByWorkStatus(lod.Id, lod.Workflow, (int)LodWorkStatus_v2.BoardLegalReview);
 
             if (sig != null)
             {
-                LineOfDutyFindings legalfinding = lod.FindByType(PersonnelTypes.BOARD_JA);
+                LineOfDutyFindings legalfinding = lod.FindByType((short)PersonnelTypes.BOARD_JA);
                 if (AddBoardFinding_v2(form348_v2, legalfinding, "part6LegalReview"))
                 {
                     AddSignatureToForm_v2(form348_v2, sig,
@@ -667,11 +667,11 @@ namespace ALODWebUtility.Printing
 
         private void SetBoardMedicalInfo(PDFForm form348_v2, LineOfDuty_v2 lod)
         {
-            SignatureMetaData sig = SigDao.GetByWorkStatus(lod.Id, lod.Workflow, LodWorkStatus_v2.BoardMedicalReview);
+            SignatureMetaData sig = SigDao.GetByWorkStatus(lod.Id, lod.Workflow, (int)LodWorkStatus_v2.BoardMedicalReview);
 
             if (sig != null)
             {
-                LineOfDutyFindings medicalfinding = lod.FindByType(PersonnelTypes.BOARD_SG);
+                LineOfDutyFindings medicalfinding = lod.FindByType((short)PersonnelTypes.BOARD_SG);
                 if (AddBoardFinding_v2(form348_v2, medicalfinding, "part6MedicalReview"))
                 {
                     if (!AddSignatureToForm_v2(form348_v2, sig,
@@ -698,20 +698,20 @@ namespace ALODWebUtility.Printing
         {
             if (lod.FinalFindings.HasValue)
             {
-                SignatureMetaData sig = SigDao.GetByWorkStatus(lod.Id, lod.Workflow, LodWorkStatus_v2.BoardReview);
+                SignatureMetaData sig = SigDao.GetByWorkStatus(lod.Id, lod.Workflow, (int)LodWorkStatus_v2.BoardReview);
 
                 if (sig != null)
                 {
                     // if the board signed for the general, add the board signature for the AA as well
                     if (lod.BoardForGeneral == "Y")
                     {
-                        LineOfDutyFindings approvingfinding = lod.FindByType(PersonnelTypes.BOARD);
+                        LineOfDutyFindings approvingfinding = lod.FindByType((short)PersonnelTypes.BOARD);
 
                         if (approvingfinding != null)
                         {
                             if (approvingfinding.Finding.HasValue)
                             {
-                                switch (approvingfinding.Finding.Value)
+                                switch ((Finding)approvingfinding.Finding.Value)
                                 {
                                     case Finding.In_Line_Of_Duty:
                                         PrintingUtil.PrintingUtil.SetFormField(form348_v2, "part7Check34ILOD", "1");
@@ -734,7 +734,7 @@ namespace ALODWebUtility.Printing
 
                                 approver += sig.NameAndRank + " for ";
 
-                                SignatureMetaData Appsig = SigDao.GetByWorkStatus(lod.Id, lod.Workflow, LodWorkStatus_v2.ApprovingAuthorityAction);
+                                SignatureMetaData Appsig = SigDao.GetByWorkStatus(lod.Id, lod.Workflow, (int)LodWorkStatus_v2.ApprovingAuthorityAction);
 
                                 // Check if the Approval Authority actually signed the case...
                                 if (Appsig != null)
@@ -755,7 +755,7 @@ namespace ALODWebUtility.Printing
 
                                     if (approvalAuthority != null)
                                     {
-                                        title = UserService.GetUserAlternateTitle(approvalAuthority.Id, ALOD.Core.Domain.Users.UserGroups.BoardApprovalAuthority);
+                                        title = UserService.GetUserAlternateTitle(approvalAuthority.Id, (int)ALOD.Core.Domain.Users.UserGroups.BoardApprovalAuthority);
 
                                         string strSig = "USAF";
                                         if (SESSION_COMPO == "5")
@@ -796,19 +796,19 @@ namespace ALODWebUtility.Printing
             {
                 if (lod.LODMedical_v2.MemberFrom != null)
                 {
-                    if (lod.LODMedical_v2.MemberFrom == FromLocation.MTF)
+                    if (lod.LODMedical_v2.MemberFrom == (int)FromLocation.MTF)
                     {
                         PrintingUtil.PrintingUtil.SetFormField(form348_v2, "part1check2MTF", "1");
                     }
-                    else if (lod.LODMedical_v2.MemberFrom == FromLocation.RMU)
+                    else if (lod.LODMedical_v2.MemberFrom == (int)FromLocation.RMU)
                     {
                         PrintingUtil.PrintingUtil.SetFormField(form348_v2, "part1check2RMU", "1");
                     }
-                    else if (lod.LODMedical_v2.MemberFrom == FromLocation.GMU)
+                    else if (lod.LODMedical_v2.MemberFrom == (int)FromLocation.GMU)
                     {
                         PrintingUtil.PrintingUtil.SetFormField(form348_v2, "part1check2GMU", "1");
                     }
-                    else if (lod.LODMedical_v2.MemberFrom == FromLocation.DeployedLocation)
+                    else if (lod.LODMedical_v2.MemberFrom == (int)FromLocation.DeployedLocation)
                     {
                         PrintingUtil.PrintingUtil.SetFormField(form348_v2, "part1check2DepLoc", "1");
                     }
@@ -816,23 +816,23 @@ namespace ALODWebUtility.Printing
 
                 if (lod.LODMedical_v2.MemberComponent != null)
                 {
-                    if (lod.LODMedical_v2.MemberComponent == MemberComponent.AFR)
+                    if (lod.LODMedical_v2.MemberComponent == (int)MemberComponent.AFR)
                     {
                         PrintingUtil.PrintingUtil.SetFormField(form348_v2, "part1check8AFR", "1");
                     }
-                    else if (lod.LODMedical_v2.MemberComponent == MemberComponent.RegAF)
+                    else if (lod.LODMedical_v2.MemberComponent == (int)MemberComponent.RegAF)
                     {
                         PrintingUtil.PrintingUtil.SetFormField(form348_v2, "part1check8RegAF", "1");
                     }
-                    else if (lod.LODMedical_v2.MemberComponent == MemberComponent.ANG)
+                    else if (lod.LODMedical_v2.MemberComponent == (int)MemberComponent.ANG)
                     {
                         PrintingUtil.PrintingUtil.SetFormField(form348_v2, "part1check8ANG", "1");
                     }
-                    else if (lod.LODMedical_v2.MemberComponent == MemberComponent.USAFACadet)
+                    else if (lod.LODMedical_v2.MemberComponent == (int)MemberComponent.USAFACadet)
                     {
                         PrintingUtil.PrintingUtil.SetFormField(form348_v2, "part1check8USAFA", "1");
                     }
-                    else if (lod.LODMedical_v2.MemberComponent == MemberComponent.AFROTCCadet)
+                    else if (lod.LODMedical_v2.MemberComponent == (int)MemberComponent.AFROTCCadet)
                     {
                         PrintingUtil.PrintingUtil.SetFormField(form348_v2, "part1check8AFROTC", "1");
                     }
@@ -940,7 +940,7 @@ namespace ALODWebUtility.Printing
 
                 if (lod.LODMedical_v2.Influence != null)
                 {
-                    if (lod.LODMedical_v2.Influence == MemberInfluence.Alcohol)
+                    if (lod.LODMedical_v2.Influence == (int)MemberInfluence.Alcohol)
                     {
                         PrintingUtil.PrintingUtil.SetFormField(form348_v2, "part2Check13aAlcohol", "1");
 
@@ -962,7 +962,7 @@ namespace ALODWebUtility.Printing
                             PrintingUtil.PrintingUtil.SetFormField(form348_v2, "part2Check13bResults", "See attachments");
                         }
                     }
-                    else if (lod.LODMedical_v2.Influence == MemberInfluence.Drugs)
+                    else if (lod.LODMedical_v2.Influence == (int)MemberInfluence.Drugs)
                     {
                         PrintingUtil.PrintingUtil.SetFormField(form348_v2, "part2Check13aDrug", "1");
 
@@ -984,7 +984,7 @@ namespace ALODWebUtility.Printing
                             PrintingUtil.PrintingUtil.SetFormField(form348_v2, "part2Check13bResults", "See attachments");
                         }
                     }
-                    else if (lod.LODMedical_v2.Influence == MemberInfluence.AlcoholDrugs)
+                    else if (lod.LODMedical_v2.Influence == (int)MemberInfluence.AlcoholDrugs)
                     {
                         PrintingUtil.PrintingUtil.SetFormField(form348_v2, "part2Check13aAlcohol", "1");
                         PrintingUtil.PrintingUtil.SetFormField(form348_v2, "part2Check13aDrug", "1");
@@ -1135,10 +1135,10 @@ namespace ALODWebUtility.Printing
                 SignatureMetaData Medsig;
 
                 // Checks legacy path first and if null then checks pilot workflow
-                Medsig = SigDao.GetByWorkStatus(lod.Id, lod.Workflow, LodWorkStatus_v2.MedicalOfficerReview);
+                Medsig = SigDao.GetByWorkStatus(lod.Id, lod.Workflow, (int)LodWorkStatus_v2.MedicalOfficerReview);
                 if (Medsig == null)
                 {
-                    Medsig = SigDao.GetByWorkStatus(lod.Id, lod.Workflow, LodWorkStatus_v3.MedicalOfficerReview_LODV3); // Medical Officer (Pilot)
+                    Medsig = SigDao.GetByWorkStatus(lod.Id, lod.Workflow, (int)LodWorkStatus_v3.MedicalOfficerReview_LODV3); // Medical Officer (Pilot)
                 }
 
                 AddSignatureToForm_v2(form348_v2, Medsig,
@@ -1171,27 +1171,27 @@ namespace ALODWebUtility.Printing
 
                     if (lod.LODUnit_v2.SourceInformation != null)
                     {
-                        if (lod.LODUnit_v2.SourceInformation == InfoSource.Member)
+                        if (lod.LODUnit_v2.SourceInformation == (int)InfoSource.Member)
                         {
                             PrintingUtil.PrintingUtil.SetFormField(form348_v2, "part3Check18Member", "1");
                         }
-                        else if (lod.LODUnit_v2.SourceInformation == InfoSource.CivilianPolice)
+                        else if (lod.LODUnit_v2.SourceInformation == (int)InfoSource.CivilianPolice)
                         {
                             PrintingUtil.PrintingUtil.SetFormField(form348_v2, "part3Check18CivPolice", "1");
                         }
-                        else if (lod.LODUnit_v2.SourceInformation == InfoSource.MilitaryPolice)
+                        else if (lod.LODUnit_v2.SourceInformation == (int)InfoSource.MilitaryPolice)
                         {
                             PrintingUtil.PrintingUtil.SetFormField(form348_v2, "part3Check18MilPolice", "1");
                         }
-                        else if (lod.LODUnit_v2.SourceInformation == InfoSource.OSI)
+                        else if (lod.LODUnit_v2.SourceInformation == (int)InfoSource.OSI)
                         {
                             PrintingUtil.PrintingUtil.SetFormField(form348_v2, "part3Check18OSI", "1");
                         }
-                        else if (lod.LODUnit_v2.SourceInformation == InfoSource.Witness)
+                        else if (lod.LODUnit_v2.SourceInformation == (int)InfoSource.Witness)
                         {
                             PrintingUtil.PrintingUtil.SetFormField(form348_v2, "part3Check18Witness", "1");
                         }
-                        else if (lod.LODUnit_v2.SourceInformation == InfoSource.Other)
+                        else if (lod.LODUnit_v2.SourceInformation == (int)InfoSource.Other)
                         {
                             PrintingUtil.PrintingUtil.SetFormField(form348_v2, "part3Check18Other", "1");
                             PrintingUtil.PrintingUtil.SetFormField(form348_v2, "part3Check18OtherSpecify", lod.LODUnit_v2.SourceInformationSpecify);
@@ -1252,15 +1252,15 @@ namespace ALODWebUtility.Printing
 
                     if (lod.LODUnit_v2.MemberOccurrence != null)
                     {
-                        if (lod.LODUnit_v2.MemberOccurrence == Occurrence.Present)
+                        if (lod.LODUnit_v2.MemberOccurrence == (int)Occurrence.Present)
                         {
                             PrintingUtil.PrintingUtil.SetFormField(form348_v2, "part3Check19Present", "1");
                         }
-                        else if (lod.LODUnit_v2.MemberOccurrence == Occurrence.AbsentWithAuthority)
+                        else if (lod.LODUnit_v2.MemberOccurrence == (int)Occurrence.AbsentWithAuthority)
                         {
                             PrintingUtil.PrintingUtil.SetFormField(form348_v2, "part3Check19AbsentW", "1");
                         }
-                        else if (lod.LODUnit_v2.MemberOccurrence == Occurrence.AbsentWithoutAuthority)
+                        else if (lod.LODUnit_v2.MemberOccurrence == (int)Occurrence.AbsentWithoutAuthority)
                         {
                             PrintingUtil.PrintingUtil.SetFormField(form348_v2, "part3Check19AbsentWO", "1");
 
@@ -1280,11 +1280,11 @@ namespace ALODWebUtility.Printing
 
                     if (lod.LODUnit_v2.DutyDetermination == DutyStatus.Travel_to_from_duty)
                     {
-                        if (lod.LODUnit_v2.TravelOccurrence.Value == Occurrence.InactiveDutyTraining)
+                        if (lod.LODUnit_v2.TravelOccurrence.Value == (int)Occurrence.InactiveDutyTraining)
                         {
                             PrintingUtil.PrintingUtil.SetFormField(form348_v2, "part3Check19IDT", "1");
                         }
-                        else if (lod.LODUnit_v2.TravelOccurrence.Value == Occurrence.DutyOrTraining)
+                        else if (lod.LODUnit_v2.TravelOccurrence.Value == (int)Occurrence.DutyOrTraining)
                         {
                             PrintingUtil.PrintingUtil.SetFormField(form348_v2, "part3Check19Duty", "1");
                         }
@@ -1294,8 +1294,8 @@ namespace ALODWebUtility.Printing
 
                     if (lod.LODUnit_v2.ProximateCause != null)
                     {
-                        var prox = (from n in lkupDAO.GetCauses() where n.Value == lod.LODUnit_v2.ProximateCause select n).FirstOrDefault();
-                        if (lod.LODUnit_v2.ProximateCause == ProximateCause.Misconduct)
+                        var prox = (from n in lkupDAO.GetCauses() where (int?)n.Value == lod.LODUnit_v2.ProximateCause select n).FirstOrDefault();
+                        if (lod.LODUnit_v2.ProximateCause == (int)ProximateCause.Misconduct)
                         {
                             PrintingUtil.PrintingUtil.SetFormField(form348_v2, "part3Check20Misconduct", "1");
                         }
@@ -1311,14 +1311,14 @@ namespace ALODWebUtility.Printing
                         }
                     }
 
-                    LineOfDutyFindings unitFinding = lod.FindByType(PersonnelTypes.UNIT_CMDR);
+                    LineOfDutyFindings unitFinding = lod.FindByType((short)PersonnelTypes.UNIT_CMDR);
                     if (unitFinding != null)
                     {
                         if (unitFinding.Finding.HasValue)
                         {
-                            concurredFinding = unitFinding.Finding.Value;
+                            concurredFinding = (short)unitFinding.Finding.Value;
 
-                            switch (concurredFinding)
+                            switch ((Finding)unitFinding.Finding.Value)
                             {
                                 case Finding.In_Line_Of_Duty:
                                     PrintingUtil.PrintingUtil.SetFormField(form348_v2, "part3Check22ILOD", "1");
@@ -1335,10 +1335,10 @@ namespace ALODWebUtility.Printing
                         SignatureMetaData sig;
 
                         // Checks legacy path first and if null then checks pilot workflow
-                        sig = SigDao.GetByWorkStatus(lod.Id, lod.Workflow, LodWorkStatus_v2.UnitCommanderReview);
+                        sig = SigDao.GetByWorkStatus(lod.Id, lod.Workflow, (int)LodWorkStatus_v2.UnitCommanderReview);
                         if (sig == null)
                         {
-                            sig = SigDao.GetByWorkStatus(lod.Id, lod.Workflow, LodWorkStatus_v3.UnitCommanderReview_LODV3); // Unit Commander Review (Pilot)
+                            sig = SigDao.GetByWorkStatus(lod.Id, lod.Workflow, (int)LodWorkStatus_v3.UnitCommanderReview_LODV3); // Unit Commander Review (Pilot)
                         }
 
                         AddSignatureToForm_v2(form348_v2, sig,
@@ -1356,20 +1356,20 @@ namespace ALODWebUtility.Printing
             SignatureMetaData sig;
 
             // Checks legacy path first and if null then checks pilot workflow
-            sig = SigDao.GetByWorkStatus(lod.Id, lod.Workflow, LodWorkStatus_v2.AppointingAutorityReview);
+            sig = SigDao.GetByWorkStatus(lod.Id, lod.Workflow, (int)LodWorkStatus_v2.AppointingAutorityReview);
             if (sig == null)
             {
-                sig = SigDao.GetByWorkStatus(lod.Id, lod.Workflow, LodWorkStatus_v3.AppointingAutorityReview_LODV3); // Appointing Authority Action (Pilot)
+                sig = SigDao.GetByWorkStatus(lod.Id, lod.Workflow, (int)LodWorkStatus_v3.AppointingAutorityReview_LODV3); // Appointing Authority Action (Pilot)
             }
 
             if (sig != null)
             {
-                LineOfDutyFindings appointingfinding = lod.FindByType(PersonnelTypes.APPOINT_AUTH);
+                LineOfDutyFindings appointingfinding = lod.FindByType((short)PersonnelTypes.APPOINT_AUTH);
                 if (appointingfinding != null)
                 {
                     if (appointingfinding.Finding.HasValue)
                     {
-                        switch (appointingfinding.Finding.Value)
+                        switch ((Finding)appointingfinding.Finding.Value)
                         {
                             case Finding.In_Line_Of_Duty:
                                 PrintingUtil.PrintingUtil.SetFormField(form348_v2, "part5Check26ILOD", "1");
@@ -1394,11 +1394,11 @@ namespace ALODWebUtility.Printing
 
         private void SetWingJudgeAdvocateInfo(PDFForm form348_v2, LineOfDuty_v2 lod)
         {
-            SignatureMetaData sig = SigDao.GetByWorkStatus(lod.Id, lod.Workflow, LodWorkStatus_v2.WingJAReview);
+            SignatureMetaData sig = SigDao.GetByWorkStatus(lod.Id, lod.Workflow, (int)LodWorkStatus_v2.WingJAReview);
 
             if (sig != null)
             {
-                LineOfDutyFindings jaFinding = lod.FindByType(PersonnelTypes.WING_JA);
+                LineOfDutyFindings jaFinding = lod.FindByType((short)PersonnelTypes.WING_JA);
 
                 if (jaFinding != null)
                 {

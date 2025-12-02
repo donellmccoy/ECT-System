@@ -162,7 +162,7 @@ namespace ALODWebUtility.Workflow
             row.FullDescription = _fullDescr;
             row.displayOrder = _displayOrder;
             row.isDisposition = _isDisposition;
-            row.isFormal = _isFormal;
+            row.isFormal = _isFormal.ToString();
         }
     }
 }

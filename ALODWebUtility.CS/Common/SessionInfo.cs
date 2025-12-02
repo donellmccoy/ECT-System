@@ -5,6 +5,7 @@ using System.Collections.Specialized;
 using System.Configuration;
 using System.Data;
 using System.Data.Common;
+using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Threading;
 using System.Web;
@@ -128,7 +129,7 @@ namespace ALODWebUtility.Common
             }
         }
 
-        public static int SESSION_DISPLAY_NAME // VB property type is Integer, but name is DisplayName? Wait.
+        public static string SESSION_DISPLAY_NAME // VB property type is Integer, but name is DisplayName? Wait.
         // VB: Public Property SESSION_DISPLAY_NAME() As Integer
         // VB Get: Return CInt(GetSessionValue(SESSIONKEY_DISPLAY_NAME))
         // VB SetLogin: HttpContext.Current.Session("DisplayName") = user.Rank.Rank + " " + user.LastName + ", " + user.FirstName
@@ -621,13 +622,13 @@ namespace ALODWebUtility.Common
 
             FormsAuthentication.SetAuthCookie(user.Id.ToString(), false);
 
-            UserAuthentication perms = new UserAuthentication(user.Id);
+            UserAuthentication perms = new UserAuthentication(user.Id.ToString());
             LodPrinciple principle = new LodPrinciple(perms, perms.Permissions);
             HttpContext.Current.User = principle;
             System.Threading.Thread.CurrentPrincipal = principle;
             AuthProvider.SetAuthCookie(perms);
 
-            LogManager.LogAction(ModuleType.System, UserAction.UserLogin, "Role: " + role.Group.Description);
+            LogManager.LogAction((int)ModuleType.System, UserAction.UserLogin, "Role: " + role.Group.Description);
             return true;
         }
 
@@ -652,7 +653,7 @@ namespace ALODWebUtility.Common
         /// <returns>List of LookUpItems containg units</returns>
         public static List<ALOD.Core.Domain.Users.LookUpItem> UnitLookUp(StringDictionary param)
         {
-            List<ALOD.Core.Domain.Users.LookUpItem> lst = LookupService.GetChildUnits(int.Parse(param[SESSIONKEY_UNIT_ID]), byte.Parse(param[SESSIONKEY_REPORT_VIEW]));
+            List<ALOD.Core.Domain.Users.LookUpItem> lst = LookupService.GetChildUnits(int.Parse(param[SESSIONKEY_UNIT_ID]), (ReportingView)byte.Parse(param[SESSIONKEY_REPORT_VIEW])).ToList();
             return lst;
         }
 

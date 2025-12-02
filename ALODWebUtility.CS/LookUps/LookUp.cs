@@ -9,6 +9,7 @@ using System.Xml;
 using AjaxControlToolkit;
 using ALOD.Core.Domain.Common;
 using ALOD.Core.Domain.Modules.Lod;
+using ALOD.Core.Interfaces.DAOInterfaces;
 using ALOD.Data;
 using ALODWebUtility.DataAccess;
 
@@ -25,14 +26,14 @@ namespace ALODWebUtility.LookUps
 
         public IEnumerable<ICD9Code> GetCategory(int headingId)
         {
-            ICD9CodeDao icdDao = new NHibernateDaoFactory().GetICD9CodeDao();
+            IICD9CodeDao icdDao = new NHibernateDaoFactory().GetICD9CodeDao();
             var query = from r in icdDao.GetAll() where r.ParentId == headingId && r.Active select r;
             return query;
         }
 
         public IEnumerable<ICD9Code> GetChapter()
         {
-            ICD9CodeDao icdDao = new NHibernateDaoFactory().GetICD9CodeDao();
+            IICD9CodeDao icdDao = new NHibernateDaoFactory().GetICD9CodeDao();
             var query = from r in icdDao.GetAll() where r.Code == null && r.ParentId == null && r.Active orderby r.SortOrder select r;
 
             return query;
@@ -53,7 +54,7 @@ namespace ALODWebUtility.LookUps
 
         public IEnumerable<ICD9Code> GetICDChildren(int parentId)
         {
-            ICD9CodeDao icdDao = new NHibernateDaoFactory().GetICD9CodeDao();
+            IICD9CodeDao icdDao = new NHibernateDaoFactory().GetICD9CodeDao();
             var query = from r in icdDao.GetAll() where r.ParentId == parentId && r.Active select r;
             return query;
         }
@@ -94,11 +95,11 @@ namespace ALODWebUtility.LookUps
                 return null;
             }
 
-            ICD9CodeDao icdDao = new NHibernateDaoFactory().GetICD9CodeDao();
+            IICD9CodeDao icdDao = new NHibernateDaoFactory().GetICD9CodeDao();
             ICD9Code code = icdDao.GetById(codeId);
             List<ListItem> values = new List<ListItem>();
 
-            List<NatureOfIncident> incidentValues = icdDao.GetAssociatedNatureOfIncidentValues(codeId);
+            IList<NatureOfIncident> incidentValues = icdDao.GetAssociatedNatureOfIncidentValues(codeId);
 
             if (incidentValues != null && incidentValues.Count > 0)
             {

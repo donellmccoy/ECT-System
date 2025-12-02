@@ -10,7 +10,7 @@ namespace ALODWebUtility.Common
         public static SC_PSCD_Findings CreatePSCDFinding(int PSCDID)
         {
             SC_PSCD_Findings cFinding = new SC_PSCD_Findings();
-            var currUser = UserService.CurrentUser;
+            var currUser = UserService.CurrentUser();
 
             cFinding.PSCDId = PSCDID;
             cFinding.Name = currUser.FullName;

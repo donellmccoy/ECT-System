@@ -5,6 +5,8 @@ using ALOD.Core.Interfaces.DAOInterfaces;
 using ALOD.Data;
 using ALOD.Data.Services;
 using ALODWebUtility.Common;
+using static ALODWebUtility.Common.SessionInfo;
+using static ALODWebUtility.Common.Utility;
 
 namespace ALOD.Web
 {

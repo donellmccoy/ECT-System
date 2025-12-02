@@ -59,6 +59,11 @@ namespace ALODWebUtility.Common
             }
         }
 
+        public static void SetDropdownByValue(DropDownList list, int value)
+        {
+            SetDropdownByValue(list, value.ToString());
+        }
+
         public static void SetLabelText(Label label, string text)
         {
             if (label == null || string.IsNullOrEmpty(text))

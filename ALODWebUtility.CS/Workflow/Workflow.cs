@@ -167,7 +167,7 @@ namespace ALODWebUtility.Workflow
             DbCommand cmd = adapter.GetSqlStringCommand(
             "SELECT title, a.compo, formal, active, cast(initialStatus as int) as initialStatus, b.description "
             + "FROM core_Workflow a JOIN core_StatusCodes b ON b.statusId = a.initialStatus WHERE workflowId = @workflowId");
-            adapter.AddInParameter(cmd, "@workflowId", ALOD.Data.DbType.Byte, _id);
+            adapter.AddInParameter(cmd, "@workflowId", System.Data.DbType.Byte, _id);
             adapter.ExecuteReader(DetailsReader, cmd);
         }
 

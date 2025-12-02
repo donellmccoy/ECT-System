@@ -88,7 +88,7 @@ namespace ALODWebUtility.Providers
         protected void LoadPermissions()
         {
             PermissionList perms = new PermissionList();
-            perms.GetByUserId(_userName);
+            perms.GetByUserId(int.Parse(_userName));
 
             foreach (Permission perm in perms)
             {

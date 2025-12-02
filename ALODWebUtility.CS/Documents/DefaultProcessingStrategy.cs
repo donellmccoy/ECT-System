@@ -44,7 +44,7 @@ namespace ALODWebUtility.Documents
                 }
 
                 // Log successful action
-                LogManager.LogAction(ModuleType.System, UserAction.AddedDocument, "Added document: " + metaData.OriginalFileName + ". RefId = " + refId + ". DocGroupId = " + groupId + ". DocId = " + docId + ".");
+                LogManager.LogAction((int)ModuleType.System, UserAction.AddedDocument, "Added document: " + metaData.OriginalFileName + ". RefId = " + refId + ". DocGroupId = " + groupId + ". DocId = " + docId + ".");
 
                 return docId;
             }

@@ -1,6 +1,8 @@
 using System;
 using System.Data;
 using System.Text;
+using System.Web;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 using ALOD.Core.Domain.Users;
 using ALOD.Core.Domain.Workflow;
@@ -8,7 +10,9 @@ using ALOD.Core.Interfaces.DAOInterfaces;
 using ALOD.Core.Utils;
 using ALOD.Data;
 using ALODWebUtility.Common;
-using ALODWebUtility.Permission.Search;
+using ALODWebUtility.Perms.Search;
+using static ALODWebUtility.Common.SessionInfo;
+using static ALODWebUtility.Common.Utility;
 
 namespace ALOD.Web.LOD
 {
@@ -45,7 +49,7 @@ namespace ALOD.Web.LOD
 
         protected void gvResults_LODV3_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            HeaderRowBinding(sender, e, "CaseId");
+            HeaderRowBinding((GridView)sender, e, "CaseId");
 
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
@@ -67,7 +71,7 @@ namespace ALOD.Web.LOD
 
         protected void gvResults_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            HeaderRowBinding(sender, e, "CaseId");
+            HeaderRowBinding((GridView)sender, e, "CaseId");
 
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
@@ -101,23 +105,23 @@ namespace ALOD.Web.LOD
 
         protected void LOD_V3()
         {
-            switch (SESSION_GROUP_ID)
+            switch ((byte)SESSION_GROUP_ID)
             {
-                case UserGroups.MedicalTechnician:
-                case UserGroups.MedicalOfficer:
-                case UserGroups.UnitCommander:
-                case UserGroups.WingJudgeAdvocate:
-                case UserGroups.WingCommander:
-                case UserGroups.WingSarc:
-                case UserGroups.BoardLegal:
-                case UserGroups.BoardMedical:
-                case UserGroups.BoardTechnician:
-                case UserGroups.BoardAdministrator:
-                case UserGroups.BoardApprovalAuthority:
+                case (byte)UserGroups.MedicalTechnician:
+                case (byte)UserGroups.MedicalOfficer:
+                case (byte)UserGroups.UnitCommander:
+                case (byte)UserGroups.WingJudgeAdvocate:
+                case (byte)UserGroups.WingCommander:
+                case (byte)UserGroups.WingSarc:
+                case (byte)UserGroups.BoardLegal:
+                case (byte)UserGroups.BoardMedical:
+                case (byte)UserGroups.BoardTechnician:
+                case (byte)UserGroups.BoardAdministrator:
+                case (byte)UserGroups.BoardApprovalAuthority:
                     resultsUpdatePanel.Visible = false;
                     resultsUpdatePanel_IO.Visible = false;
                     break;
-                case UserGroups.InvestigatingOfficer:
+                case (byte)UserGroups.InvestigatingOfficer:
                     resultsUpdatePanel.Visible = false;
                     resultsUpdatePanel_LODV3.Visible = false;
                     break;

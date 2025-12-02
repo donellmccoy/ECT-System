@@ -2,16 +2,21 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 using ALOD.Core.Domain.Lookup;
 using ALOD.Core.Domain.ServiceMembers;
 using ALOD.Core.Domain.Users;
 using ALOD.Core.Interfaces.DAOInterfaces;
 using ALOD.Core.Utils;
-using ALOD.Core.Utils.RegexValidation;
+using static ALOD.Core.Utils.RegexValidation;
 using ALOD.Data;
 using ALOD.Data.Services;
 using ALODWebUtility.Common;
+using static ALODWebUtility.Common.SessionInfo;
+using static ALODWebUtility.Common.Utility;
+using static ALODWebUtility.Common.WebControlSetters;
+using DomainUnit = ALOD.Core.Domain.Users.Unit;
 
 namespace ALOD.Web
 {
@@ -265,7 +270,7 @@ namespace ALOD.Web
 
         protected void PopulateRoles()
         {
-            IList<UserGroup> groups = LookupService.GetGroupsByCompo(6);
+            IList<UserGroup> groups = LookupService.GetGroupsByCompo("6");
 
             RoleSelect.DataSource = from g in groups where g.CanBeRequested == true select g;
             RoleSelect.DataTextField = "Description";
@@ -325,7 +330,7 @@ namespace ALOD.Web
 
             if (SrcUnitIdHdn.Text != "")
             {
-                Unit newUnit = new NHibernateDaoFactory().GetUnitDao().FindById(int.Parse(SrcUnitIdHdn.Text.Trim()));
+                DomainUnit newUnit = new NHibernateDaoFactory().GetUnitDao().FindById(int.Parse(SrcUnitIdHdn.Text.Trim()));
                 if (newUnit != null)
                 {
                     user.Unit = newUnit;

@@ -5,11 +5,16 @@ using System.Web.UI.WebControls;
 using ALOD.Core.Domain.Users;
 using ALOD.Data.Services;
 using ALODWebUtility.Common;
+using static ALODWebUtility.Common.SessionInfo;
+using static ALODWebUtility.Common.Utility;
 
 namespace ALOD.Web
 {
     public partial class login_SelectAccount : System.Web.UI.Page
     {
+        // Resource string constant - normally from App_GlobalResources
+        private const string START_PAGE = "~/Secure/lod/Inbox.aspx";
+
         protected void AccountRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             int userId = 0;
@@ -29,7 +34,7 @@ namespace ALOD.Web
                 return;
             }
 
-            string url = Resources._Global.StartPage;
+            string url = START_PAGE;
 
             if (SESSION_REDIRECT_URL != null)
             {

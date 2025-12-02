@@ -3,16 +3,21 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Web;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 using ALOD.Core.Domain.Documents;
 using ALOD.Core.Domain.Modules.Lod;
 using ALOD.Core.Domain.Workflow;
 using ALOD.Core.Utils;
-using ALOD.Core.Utils.RegexValidation;
+using static ALOD.Core.Utils.RegexValidation;
 using ALOD.Data;
 using ALOD.Data.Services;
 using ALODWebUtility.Common;
-using ALODWebUtility.Permission.Search;
+using ALODWebUtility.Perms.Search;
+using static ALODWebUtility.Common.SessionInfo;
+using static ALODWebUtility.Common.Utility;
+using Microsoft.VisualBasic;
 
 namespace ALOD.Web.LOD
 {
@@ -58,7 +63,7 @@ namespace ALOD.Web.LOD
 
         protected void ResultGrid_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            HeaderRowBinding(sender, e, "CaseId");
+            HeaderRowBinding((GridView)sender, e, "CaseId");
 
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
@@ -112,9 +117,9 @@ namespace ALOD.Web.LOD
             instance = LodService.GetById(int.Parse(data["RefId"].ToString()));
 
             // Check for GroupID; some cases were cancelled
-            if (instance.DocumentGroupId > 0)
+            if (instance.DocumentGroupId.HasValue && instance.DocumentGroupId.Value > 0)
             {
-                _documents = DocumentDao.GetDocumentsByGroupId(instance.DocumentGroupId);
+                _documents = DocumentDao.GetDocumentsByGroupId(instance.DocumentGroupId.Value);
             }
 
             if ((bool)data["IsFinal"])
@@ -164,7 +169,7 @@ namespace ALOD.Web.LOD
 
             string data = Request.QueryString["data"];
 
-            if (IsNumeric(data))
+            if (Information.IsNumeric(data))
             {
                 if (data.Length == 4)
                 {

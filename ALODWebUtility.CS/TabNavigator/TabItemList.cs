@@ -52,11 +52,11 @@ namespace ALODWebUtility.TabNavigation
             }
             set
             {
-                foreach (TabItem row in _list)
+                for (int i = 0; i < _list.Count; i++)
                 {
-                    if (row.Page.CompareTo(page) == 0)
+                    if (_list[i].Page.CompareTo(page) == 0)
                     {
-                        row = value;
+                        _list[i] = value;
                     }
                 }
             }

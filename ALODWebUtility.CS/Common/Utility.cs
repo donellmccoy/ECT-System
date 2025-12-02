@@ -129,7 +129,7 @@ namespace ALODWebUtility.Common
         {
             ALOD.Core.Domain.Modules.Lod.LineOfDutyFindings cFinding = new ALOD.Core.Domain.Modules.Lod.LineOfDutyFindings();
             cFinding.LODID = lodid;
-            var currUser = UserService.CurrentUser;
+            var currUser = UserService.CurrentUser();
             cFinding.SSN = currUser.SSN;
             cFinding.Compo = currUser.Component;
             cFinding.Rank = currUser.Rank.Rank;
@@ -818,7 +818,7 @@ namespace ALODWebUtility.Common
                 return null;
             }
 
-            ICD9CodeDao icdDao = new NHibernateDaoFactory().GetICD9CodeDao();
+            IICD9CodeDao icdDao = new NHibernateDaoFactory().GetICD9CodeDao();
 
             if (icdDao == null)
             {
@@ -892,8 +892,12 @@ namespace ALODWebUtility.Common
 
         public static int IntCheck(object value, int defaultValue = 0)
         {
-            if (!Information.IsNumeric(value)) return defaultValue;
-            return Convert.ToInt32(value);
+            if (value == null) return defaultValue;
+            if (int.TryParse(value.ToString(), out int result))
+            {
+                return result;
+            }
+            return defaultValue;
         }
 
         public static bool IsFileSizeValid(int length)
@@ -1026,7 +1030,7 @@ namespace ALODWebUtility.Common
         /// <param name="input">the control to limit</param>
         /// <param name="type">Type of restriction</param>
         /// <remarks></remarks>
-        public static void SetInputFormatRestriction(ref Page Page, TextBox input, FormatRestriction type, string specialChars = "")
+        public static void SetInputFormatRestriction(Page Page, TextBox input, FormatRestriction type, string specialChars = "")
         {
             input.Attributes.Add("onKeyPress", "return checkFormat(this,event,'" + type.ToString() + "','" + specialChars + "');");
         }
@@ -1038,7 +1042,7 @@ namespace ALODWebUtility.Common
         /// <param name="input">the control to limit</param>
         /// <param name="type">Type of restriction</param>
         /// <remarks></remarks>
-        public static void SetInputFormatRestriction(ref Page Page, HtmlInputText input, FormatRestriction type, string specialChars = "")
+        public static void SetInputFormatRestriction(Page Page, HtmlInputText input, FormatRestriction type, string specialChars = "")
         {
             input.Attributes.Add("onKeyPress", "return checkFormat(this,event,'" + type.ToString() + "','" + specialChars + "');");
         }
@@ -1050,7 +1054,7 @@ namespace ALODWebUtility.Common
         /// <param name="input">the control to limit</param>
         /// <param name="type">Type of restriction</param>
         /// <remarks></remarks>
-        public static void SetInputFormatRestrictionNoReturn(ref Page Page, TextBox input, FormatRestriction type, string specialChars = "")
+        public static void SetInputFormatRestrictionNoReturn(Page Page, TextBox input, FormatRestriction type, string specialChars = "")
         {
             input.Attributes.Add("onKeyPress", "return (event.keyCode != 13 && checkFormat(this,event,'" + type.ToString() + "','" + specialChars + "'));");
         }
@@ -1122,7 +1126,7 @@ namespace ALODWebUtility.Common
         /// </summary>
         /// <param name="Page"></param>
         /// <remarks>Useful for Ajax calls</remarks>
-        public static void WriteHostName(ref Page Page)
+        public static void WriteHostName(Page Page)
         {
             // build our hostname
             string host = Page.Request.Url.Scheme + Uri.SchemeDelimiter + Page.Request.Url.Host + Page.ResolveClientUrl(Page.Request.ApplicationPath);
@@ -1146,7 +1150,7 @@ namespace ALODWebUtility.Common
         public static void InitSeniorMedicalReviewerTabVisibility(SeniorMedicalReviewerTabVisibilityArgs args)
         {
             ILookupDao lookupDao = new NHibernateDaoFactory().GetLookupDao();
-            var trackingData = lookupDao.GetStatusTracking(args.RefId, args.ModuleId);
+            var trackingData = lookupDao.GetStatusTracking(args.RefId, (byte)args.ModuleId);
 
             if (trackingData != null && trackingData.Count > 1)
             {
@@ -1176,14 +1180,14 @@ namespace ALODWebUtility.Common
 
             if (userAccess == PageAccess.AccessLevel.ReadWrite)
             {
-                CaseLock @lock = lockDao.GetByReferenceId(refId, caseModuleType);
+                CaseLock @lock = lockDao.GetByReferenceId(refId, (byte)caseModuleType);
 
                 if (@lock == null)
                 {
                     @lock = new CaseLock();
                     @lock.UserId = SessionInfo.SESSION_USER_ID;
                     @lock.ReferenceId = refId;
-                    @lock.ModuleType = caseModuleType;
+                    @lock.ModuleType = (byte)caseModuleType;
                     @lock.LockTime = DateTime.Now;
 
                     lockDao.Save(@lock);

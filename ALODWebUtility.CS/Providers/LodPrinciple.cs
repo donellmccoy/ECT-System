@@ -5,7 +5,6 @@ using System.Text;
 
 namespace ALODWebUtility.Providers
 {
-    [CLSCompliant(false)]
     public class LodPrinciple : IPrincipal
     {
         protected IIdentity _identity;
