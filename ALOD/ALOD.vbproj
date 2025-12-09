@@ -564,6 +564,7 @@
     <Import Include="System.Web.UI.HtmlControls" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\DataTypes.vb" />
     <Compile Include="Public\Adhoc.aspx.designer.vb">
       <DependentUpon>Adhoc.aspx</DependentUpon>
     </Compile>

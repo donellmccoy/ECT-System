@@ -533,6 +533,7 @@
     <Compile Include="DataAccessObjects\ApplicationWarmupProcessDao.cs" />
     <Compile Include="DataAccessObjects\ARCNetDao.cs" />
     <Compile Include="DataAccessObjects\AssociatedCaseDao.cs" />
+    <Compile Include="DataAccessObjects\BatchServiceDao.cs" />
     <Compile Include="Interceptors\AuditInterceptor.cs" />
     <Compile Include="DataAccessObjects\CaseCommentsDao.cs" />
     <Compile Include="DataAccessObjects\CaseLockDao.cs" />
@@ -551,6 +552,7 @@
     <Compile Include="DataAccessObjects\CertificationStampDao.cs" />
     <Compile Include="DataAccessObjects\DBSignTemplateDao.cs" />
     <Compile Include="DataAccessObjects\DocCategoryViewDao.cs" />
+    <Compile Include="DataAccessObjects\DocumentServiceDao.cs" />
     <Compile Include="DataAccessObjects\DocumentViewDao.cs" />
     <Compile Include="DataAccessObjects\DropDownListEditDao.cs" />
     <Compile Include="DataAccessObjects\EmailTemplateDao.cs" />
@@ -761,6 +763,3 @@
   </Target>
   -->
 </Project>
-
-
-

@@ -14,15 +14,62 @@ namespace ALOD.Data
     {
         private const string GroupName = "ALODDocument";
         private SRXExchange.DocumentService DocService;
+        private readonly DocumentServiceDao _documentServiceDao;
+        private readonly bool _useDirectDatabaseAccess;
+        private readonly string _userName;
+
+        // Default user/subuser IDs for direct database access (can be configured)
+        private const short DefaultUserID = 1;
+        private const int DefaultSubuserID = 0;
 
         public SRXDocumentStore()
         {
-            InitWebService(GroupName);
+            _userName = GroupName;
+            _useDirectDatabaseAccess = UseDirectDatabaseAccess;
+
+            if (_useDirectDatabaseAccess)
+            {
+                _documentServiceDao = new DocumentServiceDao();
+            }
+            else
+            {
+                InitWebService(GroupName);
+            }
         }
 
         public SRXDocumentStore(string userName)
         {
-            InitWebService(userName);
+            _userName = userName;
+            _useDirectDatabaseAccess = UseDirectDatabaseAccess;
+
+            if (_useDirectDatabaseAccess)
+            {
+                _documentServiceDao = new DocumentServiceDao();
+            }
+            else
+            {
+                InitWebService(userName);
+            }
+        }
+
+        /// <summary>
+        /// Constructor that allows explicit choice between web service and direct database access.
+        /// </summary>
+        /// <param name="userName">The user name for authentication.</param>
+        /// <param name="useDirectAccess">If true, uses DocumentServiceDao for direct database access instead of web service.</param>
+        public SRXDocumentStore(string userName, bool useDirectAccess)
+        {
+            _userName = userName;
+            _useDirectDatabaseAccess = useDirectAccess;
+
+            if (_useDirectDatabaseAccess)
+            {
+                _documentServiceDao = new DocumentServiceDao();
+            }
+            else
+            {
+                InitWebService(userName);
+            }
         }
 
         private string DocumentUploadStyleSheet
@@ -38,6 +85,28 @@ namespace ALOD.Data
         private string WebServiceUserName
         {
             get { return System.Configuration.ConfigurationManager.AppSettings["DocServiceUsername"]; }
+        }
+
+        /// <summary>
+        /// Gets whether to use direct database access instead of the web service.
+        /// Configured via appSettings key "UseDirectDocumentAccess". Defaults to false.
+        /// </summary>
+        private static bool UseDirectDatabaseAccess
+        {
+            get
+            {
+                string setting = System.Configuration.ConfigurationManager.AppSettings["UseDirectDocumentAccess"];
+                return !string.IsNullOrEmpty(setting) && 
+                       (setting.Equals("true", StringComparison.OrdinalIgnoreCase) || setting == "1");
+            }
+        }
+
+        /// <summary>
+        /// Gets the base URL for document viewer/upload when using direct database access.
+        /// </summary>
+        private string DocumentServiceBaseUrl
+        {
+            get { return System.Configuration.ConfigurationManager.AppSettings["DocServiceBaseUrl"] ?? string.Empty; }
         }
 
         private void InitWebService(string userName)
@@ -68,6 +137,11 @@ namespace ALOD.Data
         /// <inheritdoc/>
         public long AddDocument(byte[] fileData, string fileName, long groupId, Document details)
         {
+            if (_useDirectDatabaseAccess)
+            {
+                return AddDocumentDirect(fileData, fileName, groupId, details);
+            }
+
             SRXExchange.UploadKeys keys = new ALOD.Data.SRXExchange.UploadKeys();
             keys.DocDate = details.DocDate;
             keys.DocDescription = details.Description;
@@ -91,9 +165,42 @@ namespace ALOD.Data
             return docId;
         }
 
+        private long AddDocumentDirect(byte[] fileData, string fileName, long groupId, Document details)
+        {
+            var keys = new UploadKeys
+            {
+                DocDate = details.DocDate,
+                DocDescription = details.Description,
+                DocStatus = DocStatusToDaoStatus(details.DocStatus),
+                DocTypeID = (int)details.DocType,
+                EntityName = details.SSN,
+                FileName = fileName,
+                InputType = InputType.WebServiceUpload
+            };
+
+            long docId = 0;
+
+            try
+            {
+                docId = _documentServiceDao.UploadDocument(fileData, keys, groupId, DefaultUserID, DefaultSubuserID, string.Empty);
+            }
+            catch (Exception ex)
+            {
+                LogManager.LogError(ex);
+            }
+
+            return docId;
+        }
+
         /// <inheritdoc/>
         public void CopyGroupDocuments(int oldGroupId, int newGroupId, int oldDocTypeId, int newDocTypeId)
         {
+            if (_useDirectDatabaseAccess)
+            {
+                CopyGroupDocumentsDirect(oldGroupId, newGroupId, oldDocTypeId, newDocTypeId);
+                return;
+            }
+
             try
             {
                 DocService.CopyGroupDocuments(oldGroupId, newGroupId, oldDocTypeId, newDocTypeId);
@@ -104,9 +211,26 @@ namespace ALOD.Data
             }
         }
 
+        private void CopyGroupDocumentsDirect(int oldGroupId, int newGroupId, int oldDocTypeId, int newDocTypeId)
+        {
+            try
+            {
+                _documentServiceDao.CopyGroupDocuments(oldGroupId, newGroupId, oldDocTypeId, newDocTypeId, DefaultUserID, DefaultSubuserID, string.Empty);
+            }
+            catch (Exception ex)
+            {
+                LogManager.LogError(ex);
+            }
+        }
+
         /// <inheritdoc/>
         public long CreateGroup()
         {
+            if (_useDirectDatabaseAccess)
+            {
+                return CreateGroupDirect();
+            }
+
             const int maxAttempts = 5;  // you can adjust this value based on your need
             int attempts = 0;
 
@@ -132,15 +256,53 @@ namespace ALOD.Data
             throw new InvalidOperationException("Failed to obtain a valid groupId after multiple attempts.");
         }
 
+        private long CreateGroupDirect()
+        {
+            const int maxAttempts = 5;
+            int attempts = 0;
+
+            while (attempts < maxAttempts)
+            {
+                try
+                {
+                    long groupId = _documentServiceDao.CreateGroup(GroupName, DefaultUserID, DefaultSubuserID, string.Empty);
+
+                    if (groupId != 0)
+                    {
+                        return groupId;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    LogManager.LogError(ex);
+                }
+
+                attempts++;
+            }
+
+            throw new InvalidOperationException("Failed to obtain a valid groupId after multiple attempts.");
+        }
+
         /// <inheritdoc/>
         public void DeleteDocument(long docId)
         {
-            UpdateDocumentStatus(docId, DocumentStatus.Deleted);
+            if (_useDirectDatabaseAccess)
+            {
+                UpdateDocumentStatusDirect(docId, DaoDocumentStatus.Deleted);
+                return;
+            }
+
+            UpdateDocumentStatus(docId, ALOD.Core.Domain.Documents.DocumentStatus.Deleted);
         }
 
         /// <inheritdoc/>
         public IList<Document> GetDocumentsByGroupId(long groupId)
         {
+            if (_useDirectDatabaseAccess)
+            {
+                return GetDocumentsByGroupIdDirect(groupId);
+            }
+
             LogManager.LogError($"Fetching documents for groupId: {groupId}");
 
             List<Document> docs = new List<Document>();
@@ -162,7 +324,7 @@ namespace ALOD.Data
                 {
                     Id = row.DocID,
                     SSN = row.EntityName,
-                    DocStatus = (DocumentStatus)Enum.Parse(typeof(DocumentStatus), row.DocStatus.ToString()),
+                    DocStatus = (ALOD.Core.Domain.Documents.DocumentStatus)Enum.Parse(typeof(ALOD.Core.Domain.Documents.DocumentStatus), row.DocStatus.ToString()),
                     DocType = (DocumentType)row.DocTypeID,
                     DocTypeName = row.DocTypeName,
                     DocDate = row.DocDate,
@@ -176,6 +338,46 @@ namespace ALOD.Data
                 };
 
                 docs.Add(doc);
+            }
+
+            return docs;
+        }
+
+        private IList<Document> GetDocumentsByGroupIdDirect(long groupId)
+        {
+            LogManager.LogError($"Fetching documents for groupId: {groupId} (direct database access)");
+
+            List<Document> docs = new List<Document>();
+
+            try
+            {
+                var dataList = _documentServiceDao.GetGroupDocumentList(groupId, DefaultUserID, DefaultSubuserID);
+
+                foreach (var row in dataList)
+                {
+                    Document doc = new Document
+                    {
+                        Id = row.DocID,
+                        SSN = row.EntityName,
+                        DocStatus = DaoStatusToDocStatus(row.DocStatus),
+                        DocType = (DocumentType)row.DocTypeID,
+                        DocTypeName = row.DocTypeName,
+                        DocDate = row.DocDate,
+                        Description = row.DocDescription,
+                        Extension = row.FileExt,
+                        IconUrl = row.IconUrl,
+                        UploadedBy = row.UploadedBySubuserName,
+                        DateAdded = row.UploadDate,
+                        CanAppend = row.IsAppendable,
+                        OriginalFileName = row.OriginalFileName
+                    };
+
+                    docs.Add(doc);
+                }
+            }
+            catch (Exception e)
+            {
+                LogManager.LogError(e);
             }
 
             return docs;
@@ -202,9 +404,34 @@ namespace ALOD.Data
                 entityDisplayText = new string('X', docEntity.Length - 4) + docEntity.Substring(docEntity.Length - 4);
             }
 
+            if (_useDirectDatabaseAccess)
+            {
+                return GetDocumentUploadUrlDirect(groupId, docType, docEntity, entityDisplayText);
+            }
+
             try
             {
                 return DocService.GetDocumentUploadUrl(docEntity, (int)docType, groupId, DocumentUploadStyleSheet, entityDisplayText);
+            }
+            catch (Exception ex)
+            {
+                LogManager.LogError(ex);
+                return string.Empty;
+            }
+        }
+
+        private string GetDocumentUploadUrlDirect(long groupId, DocumentType docType, string docEntity, string entityDisplayText)
+        {
+            try
+            {
+                Guid uploadGuid = _documentServiceDao.CreateDocumentUploadGuid(docEntity, (int)docType, groupId, DefaultUserID, DefaultSubuserID);
+                
+                // Build the upload URL using the base URL and the GUID
+                string baseUrl = DocumentServiceBaseUrl.TrimEnd('/');
+                string styleUrl = Uri.EscapeDataString(DocumentUploadStyleSheet ?? string.Empty);
+                string entityText = Uri.EscapeDataString(entityDisplayText);
+                
+                return $"{baseUrl}/Tools/DocumentUpload.aspx?id={uploadGuid}&styleurl={styleUrl}&e={entityText}";
             }
             catch (Exception ex)
             {
@@ -218,9 +445,32 @@ namespace ALOD.Data
         {
             Check.Require(docId > 0, "docId cannot be 0");
 
+            if (_useDirectDatabaseAccess)
+            {
+                return GetDocumentViewerUrlDirect(docId);
+            }
+
             try
             {
                 return DocService.GetDocumentViewerUrl(docId, false);
+            }
+            catch (Exception ex)
+            {
+                LogManager.LogError(ex);
+                return string.Empty;
+            }
+        }
+
+        private string GetDocumentViewerUrlDirect(long docId)
+        {
+            try
+            {
+                Guid viewerGuid = _documentServiceDao.CreateDocumentViewerGuid(docId, false, DefaultUserID, DefaultSubuserID);
+                
+                // Build the viewer URL using the base URL and the GUID
+                string baseUrl = DocumentServiceBaseUrl.TrimEnd('/');
+                
+                return $"{baseUrl}/Tools/DocumentViewer.aspx?id={viewerGuid}";
             }
             catch (Exception ex)
             {
@@ -266,7 +516,13 @@ namespace ALOD.Data
         /// <inheritdoc/>
         public void LockDocument(long docId)
         {
-            UpdateDocumentStatus(docId, DocumentStatus.Approved);
+            if (_useDirectDatabaseAccess)
+            {
+                UpdateDocumentStatusDirect(docId, DaoDocumentStatus.Approved);
+                return;
+            }
+
+            UpdateDocumentStatus(docId, ALOD.Core.Domain.Documents.DocumentStatus.Approved);
         }
 
         /// <inheritdoc/>
@@ -279,12 +535,24 @@ namespace ALOD.Data
         /// <inheritdoc/>
         public void UnlockDocument(long docId)
         {
-            UpdateDocumentStatus(docId, DocumentStatus.Pending);
+            if (_useDirectDatabaseAccess)
+            {
+                UpdateDocumentStatusDirect(docId, DaoDocumentStatus.Pending);
+                return;
+            }
+
+            UpdateDocumentStatus(docId, ALOD.Core.Domain.Documents.DocumentStatus.Pending);
         }
 
         /// <inheritdoc/>
-        public void UpdateDocumentDetails(long docId, string description, DateTime docDate, string ssn, DocumentStatus status, DocumentType type)
+        public void UpdateDocumentDetails(long docId, string description, DateTime docDate, string ssn, ALOD.Core.Domain.Documents.DocumentStatus status, DocumentType type)
         {
+            if (_useDirectDatabaseAccess)
+            {
+                UpdateDocumentDetailsDirect(docId, description, docDate, ssn, status, type);
+                return;
+            }
+
             SRXExchange.DocumentKeys keys = new ALOD.Data.SRXExchange.DocumentKeys();
             keys.DocDate = docDate;
             keys.DocDescription = description;
@@ -302,18 +570,63 @@ namespace ALOD.Data
             }
         }
 
-        private SRXExchange.DocumentStatus DocStatusToSrxStatus(DocumentStatus status)
+        private void UpdateDocumentDetailsDirect(long docId, string description, DateTime docDate, string ssn, ALOD.Core.Domain.Documents.DocumentStatus status, DocumentType type)
+        {
+            var keys = new DocumentKeys
+            {
+                DocDate = docDate,
+                DocDescription = description,
+                DocStatus = DocStatusToDaoStatus(status),
+                DocTypeID = (int)type,
+                EntityName = ssn
+            };
+
+            try
+            {
+                _documentServiceDao.UpdateDocumentKeys(docId, keys, DefaultUserID, DefaultSubuserID, string.Empty);
+            }
+            catch (Exception ex)
+            {
+                LogManager.LogError(ex);
+            }
+        }
+
+        private SRXExchange.DocumentStatus DocStatusToSrxStatus(ALOD.Core.Domain.Documents.DocumentStatus status)
         {
             return (SRXExchange.DocumentStatus)Enum.Parse(typeof(SRXExchange.DocumentStatus), status.ToString());
         }
 
-        private void UpdateDocumentStatus(long docId, DocumentStatus status)
+        private DaoDocumentStatus DocStatusToDaoStatus(ALOD.Core.Domain.Documents.DocumentStatus status)
+        {
+            return (DaoDocumentStatus)Enum.Parse(typeof(DaoDocumentStatus), status.ToString());
+        }
+
+        private ALOD.Core.Domain.Documents.DocumentStatus DaoStatusToDocStatus(DaoDocumentStatus status)
+        {
+            return (ALOD.Core.Domain.Documents.DocumentStatus)Enum.Parse(typeof(ALOD.Core.Domain.Documents.DocumentStatus), status.ToString());
+        }
+
+        private void UpdateDocumentStatus(long docId, ALOD.Core.Domain.Documents.DocumentStatus status)
         {
             Check.Require(docId > 0, "docId cannot be 0");
 
             try
             {
                 DocService.UpdateDocumentStatus(docId, (SRXExchange.DocumentStatus)Enum.Parse(typeof(SRXExchange.DocumentStatus), status.ToString()));
+            }
+            catch (Exception ex)
+            {
+                LogManager.LogError(ex);
+            }
+        }
+
+        private void UpdateDocumentStatusDirect(long docId, DaoDocumentStatus status)
+        {
+            Check.Require(docId > 0, "docId cannot be 0");
+
+            try
+            {
+                _documentServiceDao.UpdateDocumentStatus(docId, status, DefaultUserID, DefaultSubuserID, string.Empty);
             }
             catch (Exception ex)
             {
